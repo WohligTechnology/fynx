@@ -24,6 +24,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     templateUrl: "views/template.html",
     controller: 'PrivacyCtrl'
   })
+  
+  .state('contact', {
+    url: "/contact",
+    templateUrl: "views/template.html",
+    controller: 'ContactCtrl'
+  })
 
   $urlRouterProvider.otherwise("/home");
 

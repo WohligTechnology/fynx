@@ -56,7 +56,12 @@ $menu-height: 70px !default;
 .font-smart {
     font-family: $font-family-serif;
     font-weight: bold;
+    cursor: pointer;
 }
+.primary {color: $brand-primary;}
+.danger {color: $brand-danger;}
+.warning {color: $brand-warning;}
+.success {color: $brand-success;}
 body {
   padding-top: $menu-height;
 }
@@ -324,7 +329,7 @@ nav li:hover .dropdown-menu {
 .breadcrumb {
     position: relative;
     background-color: $brand-danger;
-    margin: 0 0 60px;
+    margin: 0 0 70px;
     padding: 0;
     h3 {
         @extend .font-smart;
@@ -342,5 +347,66 @@ nav li:hover .dropdown-menu {
         height: 20px;
         width: 100%;
         @include clip-path(polygon(0 0, 100% 0%, 100% 100%, 2% 100%));
+    }
+    .mascot {
+        position: absolute;
+        width: 200px;
+        bottom: -65px;
+        right: 0;
+        z-index: 9;
+    }
+}
+.content-view {
+    padding-bottom: 40px;
+    h1, h2, h3, h4, h5, h6 {
+        margin: 15px 0 0;
+        color: $brand-danger;
+    }
+    p {
+        margin: 0;
+        color: $gray;
+        text-align: justify;
+    }
+    ol, ul {
+        margin: 0;
+        color: $gray;
+        padding: 0 0 0 20px;
+        text-align: justify;
+        li {
+         padding-left: 10px;
+        }
+    }
+    label {
+        font-weight: normal;
+        color: $gray;
+        text-transform: uppercase;
+    }
+    
+}
+
+.inline {
+    display: inline-block;
+    float: none;
+}
+
+h4.bold, .bold {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 0 5px;
+}
+
+.font-big {
+    p {
+        font-size: 16px;
+        line-height: 180%;
+    }
+}
+
+.font-tiny {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    p+p {
+        margin-top: 10px;
+        line-height: 180%;
     }
 }

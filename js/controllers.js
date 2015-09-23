@@ -30,7 +30,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('PrivacyCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("privacy");
-    $scope.menutitle = NavigationService.makeactive("Privacy");
+    $scope.menutitle = NavigationService.makeactive("Privacy Policy");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+})
+
+.controller('ContactCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("contact");
+    $scope.menutitle = NavigationService.makeactive("Contact Us");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
