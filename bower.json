@@ -24,6 +24,7 @@
     "animate.css": "~3.3.0",
     "bootstrap": "~3.3.5",
     "bootstrap-sass": "~3.3.5",
+    "bourbon": "~4.2.5",
     "fontawesome": "~4.3.0",
     "jquery": "~2.1.4",
     "less": "~2.5.1",
