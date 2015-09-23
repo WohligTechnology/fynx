@@ -43,10 +43,22 @@ $border-radius-base:        0px !default;
 $border-radius-large:       0px !default;
 $border-radius-small:       0px !default;
 
+$menu-height: 70px !default;
+
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
- body {
-  padding-top: 76px;
+@mixin clip-path($clip) {
+  -webkit-clip-path: $clip;
+  -moz-clip-path: $clip;
+  -ms-clip-path: $clip;
+  clip-path: $clip;
+}
+.font-smart {
+    font-family: $font-family-serif;
+    font-weight: bold;
+}
+body {
+  padding-top: $menu-height;
 }
 img.loading {
   text-align: center;
@@ -69,23 +81,48 @@ nav li:hover .dropdown-menu {
 }
 .flexslider {
   border: none;
+    .flex-direction-nav {
+         a {
+            height: 45px;
+            color: white;
+            text-shadow: none;
+            &:before {
+                font-size: 40px;
+                color: white;
+                text-shadow: none;
+            }
+        }
+        .flex-prev {
+            left: 20px !important;
+            opacity: 1 !important;
+        }
+        .flex-next {
+            right: 20px !important;
+            opacity: 1 !important;
+        }
+    }
+    
 }
 .row-flex {
   @include display(flex);
 }
 .col-flex {
   @include flex(1);
+  position: relative;
 }
 .btn {
-  border: none;
+    border: none;
+    @include transition(all 300ms ease);
+    padding: 6px 16px;
+    outline: 0 !important;
 }
 .logo {
     position: absolute;
-    left: 40px;
+    left: 20px;
     top: 5px;
     outline: none !important;
     img {
-        height: 120px;
+        height: 110px;
         width: auto;   
     }
 }
@@ -97,8 +134,7 @@ nav li:hover .dropdown-menu {
     }
 }
 .nav {
-    font-family: $font-family-serif;
-    font-weight: bold;
+    @extend .font-smart;
     text-transform: uppercase;
     a {
         color: $gray-dark;
@@ -109,13 +145,15 @@ nav li:hover .dropdown-menu {
         a {
             padding-bottom: 20px;
             padding-top: 30px;
+            @include transition(all 300ms ease);
         }
     }
 }
 
 .navbar-white {
     background-color: white;
-    height: 76px;
+    height: $menu-height;
+    border-bottom: 1px solid #ebebeb;
 }
 
 /*Slider*/
@@ -125,13 +163,16 @@ nav li:hover .dropdown-menu {
 .text-above {
     position: absolute;
     top: 50%;
-    right: 35%;
-    @include transform(translateY(-50%));
+    right: 30%;
+    @include transform(translate(30%,-50%));
     h3 {
+        @extend .font-smart;
         font-size: 60px;
         color: $brand-info;
         margin: 0;
-        text-transform: uppercase;
+        text-transform: uppercase;    
+        letter-spacing: -3px;
+        line-height: 0.9;
     }
     p {
         color: $brand-danger;
@@ -140,5 +181,166 @@ nav li:hover .dropdown-menu {
     }
     .btn {
         text-transform: uppercase;
+    }
+}
+
+.relative {position: relative;}
+
+.align-center {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    @include transform(translateY(-50%));
+}
+
+.banner {
+    background-image: url('../img/whitechecks.jpg');
+    padding: 90px;
+    background-size: cover;
+    background-attachment: fixed;
+    h3 {
+        margin: 0 0 10px;
+        text-transform: uppercase;
+        @extend .font-smart;
+        font-size: 40px;
+        color: $brand-primary;
+    }
+    p {
+        text-align: justify;
+    }
+    .btn {
+        text-transform: uppercase;
+    }
+}
+
+.half-image {width: 50%;}
+.full-image {width: 100%;}
+.m-center {margin: 0 auto;}
+.text-upper {text-transform: uppercase;}
+
+.btn-middle-big {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+    @extend .font-smart;
+    color: $gray-base;
+    font-size: 30px;
+    text-transform: uppercase;
+    padding: 8px 100px
+}
+
+.custom-banner {
+    .btn {
+        position: absolute;
+        bottom: 30px;
+        padding: 6px 40px;
+        left: 50%;
+        @include transform(translateX(-50%));
+    }
+}
+
+/*Footer*/
+.footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 150%;
+    a {
+        color: inherit;
+    }
+}
+.footer-bg {
+    padding: 50px 0;
+}
+.big-text {
+    font-size: 25px;
+}
+.medium-text {
+    font-size: 16px;
+}
+.dashed {
+    position: relative;
+    &:after {
+        height: 2px;
+        background-color: black;
+        content: '';
+        width: 245px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+    }
+    .white-bg {
+        background-color: white;
+        z-index: 2;
+        position: relative;
+        padding: 0 10px;
+    }
+}
+.box-outlined {
+    border: 5px solid;
+    padding: 0px 16px;
+    display: inline-block;
+    width: auto;
+    margin: 5px auto;
+    font-size: 40px;
+    line-height: 120%;
+}
+.follow-text {
+    margin-top: 50px;
+}
+.social-icon {
+    font-size: 25px;
+    margin-top: 10px;
+    a+a {
+        margin-left: 15px;
+    }
+}
+.black-bg {
+    background-color: black;
+    color: white;
+    a {
+        color: inherit;
+    }
+    .dashed {
+        &:after {
+            background-color: white;
+        }
+        .white-bg {
+            background-color: black;
+        }
+    }
+    .box-outlined {
+        border-color: white;
+    }
+}
+
+.content {
+    min-height: 450px;
+}
+
+/*Breadcrumb*/
+.breadcrumb {
+    position: relative;
+    background-color: $brand-danger;
+    margin: 0 0 60px;
+    padding: 0;
+    h3 {
+        @extend .font-smart;
+        text-transform: uppercase;
+        color: white;
+        margin: 70px 0 25px;
+        font-size: 40px;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -20px;
+        background-color: darken($brand-danger, 20%);
+        height: 20px;
+        width: 100%;
+        @include clip-path(polygon(0 0, 100% 0%, 100% 100%, 2% 100%));
     }
 }
