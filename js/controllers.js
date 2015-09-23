@@ -7,12 +7,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.mySlides = [
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-    ];
+   /* $scope.mySlides = [{
+        src: "img/slider1.jpg",
+        head: "Superhero Stuff",
+        sub: "EXCLUSIVE DC COMICS COLLECTION BY MY FYNX"
+    }, {
+        src: "img/slider1.jpg",
+        head: "Superhero Stuff",
+        sub: "EXCLUSIVE DC COMICS COLLECTION BY MY FYNX"
+    }];*/
+    
+     $scope.mySlides = ["img/slider1.jpg"];
+
     $scope.footerBlack = false;
 })
 

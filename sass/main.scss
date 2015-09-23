@@ -1,6 +1,14 @@
 /*Start writing sass here*/
+@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
 
-@import "../bower_components/bourbon/bourbon";
+@include font-face("Advent Pro", "../fonts/adventpro-regular-webfont");
+@include font-face("Advent Pro", "../fonts/adventpro-bold-webfont", bold);
+@include font-face("Advent Pro", "../fonts/adventpro-light-webfont", 300);
+
+@include font-face("Roboto Condensed", "../fonts/robotocondensed-regular-webfont");
+@include font-face("Roboto Condensed", "../fonts/robotocondensed-bold-webfont", bold);
+@include font-face("Roboto Condensed", "../fonts/robotocondensed-light-webfont", 300);
+
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/fontawesome/css/font-awesome.min.css";
@@ -14,9 +22,9 @@ $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
 $brand-primary:         #0d9dff !default;
 $brand-success:         #84ce3c !default;
-$brand-info:            #5bc0de !default;
 $brand-warning:         #ffec39 !default;
 $brand-danger:          #fc483f !default;
+$brand-info:            #000072 !default;
 
 $body-bg:               #fff !default;
 
@@ -38,7 +46,7 @@ $border-radius-small:       0px !default;
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
  body {
-  padding-top: 70px;
+  padding-top: 76px;
 }
 img.loading {
   text-align: center;
@@ -68,7 +76,69 @@ nav li:hover .dropdown-menu {
 .col-flex {
   @include flex(1);
 }
-
 .btn {
   border: none;
+}
+.logo {
+    position: absolute;
+    left: 40px;
+    top: 5px;
+    outline: none !important;
+    img {
+        height: 120px;
+        width: auto;   
+    }
+}
+/*Navbar*/
+.menu {
+    .nav {
+        display: inline-block;
+        float: none;
+    }
+}
+.nav {
+    font-family: $font-family-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    a {
+        color: $gray-dark;
+    }
+}
+.navbar-nav {
+    li {
+        a {
+            padding-bottom: 20px;
+            padding-top: 30px;
+        }
+    }
+}
+
+.navbar-white {
+    background-color: white;
+    height: 76px;
+}
+
+/*Slider*/
+.flexslider {
+    margin: 0;
+}
+.text-above {
+    position: absolute;
+    top: 50%;
+    right: 35%;
+    @include transform(translateY(-50%));
+    h3 {
+        font-size: 60px;
+        color: $brand-info;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    p {
+        color: $brand-danger;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    .btn {
+        text-transform: uppercase;
+    }
 }
