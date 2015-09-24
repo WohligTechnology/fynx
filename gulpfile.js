@@ -78,7 +78,7 @@ gulp.task('inlinesource', function () {
 
 gulp.task('uglify:js', function () {
     return gulp.src('./w/w.js')
-        .pipe(uglify())
+        .pipe(uglify({mangle:false}))
         .pipe(gulp.dest('./w'));
 });
 
