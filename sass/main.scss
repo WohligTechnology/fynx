@@ -43,7 +43,7 @@ $border-radius-base:        0px !default;
 $border-radius-large:       0px !default;
 $border-radius-small:       0px !default;
 
-$menu-height: 70px !default;
+$menu-height: 74px !default;
 
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -56,7 +56,6 @@ $menu-height: 70px !default;
 .font-smart {
     font-family: $font-family-serif;
     font-weight: bold;
-    cursor: pointer;
 }
 .primary {color: $brand-primary;}
 .danger {color: $brand-danger;}
@@ -131,7 +130,9 @@ nav li:hover .dropdown-menu {
     outline: none !important;
     img {
         height: 110px;
-        width: auto;   
+        width: auto;  
+        position: relative;
+        z-index: 1; 
     }
 }
 /*Navbar*/
@@ -152,7 +153,7 @@ nav li:hover .dropdown-menu {
     li {
         a {
             padding-bottom: 20px;
-            padding-top: 30px;
+            padding-top: 33px;
             @include transition(all 300ms ease);
         }
     }
@@ -424,3 +425,40 @@ h4.bold, .bold {
     }
 }
 .btn-strong {font-weight: bold;text-transform: uppercase;padding: 6px 27px;}
+
+/*Product Page*/
+.site-map {
+    margin: 30px 0 10px;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        display: inline-block;
+    }
+    li+li {
+        margin-left: 5px;
+        &:before {
+            content: "\f105";
+            font-family: 'FontAwesome';
+            margin-right: 5px;
+            color: $brand-danger;
+        }
+    }   
+    a {
+        color: $brand-danger;
+    }
+}
+.page-title {
+    h2 {
+        margin: 0;
+        @extend .font-smart;
+        font-size: 26px;
+    }
+    h1 {
+        margin: 0;
+        @extend .font-smart;
+        font-size: 40px;
+    }
+}

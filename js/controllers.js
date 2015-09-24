@@ -17,7 +17,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         sub: "EXCLUSIVE DC COMICS COLLECTION BY MY FYNX"
     }];*/
 
-//    $scope.mySlides = ['img/slider1.jpg'];
+    //    $scope.mySlides = ['img/slider1.jpg'];
     $scope.mySlides = [
         'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
         'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
@@ -34,6 +34,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
+})
+
+.controller('ProductCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("product-list");
+    $scope.menutitle = NavigationService.makeactive("Mens");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+
+    $scope.productList = [{
+        src: "img/logo.png",
+        name: "SPACE PRINT SLIM FIT T-SHIRT",
+        price: "699"
+    }, {
+        src: "img/logo.png",
+        name: "SPACE PRINT SLIM FIT T-SHIRT",
+        price: "699"
+    }];
+
 })
 
 .controller('ContactCtrl', function($scope, TemplateService, NavigationService) {

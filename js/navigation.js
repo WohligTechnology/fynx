@@ -4,31 +4,31 @@ var navigationservice = angular.module('navigationservice', [])
   var navigation = [{
     name: "Men",
     active: "",
-    link: "#/men",
+    link: "#/product/men",
     classis: "active",
     subnav: []
   }, {
     name: "Women",
     active: "",
-    link: "#/women",
+    link: "#/product/women",
     classis: "active",
     subnav: []
   }, {
     name: "Infants",
     active: "",
-    link: "#/infants",
+    link: "#/product/infants",
     classis: "active",
     subnav: []
   }, {
     name: "Pets",
     active: "",
-    link: "#/pets",
+    link: "#/product/pets",
     classis: "active",
     subnav: []
   }, {
     name: "Custom",
     active: "",
-    link: "#/custom",
+    link: "#/product/custom",
     classis: "active",
     subnav: []
   }];
