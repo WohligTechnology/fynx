@@ -18,7 +18,6 @@ var clean = require('gulp-clean');
 var open = require('gulp-open');
 var wait = require('gulp-wait')
 var zip = require('gulp-zip');
-var image = require('gulp-image');
 
 var templateCacheBootstrap = "firstapp.run(['$templateCache', function($templateCache) {";
 
@@ -72,7 +71,7 @@ gulp.task('gzipfile', function () {
 
 gulp.task('tarball', function () {
     gulp.src('./production/*')
-        .pipe(tar('production.tar'))
+        .pipe(tar('production.tar'),{mode:0755})
         .pipe(gulp.dest('./'));
 });
 
@@ -200,12 +199,6 @@ gulp.task('zip', function () {
         .pipe(gulp.dest('./'));
 });
  
-gulp.task('imagemin', function () {
-  gulp.src('./img/**')
-    .pipe(image())
-    .pipe(gulp.dest('./img2'));
-});
-
 
 gulp.task('watch', ["sass:development", "watch:all"]);
 gulp.task('default', ["sass:development", "watch:all"]);
@@ -213,4 +206,4 @@ gulp.task('development', ["sass:development", "watch:all"]);
 gulp.task('minifyhtml', ["minify:indexHTML", "minify:views", "templatecache"]);
 gulp.task('copy', ["copy:img", "copy:fonts"]);
 
-gulp.task('production', gulpSequence(["copy:img", "copy:fonts", "sass:production", "minify:indexproduction", "minify:views"], 'clean:tmp', ["minify:css", "templatecache"], "concat:js", 'clean:tmp', "uglify:js", 'clean:tmp', "inlinesource", 'clean:tmp', "gzipfile", 'clean:tmp',"clean:w", 'clean:tmp', "zip","clean:tmp","clean:production"));
+gulp.task('production', gulpSequence(["copy:img", "copy:fonts", "sass:production", "minify:indexproduction", "minify:views"], 'clean:tmp', ["minify:css", "templatecache"], "concat:js", 'clean:tmp', "uglify:js", 'clean:tmp', "inlinesource", 'clean:tmp', "gzipfile", 'clean:tmp',"clean:w", 'clean:tmp', "tarball","clean:tmp","clean:production"));
