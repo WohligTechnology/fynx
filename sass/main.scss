@@ -436,14 +436,14 @@ h4.bold, .bold {
     }
     li {
         display: inline-block;
-    }
-    li+li {
-        margin-left: 5px;
-        &:before {
-            content: "\f105";
-            font-family: 'FontAwesome';
-            margin-right: 5px;
-            color: $brand-danger;
+        +li {
+            margin-left: 5px;
+            &:before {
+                content: "\f105";
+                font-family: 'FontAwesome';
+                margin-right: 5px;
+                color: $brand-danger;
+            }
         }
     }   
     a {
@@ -460,5 +460,29 @@ h4.bold, .bold {
         margin: 0;
         @extend .font-smart;
         font-size: 40px;
+    }
+}
+.filter-bar {
+    background-color: black;
+    padding: 15px 0;
+    margin: 10px 0 20px;
+    .arrow {
+        &:after {
+            content: "\f107";
+            font-family: FontAwesome;
+            color: white;
+            margin-left: 5px;
+        }
+        +.arrow {
+                margin-left: 10px;
+        }
+    }
+    select {
+        @include appearance(none);
+        color: white;
+        background-color: transparent;
+        border: none;
+        text-transform: uppercase;
+        outline: none;
     }
 }
