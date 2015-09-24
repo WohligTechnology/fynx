@@ -17,6 +17,8 @@ var gulpSequence = require('gulp-sequence');
 var clean = require('gulp-clean');
 var open = require('gulp-open');
 var wait = require('gulp-wait')
+var zip = require('gulp-zip');
+var image = require('gulp-image');
 
 var templateCacheBootstrap = "firstapp.run(['$templateCache', function($templateCache) {";
 
@@ -52,13 +54,11 @@ gulp.task('clean:w', function () {
 });
 
 gulp.task('minify:css', function () {
-    return gulp.src('./w/main.css')
-
+    return gulp.src('./w/*.css')
     .pipe(minifyCss({
         keepSpecialComments: 0
     }))
-
-    .pipe(rename('w.css'))
+        .pipe(rename('w.css'))
         .pipe(gulp.dest('./w/'));
 });
 
@@ -71,7 +71,7 @@ gulp.task('gzipfile', function () {
 });
 
 gulp.task('tarball', function () {
-    gulp.src('./production/**/*')
+    gulp.src('./production/*')
         .pipe(tar('production.tar'))
         .pipe(gulp.dest('./'));
 });
@@ -194,6 +194,18 @@ gulp.task('watch:all', function () {
     gulp.watch(['./**/*.html', './sass/*.scss', './js/*.js'], ['sass:development', 'connect:html', 'connect:js']);
 });
 
+gulp.task('zip', function () {
+    return gulp.src('./production/**')
+        .pipe(zip('production.zip'))
+        .pipe(gulp.dest('./'));
+});
+ 
+gulp.task('imagemin', function () {
+  gulp.src('./img/**')
+    .pipe(image())
+    .pipe(gulp.dest('./img2'));
+});
+
 
 gulp.task('watch', ["sass:development", "watch:all"]);
 gulp.task('default', ["sass:development", "watch:all"]);
@@ -201,4 +213,4 @@ gulp.task('development', ["sass:development", "watch:all"]);
 gulp.task('minifyhtml', ["minify:indexHTML", "minify:views", "templatecache"]);
 gulp.task('copy', ["copy:img", "copy:fonts"]);
 
-gulp.task('production', gulpSequence(["copy:img", "copy:fonts", "sass:production", "minify:indexproduction", "minify:views"], 'clean:tmp', ["minify:css", "templatecache"], "concat:js", 'clean:tmp', "uglify:js", 'clean:tmp', "inlinesource", 'clean:tmp', "gzipfile", 'clean:tmp', "tarball"));
+gulp.task('production', gulpSequence(["copy:img", "copy:fonts", "sass:production", "minify:indexproduction", "minify:views"], 'clean:tmp', ["minify:css", "templatecache"], "concat:js", 'clean:tmp', "uglify:js", 'clean:tmp', "inlinesource", 'clean:tmp', "gzipfile", 'clean:tmp',"clean:w", 'clean:tmp', "zip","clean:tmp","clean:production"));

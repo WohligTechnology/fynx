@@ -5,3 +5,4 @@ bourbon/
 .sass-cache/
 *.tar
 production/
+*.zip
