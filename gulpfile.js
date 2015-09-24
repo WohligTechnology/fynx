@@ -34,9 +34,9 @@ gulp.task('clean:production', function () {
 
 gulp.task('clean:tmp', function () {
     return gulp.src('./tmp', {
-        read: false
-    })
-    .pipe(wait(200))
+            read: false
+        })
+        .pipe(wait(200))
         .pipe(clean({
             force: true
         }));
@@ -47,16 +47,18 @@ gulp.task('clean:w', function () {
     return gulp.src('./w', {
             read: false
         })
+        .pipe(wait(200))
         .pipe(clean());
 });
 
 gulp.task('minify:css', function () {
     return gulp.src('./w/main.css')
-    
-        .pipe(wait(200))
-        .pipe(minifyCss({
-            keepSpecialComments: 0
-        }))
+
+    .pipe(minifyCss({
+        keepSpecialComments: 0
+    }))
+
+    .pipe(rename('w.css'))
         .pipe(gulp.dest('./w/'));
 });
 
@@ -71,8 +73,6 @@ gulp.task('gzipfile', function () {
 gulp.task('tarball', function () {
     gulp.src('./production/**')
         .pipe(tar('production.tar'))
-    
-        .pipe(wait(200))
         .pipe(gulp.dest('./'));
 });
 
@@ -97,30 +97,30 @@ gulp.task('uglify:js', function () {
 
 gulp.task('concat:js', function () {
     return gulp.src([
-        './bower_components/jquery/dist/jquery.min.js',
-        './bower_components/bootstrap/dist/js/bootstrap.min.js',
-        './bower_components/flexslider/jquery.flexslider-min.js',
-        './bower_components/angular/angular.min.js',
-        './bower_components/angular-sanitize/angular-sanitize.min.js',
-        './bower_components/angular-animate/angular-animate.min.js',
-        './bower_components/angular-bootstrap/ui-bootstrap.min.js',
-        './bower_components/ui-router/release/angular-ui-router.min.js',
-        './bower_components/angular-flexslider/angular-flexslider.js',
-                     './js/app.js',
-                     './js/controllers.js',
-                     './js/templateservice.js',
-                     './js/navigation.js',
-                     './w/js/templates.js',
-    ])
+            './bower_components/jquery/dist/jquery.min.js',
+            './bower_components/bootstrap/dist/js/bootstrap.min.js',
+            './bower_components/flexslider/jquery.flexslider-min.js',
+            './bower_components/angular/angular.min.js',
+            './bower_components/angular-sanitize/angular-sanitize.min.js',
+            './bower_components/angular-animate/angular-animate.min.js',
+            './bower_components/angular-bootstrap/ui-bootstrap.min.js',
+            './bower_components/ui-router/release/angular-ui-router.min.js',
+            './bower_components/angular-flexslider/angular-flexslider.js',
+            './js/app.js',
+            './js/controllers.js',
+            './js/templateservice.js',
+            './js/navigation.js',
+            './w/js/templates.js',
+        ])
         .pipe(concat('w.js'))
         .pipe(gulp.dest('./w'));
 });
 
 gulp.task('templatecache', function () {
     return gulp.src('./w/views/**/*.html')
-    
-        .pipe(wait(200))
-        .pipe(templateCache({
+
+    .pipe(templateCache({
+            root: "views/",
             templateHeader: templateCacheBootstrap
         }))
         .pipe(gulp.dest('./w/js/'));
@@ -201,4 +201,4 @@ gulp.task('development', ["sass:development", "watch:all"]);
 gulp.task('minifyhtml', ["minify:indexHTML", "minify:views", "templatecache"]);
 gulp.task('copy', ["copy:img", "copy:fonts"]);
 
-gulp.task('production', gulpSequence(["copy:img", "copy:fonts", "sass:production", "minify:indexproduction", "minify:views"], ["minify:css", "templatecache"], "concat:js", "uglify:js", "inlinesource", "gzipfile", "tarball"));
+gulp.task('production', gulpSequence(["copy:img", "copy:fonts", "sass:production", "minify:indexproduction", "minify:views"], 'clean:tmp', ["minify:css", "templatecache"], "concat:js", 'clean:tmp', "uglify:js", 'clean:tmp', "inlinesource", 'clean:tmp', "gzipfile", 'clean:tmp', "tarball"));
