@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10">
+            <div class="site-map">
+                <ul>
+                    <li><a href="#/home">
+                        Home
+                    </a>
+                    </li>
+                    <li><a href="#/product/men">
+                        Printed T-Shirts for Men
+                    </a>
+                    </li>
+                    <li><a href="#/product/men/1">
+                        {{product.name}}
+                    </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="product-detail">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="image-sidebar">
+                            <div class="thumb-img " ng-repeat="image in product.img track by $index">
+                                <img ng-src="{{image}}">
+                            </div>
+                        </div>
+                        <div class="full-img">
+                            <img src="img/tee.jpg">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="right-bar">
+                            <h3>{{product.name}}</h3>
+                            <h3 class="primary">Rs. {{product.price}}</h3>
+                        </div>
+                        <div class="size-chart">
+                            <span class="very-bold">Size</span>
+                            <button class="btn-gray btn-outline">Size Guide</button>
+
+                            <ul class="no-list">
+                                <li>S</li>
+                                <li>M</li>
+                                <li>L</li>
+                                <li>XL</li>
+                                <li class="dashed">XXL</li>
+                            </ul>
+                        </div>
+
+                        <div class="color-picker">
+                            <span class="very-bold">Size</span>
+                            <ul>
+                                <li class="circle black"></li>
+                                <li class="circle gray"></li>
+                                <li class="circle white selected"></li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn-black btn-outline">Add to bag</button>
+                        <button class="btn-black btn-clear">Add to Wishlist</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

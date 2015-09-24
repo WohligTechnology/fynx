@@ -7,23 +7,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    /* $scope.mySlides = [{
+    $scope.mySlides = [{
+        id: 1,
         src: "img/slider1.jpg",
-        head: "Superhero Stuff",
+        head: 'Superhero <br>Stuff',
         sub: "EXCLUSIVE DC COMICS COLLECTION BY MY FYNX"
     }, {
+        id: 2,
         src: "img/slider1.jpg",
-        head: "Superhero Stuff",
+        head: 'Superhero <br>Stuff',
         sub: "EXCLUSIVE DC COMICS COLLECTION BY MY FYNX"
-    }];*/
+    }];
 
-    //    $scope.mySlides = ['img/slider1.jpg'];
-    $scope.mySlides = [
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-        'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-    ];
 
     $scope.footerBlack = false;
 })
@@ -36,7 +31,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.footerBlack = true;
 })
 
-.controller('ProductCtrl', function($scope, TemplateService, NavigationService) {
+.controller('ProductListCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("product-list");
     $scope.menutitle = NavigationService.makeactive("Men");
     TemplateService.title = $scope.menutitle;
@@ -44,14 +39,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.footerBlack = true;
 
     $scope.productList = [{
-        src: "img/logo.png",
+        src: "img/tee.jpg",
         name: "SPACE PRINT SLIM FIT T-SHIRT",
         price: "699"
     }, {
-        src: "img/logo.png",
+        src: "img/tee.jpg",
         name: "SPACE PRINT SLIM FIT T-SHIRT",
         price: "699"
     }];
+
+})
+
+.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("product-view");
+    $scope.menutitle = NavigationService.makeactive("Men");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+
+    $scope.product = {
+        name: "SPACE PRINT SLIM FIT T-SHIRT",
+        price: "699",
+        img: ["img/thumb1.jpg", "img/thumb2.jpg", "img/thumb3.jpg", "img/thumb4.jpg"]
+    };
 
 })
 

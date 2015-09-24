@@ -179,8 +179,9 @@ nav {
 .text-above {
     position: absolute;
     top: 50%;
-    right: 30%;
-    @include transform(translate(30%,-50%));
+    right: 0;
+    left: 0;
+    @include transform(translateY(-50%));
     h3 {
         @extend .font-smart;
         font-size: 60px;
@@ -441,6 +442,7 @@ h4.bold, .bold {
 /*Product Page*/
 .site-map {
     margin: 30px 0 10px;
+    text-transform: capitalize;
     ul {
         list-style: none;
         padding: 0;
@@ -500,17 +502,59 @@ h4.bold, .bold {
 }
 .product-list {
     min-height: 450px;
-    padding: 30px 0 0;
+    padding: 10px 0 0;
     .image-holder {
         height: 300px;
         text-align: center;
         overflow: hidden;
+        cursor: pointer;
+        &:hover img {
+            @include transform(scale(1.1));
+        }
         img {
             max-width: 100%;
             max-height: 100%;
+            @include transition(all 300ms ease);
         }
     }
     .price {
         font-size: 20px;
+    }
+    .product-name {
+        text-transform: capitalize;
+    }
+}
+
+/*Product View*/
+.product-detail {
+    margin-top: 40px;
+    .image-sidebar {
+        width: auto;
+        position: absolute;
+        left: 10px;
+        top: 0;
+        .thumb-img {
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            border: 1px solid transparent;
+            +.thumb-img {
+                margin-top: 10px;
+            }
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+    }
+    .full-img {
+        padding-left: 90px;
+        height: 400px;
+        overflow: hidden;
+        text-align: center;
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
     }
 }

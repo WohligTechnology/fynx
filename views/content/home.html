@@ -1,16 +1,19 @@
-<flex-slider flex-slide="s in mySlides">
+<flex-slider flex-slide="s in mySlides track by $index">
     <li>
-        <img ng-src="img/slider1.jpg">
+        <img ng-src="{{s.src}}">
+        
         <div class="text-above">
-            <h3>SUPERHERO <br>STUFF</h3>
-            <p>EXCLUSIVE DC COMICS COLLECTION BY MY FYNX</p>
-            <button class="btn btn-danger">Shop Now</button>
-
-            <!--<div class="text-above">
-            <h3>{{s.head}}</h3>
-            <p>{{s.sub}}</p>
-            <button class="btn btn-primary">Shop Now</button>-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-7 col-md-5">
+                        <h3 ng-bind-html="s.head"></h3>
+                        <p ng-bind-html="s.sub"></p>
+                        <button class="btn btn-primary">Shop Now</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </li>
 </flex-slider>
 
