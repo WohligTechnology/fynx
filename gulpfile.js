@@ -71,7 +71,7 @@ gulp.task('gzipfile', function () {
 });
 
 gulp.task('tarball', function () {
-    gulp.src('./production/**')
+    gulp.src('./production/**/*')
         .pipe(tar('production.tar'))
         .pipe(gulp.dest('./'));
 });
