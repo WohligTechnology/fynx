@@ -20,6 +20,7 @@ var wait = require('gulp-wait')
 var zip = require('gulp-zip');
 var gutil = require('gulp-util');
 var ftp = require('gulp-ftp');
+var replace = require('gulp-replace');
 
 gulp.task('deploy', function () {
     return gulp.src('./production/**')
@@ -71,9 +72,13 @@ gulp.task('clean:w', function () {
 gulp.task('minify:css', function () {
     return gulp.src('./w/main.css')
         .pipe(minifyCss({
-            keepSpecialComments: 0
+            keepSpecialComments: 0,
+            rebase: false
         }))
         .pipe(rename('w.css'))
+        .pipe(replace('url(../', 'url('))
+        .pipe(replace("url('../", 'url('))
+        .pipe(replace('url("../', 'url('))
         .pipe(gulp.dest('./w/'));
 });
 
@@ -97,7 +102,7 @@ gulp.task('tarball', function () {
 gulp.task('inlinesource', function () {
     return gulp.src('./w/index.html')
         .pipe(inline({
-            base: './w/',
+            base: './w',
             disabledTypes: ['svg', 'img'] // Only inline css files 
         }))
         .pipe(gulp.dest('./w/'));
