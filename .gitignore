@@ -3,3 +3,5 @@ node_modules/
 w/
 bourbon/
 .sass-cache/
+*.tar
+production/
