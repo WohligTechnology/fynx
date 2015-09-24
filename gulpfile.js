@@ -169,9 +169,9 @@ gulp.task('watch:all', function () {
 });
 
 
-gulp.task('watch', ["watch:all"]);
-gulp.task('default', ["watch:all"]);
-gulp.task('development', ["watch:all"]);
+gulp.task('watch', ["sass:development","watch:all"]);
+gulp.task('default', ["sass:development","watch:all"]);
+gulp.task('development', ["sass:development","watch:all"]);
 gulp.task('minifyhtml', ["minify:indexHTML", "minify:views", "templatecache"]);
 gulp.task('copy', ["copy:img", "copy:fonts"]);
 
