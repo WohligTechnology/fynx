@@ -1,3 +1,36 @@
+var jsArray = [
+            './bower_components/jquery/dist/jquery.min.js',
+            './bower_components/bootstrap/dist/js/bootstrap.min.js',
+            './bower_components/flexslider/jquery.flexslider-min.js',
+            './bower_components/angular/angular.min.js',
+            './bower_components/angular-sanitize/angular-sanitize.min.js',
+            './bower_components/angular-animate/angular-animate.min.js',
+            './bower_components/angular-bootstrap/ui-bootstrap.min.js',
+            './bower_components/ui-router/release/angular-ui-router.min.js',
+            './bower_components/angular-flexslider/angular-flexslider.js',
+            './js/app.js',
+            './js/controllers.js',
+            './js/templateservice.js',
+            './js/navigation.js',
+            './w/js/templates.js',
+        ];
+var replacehostFrom = "http://localhost/demo/";
+var replacehostTo = "http://wohlig.co.in/demo2/";
+
+var ftpdetails = {
+    host: 'wohlig.co.in',
+    user: 'wohligco',
+    pass: 'wearew0hl1g',
+    remotePath: "public_html/fynx"
+};
+
+//Do not change anything below
+//Do not change anything below
+//Do not change anything below
+//Do not change anything below
+//Do not change anything below
+//Do not change anything below
+
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -23,15 +56,6 @@ var ftp = require('gulp-ftp');
 var replace = require('gulp-replace');
 var imagemin = require('gulp-imagemin');
 
-var replacehostFrom="http://localhost/demo/";
-var replacehostTo="http://wohlig.co.in/demo2/";
-
-var ftpdetails = {
-    host: 'wohlig.co.in',
-    user: 'wohligco',
-    pass: 'wearew0hl1g',
-    remotePath: "public_html/fynx"
-};
 
 var templateCacheBootstrap = "firstapp.run(['$templateCache', function($templateCache) {";
 
@@ -39,7 +63,9 @@ gulp.task('imagemin', function () {
     return gulp.src('./img/**')
         .pipe(imagemin({
             progressive: true,
-            svgoPlugins: [{removeViewBox: false}]
+            svgoPlugins: [{
+                removeViewBox: false
+            }]
         }))
         .pipe(gulp.dest('./img2/'));
 });
@@ -135,24 +161,9 @@ gulp.task('uglify:js', function () {
 });
 
 gulp.task('concat:js', function () {
-    return gulp.src([
-            './bower_components/jquery/dist/jquery.min.js',
-            './bower_components/bootstrap/dist/js/bootstrap.min.js',
-            './bower_components/flexslider/jquery.flexslider-min.js',
-            './bower_components/angular/angular.min.js',
-            './bower_components/angular-sanitize/angular-sanitize.min.js',
-            './bower_components/angular-animate/angular-animate.min.js',
-            './bower_components/angular-bootstrap/ui-bootstrap.min.js',
-            './bower_components/ui-router/release/angular-ui-router.min.js',
-            './bower_components/angular-flexslider/angular-flexslider.js',
-            './js/app.js',
-            './js/controllers.js',
-            './js/templateservice.js',
-            './js/navigation.js',
-            './w/js/templates.js',
-        ])
+    return gulp.src(jsArray)
         .pipe(concat('w.js'))
-        .pipe(replace(replacehostFrom,replacehostTo))
+        .pipe(replace(replacehostFrom, replacehostTo))
         .pipe(gulp.dest('./w'));
 });
 
