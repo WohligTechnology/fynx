@@ -18,9 +18,9 @@ var replacehostFrom = "http://localhost/demo/";
 var replacehostTo = "http://wohlig.co.in/demo2/";
 
 var ftpdetails = {
-    host: 'wohlig.co.in',
-    user: 'wohligco',
-    pass: 'wearew0hl1g',
+    host: 'hostname',
+    user: 'username',
+    pass: 'password',
     remotePath: "public_html/fynx"
 };
 
