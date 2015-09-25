@@ -24,6 +24,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     templateUrl: "views/template.html",
     controller: 'PrivacyCtrl'
   })
+    .state('terms-conditions', {
+    url: "/terms-conditions",
+    templateUrl: "views/template.html",
+    controller: 'TermsCtrl'
+  })
   
   .state('productlist', {
     url: "/product/men",
