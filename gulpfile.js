@@ -18,7 +18,7 @@ var replacehostFrom = "http://localhost/demo/";
 var replacehostTo = "http://wohlig.co.in/demo2/";
 
 var ftpdetails = {
-    host: 'hostname',
+    host: 'wohlig.co.in',
     user: 'username',
     pass: 'password',
     remotePath: "public_html/fynx"
@@ -55,7 +55,7 @@ var gutil = require('gulp-util');
 var ftp = require('gulp-ftp');
 var replace = require('gulp-replace');
 var imagemin = require('gulp-imagemin');
-
+var prompt = require("gulp-prompt");
 
 var templateCacheBootstrap = "firstapp.run(['$templateCache', function($templateCache) {";
 
@@ -72,11 +72,30 @@ gulp.task('imagemin', function () {
 
 
 gulp.task('deploy', function () {
+    return gulp.src('./index.html')
+        .pipe(prompt.prompt([{
+                type: 'input',
+                name: 'username',
+                message: 'Enter FTP username:'
+    },
+            {
+                type: 'password',
+                name: 'password',
+                message: 'Enter FTP password:'
+    }], function (res) {
+
+            ftpdetails.user = res.username;
+            ftpdetails.pass = res.password;
+
+            gulp.start('ftp');
+
+        }));
+});
+
+
+gulp.task('ftp', function () {
     return gulp.src('./production/**')
         .pipe(ftp(ftpdetails))
-        // you need to have some kind of stream after gulp-ftp to make sure it's flushed 
-        // this can be a gulp plugin, gulp.dest, or any kind of stream 
-        // here we use a passthrough stream 
         .pipe(gutil.noop());
 });
 
