@@ -21,22 +21,38 @@ var zip = require('gulp-zip');
 var gutil = require('gulp-util');
 var ftp = require('gulp-ftp');
 var replace = require('gulp-replace');
+var imagemin = require('gulp-imagemin');
+
+var replacehostFrom="http://localhost/demo/";
+var replacehostTo="http://wohlig.co.in/demo2/";
+
+var ftpdetails = {
+    host: 'wohlig.co.in',
+    user: 'wohligco',
+    pass: 'wearew0hl1g',
+    remotePath: "public_html/fynx"
+};
+
+var templateCacheBootstrap = "firstapp.run(['$templateCache', function($templateCache) {";
+
+gulp.task('imagemin', function () {
+    return gulp.src('./img/**')
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}]
+        }))
+        .pipe(gulp.dest('./img2/'));
+});
+
 
 gulp.task('deploy', function () {
     return gulp.src('./production/**')
-        .pipe(ftp({
-            host: 'wohlig.co.in',
-            user: 'wohligco',
-            pass: 'wearew0hl1g',
-            remotePath: "public_html/fynx"
-        }))
+        .pipe(ftp(ftpdetails))
         // you need to have some kind of stream after gulp-ftp to make sure it's flushed 
         // this can be a gulp plugin, gulp.dest, or any kind of stream 
         // here we use a passthrough stream 
         .pipe(gutil.noop());
 });
-
-var templateCacheBootstrap = "firstapp.run(['$templateCache', function($templateCache) {";
 
 
 
@@ -136,6 +152,7 @@ gulp.task('concat:js', function () {
             './w/js/templates.js',
         ])
         .pipe(concat('w.js'))
+        .pipe(replace(replacehostFrom,replacehostTo))
         .pipe(gulp.dest('./w'));
 });
 
