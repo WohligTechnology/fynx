@@ -51,7 +51,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         name: "SPACE PRINT SLIM FIT T-SHIRT",
         price: "699"
     }, {
-        src: "img/tee.jpg",
+        src: "img/t1.jpg",
+        name: "SPACE PRINT SLIM FIT T-SHIRT",
+        price: "699"
+    }, {
+        src: "img/t2.jpg",
+        name: "SPACE PRINT SLIM FIT T-SHIRT",
+        price: "699"
+    }, {
+        src: "img/t3.jpg",
+        name: "SPACE PRINT SLIM FIT T-SHIRT",
+        price: "699"
+    }, {
+        src: "img/t4.jpg",
+        name: "SPACE PRINT SLIM FIT T-SHIRT",
+        price: "699"
+    }, {
+        src: "img/t5.jpg",
         name: "SPACE PRINT SLIM FIT T-SHIRT",
         price: "699"
     }];
