@@ -1,49 +1,51 @@
-<div class="left-bar hide-sm">
+<div class="left-bar hidden-sm hidden-xs">
 
     <div class="text-center">
         <img src="img/mrfynx2.png" class="small-mascot">
     </div>
 
-    <div class="search-box">
-        <span class="search-btn"><i class="fa fa-search"></i></span>
+    <form class="search-box" ng-submit="">
+        <button class="search-btn" type="submit"><i class="fa fa-search"></i>
+        </button>
         <div class="input-box">
             <input type="search" placeholder="search here">
         </div>
-    </div>
+    </form>
 
     <h5 class="text-upper">Highlights</h5>
     <ul class="list-unstyled">
         <li ui-sref="home">Home</li>
+        <li>New Arrivals</li>
         <li>Best Sellers</li>
         <li>Trend Styles</li>
     </ul>
 
     <h5 class="text-upper">Shop by category</h5>
     <ul class="list-unstyled">
-        <li>T-Shirts
-            <div class="radio">
+        <li class="econ tshirt">T-Shirts
+            <div class="checkbox">
                 <label>
-                    <input type="radio" name="tshirts">Polo Shirts
+                    <input type="checkbox" name="tshirts"><span>Polo Shirts</span>
                 </label>
             </div>
-            <div class="radio">
+            <div class="checkbox">
                 <label>
-                    <input type="radio" name="tshirts">Graphic T-shirts
+                    <input type="checkbox" name="tshirts"><span>Graphic T-shirts</span>
                 </label>
             </div>
-            <div class="radio">
+            <div class="checkbox">
                 <label>
-                    <input type="radio" name="tshirts">Tanks
+                    <input type="checkbox" name="tshirts"><span>Tanks</span>
                 </label>
             </div>
-            <div class="radio">
+            <div class="checkbox">
                 <label>
-                    <input type="radio" name="tshirts">Hoodies
+                    <input type="checkbox" name="tshirts"><span>Hoodies</span>
                 </label>
             </div>
         </li>
-        <li>Caps</li>
-        <li>Shoes</li>
+        <li class="econ cap">Caps</li>
+        <li class="econ shoe">Shoes</li>
     </ul>
 
     <h5 class="text-upper">Miscellaneous</h5>
@@ -53,10 +55,9 @@
     </ul>
 </div>
 
-
 <div class="container">
     <div class="row">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-offset-2 col-md-10 col-sm-offset-0 col-sm-12">
             <div class="site-map">
                 <ul>
                     <li><a href="#/home">
@@ -82,6 +83,7 @@
                         <option value="">M</option>
                         <option value="">L</option>
                         <option value="">XL</option>
+                        <option value="">XXL</option>
                     </select></span>
                 <span class="arrow"><select>
                         <option value="">Colors</option>
@@ -99,7 +101,7 @@
 
             <div class="product-list">
                 <div class="row">
-                    <div class="col-md-4 col-xs-6" ng-repeat="p in productList" ui-sref="productview">
+                    <div class="col-sm-4 col-xs-6" ng-repeat="p in productList" ui-sref="productview">
                         <div class="image-holder">
                             <img ng-src="{{p.src}}">
                         </div>
