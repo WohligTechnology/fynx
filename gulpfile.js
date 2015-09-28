@@ -164,7 +164,7 @@ gulp.task('inlinesource', function() {
     return gulp.src('./w/index.html')
         .pipe(inline({
             base: './w',
-            disabledTypes: ['svg', 'img'] // Only inline css files 
+            disabledTypes: ['svg', 'img'] // Only inline css files
         }))
         .pipe(gulp.dest('./w/'));
 });
@@ -276,5 +276,6 @@ gulp.task('default', ["sass:development", "watch:all"]);
 gulp.task('development', ["sass:development", "watch:all"]);
 gulp.task('minifyhtml', ["minify:indexHTML", "minify:views", "templatecache"]);
 gulp.task('copy', ["copy:img", "copy:fonts"]);
+
 
 gulp.task('production', gulpSequence(["copy:img", "copy:fonts", "sass:production", "minify:indexproduction", "minify:views"], 'clean:tmp', ["minify:css", "templatecache"], "concat:js", 'clean:tmp', "uglify:js", 'clean:tmp', "inlinesource", 'clean:tmp', "gzipfile", 'clean:tmp', 'clean:tmp', "zip"));
