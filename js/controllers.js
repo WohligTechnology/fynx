@@ -9,14 +9,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.mySlides = [{
         id: 1,
-        src: "img/slider1.jpg",
-        head: 'Superhero <br>Stuff',
-        sub: "EXCLUSIVE DC COMICS COLLECTION BY MY FYNX"
+        src: "img/slider2.jpg",
+        template: '<img src="img/custom-tee.png" class="img-responsive doneLoading img-spacer"/>',
+        button: {
+          class: 'btn-dark',
+          text: 'Enter Now',
+          url: '#/custom',
+          centerAlign: true
+        }
     }, {
         id: 2,
         src: "img/slider1.jpg",
-        head: 'Superhero <br>Stuff',
-        sub: "EXCLUSIVE DC COMICS COLLECTION BY MY FYNX"
+        template: '<h3 class="hidden-xs">Superhero <br>Stuff</h3><p class="hidden-xs">EXCLUSIVE DC COMICS COLLECTION BY MY FYNX</p>',
+        button: {
+          class: 'btn-primary',
+          text: 'Shop Now',
+          url: '#/product/men',
+          centerAlign: false
+        }
     }];
 
 

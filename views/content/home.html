@@ -1,35 +1,29 @@
 <flex-slider flex-slide="s in mySlides track by $index">
     <li>
         <img ng-src="{{s.src}}">
-        
+
         <div class="text-above">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-offset-7 col-md-5 col-xs-offset-6 col-xs-5">
-                        <h3 ng-bind-html="s.head" class="hidden-xs"></h3>
-                        <p ng-bind-html="s.sub" class="hidden-xs"></p>
-                        <button class="btn btn-primary">Shop Now</button>
+                    <div class="col-md-offset-7 col-md-4 col-xs-offset-6 col-xs-5">
+                      <div ng-if="s.template" ng-bind-html="s.template"></div>
+                        <div ng-class="{'text-center': s.button.centerAlign}">
+                          <a class="btn {{s.button.class}}" ng-href="{{s.button.url}}">{{s.button.text}}</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </li>
 </flex-slider>
 
-<div class="banner relative">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5  col-xs-12">
-                <img src="img/mrfynx.png" alt="Mr. Fynx" class="half-image img-responsive m-center">
-            </div>
-            <div class="col-md-5 col-xs-12">
-                <h3>Meet the FYNX</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae officiis facere, eum accusantium dolores eaque aliquam, quaerat adipisci, vel consequatur, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil.</p>
-                <button class="btn btn-danger">Know More</button>
-            </div>
-        </div>
-    </div>
+<div class="container">
+  <uib-tabset>
+    <uib-tab heading="Static title">Static content</uib-tab>
+    <uib-tab heading="Static title">Static content</uib-tab>
+    <uib-tab heading="Static title">Static content</uib-tab>
+  </uib-tabset>
 </div>
 
 <div class="row-flex">
@@ -54,7 +48,23 @@
         <button class="btn btn-success btn-middle-big">Pets</button>
     </div>
 </div>
-<div class="custom-banner relative">
+
+<div class="banner relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5  col-xs-12">
+                <img src="img/mrfynx.png" alt="Mr. Fynx" class="half-image img-responsive m-center">
+            </div>
+            <div class="col-md-5 col-xs-12">
+                <h3 class="light">Meet the FYNX</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae officiis facere, eum accusantium dolores eaque aliquam, quaerat adipisci, vel consequatur, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil.</p>
+                <button class="btn btn-danger">Know More</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="custom-banner relative">
     <img src="img/customize.jpg" alt="Customize" class="img-responsive full-image">
     <button class="btn btn-danger text-upper">Enter</button>
-</div>
+</div> -->

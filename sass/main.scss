@@ -1,5 +1,6 @@
 /*Start writing sass here*/
 @import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 
 @include font-face("Advent Pro", "../fonts/adventpro-regular-webfont");
 @include font-face("Advent Pro", "../fonts/adventpro-bold-webfont", bold);
@@ -57,10 +58,16 @@ $menu-height: 74px !default;
     font-family: $font-family-serif;
     font-weight: bold;
 }
+.light {color: white;}
 .primary {color: $brand-primary;}
 .danger {color: $brand-danger;}
 .warning {color: $brand-warning;}
 .success {color: $brand-success;}
+
+.btn-dark {
+  @include button-variant(white, black, black);
+}
+
 body {
   padding-top: $menu-height;
 }
@@ -76,6 +83,9 @@ img {
 }
 img.doneLoading {
   opacity: 1;
+}
+.pointer {
+  cursor: pointer;
 }
 nav {
     li:hover .dropdown-menu {
@@ -115,7 +125,7 @@ nav {
             opacity: 1 !important;
         }
     }
-    
+
 }
 .row-flex {
   @include display(flex);
@@ -139,7 +149,7 @@ nav {
         height: 110px;
         width: auto;
         position: relative;
-        z-index: 1; 
+        z-index: 1;
     }
 }
 /*Navbar*/
@@ -187,7 +197,7 @@ nav {
         font-size: 60px;
         color: $brand-info;
         margin: 0;
-        text-transform: uppercase;    
+        text-transform: uppercase;
         letter-spacing: -3px;
         line-height: 0.9;
     }
@@ -211,16 +221,15 @@ nav {
 }
 
 .banner {
-    background-image: url('../img/whitechecks.jpg');
+    background-image: url('../img/checks.jpg');
     padding: 90px 0;
-    background-size: cover;
+    background-color: $brand-primary;
     background-attachment: fixed;
     h3 {
         margin: 0 0 10px;
         text-transform: uppercase;
         @extend .font-smart;
         font-size: 40px;
-        color: $brand-primary;
     }
     p {
         text-align: justify;
@@ -460,7 +469,7 @@ h4.bold, .bold {
                 color: $brand-danger;
             }
         }
-    }   
+    }
     a {
         color: $brand-danger;
     }
@@ -570,7 +579,7 @@ h4.bold, .bold {
     h3 {
         margin: 0;
         line-height: 120%;
-    }    
+    }
 }
 .size-chart {
     .list-inline {
@@ -697,7 +706,7 @@ h4.bold, .bold {
         padding: 15px 0;
         min-height: 200px;
         > * {
-          color: $gray;  
+          color: $gray;
         }
         h4 {
             margin: 0;
@@ -752,7 +761,7 @@ h4.bold, .bold {
             &:checked {
                 background-color: white;
                 border-width: 2px;
-                
+
                 + span {
                     color: white;
                 }
@@ -816,7 +825,7 @@ h4.bold, .bold {
         padding: 6px 0;
         width: 100%;
         outline: 0;
-        
+
         @include placeholder {
             color: black;
             text-transform: uppercase;
@@ -843,7 +852,7 @@ h4.bold, .bold {
     &.shoe::before {
         background-position: 0 0;
     }
-    &.cap::before {    
+    &.cap::before {
         background-position: -30px 0;
     }
     &.tshirt::before {
@@ -855,4 +864,8 @@ h4.bold, .bold {
     color: black;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+.img-spacer {
+  margin: 10px 0;
 }
