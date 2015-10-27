@@ -1,4 +1,4 @@
-<header>
+<header ng-controller="headerctrl">
     <nav class="navbar navbar-white navbar-fixed-top">
         <div class="container">
 
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-3 text-center hidden-xs">
                     <ul class="nav navbar-nav inline">
-                        <li><a href="">Login</a></li>
+                        <li><a href="" ng-click="openLogin();">Login</a></li>
                         <li><a href="">Cart (0)</a></li>
                     </ul>
                 </div>

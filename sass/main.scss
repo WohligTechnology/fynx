@@ -27,6 +27,10 @@ $brand-warning:         #ffec39 !default;
 $brand-danger:          #fc483f !default;
 $brand-info:            #000072 !default;
 
+$facebook:              #3a579d !default;
+$google:                #dd4d3c !default;
+$twitter:               #49c8f5 !default;
+
 $body-bg:               #fff !default;
 
 $text-color:            $gray-base !default;
@@ -64,8 +68,22 @@ $menu-height: 74px !default;
 .warning {color: $brand-warning;}
 .success {color: $brand-success;}
 
+.bg-primary {background-color: $brand-primary;}
+.bg-danger {background-color: $brand-danger;}
+.bg-warning {background-color: $brand-warning;}
+.bg-success {background-color: $brand-success;}
+
 .btn-dark {
   @include button-variant(white, black, black);
+}
+.btn-facebook {
+  @include button-variant(white, $facebook, $facebook);
+}
+.btn-google {
+  @include button-variant(white, $google, $google);
+}
+.btn-twitter {
+  @include button-variant(white, $twitter, $twitter);
 }
 
 body {
@@ -105,6 +123,7 @@ nav {
 }
 .flexslider {
   border: none;
+  overflow: hidden;
     .flex-direction-nav {
          a {
             height: 45px;
@@ -114,19 +133,96 @@ nav {
                 font-size: 40px;
                 color: white;
                 text-shadow: none;
+                font-family: 'FontAwesome';
             }
         }
         .flex-prev {
             left: 20px !important;
             opacity: 1 !important;
+            &:before {
+              content: '\f053';
+            }
         }
         .flex-next {
             right: 20px !important;
             opacity: 1 !important;
+            &:before {
+              content: '\f054';
+            }
         }
     }
-
 }
+
+.glyphicon {
+  font-family: 'FontAwesome';
+  &.glyphicon-chevron-right {
+    &:before {
+      content: '\f054';
+    }
+  }
+  &.glyphicon-chevron-left {
+    &:before {
+      content: '\f053';
+    }
+  }
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background: transparent;
+}
+
+.product-slideset {
+  .carousel-inner {
+    margin-top: 20px;
+  }
+  text-align: center;
+  padding: 40px 0 30px;
+  > ul.nav {
+    display: inline-block;
+    border-width: 0px;
+    li {
+      background: $gray-lighter;
+      overflow: hidden;
+      margin: 0;
+      border-width: 0px !important;
+      &:first-child {
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+      }
+      &:last-child {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+      }
+      &.active {
+        a {
+          color: white;
+          background-color: $brand-danger;
+        }
+      }
+      a {
+        color: $gray-light;
+        border-width: 0px !important;
+        padding: 7px 30px;
+        text-transform: capitalize;
+        font-size: 18px;
+        background: transparent;
+        margin: 0;
+        @include transition(all 300ms ease);
+        &:hover {
+          color: white;
+          background-color: $brand-danger;
+        }
+      }
+    }
+  }
+  .carousel-control {
+      color: $gray-light;
+      text-shadow: none;
+      width: 20px;
+    }
+}
+
 .row-flex {
   @include display(flex);
 }
@@ -172,6 +268,7 @@ nav {
             padding-bottom: 20px;
             padding-top: 33px;
             @include transition(all 300ms ease);
+            outline: 0 !important;
         }
     }
 }
@@ -860,7 +957,11 @@ h4.bold, .bold {
         width: 14px;
     }
 }
-.input-box input::-webkit-input-placeholder {
+
+.input-box input::-webkit-input-placeholder,
+.input-box input:-ms-input-placeholder,
+.input-box input:-moz-placeholder,
+.input-box input::-moz-placeholder {
     color: black;
     text-transform: uppercase;
     font-weight: bold;
@@ -868,4 +969,39 @@ h4.bold, .bold {
 
 .img-spacer {
   margin: 10px 0;
+}
+
+.nothing {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    .center-margin {
+      margin: 0 auto;
+    }
+}
+
+.modal-content {
+  background: transparent;
+  box-shadow: none;
+  border-width: 0;
+  .modal-height {
+    min-height: 200px;
+  }
+}
+
+.login-tab {
+  label, p {
+    color: $gray-darker;
+  }
+  .content-view {
+    padding: 10px 20px 20px;
+  }
+  input {
+    background-color: transparent;
+    border-color: white;
+    @include placeholder {
+      color: white;
+      text-transform: uppercase;
+    }
+  }
 }
