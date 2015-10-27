@@ -20,7 +20,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }, {
     id: 2,
     src: "img/slider1.jpg",
-    template: '<h3 class="hidden-xs">Superhero <br>Stuff</h3><p class="hidden-xs">EXCLUSIVE DC COMICS COLLECTION BY MY FYNX</p>',
+    template: '<h3>Superhero <br>Stuff</h3><p>EXCLUSIVE DC COMICS COLLECTION BY MY FYNX</p>',
     button: {
       class: 'btn-primary',
       text: 'Shop Now',
@@ -28,6 +28,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       centerAlign: false
     }
   }];
+
+  $scope.slideSet = [{
+    src: 'img/shoe1.png'
+  }, {
+    src: 'img/shoe2.png'
+  }, {
+    src: 'img/shoe3.png'
+  }, {
+    src: 'img/shoe4.png'
+  }, {
+    src: 'img/shoe4.png'
+  }, {
+    src: 'img/shoe3.png'
+  }, {
+    src: 'img/shoe2.png'
+  }, {
+    src: 'img/shoe1.png'
+  }];
+
+  $scope.slideSet = _.chunk($scope.slideSet, 4);
 
   $scope.footerBlack = false;
 })
@@ -110,22 +130,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
+
+.controller('CustomCtrl', function($scope, TemplateService, NavigationService) {
+  $scope.template = TemplateService.changecontent("custom");
+  $scope.menutitle = NavigationService.makeactive("Custom");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+
+})
+
+.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService) {
+  $scope.template = TemplateService.changecontent("custom-choose");
+  $scope.menutitle = NavigationService.makeactive("Choose Your Attire");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+
+})
+
+.controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService) {
+  $scope.template = TemplateService.changecontent("custom-create");
+  $scope.menutitle = NavigationService.makeactive("Funk It Up");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+
+})
+
 .controller('headerctrl', function($scope, TemplateService, $uibModal) {
   $scope.template = TemplateService;
 
-  $scope.openLogin = function(size) {
-    var modalInstance = $uibModal.open({
-      animation: $scope.animationsEnabled,
+  $scope.openLogin = function() {
+    $uibModal.open({
+      animation: true,
       templateUrl: 'views/modal/login.html',
-      controller: 'LoginCtrl',
-      size: size,
-      resolve: {
-        items: function() {
-          return $scope.items;
-        }
-      }
+      controller: 'LoginCtrl'
     })
   }
 
-})
-;
+});

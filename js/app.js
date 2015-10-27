@@ -18,7 +18,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     templateUrl: "views/template.html",
     controller: 'HomeCtrl'
   })
-  
+
   .state('privacy', {
     url: "/privacy",
     templateUrl: "views/template.html",
@@ -29,19 +29,37 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     templateUrl: "views/template.html",
     controller: 'TermsCtrl'
   })
-  
+
   .state('productlist', {
     url: "/product/men",
     templateUrl: "views/template.html",
     controller: 'ProductListCtrl'
   })
-  
+
   .state('productview', {
     url: "/product/men/1",
     templateUrl: "views/template.html",
     controller: 'ProductViewCtrl'
   })
-  
+
+  .state('customization', {
+    url: "/custom",
+    templateUrl: "views/template.html",
+    controller: 'CustomCtrl'
+  })
+
+  .state('chooseAttire', {
+    url: "/custom/choose",
+    templateUrl: "views/template.html",
+    controller: 'CustomChooseCtrl'
+  })
+
+  .state('customCreate', {
+    url: "/custom/create",
+    templateUrl: "views/template.html",
+    controller: 'CustomCreateCtrl'
+  })
+
   .state('contact', {
     url: "/contact",
     templateUrl: "views/template.html",

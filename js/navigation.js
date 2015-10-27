@@ -30,7 +30,7 @@ var navigationservice = angular.module('navigationservice', [])
   }, {
     name: "Custom",
     active: "",
-    link: "#/product/custom",
+    link: "#/custom",
     classis: "active",
     subnav: []
   }];

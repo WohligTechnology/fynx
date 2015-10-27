@@ -20,99 +20,77 @@
 
 <div class="container">
 <uib-tabset class="product-slideset">
+
   <uib-tab heading="Shoes">
     <uib-carousel>
-      <uib-slide>
+      <uib-slide ng-repeat="slide in slideSet">
         <div class="row">
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
-          </div>
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
-          </div>
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
-          </div>
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
+          <div class="col-md-3 col-xs-6" ng-repeat="image in slide">
+            <img class="img-responsive" ng-src="{{image.src}}"/>
           </div>
         </div>
       </uib-slide>
-      <uib-slide>
-        <div class="row">
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
-          </div>
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
-          </div>
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
-          </div>
-          <div class="col-md-3">
-            <img src="img/tee.jpg" class="img-responsive" />
-          </div>
-        </div>
-      </uib-slide>
-      <uib-carousel>
-      </uib-tab>
-      <uib-tab heading="Tshirts">
-        <div class="nothing">
-            <div class="center-margin">No Product found.</div>
-        </div>
-      </uib-tab>
-      <uib-tab heading="Hoodies">
-        <div class="nothing">
-            <div class="center-margin">No Product found.</div>
-        </div>
-      </uib-tab>
-      <uib-tab heading="Tanks">
-        <div class="nothing">
-            <div class="center-margin">No Product found.</div>
-        </div>
-      </uib-tab>
-    </uib-tabset>
-  </div>
+    </uib-carousel>
+  </uib-tab>
 
-  <div class="row-flex">
-    <div class="col-flex">
-      <img alt="Women" class="img-responsive full-image" src="img/box1.jpg">
-      <button class="btn btn-danger btn-middle-big">Women</button>
+  <uib-tab heading="Tshirts">
+    <div class="nothing">
+      <div class="center-margin">No products found.</div>
     </div>
-    <div class="col-flex">
-      <img alt="Men" class="img-responsive full-image" src="img/box2.jpg">
-      <button class="btn btn-primary btn-middle-big" ui-sref="productlist">Men</button>
+  </uib-tab>
 
+  <uib-tab heading="Hoodies">
+    <div class="nothing">
+      <div class="center-margin">No products found.</div>
     </div>
-  </div>
+  </uib-tab>
 
-  <div class="row-flex">
-    <div class="col-flex">
-      <img alt="Infants" class="img-responsive full-image" src="img/box4.jpg">
-      <button class="btn btn-warning btn-middle-big">Infants</button>
+  <uib-tab heading="Tanks">
+    <div class="nothing">
+      <div class="center-margin">No products found.</div>
     </div>
-    <div class="col-flex">
-      <img alt="Pets" class="img-responsive full-image" src="img/box3.jpg">
-      <button class="btn btn-success btn-middle-big">Pets</button>
-    </div>
-  </div>
+  </uib-tab>
+</uib-tabset>
+</div>
 
-  <div class="banner relative">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-5  col-xs-12">
-          <img alt="Mr. Fynx" class="half-image img-responsive m-center" src="img/mrfynx.png">
-        </div>
-        <div class="col-md-5 col-xs-12">
-          <h3 class="light">Meet the FYNX</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae officiis facere, eum accusantium dolores eaque aliquam, quaerat adipisci, vel consequatur, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil.</p>
-          <button class="btn btn-danger">Know More</button>
-        </div>
-      </div>
+<div class="row-flex">
+<div class="col-flex">
+  <img alt="Women" class="img-responsive full-image" src="img/box1.jpg">
+  <button class="btn btn-danger btn-middle-big">Women</button>
+</div>
+<div class="col-flex">
+  <img alt="Men" class="img-responsive full-image" src="img/box2.jpg">
+  <button class="btn btn-primary btn-middle-big" ui-sref="productlist">Men</button>
+</div>
+</div>
+
+<div class="row-flex">
+<div class="col-flex">
+  <img alt="Infants" class="img-responsive full-image" src="img/box4.jpg">
+  <button class="btn btn-warning btn-middle-big">Infants</button>
+</div>
+<div class="col-flex">
+  <img alt="Pets" class="img-responsive full-image" src="img/box3.jpg">
+  <button class="btn btn-success btn-middle-big">Pets</button>
+</div>
+</div>
+
+<div class="banner relative">
+<div class="container">
+  <div class="row">
+    <div class="col-md-5  col-xs-12">
+      <img alt="Mr. Fynx" class="half-image img-responsive m-center" src="img/mrfynx.png">
+    </div>
+    <div class="col-md-5 col-xs-12">
+      <h3 class="light">Meet the FYNX</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae officiis facere, eum accusantium dolores eaque aliquam, quaerat adipisci, vel consequatur, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil, minima suscipit saepe ducimus! Corporis incidunt aliquid accusamus neque nihil.</p>
+      <button class="btn btn-danger">Know More</button>
     </div>
   </div>
+</div>
+</div>
 
-  <!-- <div class="custom-banner relative">
+<!-- <div class="custom-banner relative">
     <img src="img/customize.jpg" alt="Customize" class="img-responsive full-image">
     <button class="btn btn-danger text-upper">Enter</button>
 </div> -->
