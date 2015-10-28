@@ -142,7 +142,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService) {
   $scope.template = TemplateService.changecontent("custom-choose");
-  $scope.menutitle = NavigationService.makeactive("Choose Your Attire");
+  $scope.menutitle = NavigationService.makeactive("Custom");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
@@ -151,7 +151,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService) {
   $scope.template = TemplateService.changecontent("custom-create");
-  $scope.menutitle = NavigationService.makeactive("Funk It Up");
+  $scope.menutitle = NavigationService.makeactive("Custom");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
