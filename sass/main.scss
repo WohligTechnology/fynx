@@ -6,7 +6,34 @@
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/fontawesome/css/font-awesome.min.css";
-@import "../css/flaticon.css";
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/flaticon.eot");
+  src: url("../fonts/flaticon.eot#iefix") format("embedded-opentype"), url("../fonts/flaticon.woff") format("woff"), url("../fonts/flaticon.ttf") format("truetype"), url("../fonts/flaticon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.flaticon {
+  font-family: Flaticon;
+  font-size: inherit;
+  font-style: normal;
+}
+.flaticon-camera:before {
+	content: "\e000";
+}
+.flaticon-t-shirt-o:before {
+	content: "\e001";
+}
+.flaticon-cross:before {
+	content: "\e002";
+}
+.flaticon-t-shirt:before {
+	content: "\e003";
+}
+.flaticon-zoom:before {
+	content: "\e004";
+}
 
 $gray-base:              #000 !default;
 $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
