@@ -151,7 +151,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal) {
     $scope.template = TemplateService.changecontent("custom-create");
     $scope.menutitle = NavigationService.makeactive("Custom");
     TemplateService.title = $scope.menutitle;
@@ -209,6 +209,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             i++;
         })
     };
+    
+//    sizechart popup
+    
+        $scope.openLogin = function () {
+        $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modal/sizechart.html',
+            controller: 'CustomCreateCtrl'
+        })
+    }
 
 })
 
