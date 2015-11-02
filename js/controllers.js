@@ -158,6 +158,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
     
+    $scope.size=[{
+        src:"img/sizechart.jpg"
+    }];
+    
     $scope.tshirt = [{
         name: "ULTRA COTTON TSHIRT",
         from: "YXS",
