@@ -51,6 +51,7 @@ $brand-info:            #000072 !default;
 $facebook:              #3a579d !default;
 $google:                #dd4d3c !default;
 $twitter:               #49c8f5 !default;
+$popup:                 #515151 !default;
 
 $body-bg:               #fff !default;
 
@@ -81,6 +82,11 @@ $menu-height: 74px !default;
     }
   }
 }
+@mixin x-appearance ($value) {
+	-webkit-appearance: $value;
+	   -moz-appearance: $value;
+	        appearance: $value;
+}
 
 @mixin clip-path($clip) {
   -webkit-clip-path: $clip;
@@ -102,6 +108,7 @@ $menu-height: 74px !default;
 .bg-danger {background-color: $brand-danger;}
 .bg-warning {background-color: $brand-warning;}
 .bg-success {background-color: $brand-success;}
+.bg-imgupload {background-color: $body-bg;}
 
 .btn-dark {
   @include button-variant(white, black, black);
@@ -1010,6 +1017,11 @@ h4.bold, .bold {
   .modal-height {
     min-height: 200px;
     margin-top: 15%;
+  }  
+    .modal-heights {
+    min-height: 300px;
+    margin-top: 15%;
+        padding: 50px;
   }
 }
 
@@ -1097,6 +1109,9 @@ h4.bold, .bold {
 .mb-10 {
   margin: 0 0px 10px;
 }
+.m-30 {
+  margin-top:30px !important;
+}
 .mt-10 {
   margin: 10px 0px 0px;
 }
@@ -1136,7 +1151,9 @@ h4.bold, .bold {
   }
 }
 //mahesh scss start
-
+.mar0{
+    margin: 0 !important;
+}
 .edit_content{
     text-transform: uppercase;
         padding-top: 10px;
@@ -1186,4 +1203,87 @@ h4.bold, .bold {
     @extend .btn;
         padding: 6px 50px !important;
         margin-top: 18px;
+}
+.img-box {
+    border: 1px solid black;
+}
+.img-content{
+    h3{
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: bold;
+            color:$brand-danger;
+    }
+    h4{
+            font-weight: bold;
+            font-size: 17px;
+            margin-bottom: 0;
+            line-height: 150%;
+            color:#515151;
+    }
+    p{
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            color:$popup;
+    }
+}
+.large-Modal .modal-dialog{
+  width:720px;
+}
+.txt-img {
+    padding-top: 1px;
+   
+}
+.front{
+    textarea{
+        resize: none;
+        border-color: $brand-danger;
+        &:focus{
+           border-color: $brand-danger; 
+        }
+    }
+    p{
+         margin-bottom: 6px !important;
+
+    }
+}
+.fynx-select {
+    position: relative;
+    select{
+     @include x-appearance(none);
+    border: none;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 2px 0px 0px 6px;
+    width: 100%;
+    background-color: transparent;
+    outline: 0;
+    color: $brand-danger;
+    cursor: pointer;
+
+    }
+            &:after{
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f107";
+    height: 32px;
+    width: 28px;
+    background-color: $brand-danger;
+    color: white;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+    z-index: -1;
+        }
+    .only-border {
+    border: 1px solid $brand-danger;
+    width: 100%;
+    position: absolute;
+    height: 32px;
+    top: -2px;
+    z-index: -1;
+}
 }

@@ -25,10 +25,10 @@
                             </uib-tab-heading>
                             <div class="edit_content" ng-repeat="pro in tshirt">
                                 <p>{{pro.name}}</p>
-                                <p>SIZES <span>: {{pro.from}} to {{pro.to}}</span> <b class="b-color" ng-click="openLogin();">SIZE CHART</b></p>
+                                <p>SIZES <span>: {{pro.from}} to {{pro.to}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b></p>
                                 <p>FABRIC: <span>100% PRESHRUNK COTTON</span></p>
                                 <p class="b-color"> + SHOW MORE INFORMATION</p>
-             
+
 
                                 <div class="color-pick">
                                     <p>CHOOSE COLOURS</p>
@@ -50,6 +50,11 @@
                                 </div>
                                 <div class="tab-title">Add Image</div>
                             </uib-tab-heading>
+                            <div class="edit_content" ng-repeat="pro in tshirt">
+                                <p>ADD IMAGE TO YOUR TSHIRT</p>
+                                <button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
+
+                            </div>
                         </uib-tab>
                         <uib-tab>
                             <uib-tab-heading>
@@ -58,6 +63,59 @@
                                 </div>
                                 <div class="tab-title">Add Text</div>
                             </uib-tab-heading>
+                            <div class="add-input">
+                                <!--
+                                <div class="first">
+
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+
+                                            <div class="front">
+                                                <div class="edit_content">
+                                                    <p>ENTER YOUR TEXT BELOW</p>
+                                                </div>
+                                                <textarea rows="4" cols="80"> </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="edit_content mt-10 front">
+                                                <p>font</p>
+                                            </div>
+                                            <div class="fynx-select">
+                                                <select>
+                                                    <option></option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                                <span class="only-border"></span>
+                                            </div>
+                                            <button class="btn btn-danger m-30 con-btn">ADD TO DESIGN</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+-->
+                                <div class="second">
+                                    <div class="row">
+                                        <div class="col-md-8">
+
+                                            <div class="front">
+                                                <div class="edit_content">
+                                                    <p>ENTER YOUR TEXT BELOW</p>
+                                                </div>
+                                                <textarea rows="4" cols="80"> </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </uib-tab>
                         <uib-tab>
                             <uib-tab-heading>

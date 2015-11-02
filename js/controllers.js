@@ -216,10 +216,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     
 //    sizechart popup
     
-        $scope.openLogin = function () {
+        $scope.sizeChart = function () {
         $uibModal.open({
             animation: true,
             templateUrl: 'views/modal/sizechart.html',
+            controller: 'CustomCreateCtrl'
+        })
+    }
+// image upload popup
+          $scope.width = "720px";
+              $scope.imgUpload = function () {
+        $uibModal.open({
+            animation: true,
+             windowClass: 'large-Modal',
+            templateUrl: 'views/modal/upload.html',
             controller: 'CustomCreateCtrl'
         })
     }
