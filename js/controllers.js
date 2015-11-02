@@ -201,6 +201,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         class: ""
 
   }];
+        $scope.colors = [{
+        color: "red",
+        name: "COLOR",
+            
+
+  }, {
+        color: "black",
+        name: "STROKE"
+
+  }, {
+        color: "grey",
+        name: "SHADOW"
+
+  }];
 
     $scope.makeactive = function (index) {
         var i = 0;

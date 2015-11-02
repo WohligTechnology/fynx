@@ -64,6 +64,7 @@
                                 <div class="tab-title">Add Text</div>
                             </uib-tab-heading>
                             <div class="add-input">
+
                                 <!--
                                 <div class="first">
 
@@ -100,6 +101,7 @@
                                     </div>
                                 </div>
 -->
+
                                 <div class="second">
                                     <div class="row">
                                         <div class="col-md-8">
@@ -111,6 +113,37 @@
                                                 <textarea rows="4" cols="80"> </textarea>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="edit_content mt-10 front">
+                                                <p>font</p>
+                                            </div>
+                                            <div class="fynx-select">
+                                                <select>
+                                                    <option></option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                                <span class="only-border"></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="color-pick">
+                                                <ul class="m-minus">
+                                                    <li ng-repeat="col in colors" class="m-17">
+                                                        <p class="class-p">{{col.name}}</p>
+                                                        <div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

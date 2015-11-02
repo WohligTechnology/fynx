@@ -1259,7 +1259,7 @@ h4.bold, .bold {
     width: 100%;
     background-color: transparent;
     outline: 0;
-    color: $brand-danger;
+    color: #515151;
     cursor: pointer;
 
     }
@@ -1286,4 +1286,19 @@ h4.bold, .bold {
     top: -2px;
     z-index: -1;
 }
+}
+.m-minus{
+        margin-top: -15px;
+}
+.class-p{
+        margin-bottom: 5px !important;
+    font-weight: bold;
+}
+.m-auto{
+    margin: 0 auto;
+      border: 1px solid $brand-danger;
+}
+.m-17{
+    margin: 0 17px !important;
+      
 }
