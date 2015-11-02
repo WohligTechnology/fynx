@@ -1135,3 +1135,53 @@ h4.bold, .bold {
     }
   }
 }
+//mahesh scss start
+
+.edit_content{
+    text-transform: uppercase;
+        padding-top: 10px;
+    p{
+        font-weight: 600;
+        line-height: 130%;
+        span{
+            font-weight: 400;
+        }
+        b{
+            padding-left: 5px;
+        }
+    }
+       .b-color{
+            color:$brand-danger;
+        }
+}
+.color-pick{
+    ul{
+       padding: 0;
+        list-style: none;
+        display: block;
+        li{
+            display: inline-block;
+              margin: 0px 2px;
+            .color-bx{
+                height: 28px;
+                width: 28px;
+                background: black;
+              
+                cursor: pointer;
+               
+            }
+     
+        }
+        .active{
+                    border:1px solid #000;
+                }
+    }
+}
+.color-pick{
+        margin-top: 35px;
+}
+.con-btn{
+    @extend .btn;
+        padding: 6px 50px !important;
+        margin-top: 18px;
+}
