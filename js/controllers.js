@@ -151,6 +151,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
+.controller('ProfileCtrl', function ($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("profile");
+    $scope.menutitle = NavigationService.makeactive("Profile");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+
+})
+
 .controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal) {
     $scope.template = TemplateService.changecontent("custom-create");
     $scope.menutitle = NavigationService.makeactive("Custom");

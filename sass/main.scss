@@ -47,6 +47,7 @@ $brand-success:         #84ce3c !default;
 $brand-warning:         #ffec39 !default;
 $brand-danger:          #fc483f !default;
 $brand-info:            #000072 !default;
+$brand-account:         #86ceff !default;
 
 $facebook:              #3a579d !default;
 $google:                #dd4d3c !default;
@@ -1420,5 +1421,62 @@ h4.bold, .bold {
                 cursor: pointer;
                 padding-top: 15px;
         }
+    }
+}
+.account{
+        margin:-8px 0px 14px 0px;
+    ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: block;
+        li{
+            display: inline-block;
+            background: $brand-primary;
+            color: #fff;
+            padding: 5px 40px;
+            cursor: pointer;
+        }
+    }
+    .yellow-btn{
+       background: $brand-warning !important;
+            color: black !important;
+    }
+}
+.account-name{
+    p{
+            color: #515151;
+            line-height: 100%;
+            text-indent: 0px;
+        
+        span{
+           padding-left: 34px;
+        }
+    
+    
+}
+        h5{
+             margin-top: 22px;
+             cursor: pointer;
+        }
+}
+.h5-class{
+        font-weight: bold;
+        color: $brand-danger;
+   
+}
+    .min-hght{
+        min-height: 450px;
+    }
+.edit{
+        background: $brand-account;
+        border: 1px solid $brand-account;
+        color: #56a4de;
+        text-transform: uppercase;
+        padding: 0px 9px;
+        font-size: 12px;
+        cursor: pointer;
+    &:focus{
+         border: 1px solid $brand-account;
     }
 }
