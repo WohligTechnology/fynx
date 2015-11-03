@@ -65,18 +65,17 @@
                             </uib-tab-heading>
                             <div class="add-input">
 
-                                <!--
-                                <div class="first">
 
 
+                                <div class="first" ng-show="showFirst">
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
 
                                             <div class="front">
                                                 <div class="edit_content">
                                                     <p>ENTER YOUR TEXT BELOW</p>
                                                 </div>
-                                                <textarea rows="4" cols="80"> </textarea>
+                                                <textarea rows="4" cols="87"> </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -95,22 +94,23 @@
                                                 </select>
                                                 <span class="only-border"></span>
                                             </div>
-                                            <button class="btn btn-danger m-30 con-btn">ADD TO DESIGN</button>
+                                            <button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();">ADD TO DESIGN</button>
                                         </div>
 
                                     </div>
                                 </div>
--->
 
-                                <div class="second">
+
+
+                                <div class="second" ng-hide="showFirst">
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
 
                                             <div class="front">
                                                 <div class="edit_content">
                                                     <p>ENTER YOUR TEXT BELOW</p>
                                                 </div>
-                                                <textarea rows="4" cols="80"> </textarea>
+                                                <textarea rows="4" cols="87"> </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                                         <div class="col-md-5">
                                             <div class="color-pick">
                                                 <ul class="m-minus">
-                                                    <li ng-repeat="col in colors" class="m-17">
+                                                    <li ng-repeat="col in colors" class="m-17" ng-click="showorhide($index);">
                                                         <p class="class-p">{{col.name}}</p>
                                                         <div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
                                                     </li>
@@ -145,7 +145,170 @@
                                         </div>
 
                                     </div>
+
+
+                                    <div class="color-show" ng-hide="showSize">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="color-bxs">
+                                                    <div class="close-btn pull-right" ng-click="closeandshowsize();">
+                                                        <img src="img/close.jpg">
+                                                    </div>
+                                                    <div class="color-pick mar">
+
+                                                        <ul>
+                                                            <li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
+                                                                <div class="color-bx" ng-style="{'background':col.color}"></div>
+                                                            </li>
+
+
+                                                        </ul>
+
+                                                    </div>
+                                                    <div class="text-line ">
+                                                        <p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+                                                    </div>
+                                                    <div class="text-line">
+
+
+                                                        <div class="row ">
+                                                            <div class="col-md-2">
+                                                                <p class="mar0 f-size">Size</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p class="range-value">{{items[0].value}}</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-2">
+                                                                <p class="mar0 f-size">Arc</p>
+                                                            </div>
+                                                            <div class="col-md-8 text-center">
+                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
+                                                                <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p class="range-value">{{item1[0].value}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="slider-show" ng-show="showSize">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="rang-slider">
+                                                    <div class="ul-class">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <p class="mar0 f-size">Size</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p class="range-value">{{items[0].value}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <p class="mar0 f-size">Arc</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p class="range-value">{{items[0].value}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <p class="mar0 f-size">Rotation</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item1[0].value"></div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p class="range-value">{{items[0].value}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <p class="mar0 f-size">Spacing</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item2[0].value"></div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p class="range-value">{{items[0].value}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <p class="mar0 f-size">Stretch</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item3[0].value"></div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <p class="range-value">{{items[0].value}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="edit_content mt-10 front">
+                                                                    <p>JUSTIFY</p>
+                                                                </div>
+                                                                <div class="fynx-select txt-img">
+                                                                    <select>
+                                                                        <option></option>
+                                                                        <option>2</option>
+                                                                        <option>3</option>
+                                                                        <option>4</option>
+                                                                    </select>
+                                                                    <span class="only-border"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="edit_content mt-10 front">
+                                                                    <p>LAYER ORDER</p>
+                                                                </div>
+                                                                <button class="btn btn-dangers ">A Bring Forward</button>
+                                                            </div>
+                                                            <div class="col-md-3">
+
+                                                                <button class="btn btn-dangers m-45 ">V send Backward</button>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="edit_content mt-10 front">
+                                                                    <p>Alignment</p>
+                                                                </div>
+                                                                <button class="btn btn-dangers ">Align to center</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
                                 </div>
+
                             </div>
 
 
@@ -157,6 +320,51 @@
                                 </div>
                                 <div class="tab-title">Buy</div>
                             </uib-tab-heading>
+                            
+                            <div class="edit_content" ng-show="showSecond">
+                                <p class="m5">DECORATIVE METHODS</p>
+                                <span class="span-class">Digital Print (no minimum)</span>
+                                <div class="rate m-45">
+                                   <div class="row">
+                                    <div class="col-md-3 select-size">
+                                                 
+                                            <div class="fynx-select">
+                                                <select>
+                                                    <option></option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                                <span class="only-border"></span>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="qnt">
+                                            <p>QUANTITY<span><input type="text"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                  <button class="btn btn-danger con-btn" ng-click="showor();">CALCULATE PRIZE</button> 
+                                </div>
+                                
+                            </div>
+
+                            <div class="row" ng-hide="showSecond">
+                                <div class="col-md-9">
+                                    <div class="fix-prize mt-10">
+
+                                        <h3>Rs. 999/- <span class="pull-right">Edit Quantities</span></h3>
+                                    </div>
+                                    <div class="front content-view m-30 ">
+                                        <div class="edit_content">
+                                            <p>ENTER YOUR DESIGN NAME</p>
+                                        </div>
+                                        <input type="text" class="form-control"> </input>
+                                        <button class="btn btn-danger m-30 con-btns">ADD TO CART</button> 
+                                    </div>
+                                </div>
+                            </div>
+
                         </uib-tab>
                     </uib-tabset>
                 </div>

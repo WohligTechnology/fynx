@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -157,17 +157,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
-    
-    $scope.size=[{
-        src:"img/sizechart.jpg"
+    $scope.showSize = true;
+    $scope.showFirst = true;
+    $scope.showSecond = true;
+
+    $scope.showorhide = function (index) {
+        if (index == 0) {
+            $scope.showSize = false;
+        }
+    }
+
+    $scope.closeandshowsize = function () {
+        $scope.showSize = !$scope.showSize;
+    }
+
+    $scope.showorfirst = function () {
+        $scope.showFirst = false;
+    }  
+    $scope.showor = function () {
+        $scope.showSecond = false;
+    }
+
+    //    $scope.closeandshowsize=function(){
+    //        $scope.showSize = !$scope.showSize;
+    //    }
+
+    $scope.size = [{
+        src: "img/sizechart.jpg"
     }];
-    
+
     $scope.tshirt = [{
         name: "ULTRA COTTON TSHIRT",
         from: "YXS",
         to: "3XL"
 
   }];
+
     $scope.color = [{
         color: "red",
         class: "active"
@@ -201,10 +226,133 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         class: ""
 
   }];
-        $scope.colors = [{
+
+    $scope.colour = [{
+        color: "red",
+        class: "active"
+
+  }, {
+        color: "black",
+        class: ""
+
+  }, {
+        color: "grey",
+        class: ""
+
+  }, {
+        color: "cyan",
+        class: ""
+
+  }, {
+        color: "blue",
+        class: ""
+
+  }, {
+        color: "pink",
+        class: ""
+
+  }, {
+        color: "green",
+        class: ""
+
+  }, {
+        color: "orange",
+        class: ""
+
+  }, {
+        color: "Chocolate ",
+        class: ""
+
+  }, {
+        color: "DarkCyan ",
+        class: ""
+
+  }, {
+        color: "DarkKhaki ",
+        class: ""
+
+  }, {
+        color: "DarkRed",
+        class: ""
+
+  }, {
+        color: "DarkOliveGreen ",
+        class: ""
+
+  }, {
+        color: "DarkSalmon ",
+        class: ""
+
+  }, {
+        color: "DarkSlateGray ",
+        class: ""
+
+  }, {
+        color: "DarkTurquoise ",
+        class: ""
+
+  }, {
+        color: "DarkViolet ",
+        class: ""
+
+  }, {
+        color: "DeepSkyBlue ",
+        class: ""
+
+  }, {
+        color: "FireBrick ",
+        class: ""
+
+  }, {
+        color: "Cornsilk ",
+        class: ""
+
+  }, {
+        color: "Crimson",
+        class: ""
+
+  }, {
+        color: "Khaki  ",
+        class: ""
+
+  }, {
+        color: "Lavender",
+        class: ""
+
+  }, {
+        color: "LavenderBlush ",
+        class: ""
+
+  }, {
+        color: "LawnGreen ",
+        class: ""
+
+  }, {
+        color: "LightCyan ",
+        class: ""
+
+  }, {
+        color: "LightGreen",
+        class: ""
+
+  }, {
+        color: "LightSalmon ",
+        class: ""
+
+  }, {
+        color: "LightSteelBlue ",
+        class: ""
+
+  }, {
+        color: "Lime ",
+        class: ""
+
+  }];
+
+    $scope.colors = [{
         color: "red",
         name: "COLOR",
-            
+
 
   }, {
         color: "black",
@@ -215,6 +363,71 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         name: "SHADOW"
 
   }];
+
+    $scope.items = [{
+            name: 'First Item',
+            value: 500
+    },
+        {
+            name: 'Second Item',
+            value: 200
+    },
+        {
+            name: 'Third Item',
+            value: 700
+    }];
+
+    $scope.item = [{
+            name: 'First Item',
+            value: 500
+    },
+        {
+            name: 'Second Item',
+            value: 200
+    },
+        {
+            name: 'Third Item',
+            value: 700
+    }];
+
+    $scope.item1 = [{
+            name: 'First Item',
+            value: 500
+    },
+        {
+            name: 'Second Item',
+            value: 200
+    },
+        {
+            name: 'Third Item',
+            value: 700
+    }];
+
+    $scope.item2 = [{
+            name: 'First Item',
+            value: 500
+    },
+        {
+            name: 'Second Item',
+            value: 200
+    },
+        {
+            name: 'Third Item',
+            value: 700
+    }];
+
+    $scope.item3 = [{
+            name: 'First Item',
+            value: 500
+    },
+        {
+            name: 'Second Item',
+            value: 200
+    },
+        {
+            name: 'Third Item',
+            value: 700
+    }];
 
     $scope.makeactive = function (index) {
         var i = 0;
@@ -227,22 +440,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             i++;
         })
     };
-    
-//    sizechart popup
-    
-        $scope.sizeChart = function () {
+
+    //    sizechart popup
+
+    $scope.sizeChart = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modal/sizechart.html',
+                controller: 'CustomCreateCtrl'
+            })
+        }
+        // image upload popup
+    $scope.width = "720px";
+    $scope.imgUpload = function () {
         $uibModal.open({
             animation: true,
-            templateUrl: 'views/modal/sizechart.html',
-            controller: 'CustomCreateCtrl'
-        })
-    }
-// image upload popup
-          $scope.width = "720px";
-              $scope.imgUpload = function () {
-        $uibModal.open({
-            animation: true,
-             windowClass: 'large-Modal',
+            windowClass: 'large-Modal',
             templateUrl: 'views/modal/upload.html',
             controller: 'CustomCreateCtrl'
         })
