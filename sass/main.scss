@@ -1192,10 +1192,8 @@ h4.bold, .bold {
                 height: 28px;
                 width: 28px;
                 background: black;
-              
                 cursor: pointer;
-               
-            }
+           }
      
         }
         .active{
@@ -1537,8 +1535,24 @@ h4.bold, .bold {
         border-bottom: 1px solid #ddd !important;
     }
 }
+.category{
+        padding-bottom: 10px;
+    p{
+        color:$brand-danger;
+    }
+}
+.list{
+  
+    p{
+        color:#515151;
+        
+    }
+}
 .custom-btn{
     font-size: 11px !important;
     padding: 6px 20px !important;
     font-weight: 400 !important;
+}
+.mar-btm{
+    margin-bottom: 50px;
 }
