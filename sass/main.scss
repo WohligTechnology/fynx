@@ -53,7 +53,9 @@ $facebook:              #3a579d !default;
 $google:                #dd4d3c !default;
 $twitter:               #49c8f5 !default;
 $popup:                 #515151 !default;
+$DarkBrown:             #292321;
 
+$Orange:                #CC3300;
 $body-bg:               #fff !default;
 
 $text-color:            $gray-base !default;
@@ -1444,6 +1446,9 @@ h4.bold, .bold {
     }
  
 }
+.paddbtm{
+    padding-bottom: 0 !important;
+}
    .yellow-btn{
        background: $brand-warning !important;
             color: black !important;
@@ -1622,4 +1627,46 @@ h4.bold, .bold {
        font-size: 11px;
     color: #515151 !important;
     cursor: pointer;
+}
+.radio-cust{
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label {
+    color: #515151;
+    font-size:13px;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:11px;
+    height:11px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+    border: 1px solid $brand-danger;
+}
+
+input[type="radio"] + label span {
+     background-color:transparent;
+}
+
+input[type="radio"]:checked + label span{
+     background-color:$brand-danger;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;
+  -moz-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}
+}
+.payment{
+    @extend .color-pick;
+    p{
+            display: inline-block;
+    }
 }

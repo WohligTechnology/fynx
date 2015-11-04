@@ -12,7 +12,7 @@
                     <li class="tab-item {{classa}}" ng-click="tabchange('step1',1)">STEP 1</li>
                     <li class="tab-item {{classb}}" ng-click="tabchange('step2',2)">STEP 2</li>
                     <li class="tab-item {{classc}}" ng-click="tabchange('step3',3)">STEP 3</li>
-                    <li class="tab-item {{classd}}" ng-click="tabchange('step4',4)">STEP 3</li>
+                    <li class="tab-item {{classd}}" ng-click="tabchange('step4',4)">STEP 4</li>
 
                 </ul>
             </div>
@@ -209,6 +209,184 @@
 
 
 
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="tab=='step3'">
+        <div class="row">
+            <div class="col-md-12 content-view paddbtm" style="padding-left:15px;">
+                <h4 class="login">YOUR DETAILS</h4>
+            </div>
+
+        </div>
+        <div class="row content-view">
+            <div class="col-md-3">
+                <div class="form-group">
+
+                    <input type="email" class="form-control" placeholder="FIRST NAME">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+
+                    <input type="email" class="form-control" placeholder="LAST NAME">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+
+                    <input type="email" class="form-control" placeholder="MOBILE NUMBER ">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+
+                    <input type="email" class="form-control" placeholder="EMAIL ADDRESS">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="login-form content-view pad0">
+                    <h4 class="login">BILLING ADDRESS</h4>
+                    <div class="form-group">
+                        <label>LINE 1*</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>LINE 2</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>LINE 3</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>CITY *</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>PINCODE *</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>STATE</label>
+                        <div class="fynx-select">
+                            <select>
+                                <option value=""></option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <span class="only-border"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>COUNTRY</label>
+                        <input type="password" class="form-control">
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-3">
+                <div class="login-form content-view pad0">
+                    <h4 class="login">SHIPPING ADDRESS</h4>
+                    <div class="form-group i-check">
+
+                        <input type="checkbox" name="vehicle" value="Bike" class="iagree">Same as billing address
+                    </div>
+                    <div class="form-group">
+                        <label>LINE 1*</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>LINE 2</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>LINE 3</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>CITY *</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>PINCODE *</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>STATE</label>
+                        <div class="fynx-select">
+                            <select>
+                                <option value=""></option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <span class="only-border"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>COUNTRY</label>
+                        <input type="password" class="form-control">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 content-view paddbtm m-45" style="padding-left:15px;">
+                <h4 class="login">PAYMENT METHOD</h4>
+            </div>
+
+        </div>
+        <div class="row content-view paddbtm">
+            <div class="col-md-3">
+                <div class="form-group radio-cust">
+
+                    <input type="radio" id="radio01" name="radio" />
+                    <label for="radio01"><span></span>CREDIT CARD</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group radio-cust">
+                    <input type="radio" id="radio02" name="radio" />
+                    <label for="radio02"><span></span>DEBIT CARD</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group radio-cust">
+                    <input type="radio" id="radio03" name="radio" />
+                    <label for="radio03"><span></span>NET BANKING</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group radio-cust">
+                    <input type="radio" id="radio04" name="radio" />
+                    <label for="radio04"><span></span>CASH ON DELIVERY</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center">
+                <button class="btn btn-danger m-30 con-btn">CONTINUE</button>
+            </div>
+        </div>
+        <div class="row mar-btm">
+            <div class="col-md-6">
+                <div class="payment list">
+                   <p >We Accept:</p>
+                    <ul style="display: inline-block;">
+                        <li><img src="img/visa.png"></li>
+                        <li><img src="img/card.png"></li>
+                        <li><img src="img/meastro.png"></li>
+                      
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
