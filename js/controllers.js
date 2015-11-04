@@ -159,6 +159,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.footerBlack = true;
 
 })
+    .controller('OrderCtrl', function ($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("order");
+    $scope.menutitle = NavigationService.makeactive("Orders");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+
+})   
+    .controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("wishlist");
+    $scope.menutitle = NavigationService.makeactive("Wishlist");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+
+})
 
 .controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal) {
     $scope.template = TemplateService.changecontent("custom-create");

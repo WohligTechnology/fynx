@@ -1471,7 +1471,7 @@ h4.bold, .bold {
 .edit{
         background: $brand-account;
         border: 1px solid $brand-account;
-        color: #56a4de;
+        color: #0a73bb;
         text-transform: uppercase;
         padding: 0px 9px;
         font-size: 12px;
@@ -1479,4 +1479,65 @@ h4.bold, .bold {
     &:focus{
          border: 1px solid $brand-account;
     }
+}
+.btn-blue{
+            background: $brand-primary;
+            color: #fff;
+            padding: 5px 40px;
+            cursor: pointer;
+            border: none;
+            font-size: 13px;
+            vertical-align: baseline;
+            text-transform: uppercase;
+}
+.order-table{
+    table{
+        color:#515151;
+        thead{
+            tr{
+                background:$brand-danger;
+                
+                th{
+                    text-align: center;
+                    font-weight: normal;
+                    color:$body-bg ;
+                    border: none;
+                    padding: 4px 0px;
+                    
+                }
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    vertical-align: baseline;vertical-align: middle;
+                    padding: 20px 0px 0px 0px;
+                    border: none;
+                    text-transform: uppercase;
+                    figure{
+                        img{
+                            width: 80px;
+                      }
+                        figcaption{
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.text-bold{
+    td{
+        font-weight: bold !important;
+        font-size: 20px !important;
+        text-transform: capitalize !important;
+        color:#515151;
+        padding-bottom: 27px !important;
+    }
+}
+.custom-btn{
+    font-size: 11px !important;
+    padding: 5px 12px !important;
+    font-weight: 400 !important;
 }
