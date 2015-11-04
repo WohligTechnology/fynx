@@ -47,6 +47,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     url: "/cart",
     templateUrl: "views/template.html",
     controller: 'CartCtrl'
+  })  
+      
+    .state('checkout', {
+    url: "/checkout",
+    templateUrl: "views/template.html",
+    controller: 'CheckoutCtrl'
   })
   
     .state('terms-conditions', {
