@@ -48,6 +48,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     templateUrl: "views/template.html",
     controller: 'CartCtrl'
   })  
+  
+         .state('confirmationmail', {
+    url: "/confirmationmail",
+    templateUrl: "views/template.html",
+    controller: 'ConfirmationmailCtrl'
+  })  
       
     .state('checkout', {
     url: "/checkout",

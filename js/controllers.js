@@ -174,6 +174,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
 
+})  
+    .controller('ConfirmationmailCtrl', function ($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("confirmationmail");
+    $scope.menutitle = NavigationService.makeactive("Confirmationmail");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+
 }) 
     .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("checkout");
