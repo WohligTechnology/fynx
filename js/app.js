@@ -35,11 +35,18 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     url: "/order",
     templateUrl: "views/template.html",
     controller: 'OrderCtrl'
-  })    
+  }) 
+  
     .state('wishlist', {
     url: "/wishlist",
     templateUrl: "views/template.html",
     controller: 'WishlistCtrl'
+  }) 
+      
+    .state('cart', {
+    url: "/cart",
+    templateUrl: "views/template.html",
+    controller: 'CartCtrl'
   })
   
     .state('terms-conditions', {

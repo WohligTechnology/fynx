@@ -166,6 +166,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
 
+})  
+    .controller('CartCtrl', function ($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("cart");
+    $scope.menutitle = NavigationService.makeactive("Cart");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+
 })   
     .controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("wishlist");
