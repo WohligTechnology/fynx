@@ -148,7 +148,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
-
 })
 
 .controller('ProfileCtrl', function ($scope, TemplateService, NavigationService) {
