@@ -151,27 +151,19 @@
 		}
 		
 		.btn-dark {
-			@include button-variant(white,
-			black,
-			black);
+			@include button-variant(white,black,black);
 		}
 		
 		.btn-facebook {
-			@include button-variant(white,
-			$facebook,
-			$facebook);
+			@include button-variant(white,$facebook,$facebook);
 		}
 		
 		.btn-google {
-			@include button-variant(white,
-			$google,
-			$google);
+			@include button-variant(white,$google,$google);
 		}
 		
 		.btn-twitter {
-			@include button-variant(white,
-			$twitter,
-			$twitter);
+			@include button-variant(white,$twitter,$twitter);
 		}
 		
 		body {
@@ -470,8 +462,7 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			@include transform(translate(-50%,
-			-50%));
+			@include transform(translate(-50%,-50%));
 			@extend .font-smart;
 			color: $gray-base;
 			font-size: 30px;
@@ -599,10 +590,7 @@
 				background-color: darken($brand-danger, 20%);
 				height: 20px;
 				width: 100%;
-				@include clip-path(polygon(0 0,
-				100% 0%,
-				100% 100%,
-				2% 100%));
+				@include clip-path(polygon(0 0,100% 0%,100% 100%,2% 100%));
 			}
 			.mascot {
 				position: absolute;
@@ -1851,12 +1839,6 @@
 		}
 		
 		//mobile
-		@media (max-width:$screen-sm-max) {
-			.left-bar {
-				width: 175px;
-			}
-		}
-		
 		@media (max-width:$screen-xs-max) {
 			.navbar-collapse {
 				background-color: white;
@@ -2047,6 +2029,12 @@
 			}
 			.min-hght {
 				min-height: 400px;
+			}
+		}
+		
+		@media (max-width:1024px) {
+			.left-bar {
+				width: 160px;
 			}
 		}
 		
