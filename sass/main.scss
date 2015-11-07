@@ -1344,7 +1344,7 @@ h4.bold,
   &:before {
     position: absolute;
     top: 0;
-    right: 38%;
+    right: 224px;;
     margin-top: -3px;
     width: 22px;
     height: 19px;
@@ -1661,6 +1661,28 @@ h4.bold,
 .p25 {
   padding: 25px 0;
 }
+
+
+//mahesh scss
+.p70{
+        padding-bottom: 70px;
+}
+.strok{
+    @extend .color-bxs;
+    &:before{
+           right: 170px !important;
+    }
+}
+.shadow{
+    @extend .color-bxs;
+    &:before{
+           right: 109px !important;
+    }
+}
+
+
+
+
 
 //mobile
 @media (max-width:$screen-xs-max) {
