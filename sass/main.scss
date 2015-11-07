@@ -1078,7 +1078,10 @@ h4.bold,
   }
   .nav-tabs {
     border-bottom: 2px solid $brand-warning;
+	  display: flex;
     > li {
+		flex: 1;
+		width: 1px;
       &.active {
         a {
           background-color: $brand-warning;
@@ -1137,8 +1140,11 @@ h4.bold,
 .customize.detail-tab {
   margin-top: 10px;
   .nav-tabs {
+	  display: flex;
     > li {
-      min-width: 100px;
+//      min-width: 100px;
+		flex: 1;
+		width: 1px;
       text-align: center;
       &.active > a {
         color: $gray-dark;
@@ -1392,6 +1398,7 @@ h4.bold,
     span {
       height: 28px !important;
       border: 1px solid #d0d0d0 !important;
+	  left: 0
     }
   };
 }
@@ -1655,11 +1662,6 @@ h4.bold,
 }
 
 //mobile
-@media (max-width:$screen-sm-max) {
-  .left-bar {
-    width: 175px;
-  }
-}
 @media (max-width:$screen-xs-max) {
   .navbar-collapse {
     background-color: white;
@@ -1691,6 +1693,16 @@ h4.bold,
       z-index: 9;
     }
   }
+	.btn-dangers {
+    padding: 8px 5px !important;
+    font-size: 10px;
+}
+	.detail-tab{
+		.tab-content p {
+    margin: 0 0 15px;
+    font-size: 10px;
+       }
+	}
   h1.danger.text-center.bold-head {
     font-size: 24px;
   }
@@ -1768,14 +1780,10 @@ h4.bold,
     margin-top: 5px;
   }
   .tab-title {
-    font-size: 13px;
+    font-size: 10px;
   }
   .detail-tab .nav-tabs > li + li {
     margin-left: 12px;
-  }
-  .customize.detail-tab .nav-tabs > li {
-    min-width: 50px;
-    text-align: center;
   }
   .edit_content {
     text-transform: uppercase;
@@ -1806,7 +1814,7 @@ h4.bold,
     line-height: 150%;
   }
   .m-45 {
-    margin-top: 20px;
+    margin-top: 29px;
   }
   .order-table {
     table {
@@ -1850,6 +1858,44 @@ h4.bold,
   }
   .min-hght {
     min-height: 400px;
+  }
+
+	.login-tab {
+	 .fixed-down {
+       position: absolute;
+       bottom: -25px;
+       right: -30px;
+       width: 90px;
+     }
+	.button-set .btn  {
+      padding: 1px 20px 0;
+	  font-size: 16px;
+     }
+  }
+	.navbar-toggle {
+    right: 0;
+    top: 12px;
+     }
+
+	.large-Modal {
+		.modal-dialog {
+    width: 90%;
+    margin: 0 auto;
+    }
+   }
+	.mobile-margin {
+    margin-top: 20px;
+}
+}
+ @media (min-width: $screen-sm-min) {
+  .left-bar {
+    width: 175px;
+  }
+	.btn-dangers {
+    padding: 8px 10px !important;
+  }
+	.m-17 {
+    margin: 0 6px !important;
   }
 }
 

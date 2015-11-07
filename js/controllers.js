@@ -165,7 +165,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
 
-})  
+})
     .controller('CartCtrl', function ($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("cart");
     $scope.menutitle = NavigationService.makeactive("Cart");
@@ -173,7 +173,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
 
-})  
+})
     .controller('ConfirmationmailCtrl', function ($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("confirmationmail");
     $scope.menutitle = NavigationService.makeactive("Confirmationmail");
@@ -181,14 +181,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
 
-}) 
+})
     .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("checkout");
     $scope.menutitle = NavigationService.makeactive("Checkout");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
-    
+
         $scope.tab = 'step1';
     $scope.classa = 'yellow-btn';
     $scope.classb = '';
@@ -198,19 +198,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //        console.log(tab);
         $scope.tab = tab;
         if (a == 1) {
-           
+
             $scope.classa = "yellow-btn";
             $scope.classb = '';
             $scope.classc = '';
             $scope.classc = '';
         } else if (a == 2) {
-            
+
             $scope.classa = '';
             $scope.classb = "yellow-btn";
             $scope.classc = '';
             $scope.classd = '';
         } else if (a == 3) {
-           
+
             $scope.classa = '';
             $scope.classb = '';
             $scope.classc = "yellow-btn";
@@ -225,7 +225,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
 
-})   
+})
     .controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("wishlist");
     $scope.menutitle = NavigationService.makeactive("Wishlist");
@@ -257,7 +257,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.showorfirst = function () {
         $scope.showFirst = false;
-    }  
+    }
     $scope.showor = function () {
         $scope.showSecond = false;
     }
@@ -549,6 +549,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('headerctrl', function ($scope, TemplateService, $uibModal) {
     $scope.template = TemplateService;
+
+    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        $(window).scrollTop(0);
+    });
 
     $scope.openLogin = function () {
         $uibModal.open({
