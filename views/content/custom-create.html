@@ -1,460 +1,506 @@
 <div class="breadcrumb">
-    <div class="container relative">
-        <h3>Welcome to the FYNX lab</h3>
-        <img src="img/mrfynx2.png" alt="Mr. Fynx" class="mascot">
-    </div>
+	<div class="container relative">
+		<h3>Welcome to the FYNX lab</h3>
+		<img src="img/mrfynx2.png" alt="Mr. Fynx" class="mascot">
+	</div>
 </div>
 <div class="container">
-    <hr>
-    <div class="product-detail">
-        <div class="row">
-            <div class="col-md-5">
-                <img class="img-responsive m-center" src="img/tee.jpg">
-            </div>
+	<hr>
+	<div class="product-detail">
+		<div class="row">
+			<div class="col-md-5">
+				<img class="img-responsive m-center" src="img/tee.jpg">
+				<div class="vertical icon">
+					<div class="icon-inner text-center">
+						<i class="flaticon flaticon-t-shirt-o"></i>
+						<p>Back</p>
+					</div>
+					<div class="icon-inner text-center">
+						<i class="flaticon flaticon-zoom"></i>
+						<p>Zoom</p>
+					</div>
+					<div class="icon-inner text-center">
+						<i class="flaticon flaticon-cross"></i>
+						<p class="margin-zero">Reset</p>
+					</div>
+				</div>
+				<div class="social-share text-center">
+					<h5 class="head"> Share your Creation On:</h5>
+					<div class="button-set">
+						<button class="btn btn-facebook">
+							<i class="fa fa-facebook"></i>
+						</button>
+						<button class="btn btn-twitter">
+							<i class="fa fa-twitter"></i>
+						</button>
+						<button class="btn btn-google">
+							<i class="fa fa-google-plus"></i>
+						</button>
+					</div>
+				</div>
+			</div>
 
-            <div class="col-md-7">
-                <h3 class="danger">FUNK IT UP</h3>
-                <div class="detail-tab customize">
-                    <uib-tabset>
-                        <uib-tab>
-                            <uib-tab-heading>
-                                <div class="icon-font">
-                                    <i class="flaticon flaticon-t-shirt"></i>
-                                </div>
-                                <div class="tab-title">Edit Product</div>
-                            </uib-tab-heading>
-                            <div class="edit_content" ng-repeat="pro in tshirt">
-                                <p>{{pro.name}}</p>
-                                <p>SIZES <span>: {{pro.from}} to {{pro.to}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b></p>
-                                <p>FABRIC: <span>100% PRESHRUNK COTTON</span></p>
-                                <p class="b-color"> + SHOW MORE INFORMATION</p>
-
-
-                                <div class="color-pick">
-                                    <p>CHOOSE COLOURS</p>
-                                    <ul>
-                                        <li ng-repeat="col in color" ng-click="makeactive($index)" class="{{col.class}}">
-                                            <div class="color-bx" ng-style="{'background':col.color}"></div>
-                                        </li>
-
-
-                                    </ul>
-                                    <button class="btn btn-danger con-btn">CONTINUE</button>
-                                </div>
-                            </div>
-                        </uib-tab>
-                        <uib-tab>
-                            <uib-tab-heading>
-                                <div class="icon-font">
-                                    <i class="flaticon flaticon-camera"></i>
-                                </div>
-                                <div class="tab-title">Add Image</div>
-                            </uib-tab-heading>
-                            <div class="edit_content" ng-repeat="pro in tshirt">
-                                <p>ADD IMAGE TO YOUR TSHIRT</p>
-                                <button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
-
-                            </div>
-                        </uib-tab>
-                        <uib-tab>
-                            <uib-tab-heading>
-                                <div class="icon-font">
-                                    <i class="not-icon">aA</i>
-                                </div>
-                                <div class="tab-title">Add Text</div>
-                            </uib-tab-heading>
-                            <div class="add-input">
+			<div class="col-md-7">
+				<h3 class="danger">FUNK IT UP</h3>
+				<div class="detail-tab customize">
+					<uib-tabset>
+						<uib-tab>
+							<uib-tab-heading>
+								<div class="icon-font">
+									<i class="flaticon flaticon-t-shirt"></i>
+								</div>
+								<div class="tab-title">Edit Product</div>
+							</uib-tab-heading>
+							<div class="edit_content" ng-repeat="pro in tshirt">
+								<p>{{pro.name}}</p>
+								<p>SIZES <span>: {{pro.from}} to {{pro.to}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b></p>
+								<p>FABRIC: <span>100% PRESHRUNK COTTON</span></p>
+								<p class="b-color"> + SHOW MORE INFORMATION</p>
 
 
+								<div class="color-pick">
+									<p>CHOOSE COLOURS</p>
+									<ul>
+										<li ng-repeat="col in color" ng-click="makeactive($index)" class="{{col.class}}">
+											<div class="color-bx" ng-style="{'background':col.color}"></div>
+										</li>
 
-                                <div class="first" ng-show="showFirst">
-                                    <div class="row">
-                                        <div class="col-md-10">
 
-                                            <div class="front">
-                                                <div class="edit_content">
-                                                    <p>ENTER YOUR TEXT BELOW</p>
-                                                </div>
-                                                <textarea rows="4" cols="87"> </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+									</ul>
+									<button class="btn btn-danger con-btn">CONTINUE</button>
+								</div>
+							</div>
+						</uib-tab>
+						<uib-tab>
+							<uib-tab-heading>
+								<div class="icon-font">
+									<i class="flaticon flaticon-camera"></i>
+								</div>
+								<div class="tab-title">Add Image</div>
+							</uib-tab-heading>
+							<div class="edit_content" ng-repeat="pro in tshirt">
+								<p>ADD IMAGE TO YOUR TSHIRT</p>
+								<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
 
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <div class="edit_content mt-10 front">
-                                                <p>font</p>
-                                            </div>
-                                            <div class="fynx-select">
-                                                <select>
-                                                    <option></option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                                <span class="only-border"></span>
-                                            </div>
-                                            <button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();">ADD TO DESIGN</button>
-                                        </div>
-
-                                    </div>
-                                </div>
+							</div>
+						</uib-tab>
+						<uib-tab>
+							<uib-tab-heading>
+								<div class="icon-font">
+									<i class="not-icon">aA</i>
+								</div>
+								<div class="tab-title">Add Text</div>
+							</uib-tab-heading>
+							<div class="add-input">
 
 
 
-                                <div class="second" ng-hide="showFirst">
-                                    <div class="row">
-                                        <div class="col-md-10">
+								<div class="first" ng-show="showFirst">
+									<div class="row">
+										<div class="col-md-10">
 
-                                            <div class="front">
-                                                <div class="edit_content">
-                                                    <p>ENTER YOUR TEXT BELOW</p>
-                                                </div>
-                                                <textarea rows="4" cols="87"> </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+											<div class="front">
+												<div class="edit_content">
+													<p>ENTER YOUR TEXT BELOW</p>
+												</div>
+												<div class="form-group">
+													<textarea type="text" class="form-control" rows="4"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
 
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="edit_content mt-10 front">
-                                                <p>font</p>
-                                            </div>
-                                            <div class="fynx-select">
-                                                <select>
-                                                    <option></option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                                <span class="only-border"></span>
-                                            </div>
+									<div class="row">
+										<div class="col-md-7">
+											<div class="edit_content mt-10 front">
+												<p>font</p>
+											</div>
+											<div class="fynx-select">
+												<select>
+													<option></option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+												</select>
+												<span class="only-border"></span>
+											</div>
+											<button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();">ADD TO DESIGN</button>
+										</div>
 
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="color-pick">
-                                                <ul class="m-minus">
-                                                    <li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
-                                                        <p class="class-p">{{col.name}}</p>
-                                                        <div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
-                                                    </li>
+									</div>
+								</div>
 
 
-                                                </ul>
-                                            </div>
-                                        </div>
 
-                                    </div>
+								<div class="second" ng-hide="showFirst">
+									<div class="row">
+										<div class="col-md-10">
 
-                                    <!--//color-->
-                                    
-                                    <div class="color-show" ng-show="first">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="color-bxs">
-                                                    <div class="close-btn pull-right" ng-click="closeandshowsize();">
-                                                        <img src="img/close.jpg">
-                                                    </div>
-                                                    <div class="color-pick mar">
+											<div class="front">
+												<div class="edit_content">
+													<p>ENTER YOUR TEXT BELOW</p>
+												</div>
+												<textarea rows="4" cols="87"> </textarea>
+											</div>
+										</div>
+									</div>
 
-                                                        <ul>
-                                                            <li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
-                                                                <div class="color-bx" ng-style="{'background':col.color}"></div>
-                                                            </li>
+									<div class="row">
+										<div class="col-md-5">
+											<div class="edit_content mt-10 front">
+												<p>font</p>
+											</div>
+											<div class="fynx-select">
+												<select>
+													<option></option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+												</select>
+												<span class="only-border"></span>
+											</div>
 
-
-                                                        </ul>
-
-                                                    </div>
-                                                    <div class="text-line p70">
-                                                        <p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!--//strok-->
-
-                                    
-                                    <div class="color-show" ng-show="second">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="strok ">
-                                                    <div class="close-btn pull-right" ng-click="closeandshowsize();">
-                                                        <img src="img/close.jpg">
-                                                    </div>
-                                                    <div class="color-pick mar">
-
-                                                        <ul>
-                                                            <li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
-                                                                <div class="color-bx" ng-style="{'background':col.color}"></div>
-                                                            </li>
+										</div>
+										<div class="col-md-5">
+											<div class="color-pick">
+												<ul class="m-minus">
+													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+														<p class="class-p">{{col.name}}</p>
+														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
+													</li>
 
 
-                                                        </ul>
+												</ul>
+											</div>
+										</div>
 
-                                                    </div>
-                                                    <div class="text-line ">
-                                                        <p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-                                                    </div>
-                                                    <div class="text-line">
+									</div>
 
+									<!--//color-->
 
-                                                        <div class="row ">
-                                                            <div class="col-xs-2">
-                                                                <p class="mar0 f-size">Weight</p>
-                                                            </div>
-                                                            <div class="col-xs-8">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+									<div class="color-show" ng-show="first">
+										<div class="row">
+											<div class="col-md-10">
+												<div class="color-bxs">
+													<div class="close-btn pull-right" ng-click="closeandshowsize();">
+														<img src="img/close.jpg">
+													</div>
+													<div class="color-pick mar">
 
-                                                            </div>
-                                                            <div class="col-xs-2">
-                                                                <p class="range-value">{{items[0].value}}</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row ">
-                                                            <div class="col-xs-2">
-                                                                <p class="mar0 f-size">Offset</p>
-                                                            </div>
-                                                            <div class="col-xs-8 text-center">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
-                                                                <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button>
-                                                            </div>
-                                                            <div class="col-xs-2">
-                                                                <p class="range-value">{{item1[0].value}}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--//shadow-->
-                                    <div class="color-show" ng-show="third">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="shadow ">
-                                                    <div class="close-btn pull-right" ng-click="closeandshowsize();">
-                                                        <img src="img/close.jpg">
-                                                    </div>
-                                                    <div class="color-pick mar">
-
-                                                        <ul>
-                                                            <li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
-                                                                <div class="color-bx" ng-style="{'background':col.color}"></div>
-                                                            </li>
+														<ul>
+															<li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
+																<div class="color-bx" ng-style="{'background':col.color}"></div>
+															</li>
 
 
-                                                        </ul>
+														</ul>
 
-                                                    </div>
-                                                    <div class="text-line ">
-                                                        <p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-                                                    </div>
-                                                    <div class="text-line">
-                                                        <div class="row ">
-                                                            <div class="col-xs-2">
-                                                                <p class="mar0 f-size">Distance</p>
-                                                            </div>
-                                                            <div class="col-xs-8">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+													</div>
+													<div class="text-line p70">
+														<p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+													</div>
 
-                                                            </div>
-                                                            <div class="col-xs-2">
-                                                                <p class="range-value">{{items[0].value}}</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row ">
-                                                            <div class="col-xs-2">
-                                                                <p class="mar0 f-size">Angle</p>
-                                                            </div>
-                                                            <div class="col-xs-8 text-center">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
-                                                                <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button>
-                                                            </div>
-                                                            <div class="col-xs-2">
-                                                                <p class="range-value">{{item1[0].value}}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-<!--//end-->
-                                    <div class="slider-show" ng-show="showSize">
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="rang-slider">
-                                                    <div class="ul-class">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <p class="mar0 f-size">Size</p>
-                                                            </div>
-                                                            <div class="col-xs-6">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
-                                                            </div>
-                                                            <div class="col-xs-3">
-                                                                <p class="range-value">{{items[0].value}}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <p class="mar0 f-size">Arc</p>
-                                                            </div>
-                                                            <div class="col-xs-6">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
-                                                            </div>
-                                                            <div class="col-xs-3">
-                                                                <p class="range-value">{{items[0].value}}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <p class="mar0 f-size">Rotation</p>
-                                                            </div>
-                                                            <div class="col-xs-6">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item1[0].value"></div>
-                                                            </div>
-                                                            <div class="col-xs-3">
-                                                                <p class="range-value">{{items[0].value}}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <p class="mar0 f-size">Spacing</p>
-                                                            </div>
-                                                            <div class="col-xs-6">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item2[0].value"></div>
-                                                            </div>
-                                                            <div class="col-xs-3">
-                                                                <p class="range-value">{{items[0].value}}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-                                                                <p class="mar0 f-size">Stretch</p>
-                                                            </div>
-                                                            <div class="col-xs-6">
-                                                                <div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item3[0].value"></div>
-                                                            </div>
-                                                            <div class="col-xs-3">
-                                                                <p class="range-value">{{items[0].value}}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-3 col-xs-12">
-                                                                <div class="edit_content mt-10 front">
-                                                                    <p>JUSTIFY</p>
-                                                                </div>
-                                                                <div class="fynx-select txt-img">
-                                                                    <select>
-                                                                        <option></option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                        <option>4</option>
-                                                                    </select>
-                                                                    <span class="only-border"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 col-xs-4">
-                                                                <div class="edit_content mt-10 front">
-                                                                    <p>LAYER ORDER</p>
-                                                                </div>
-                                                                <button class="btn btn-dangers ">A Bring Forward</button>
-                                                            </div>
-                                                            <div class="col-md-3 col-xs-4">
-
-                                                                <button class="btn btn-dangers m-45 ">V send Backward</button>
-                                                            </div>
-                                                            <div class="col-md-3 col-xs-4">
-                                                                <div class="edit_content mt-10 front">
-                                                                    <p>Alignment</p>
-                                                                </div>
-                                                                <button class="btn btn-dangers ">Align to center</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
+												</div>
+											</div>
+										</div>
+									</div>
 
 
-                                    </div>
+									<!--//strok-->
 
 
-                                </div>
+									<div class="color-show" ng-show="second">
+										<div class="row">
+											<div class="col-md-10">
+												<div class="strok ">
+													<div class="close-btn pull-right" ng-click="closeandshowsize();">
+														<img src="img/close.jpg">
+													</div>
+													<div class="color-pick mar">
 
-                            </div>
+														<ul>
+															<li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
+																<div class="color-bx" ng-style="{'background':col.color}"></div>
+															</li>
 
 
-                        </uib-tab>
-                        <uib-tab>
-                            <uib-tab-heading>
-                                <div class="icon-font">
-                                    <i class="fa fa-rupee"></i>
-                                </div>
-                                <div class="tab-title">Buy</div>
-                            </uib-tab-heading>
+														</ul>
 
-                            <div class="edit_content" ng-show="showSecond">
-                                <p class="m5">DECORATIVE METHODS</p>
-                                <span class="span-class">Digital Print (no minimum)</span>
-                                <div class="rate m-45">
-                                    <div class="row">
-                                        <div class="col-md-3 col-xs-6 select-size">
+													</div>
+													<div class="text-line ">
+														<p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+													</div>
+													<div class="text-line">
 
-                                            <div class="fynx-select">
-                                                <select>
-                                                    <option></option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                                <span class="only-border"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-xs-6 ">
+
+														<div class="row ">
+															<div class="col-xs-2">
+																<p class="mar0 f-size">Weight</p>
+															</div>
+															<div class="col-xs-8">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+															</div>
+															<div class="col-xs-2">
+																<p class="range-value">{{items[0].value}}</p>
+															</div>
+														</div>
+
+														<div class="row ">
+															<div class="col-xs-2">
+																<p class="mar0 f-size">Offset</p>
+															</div>
+															<div class="col-xs-8 text-center">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
+																<button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button>
+															</div>
+															<div class="col-xs-2">
+																<p class="range-value">{{item1[0].value}}</p>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!--//shadow-->
+									<div class="color-show" ng-show="third">
+										<div class="row">
+											<div class="col-md-10">
+												<div class="shadow ">
+													<div class="close-btn pull-right" ng-click="closeandshowsize();">
+														<img src="img/close.jpg">
+													</div>
+													<div class="color-pick mar">
+
+														<ul>
+															<li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
+																<div class="color-bx" ng-style="{'background':col.color}"></div>
+															</li>
+
+
+														</ul>
+
+													</div>
+													<div class="text-line ">
+														<p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+													</div>
+													<div class="text-line">
+														<div class="row ">
+															<div class="col-xs-2">
+																<p class="mar0 f-size">Distance</p>
+															</div>
+															<div class="col-xs-8">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+															</div>
+															<div class="col-xs-2">
+																<p class="range-value">{{items[0].value}}</p>
+															</div>
+														</div>
+
+														<div class="row ">
+															<div class="col-xs-2">
+																<p class="mar0 f-size">Angle</p>
+															</div>
+															<div class="col-xs-8 text-center">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
+																<button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button>
+															</div>
+															<div class="col-xs-2">
+																<p class="range-value">{{item1[0].value}}</p>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--//end-->
+									<div class="slider-show" ng-show="showSize">
+										<div class="row">
+											<div class="col-md-10">
+												<div class="rang-slider">
+													<div class="ul-class">
+														<div class="row">
+															<div class="col-xs-3">
+																<p class="mar0 f-size">Size</p>
+															</div>
+															<div class="col-xs-6">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+															</div>
+															<div class="col-xs-3">
+																<p class="range-value">{{items[0].value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-xs-3">
+																<p class="mar0 f-size">Arc</p>
+															</div>
+															<div class="col-xs-6">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
+															</div>
+															<div class="col-xs-3">
+																<p class="range-value">{{items[0].value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-xs-3">
+																<p class="mar0 f-size">Rotation</p>
+															</div>
+															<div class="col-xs-6">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item1[0].value"></div>
+															</div>
+															<div class="col-xs-3">
+																<p class="range-value">{{items[0].value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-xs-3">
+																<p class="mar0 f-size">Spacing</p>
+															</div>
+															<div class="col-xs-6">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item2[0].value"></div>
+															</div>
+															<div class="col-xs-3">
+																<p class="range-value">{{items[0].value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-xs-3">
+																<p class="mar0 f-size">Stretch</p>
+															</div>
+															<div class="col-xs-6">
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item3[0].value"></div>
+															</div>
+															<div class="col-xs-3">
+																<p class="range-value">{{items[0].value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-3 col-xs-12">
+																<div class="edit_content mt-10 front">
+																	<p>JUSTIFY</p>
+																</div>
+																<div class="fynx-select txt-img">
+																	<select>
+																		<option></option>
+																		<option>2</option>
+																		<option>3</option>
+																		<option>4</option>
+																	</select>
+																	<span class="only-border"></span>
+																</div>
+															</div>
+															<div class="col-md-3 col-xs-4">
+																<div class="edit_content mt-10 front">
+																	<p>LAYER ORDER</p>
+																</div>
+																<button class="btn btn-dangers ">A Bring Forward</button>
+															</div>
+															<div class="col-md-3 col-xs-4">
+
+																<button class="btn btn-dangers m-45 ">V send Backward</button>
+															</div>
+															<div class="col-md-3 col-xs-4">
+																<div class="edit_content mt-10 front">
+																	<p>Alignment</p>
+																</div>
+																<button class="btn btn-dangers ">Align to center</button>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+
+
+								</div>
+
+							</div>
+
+
+						</uib-tab>
+						<uib-tab>
+							<uib-tab-heading>
+								<div class="icon-font">
+									<i class="fa fa-rupee"></i>
+								</div>
+								<div class="tab-title">Buy</div>
+							</uib-tab-heading>
+
+							<div class="edit_content" ng-show="showSecond">
+								<p class="m5">DECORATIVE METHODS</p>
+								<span class="span-class">Digital Print (no minimum)</span>
+								<div class="rate m-45">
+									<div class="row">
+										<div class="col-md-3 col-xs-6 select-size">
+
+											<div class="fynx-select">
+												<select>
+													<option></option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+												</select>
+												<span class="only-border"></span>
+											</div>
+										</div>
+										<div class="col-md-6 col-xs-6 ">
+											<!--
+											<form class="form-inline" role="form">
+	<div class="form-group">
+		<label for="pwd" class="qnt">QUANTITY:</label>
+		<input type="text" class="form-control" id="pwd">
+	</div>
+</form>
+-->
+											<form class="form-inline" role="form">
+												<div class="form-group">
+													<label for="">QUANTITY:</label>
+													<input type="text" class="form-control">
+												</div>
+											</form>
+											<!--
                                             <div class="qnt">
                                                 <p>QUANTITY<span><input type="text"></span></p>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-danger con-btn" ng-click="showor();">CALCULATE PRIZE</button>
-                                </div>
+-->
+										</div>
+									</div>
+									<button class="btn btn-danger con-btn" ng-click="showor();">CALCULATE PRIZE</button>
+								</div>
 
-                            </div>
+							</div>
 
-                            <div class="row" ng-hide="showSecond">
-                                <div class="col-md-9">
-                                    <div class="fix-prize mt-10">
+							<div class="row" ng-hide="showSecond">
+								<div class="col-md-9">
+									<div class="fix-prize mt-10">
 
-                                        <h3>Rs. 999/- <span class="pull-right">Edit Quantities</span></h3>
-                                    </div>
-                                    <div class="front content-view m-30 ">
-                                        <div class="edit_content">
-                                            <p>ENTER YOUR DESIGN NAME</p>
-                                        </div>
-                                        <input type="text" class="form-control"> </input>
-                                        <button class="btn btn-danger m-30 con-btns">ADD TO CART</button>
-                                    </div>
-                                </div>
-                            </div>
+										<h3>Rs. 999/- <span class="pull-right">Edit Quantities</span></h3>
+									</div>
+									<div class="front content-view m-30 ">
+										<div class="edit_content">
+											<p>ENTER YOUR DESIGN NAME</p>
+										</div>
+										<input type="text" class="form-control"> </input>
+										<button class="btn btn-danger m-30 con-btns">ADD TO CART</button>
+									</div>
+								</div>
+							</div>
 
-                        </uib-tab>
-                    </uib-tabset>
-                </div>
+						</uib-tab>
+					</uib-tabset>
+				</div>
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>
