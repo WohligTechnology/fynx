@@ -9,7 +9,12 @@
 	<div class="product-detail">
 		<div class="row">
 			<div class="col-md-5">
-				<img class="img-responsive m-center" src="img/tee.jpg">
+
+				<div class="custom-img">
+					<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}" ng-show="isfront">
+					<img class="img-responsive m-center" ng-src="{{custom.backSrc}}" ng-show="!isfront">
+				</div>
+
 				<div class="vertical icon">
 					<div class="icon-inner text-center">
 						<i class="flaticon flaticon-t-shirt-o"></i>
