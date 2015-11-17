@@ -19,43 +19,43 @@
             <div class="col-md-6">
 
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.460480465605!2d72.8261876!3d18.955260400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce113fffffff%3A0x1cb3b2244f76123c!2sManak+Overseas+Limited!5e0!3m2!1sen!2sin!4v1443072919975" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen="true"></iframe>
-                
+
             </div>
         </div>
 
         <div class="font-tiny">
             <p>If you would like to give us any feedback or have any queries, please get in touch with us. We want to provide you with the best service possible.</p>
-            <p><span class="danger">Customer Care:</span> care@Myfynx.com
-                <br> <span class="danger">General Enquiries:</span> info@Myfynx.com</p>
+            <p><span class="danger">Customer Care:</span> <a href="mailto:care@Myfynx.com">care@Myfynx.com</a>
+                <br> <span class="danger">General Enquiries:</span> <a href="mailto:info@Myfynx.com">info@Myfynx.com</a></p>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <h4 class="bold">Write to us:</h4>
-                <form>
+                <h4 class="bold">Write to us: <span class="validation-error">{{msg}} {{msgsuccess}}</span></h4>
+                <form ng-submit="submitQuery(contact);">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name*</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" ng-model="contact.name" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Phone No</label>
-                                <input type="tel" class="form-control">
+                                <input type="tel" class="form-control" ng-model="contact.phone">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Email Address*</label>
-                        <input type="email" class="form-control">
+                        <input type="email" class="form-control" ng-model="contact.email" required>
                     </div>
                     <div class="form-group">
-                        <label>Message</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <label>Message*</label>
+                        <textarea class="form-control" rows="3" ng-model="contact.comment" required></textarea>
                     </div>
-                    <button class="btn btn-danger btn-strong">Submit</button>
+                    <button class="btn btn-danger btn-strong" type="submit">Submit</button>
                 </form>
 
             </div>

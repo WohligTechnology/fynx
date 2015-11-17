@@ -118,12 +118,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('ContactCtrl', function($scope, TemplateService, NavigationService) {
+.controller('ContactCtrl', function($scope, TemplateService, NavigationService, MyServices) {
   $scope.template = TemplateService.changecontent("contact");
   $scope.menutitle = NavigationService.makeactive("Contact Us");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+
+  $scope.contact = {};
+
+  var usercontactcallback = function(data, status) {
+    if (data) {
+      $scope.msgsuccess = "Successfully Submitted!!";
+      $scope.msg = "";
+      clearvalidation($scope.allvalidation);
+    } else {
+      $scope.msg = "Invalid data try again!!";
+      $scope.msgsuccess = "";
+    }
+  };
+
+  $scope.submitQuery = function(contact) {
+    $scope.allvalidation = [{
+      field: $scope.contact.name,
+      validation: ""
+    }, {
+      field: $scope.contact.email,
+      validation: ""
+    }, {
+      field: $scope.contact.comment,
+      validation: ""
+    }];
+
+    var check = formvalidation($scope.allvalidation);
+
+    if (check) {
+      MyServices.usercontact(contact, usercontactcallback);
+    } else {
+      $scope.msg = "Please fill mandatory fields!!";
+      $scope.msgsuccess = "";
+    };
+  };
+
 })
 
 .controller('LoginCtrl', function($scope, TemplateService, NavigationService) {
