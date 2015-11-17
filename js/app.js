@@ -13,7 +13,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
   $stateProvider
 
-  .state('home', {
+    .state('home', {
     url: "/home",
     templateUrl: "views/template.html",
     controller: 'HomeCtrl'
@@ -23,45 +23,45 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     url: "/privacy",
     templateUrl: "views/template.html",
     controller: 'PrivacyCtrl'
-  }) 
-      
-      .state('profile', {
+  })
+
+  .state('profile', {
     url: "/profile",
     templateUrl: "views/template.html",
     controller: 'ProfileCtrl'
   })
-      
-      .state('order', {
+
+  .state('order', {
     url: "/order",
     templateUrl: "views/template.html",
     controller: 'OrderCtrl'
-  }) 
-  
-    .state('wishlist', {
+  })
+
+  .state('wishlist', {
     url: "/wishlist",
     templateUrl: "views/template.html",
     controller: 'WishlistCtrl'
-  }) 
-      
-    .state('cart', {
+  })
+
+  .state('cart', {
     url: "/cart",
     templateUrl: "views/template.html",
     controller: 'CartCtrl'
-  })  
-  
-         .state('confirmationmail', {
+  })
+
+  .state('confirmationmail', {
     url: "/confirmationmail",
     templateUrl: "views/template.html",
     controller: 'ConfirmationmailCtrl'
-  })  
-      
-    .state('checkout', {
+  })
+
+  .state('checkout', {
     url: "/checkout",
     templateUrl: "views/template.html",
     controller: 'CheckoutCtrl'
   })
-  
-    .state('terms-conditions', {
+
+  .state('terms-conditions', {
     url: "/terms-conditions",
     templateUrl: "views/template.html",
     controller: 'TermsCtrl'
@@ -124,6 +124,40 @@ firstapp.directive('img', function($compile, $parse) {
       } else {
         $($element).addClass("doneLoading");
       }
+    }
+  };
+});
+
+firstapp.directive('imgZoomer', function() {
+  return {
+    restrict: 'EA',
+    link: function(scope, element, attrs) {
+      var $element = $(element);
+
+      //Zoom Function
+      var basezoom = 1.0;
+      var maxzoom;
+
+      var zoom = function(newValue) {
+        $element.css({
+          "transform": "scale(" + newValue + ")",
+          "transition": "all 300ms ease"
+        });
+      }
+
+      $(".reset-zoom").click(function() {
+        basezoom = 1.0;
+        zoom(basezoom);
+      });
+
+      $(".zoom-img").click(function() {
+        maxzoom = 1.9;
+        if (basezoom <= maxzoom) {
+          basezoom += 0.3;
+          zoom(basezoom);
+        };
+      });
+
     }
   };
 });

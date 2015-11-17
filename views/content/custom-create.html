@@ -11,24 +11,43 @@
 			<div class="col-md-5">
 
 				<div class="custom-img">
-					<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}" ng-show="isfront">
-					<img class="img-responsive m-center" ng-src="{{custom.backSrc}}" ng-show="!isfront">
+					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
+
+						<div ng-show="isfront">
+							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
+							<div class="on-img">
+								<span style="font-family: '{{selectedFont}}';">{{imgText.value}}</span>
+							</div>
+						</div>
+						<div ng-show="!isfront">
+							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
+							<div class="on-img">
+								<span style="font-family: '{{selectedFont}}';">{{imgText.value}}</span>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div class="vertical icon">
-					<div class="icon-inner text-center">
+
+					<div class="icon-inner text-center reset-zoom" ng-click="isfront = !isfront;">
 						<i class="flaticon flaticon-t-shirt-o"></i>
-						<p>Back</p>
+						<p ng-show="isfront">Back</p>
+						<p ng-show="!isfront">Front</p>
 					</div>
-					<div class="icon-inner text-center">
+
+					<div class="icon-inner text-center zoom-img">
 						<i class="flaticon flaticon-zoom"></i>
 						<p>Zoom</p>
 					</div>
-					<div class="icon-inner text-center">
+
+					<div class="icon-inner text-center reset-zoom">
 						<i class="flaticon flaticon-cross"></i>
 						<p class="margin-zero">Reset</p>
 					</div>
+
 				</div>
+
 				<div class="social-share text-center">
 					<h5 class="head"> Share your Creation On:</h5>
 					<div class="button-set">
@@ -98,9 +117,7 @@
 							</uib-tab-heading>
 							<div class="add-input">
 
-
-
-								<div class="first" ng-show="showFirst">
+								<div class="first">
 									<div class="row">
 										<div class="col-md-10">
 
@@ -109,27 +126,42 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="4"></textarea>
+													<textarea type="text" class="form-control" rows="4" ng-model="imgText.value"></textarea>
 												</div>
 											</div>
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-md-7">
+										<div class="col-md-5">
 											<div class="edit_content mt-10 front">
-												<p>font</p>
+												<p>Font</p>
 											</div>
 											<div class="fynx-select">
-												<select>
-													<option></option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-												</select>
+												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
+													{{selectedFont}}
+												</div>
+
+													<ul class="options list-unstyled" ng-show="showSelect">
+														<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);"  style="font-family: '{{font.family}}'; font-weight: 700;">
+															{{font.family}}
+														</li>
+													</ul>
+
 												<span class="only-border"></span>
 											</div>
-											<button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();">ADD TO DESIGN</button>
+											<button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();" ng-show="showFirst">ADD TO DESIGN</button>
+										</div>
+
+										<div class="col-md-5" ng-hide="showFirst">
+											<div class="color-pick">
+												<ul class="m-minus">
+													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+														<p class="class-p">{{col.name}}</p>
+														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
+													</li>
+												</ul>
+											</div>
 										</div>
 
 									</div>
@@ -138,48 +170,6 @@
 
 
 								<div class="second" ng-hide="showFirst">
-									<div class="row">
-										<div class="col-md-10">
-
-											<div class="front">
-												<div class="edit_content">
-													<p>ENTER YOUR TEXT BELOW</p>
-												</div>
-												<textarea rows="4" cols="87"> </textarea>
-											</div>
-										</div>
-									</div>
-
-									<div class="row">
-										<div class="col-md-5">
-											<div class="edit_content mt-10 front">
-												<p>font</p>
-											</div>
-											<div class="fynx-select">
-												<select>
-													<option></option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-												</select>
-												<span class="only-border"></span>
-											</div>
-
-										</div>
-										<div class="col-md-5">
-											<div class="color-pick">
-												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
-														<p class="class-p">{{col.name}}</p>
-														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
-													</li>
-
-
-												</ul>
-											</div>
-										</div>
-
-									</div>
 
 									<!--//color-->
 
@@ -392,10 +382,9 @@
 																</div>
 																<div class="fynx-select txt-img">
 																	<select>
-																		<option></option>
-																		<option>2</option>
-																		<option>3</option>
-																		<option>4</option>
+																		<option selected>Center</option>
+																		<option>Left</option>
+																		<option>Right</option>
 																	</select>
 																	<span class="only-border"></span>
 																</div>
@@ -430,9 +419,8 @@
 								</div>
 
 							</div>
-
-
 						</uib-tab>
+
 						<uib-tab>
 							<uib-tab-heading>
 								<div class="icon-font">
@@ -450,34 +438,22 @@
 
 											<div class="fynx-select">
 												<select>
-													<option></option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
+													<option selected>Size</option>
+													<option>YXS</option>
+													<option>YS</option>
+													<option>YM</option>
 												</select>
 												<span class="only-border"></span>
 											</div>
 										</div>
 										<div class="col-md-6 col-xs-6 ">
-											<!--
-											<form class="form-inline" role="form">
-	<div class="form-group">
-		<label for="pwd" class="qnt">QUANTITY:</label>
-		<input type="text" class="form-control" id="pwd">
-	</div>
-</form>
--->
+
 											<form class="form-inline" role="form">
 												<div class="form-group">
 													<label for="">QUANTITY:</label>
 													<input type="text" class="form-control">
 												</div>
 											</form>
-											<!--
-                                            <div class="qnt">
-                                                <p>QUANTITY<span><input type="text"></span></p>
-                                            </div>
--->
 										</div>
 									</div>
 									<button class="btn btn-danger con-btn" ng-click="showor();">CALCULATE PRIZE</button>

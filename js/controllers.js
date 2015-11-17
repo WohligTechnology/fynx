@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'api.services', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
   //Used to name the .html file
@@ -248,12 +248,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.second = false;
   $scope.third = false;
 
-  //T-shirt front
+  //T-shirt front-back
   $scope.isfront = true;
-
   $scope.custom = {
     frontSrc: "img/custom/tshirt/white-front.jpg",
     backSrc: "img/custom/tshirt/white-back.jpg"
+  };
+
+  //Text on Cloth
+  $scope.imgText = {
+    value: ""
+  };
+
+  //Select FONT
+  $scope.showSelect = false;
+  $scope.selectedFont = "Advent Pro";
+  $scope.fonts = [{
+    family: "Advent Pro"
+  }, {
+    family: "Roboto Condensed"
+  }];
+  $scope.showSelecter = function() {
+    $scope.showSelect = true;
+    console.log($scope.showSelect);
+  };
+  $scope.fontSelect = function(val) {
+    $scope.selectedFont = val;
+    $scope.showSelect = false;
   };
 
   $scope.changeColor = function(index) {
@@ -505,14 +526,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   //    sizechart popup
   $scope.sizeChart = function() {
-      $uibModal.open({
-        animation: true,
-        templateUrl: 'views/modal/sizechart.html',
-        controller: 'CustomCreateCtrl'
-      })
-    }
+    $uibModal.open({
+      animation: true,
+      templateUrl: 'views/modal/sizechart.html',
+      controller: 'CustomCreateCtrl'
+    })
+  }
 
-    // image upload popup
+  // image upload popup
   $scope.width = "720px";
   $scope.imgUpload = function() {
     $uibModal.open({
