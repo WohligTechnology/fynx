@@ -7,6 +7,9 @@
 
 
 <div class="container">
+  <div class="alert-postion">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+  </div>
     <div class="content-view">
         <div class="row font-big">
             <div class="col-md-6">
@@ -31,7 +34,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <h4 class="bold">Write to us: <span class="validation-error">{{msg}} {{msgsuccess}}</span></h4>
+                <h4 class="bold">Write to us:</h4>
                 <form ng-submit="submitQuery(contact);">
                     <div class="row">
                         <div class="col-md-6">

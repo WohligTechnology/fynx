@@ -1,9 +1,14 @@
-var admin_url = "http://wohlig.co.in/myfynxbackend/";
+var admin_url = "http://localhost/myfynxbackend/index.php/";
 
 angular.module('api.services', [])
 
 .factory('MyServices', function($http) {
   return {
+  gethomecontent: function(callback) {
+    return $http.get(admin_url + 'json/gethomecontent', {}, {
+      withCredentials: true
+    }).success(callback);
+  },
     registeruser: function(account, callback) {
       return $http({
         url: admin_url + "json/registeruser",
@@ -75,16 +80,8 @@ angular.module('api.services', [])
 
     },
     usercontact: function(contact, callback) {
-      return $http({
-        url: admin_url + "json/usercontact",
-        method: "POST",
-        withCredentials: true,
-        data: {
-          "name": contact.name,
-          "email": contact.email,
-          "phone": contact.phone,
-          "comment": contact.comment
-        }
+      return $http.get(admin_url + 'json/usercontact?name=' + contact.name + '&email=' + contact.email + '&phone=' + contact.phone + '&comment=' + contact.comment, {}, {
+        withCredentials: true
       }).success(callback);
     },
     updateuser: function(user, callback) {

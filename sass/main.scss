@@ -1487,20 +1487,22 @@ h4.bold,
     display: block;
     li {
       display: inline-block;
-      background: $brand-primary;
+      background-color: $brand-primary;
       color: #fff;
       padding: 5px 40px;
       cursor: pointer;
+
+      &.yellow-btn {
+        background-color: $brand-warning;
+        color: $gray-darker;
+      }
     }
   }
 }
 .paddbtm {
   padding-bottom: 0 !important;
 }
-.yellow-btn {
-  background: $brand-warning !important;
-  color: black !important;
-}
+
 .account-name {
   p {
     color: #515151;
@@ -1780,7 +1782,28 @@ h4.bold,
       @include user-select(none);
     }
 }
+.alert-postion {
+    position: fixed;
+    max-width: 500px;
+    left: 50%;
+    width: 100%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+    z-index: 99;
 
+    .alert {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      border: none;
+      &.alert-success {
+        color: $gray-darker;
+        background-color: $brand-success;
+      }
+      &.alert-danger {
+        color: $gray-darker;
+        background-color: $brand-danger;
+      }
+    }
+}
 
 
 

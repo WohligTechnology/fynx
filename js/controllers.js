@@ -1,11 +1,16 @@
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'api.services', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider'])
 
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, MyServices) {
   //Used to name the .html file
   $scope.template = TemplateService.changecontent("home");
   $scope.menutitle = NavigationService.makeactive("Home");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+
+  MyServices.gethomecontent(function(data) {
+      console.log(data);
+      // $scope.mySlides = data;
+  });
 
   $scope.mySlides = [{
     id: 1,
@@ -125,16 +130,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
 
+  $scope.alerts = [];
+
+  $scope.addAlert = function(type, msg) {
+    $scope.alerts.push({type: type, msg: msg});
+  };
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
   $scope.contact = {};
 
   var usercontactcallback = function(data, status) {
     if (data) {
-      $scope.msgsuccess = "Successfully Submitted!!";
+      $scope.msgsuccess = "Kudos! We will get back to you soon!";
+      $scope.type = "success";
       $scope.msg = "";
       clearvalidation($scope.allvalidation);
+      $scope.contact = {};
+      $scope.addAlert($scope.type, $scope.msgsuccess);
     } else {
-      $scope.msg = "Invalid data try again!!";
+      $scope.msg = "Please re-verify the data you've entered!";
       $scope.msgsuccess = "";
+      $scope.type = "danger";
+      $scope.addAlert($scope.type, $scope.msg);
     }
   };
 
