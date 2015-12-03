@@ -16,7 +16,6 @@ var jsArray = [
     './js/templateservice.js',
     './js/navigation.js',
     './w/js/templates.js',
-    './w/js/services.js',
 ];
 var replacehostFrom = "http://localhost/demo/";
 var replacehostTo = "http://wohlig.co.in/demo2/";
