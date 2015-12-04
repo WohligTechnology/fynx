@@ -1,13 +1,13 @@
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider'])
 
-.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("home");
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    NavigationService.gethomecontent(function (data) {
+    NavigationService.gethomecontent(function(data) {
         console.log(data);
         // $scope.mySlides = data;
     });
@@ -22,7 +22,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             url: '#/custom',
             centerAlign: true
         }
-  }, {
+    }, {
         id: 2,
         src: "img/slider1.jpg",
         template: '<h3>Superhero <br>Stuff</h3><p>EXCLUSIVE DC COMICS COLLECTION BY MY FYNX</p>',
@@ -32,32 +32,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             url: '#/product/men',
             centerAlign: false
         }
-  }];
+    }];
 
     $scope.slideSet = [{
         src: 'img/shoe1.png'
-  }, {
+    }, {
         src: 'img/shoe2.png'
-  }, {
+    }, {
         src: 'img/shoe3.png'
-  }, {
+    }, {
         src: 'img/shoe4.png'
-  }, {
+    }, {
         src: 'img/shoe4.png'
-  }, {
+    }, {
         src: 'img/shoe3.png'
-  }, {
+    }, {
         src: 'img/shoe2.png'
-  }, {
+    }, {
         src: 'img/shoe1.png'
-  }];
+    }];
 
     $scope.slideSet = _.chunk($scope.slideSet, 4);
 
     $scope.footerBlack = false;
 })
 
-.controller('PrivacyCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('PrivacyCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("privacy");
     $scope.menutitle = NavigationService.makeactive("Privacy Policy");
     TemplateService.title = $scope.menutitle;
@@ -65,7 +65,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.footerBlack = true;
 })
 
-.controller('TermsCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('TermsCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("terms-conditions");
     $scope.menutitle = NavigationService.makeactive("Terms Conditions");
     TemplateService.title = $scope.menutitle;
@@ -73,42 +73,70 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.footerBlack = true;
 })
 
-.controller('ProductListCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ProductListCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("product-list");
     $scope.menutitle = NavigationService.makeactive("Men");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
+    $scope.filters = {};
+    $scope.filters.pageno = 1;
+    $scope.filters.category = 1;
+    $scope.filters.subcategory = '';
+    $scope.filters.color = '';
+    $scope.filters.size = '';
+    $scope.filters.price = '';
+    $scope.filters.type = '';
+    $scope.noData = false;
 
-    $scope.productList = [{
-        src: "img/tee.jpg",
-        name: "SPACE PRINT SLIM FIT T-SHIRT",
-        price: "699"
-  }, {
-        src: "img/t2.jpg",
-        name: "SPACE PRINT SLIM FIT T-SHIRT",
-        price: "699"
-  }, {
-        src: "img/t3.jpg",
-        name: "SPACE PRINT SLIM FIT T-SHIRT",
-        price: "699"
-  }, {
-        src: "img/t4.jpg",
-        name: "SPACE PRINT SLIM FIT T-SHIRT",
-        price: "699"
-  }, {
-        src: "img/t5.jpg",
-        name: "SPACE PRINT SLIM FIT T-SHIRT",
-        price: "699"
-  }, {
-        src: "img/t6.jpg",
-        name: "SPACE PRINT SLIM FIT T-SHIRT",
-        price: "699"
-  }];
+    // $scope.productList = [{
+    //     src: "img/tee.jpg",
+    //     name: "SPACE PRINT SLIM FIT T-SHIRT",
+    //     price: "699"
+    // }, {
+    //     src: "img/t2.jpg",
+    //     name: "SPACE PRINT SLIM FIT T-SHIRT",
+    //     price: "699"
+    // }, {
+    //     src: "img/t3.jpg",
+    //     name: "SPACE PRINT SLIM FIT T-SHIRT",
+    //     price: "699"
+    // }, {
+    //     src: "img/t4.jpg",
+    //     name: "SPACE PRINT SLIM FIT T-SHIRT",
+    //     price: "699"
+    // }, {
+    //     src: "img/t5.jpg",
+    //     name: "SPACE PRINT SLIM FIT T-SHIRT",
+    //     price: "699"
+    // }, {
+    //     src: "img/t6.jpg",
+    //     name: "SPACE PRINT SLIM FIT T-SHIRT",
+    //     price: "699"
+    // }];
 
+    NavigationService.getProductByCategory($scope.filters, function(data) {
+        if (data) {
+            console.log(data);
+            $scope.productList = data.queryresult;
+            // $scope.productList = [];
+            if (data.queryresult.length == 0 && $scope.productList.length == 0) {
+                $scope.noData = true;
+            }else{
+                $scope.noData = false;
+            }
+        }
+    });
+
+    NavigationService.getFilters($scope.filters.category, function(data) {
+        if (data) {
+            console.log(data);
+            // $scope.productList = data.queryresult;
+        }
+    });
 })
 
-.controller('ProductViewCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("product-view");
     $scope.menutitle = NavigationService.makeactive("Men");
     TemplateService.title = $scope.menutitle;
@@ -123,7 +151,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('ContactCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ContactCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("contact");
     $scope.menutitle = NavigationService.makeactive("Contact Us");
     TemplateService.title = $scope.menutitle;
@@ -132,35 +160,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.alerts = [];
 
-    $scope.addAlert = function (type, msg) {
+    $scope.addAlert = function(type, msg) {
         $scope.alerts.push({
             type: type,
             msg: msg
         });
     };
 
-    $scope.closeAlert = function (index) {
+    $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };
 
     $scope.contact = {};
 
-    $scope.submitQuery = function (contact) {
+    $scope.submitQuery = function(contact) {
         $scope.allvalidation = [{
             field: $scope.contact.name,
             validation: ""
-    }, {
+        }, {
             field: $scope.contact.email,
             validation: ""
-    }, {
+        }, {
             field: $scope.contact.comment,
             validation: ""
-    }];
+        }];
 
         var check = formvalidation($scope.allvalidation);
 
         if (check) {
-            NavigationService.usercontact(contact, function (data, status) {
+            NavigationService.usercontact(contact, function(data, status) {
                 if (data) {
                     $scope.msgsuccess = "Kudos! We will get back to you soon!";
                     $scope.type = "success";
@@ -183,12 +211,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('LoginCtrl', function ($scope, TemplateService, NavigationService) {
+// .controller('LoginCtrl', function($scope, TemplateService, NavigationService) {
 
-})
+// })
 
 
-.controller('CustomCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('CustomCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("custom");
     $scope.menutitle = NavigationService.makeactive("Custom");
     TemplateService.title = $scope.menutitle;
@@ -199,7 +227,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('CustomChooseCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService.changecontent("custom-choose");
     $scope.menutitle = NavigationService.makeactive("Custom");
     TemplateService.title = $scope.menutitle;
@@ -207,7 +235,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.footerBlack = true;
 })
 
-.controller('ProfileCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ProfileCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService.changecontent("profile");
         $scope.menutitle = NavigationService.makeactive("Profile");
         TemplateService.title = $scope.menutitle;
@@ -215,7 +243,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.footerBlack = true;
 
     })
-    .controller('OrderCtrl', function ($scope, TemplateService, NavigationService) {
+    .controller('OrderCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService.changecontent("order");
         $scope.menutitle = NavigationService.makeactive("Orders");
         TemplateService.title = $scope.menutitle;
@@ -223,7 +251,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.footerBlack = true;
 
     })
-    .controller('CartCtrl', function ($scope, TemplateService, NavigationService) {
+    .controller('CartCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService.changecontent("cart");
         $scope.menutitle = NavigationService.makeactive("Cart");
         TemplateService.title = $scope.menutitle;
@@ -231,7 +259,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.footerBlack = true;
 
     })
-    .controller('ConfirmationmailCtrl', function ($scope, TemplateService, NavigationService) {
+    .controller('ConfirmationmailCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService.changecontent("confirmationmail");
         $scope.menutitle = NavigationService.makeactive("Confirmationmail");
         TemplateService.title = $scope.menutitle;
@@ -239,7 +267,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.footerBlack = true;
 
     })
-    .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
+    .controller('CheckoutCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService.changecontent("checkout");
         $scope.menutitle = NavigationService.makeactive("Checkout");
         TemplateService.title = $scope.menutitle;
@@ -251,7 +279,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.classb = '';
         $scope.classc = '';
         $scope.classd = '';
-        $scope.tabchange = function (tab, a) {
+        $scope.tabchange = function(tab, a) {
             //        console.log(tab);
             $scope.tab = tab;
             if (a == 1) {
@@ -273,7 +301,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.classc = "yellow-btn";
                 $scope.classd = '';
             } else {
-                $ionicScrollDelegate.scrollTop();
                 $scope.classa = '';
                 $scope.classb = '';
                 $scope.classc = '';
@@ -283,7 +310,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
-    .controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
+    .controller('WishlistCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService.changecontent("wishlist");
         $scope.menutitle = NavigationService.makeactive("Wishlist");
         TemplateService.title = $scope.menutitle;
@@ -292,7 +319,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-.controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal) {
+.controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService, $uibModal) {
     $scope.template = TemplateService.changecontent("custom-create");
     $scope.menutitle = NavigationService.makeactive("Custom");
     TemplateService.title = $scope.menutitle;
@@ -322,19 +349,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.selectedFont = "Advent Pro";
     $scope.fonts = [{
         family: "Advent Pro"
-  }, {
+    }, {
         family: "Roboto Condensed"
-  }];
-    $scope.showSelecter = function () {
+    }];
+    $scope.showSelecter = function() {
         $scope.showSelect = true;
         console.log($scope.showSelect);
     };
-    $scope.fontSelect = function (val) {
+    $scope.fontSelect = function(val) {
         $scope.selectedFont = val;
         $scope.showSelect = false;
     };
 
-    $scope.changeColor = function (index) {
+    $scope.changeColor = function(index) {
         $scope.showSize = false;
         console.log(index);
         if (index == 0) {
@@ -352,226 +379,226 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     }
 
-    $scope.closeandshowsize = function () {
+    $scope.closeandshowsize = function() {
         $scope.showSize = !$scope.showSize;
         $scope.first = false;
         $scope.second = false;
         $scope.third = false;
     }
 
-    $scope.showorfirst = function () {
+    $scope.showorfirst = function() {
         $scope.showFirst = false;
     }
-    $scope.showor = function () {
+    $scope.showor = function() {
         $scope.showSecond = false;
     }
 
     $scope.size = [{
         src: "img/sizechart.jpg"
-  }];
+    }];
 
     $scope.tshirt = [{
         name: "ULTRA COTTON TSHIRT",
         from: "YXS",
         to: "3XL"
 
-  }];
+    }];
 
     $scope.color = [{
         color: "red",
         class: "active"
 
-  }, {
+    }, {
         color: "black",
         class: ""
 
-  }, {
+    }, {
         color: "grey",
         class: ""
 
-  }, {
+    }, {
         color: "cyan",
         class: ""
 
-  }, {
+    }, {
         color: "blue",
         class: ""
 
-  }, {
+    }, {
         color: "pink",
         class: ""
 
-  }, {
+    }, {
         color: "green",
         class: ""
 
-  }, {
+    }, {
         color: "orange",
         class: ""
 
-  }];
+    }];
 
     $scope.colour = [{
         color: "red",
         class: "active"
-  }, {
+    }, {
         color: "black",
         class: ""
-  }, {
+    }, {
         color: "grey",
         class: ""
-  }, {
+    }, {
         color: "cyan",
         class: ""
-  }, {
+    }, {
         color: "blue",
         class: ""
-  }, {
+    }, {
         color: "pink",
         class: ""
-  }, {
+    }, {
         color: "green",
         class: ""
-  }, {
+    }, {
         color: "orange",
         class: ""
-  }, {
+    }, {
         color: "Chocolate ",
         class: ""
-  }, {
+    }, {
         color: "DarkCyan ",
         class: ""
-  }, {
+    }, {
         color: "DarkKhaki ",
         class: ""
-  }, {
+    }, {
         color: "DarkRed",
         class: ""
-  }, {
+    }, {
         color: "DarkOliveGreen ",
         class: ""
-  }, {
+    }, {
         color: "DarkSalmon ",
         class: ""
-  }, {
+    }, {
         color: "DarkSlateGray ",
         class: ""
-  }, {
+    }, {
         color: "DarkTurquoise ",
         class: ""
-  }, {
+    }, {
         color: "DarkViolet ",
         class: ""
-  }, {
+    }, {
         color: "DeepSkyBlue ",
         class: ""
-  }, {
+    }, {
         color: "FireBrick ",
         class: ""
-  }, {
+    }, {
         color: "Cornsilk ",
         class: ""
-  }, {
+    }, {
         color: "Crimson",
         class: ""
-  }, {
+    }, {
         color: "Khaki  ",
         class: ""
-  }, {
+    }, {
         color: "Lavender",
         class: ""
-  }, {
+    }, {
         color: "LavenderBlush ",
         class: ""
-  }, {
+    }, {
         color: "LawnGreen ",
         class: ""
-  }, {
+    }, {
         color: "LightCyan ",
         class: ""
-  }, {
+    }, {
         color: "LightGreen",
         class: ""
-  }, {
+    }, {
         color: "LightSalmon ",
         class: ""
-  }, {
+    }, {
         color: "LightSteelBlue ",
         class: ""
-  }, {
+    }, {
         color: "Lime ",
         class: ""
-  }];
+    }];
 
     $scope.colors = [{
         color: "red",
         name: "COLOR",
-  }, {
+    }, {
         color: "black",
         name: "STROKE"
-  }, {
+    }, {
         color: "grey",
         name: "SHADOW"
-  }];
+    }];
 
     $scope.items = [{
         name: 'First Item',
         value: 500
-  }, {
+    }, {
         name: 'Second Item',
         value: 200
-  }, {
+    }, {
         name: 'Third Item',
         value: 700
-  }];
+    }];
 
     $scope.item = [{
         name: 'First Item',
         value: 500
-  }, {
+    }, {
         name: 'Second Item',
         value: 200
-  }, {
+    }, {
         name: 'Third Item',
         value: 700
-  }];
+    }];
 
     $scope.item1 = [{
         name: 'First Item',
         value: 500
-  }, {
+    }, {
         name: 'Second Item',
         value: 200
-  }, {
+    }, {
         name: 'Third Item',
         value: 700
-  }];
+    }];
 
     $scope.item2 = [{
         name: 'First Item',
         value: 500
-  }, {
+    }, {
         name: 'Second Item',
         value: 200
-  }, {
+    }, {
         name: 'Third Item',
         value: 700
-  }];
+    }];
 
     $scope.item3 = [{
         name: 'First Item',
         value: 500
-  }, {
+    }, {
         name: 'Second Item',
         value: 200
-  }, {
+    }, {
         name: 'Third Item',
         value: 700
-  }];
+    }];
 
-    $scope.makeactive = function (index) {
+    $scope.makeactive = function(index) {
         var i = 0;
-        _.each($scope.color, function (n) {
+        _.each($scope.color, function(n) {
             if (i == index) {
                 n.class = "active";
             } else {
@@ -582,7 +609,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
     //    sizechart popup
-    $scope.sizeChart = function () {
+    $scope.sizeChart = function() {
         $uibModal.open({
             animation: true,
             templateUrl: 'views/modal/sizechart.html',
@@ -592,7 +619,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     // image upload popup
     $scope.width = "720px";
-    $scope.imgUpload = function () {
+    $scope.imgUpload = function() {
         $uibModal.open({
             animation: true,
             windowClass: 'large-Modal',
@@ -603,19 +630,73 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('headerctrl', function ($scope, TemplateService, $uibModal) {
+.controller('headerctrl', function($scope, TemplateService, $uibModal, NavigationService) {
     $scope.template = TemplateService;
+    $scope.register = {};
+    $scope.login = {};
+    $scope.register.accept = false;
+    $scope.showLogout = false;
+    $scope.invalidLogin = false;
+    $scope.alreadyRegistered = false;
+    $scope.acceptTerms = false;
+    $scope.user = {};
 
-    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $(window).scrollTop(0);
     });
 
-    $scope.openLogin = function () {
+    $scope.openLogin = function() {
         $uibModal.open({
             animation: true,
             templateUrl: 'views/modal/login.html',
-            controller: 'LoginCtrl'
+            controller: 'headerctrl'
         })
     };
+
+    if (NavigationService.getUser()) {
+        $scope.showLogout = true;
+        $scope.user.name = NavigationService.getUser('user').firstname + " " + NavigationService.getUser('user').lastname;
+    }
+
+    $scope.registerUser = function() {
+        console.log($scope.register);
+        if ($scope.register.accept == true) {
+            $scope.acceptTerms = false;
+            NavigationService.registerUser($scope.register, function(data) {
+                console.log(data);
+                if (data != 'false') {
+                    NavigationService.setUser(data);
+                    // $uibModal.hide();
+                    window.location.reload();
+                } else {
+                    $scope.alreadyRegistered = true;
+                }
+            })
+        } else {
+            $scope.acceptTerms = true;
+            $scope.alreadyRegistered = false;
+        }
+    }
+
+    $scope.loginUser = function() {
+        console.log($scope.login);
+        NavigationService.login($scope.login, function(data) {
+            if (data) {
+                console.log(data);
+                if (data != "false") {
+                    NavigationService.setUser(data);
+                    window.location.reload();
+                    // $state.go('setting');
+                } else {
+                    $scope.invalidLogin = true;
+                }
+            }
+        })
+    }
+
+    $scope.logout = function() {
+        $scope.showLogout = false;
+        $.jStorage.flush();
+    }
 
 });

@@ -1,7 +1,6 @@
 <header ng-controller="headerctrl">
     <nav class="navbar navbar-white navbar-fixed-top">
         <div class="container">
-
             <div class="row">
                 <div class="col-sm-3">
                     <a class="logo" href="#/home">
@@ -17,20 +16,19 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-
                     <div class="collapse navbar-collapse" id="nav-collapse">
                         <div ng-include="template.menu" class="template menu text-center"></div>
                     </div>
                 </div>
                 <div class="col-sm-3 text-center hidden-xs">
                     <ul class="nav navbar-nav inline">
-                        <li><a href="" ng-click="openLogin();">Login</a></li>
+                        <li><a href="" ng-click="openLogin();" ng-hide="showLogout">Login</a></li>
+                        <li><a href="#/profile" ng-show="showLogout">{{user.name}}</a></li>
                         <li><a href="#/cart">Cart (0)</a></li>
+                        <li><a href="" ng-click="logout();" ng-show="showLogout">Logout</a></li>
                     </ul>
                 </div>
             </div>
-
-
         </div>
     </nav>
 </header>
