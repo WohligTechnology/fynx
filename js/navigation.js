@@ -85,6 +85,11 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
+        getProductDetails: function(id, callback) {
+            return $http.get(adminurl + 'getProductDetails?id=' + id, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
         getUser: function() {
             return $.jStorage.get('user');
         },
