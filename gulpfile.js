@@ -13,10 +13,11 @@ var jsArray = [
     './bower_components/lodash/lodash.min.js',
     './js/app.js',
     './js/controllers.js',
+    './js/services.js',
     './js/templateservice.js',
     './js/navigation.js',
     './w/js/templates.js',
-    './w/js/services.js',
+
 ];
 var replacehostFrom = "http://localhost/demo/";
 var replacehostTo = "http://wohlig.co.in/demo2/";

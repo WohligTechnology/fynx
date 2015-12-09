@@ -68,6 +68,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.footerBlack = true;
 })
 
+.controller('AboutCtrl', function($scope, TemplateService, NavigationService) {
+  $scope.template = TemplateService.changecontent("about");
+  $scope.menutitle = NavigationService.makeactive("About Us");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+})
+
 .controller('ProductListCtrl', function($scope, TemplateService, NavigationService) {
   $scope.template = TemplateService.changecontent("product-list");
   $scope.menutitle = NavigationService.makeactive("Men");
