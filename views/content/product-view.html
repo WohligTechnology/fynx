@@ -56,6 +56,9 @@
 </div>
 
 <div class="container">
+   <div class="alert-postion">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+  </div>
     <div class="row">
         <div class="col-md-offset-2 col-md-10">
             <div class="site-map">
@@ -79,28 +82,22 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="image-sidebar">
-                            <div class="thumb-img " ng-repeat="image in product.product.image track by $index">
+                            <div class="thumb-img " ng-repeat="image in product.product.image track by $index" ng-click="otherImage(image)">
                                 <img ng-src="{{image | serverimage}}">
                             </div>
                         </div>
                         <div class="full-img">
-                            <img ng-src="{{product.product.image[0] | serverimage}}">
+                            <img ng-src="{{viewImage | serverimage}}">
                             <br>
                         </div>
 
                         <div class="view-large"></div>
 
-                        <div class="related-view hidden-xs">
+                        <div class="related-view hidden-xs" ng-if="product.relatedproduct!=''">
                             <h4 class="text-upper text-center mt-20">You may also like</h4>
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="img/t2.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-sm-4">
-                                    <img src="img/t3.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-sm-4">
-                                    <img src="img/t4.jpg" class="img-responsive">
+                                <div class="col-sm-4" ng-repeat="related in product.relatedproduct" ui-sref="productview({id: related.id})">
+                                    <img ng-src="{{related.image1 | serverimage}}" class="img-responsive">
                                 </div>
                             </div>
                         </div>
@@ -116,29 +113,26 @@
                             <button class="btn btn-tiny btn-gray btn-outline">Size Guide</button>
 
                             <ul class="list-inline">
-                                <li>S</li>
-                                <li>M</li>
-                                <li>L</li>
-                                <li>XL</li>
-                                <li class="canceled">XXL</li>
+                                <li ng-repeat="size in sizes" class="{{size.status}}">{{size.name}}</li>
+<!--                                <li class="canceled">XXL</li>-->
                             </ul>
                         </div>
 
                         <div class="color-picker">
                             <span class="very-bold">Colour</span>
                             <ul class="list-inline">
-                                <li><span class="circle black"></span>
+                                <li class="{{color.selected}}" ng-repeat="color in product.color" ng-click="onColorClick(color)"><span class="circle {{color.name|lowercase}}"></span>
                                 </li>
-                                <li><span class="circle gray"></span>
-                                </li>
+<!--
                                 <li class="selected"><span class="circle white"></span>
                                 </li>
+-->
                             </ul>
                         </div>
 
-                        <button class="btn btn-huge btn-black btn-outline">Add to bag</button>
+                        <button class="btn btn-huge btn-black btn-outline" ng-click="addToCart()">Add to bag</button>
                         <br>
-                        <button class="btn btn-black btn-clear text-upper">Add to Wishlist</button>
+                        <button class="btn btn-black btn-clear text-upper" ng-click="addToWishlist()">Add to Wishlist</button>
 
                         <div class="detail-tab">
                             <uib-tabset>

@@ -1,3 +1,5 @@
+var myfunction = '';
+
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -143,27 +145,98 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.navigation = NavigationService.getnav();
 	$scope.footerBlack = true;
 	$scope.product = {};
-	
+	$scope.alerts = [];
 
-//	$scope.product = {
-//		name: "SPACE PRINT SLIM FIT T-SHIRT",
-//		price: "699",
-//		img: ["img/thumb1.jpg", "img/thumb2.jpg", "img/thumb3.jpg", "img/thumb4.jpg"]
-//	};
+	$scope.addAlert = function (type, msg) {
+		$scope.alerts.push({
+			type: type,
+			msg: msg
+		});
+	};
 
-	NavigationService.getProductDetails($stateParams.id, function(data, status){
-		
+	$scope.myfunc = function (n) {
+		console.log(n);
+	}
+
+	$scope.closeAlert = function (index) {
+		$scope.alerts.splice(index, 1);
+	};
+
+	$scope.onColorClick= function(color){
+		_.each($scope.product.color, function(n){
+			n.selected = "";
+		});
+		color.selected = "selected";
+	}
+
+	NavigationService.getProductDetails($stateParams.id, function (data, status) {
+
 		data.product.image = [];
-		_.each(data.product,function(n, key){
-			if(key.split('image')[1]){
+		_.each(data.product, function (n, key) {
+			if (key.split('image')[1]) {
 				data.product.image.push(n);
 			}
 		})
+		$scope.viewImage = data.product.image1;
+		NavigationService.getAllSize(function (data1) {
+			$scope.sizes = data1;
+			
+			//	set size canceled
+			_.each(data1, function(n, key){
+				_.each(data.size, function(m, key1){
+					if(n.id != m.id){
+						n.status = "canceled";
+					}else{
+						n.status = "";
+					}
+				})
+			})
+			//	set color selected
+			_.each(data.color, function(n, key){
+					if(n.id == data.product.color){
+						n.selected = "selected";
+					}else{
+						n.selected = "";
+					}
+			})
+			
 		$scope.product = data;
-		console.log($scope.product);
+			
+		});
 	});
+	$scope.otherImage = function (image) {
+		$scope.viewImage = image;
+	}
+
+	//	ADD TO BAG
+	$scope.addToCart = function () {
+		NavigationService.addToCart($scope.product.product.id, 1, function (data, status) {
+			if (data == "true") {
+				$scope.addAlert("success", "Added to cart");
+			} else {
+				$scope.addAlert("danger", "Something has gone wrong");
+			}
+			myfunction();
+		});
+	}
+
+	//	ADD TO WISHLIST
+	$scope.addToWishlist = function () {
+		if (NavigationService.getUser()) {
+			NavigationService.addToWishlist($scope.product.product.id, function (data, status) {
+				console.log(data);
+				if (data == "true")
+					$scope.addAlert("success", "Added to wishlist");
+				else
+					$scope.addAlert("danger", "Already in wishlist");
+			});
+		} else {
+			$scope.addAlert("danger", "Please login first");
+		}
+	}
 
 })
+
 
 .controller('ContactCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService.changecontent("contact");
@@ -171,7 +244,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.footerBlack = true;
-
 	$scope.alerts = [];
 
 	$scope.addAlert = function (type, msg) {
@@ -265,12 +337,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.footerBlack = true;
 
 	})
-	.controller('CartCtrl', function ($scope, TemplateService, NavigationService) {
+	.controller('CartCtrl', function ($scope, TemplateService, NavigationService, $stateParams, $state) {
 		$scope.template = TemplateService.changecontent("cart");
 		$scope.menutitle = NavigationService.makeactive("Cart");
 		TemplateService.title = $scope.menutitle;
 		$scope.navigation = NavigationService.getnav();
 		$scope.footerBlack = true;
+		$scope.allCart = [];
+		$scope.alerts = [];
+		$scope.amount = 0;
+
+		$scope.addAlert = function (type, msg) {
+			$scope.alerts.push({
+				type: type,
+				msg: msg
+			});
+		};
+
+		$scope.closeAlert = function (index) {
+			$scope.alerts.splice(index, 1);
+		};
+
+		$scope.isNoCart = function () {
+			if ($scope.allCart == '') {
+				$state.go('home');
+			}
+		}
+
+		NavigationService.showCart(function (data, status) {
+			$scope.allCart = data;
+			$scope.isNoCart();
+		})
+
+		$scope.deleteCart = function (cart) {
+			NavigationService.deletecart(cart.id, function (data, status) {
+				$scope.allCart = data;
+				myfunction();
+				$scope.isNoCart();
+			})
+		}
+
+		NavigationService.totalcart(function (data) {
+			$scope.amount = data;
+		});
 
 	})
 	.controller('ConfirmationmailCtrl', function ($scope, TemplateService, NavigationService) {
@@ -324,14 +433,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 	})
-	.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService.changecontent("wishlist");
-		$scope.menutitle = NavigationService.makeactive("Wishlist");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-		$scope.footerBlack = true;
 
-	})
+.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService.changecontent("wishlist");
+	$scope.menutitle = NavigationService.makeactive("Wishlist");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.footerBlack = true;
+
+	// GET WISHLIST
+
+
+})
 
 .controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal) {
 	$scope.template = TemplateService.changecontent("custom-create");
@@ -654,6 +767,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.alreadyRegistered = false;
 	$scope.acceptTerms = false;
 	$scope.user = {};
+	$scope.totalcart = 0;
+	$scope.loginUrl = mainurl;
+
+	// COMMON FUNCTIONS
+	myfunction = function () {
+		NavigationService.gettotalcart(function (data) {
+			$scope.totalcart = data;
+		});
+		//		NavigationService.totalcart(function (data) {
+		//			$scope.amount = data;
+		//		});
+	}
+
+
+	myfunction();
+
 
 	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
 		$(window).scrollTop(0);

@@ -24,7 +24,7 @@
                     <ul class="nav navbar-nav inline">
                         <li><a href="" ng-click="openLogin();" ng-hide="showLogout">Login</a></li>
                         <li><a href="#/profile" ng-show="showLogout">{{user.name}}</a></li>
-                        <li><a href="#/cart">Cart (0)</a></li>
+                        <li><a href="#/cart">Cart ({{totalcart}})</a></li>
                         <li><a href="" ng-click="logout();" ng-show="showLogout">Logout</a></li>
                     </ul>
                 </div>

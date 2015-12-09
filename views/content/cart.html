@@ -20,36 +20,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center text-bold">
+                        <tr class="text-center text-bold" ng-repeat="cart in allCart">
                             <td>
                                 <figure>
-                                    <img src="img/wishlist.jpg">
-                                    <figcaption>SPACE PRINT SLIM FIT T-SHIRT</figcaption>
+                                    <img ng-src="{{cart.image | serverimage}}">
+                                    <figcaption>{{cart.options.realname}}</figcaption>
                                 </figure>
                             </td>
-                            <td>White</td>
-                            <td>m</td>
-                            <td>1</td>
+                            <td>{{cart.options.colorname}}</td>
+                            <td>{{cart.options.sizename}}</td>
+                            <td>{{cart.qty}}</td>
                             <td>
-                                <p>699</p>
-                                <button class="btn btn-blue btn-primary">Add to cart</button>
-                                <button type="submit" class="btn btn-blue btn-primary">remove</button>
-                            </td>
-                        </tr>
-                        <tr class="text-center text-bold">
-                            <td>
-                                <figure>
-                                    <img src="img/wishlist.jpg">
-                                    <figcaption>SPACE PRINT SLIM FIT T-SHIRT</figcaption>
-                                </figure>
-                            </td>
-                            <td>White</td>
-                            <td>m</td>
-                            <td>1</td>
-                            <td>
-                                <p>699</p>
-                                <button type="submit" class="btn btn-blue btn-primary">Add to cart</button>
-                                <button type="submit" class="btn btn-blue btn-primary">remove</button>
+                                <p>{{cart.subtotal}}</p>
+                                <button type="submit" class="btn btn-blue btn-primary" ng-click="deleteCart (cart)">remove</button>
                             </td>
                         </tr>
                     </tbody>
@@ -74,12 +57,12 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="list ">
-                        <p>1398</p>
+                        <p>{{amount}}</p>
                         <p>0</p>
                         <p>0</p>
                         <p>0</p>
-                        <p>100</p>
-                        <p>1399</p>
+                        <p>0</p>
+                        <p>{{amount}}</p>
                     </div>
                 </div>
             </div>

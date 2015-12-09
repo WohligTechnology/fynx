@@ -1,4 +1,5 @@
-var adminurl = "http://localhost/newfynx/index.php/json/";
+var mainurl = "http://localhost/newfynx/index.php/";
+var adminurl = mainurl + "json/";
 
 var navigationservice = angular.module('navigationservice', [])
 
@@ -38,6 +39,11 @@ var navigationservice = angular.module('navigationservice', [])
     return {
         getnav: function() {
             return navigation;
+        },
+        authenticate: function(callback) {
+            return $http.get(adminurl + 'authenticate', {}, {
+                withCredentials: true
+            }).success(callback);
         },
         makeactive: function(menuname) {
             for (var i = 0; i < navigation.length; i++) {
@@ -80,6 +86,14 @@ var navigationservice = angular.module('navigationservice', [])
                 data: userData
             }).success(callback);
         },
+        addToWishlist: function(product, callback) {
+            $http({
+                url: adminurl + 'addtowishlist',
+                method: 'POST',
+                withCredentials: true,
+                data: {product:product}
+            }).success(callback);
+        },
         usercontact: function(contact, callback) {
             return $http.get(adminurl + 'usercontact?name=' + contact.name + '&email=' + contact.email + '&phone=' + contact.phone + '&comment=' + contact.comment, {}, {
                 withCredentials: true
@@ -87,6 +101,36 @@ var navigationservice = angular.module('navigationservice', [])
         },
         getProductDetails: function(id, callback) {
             return $http.get(adminurl + 'getProductDetails?id=' + id, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getAllSize: function(callback) {
+            return $http.get(adminurl + 'getAllSize', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        addToCart: function(product, quantity, callback) {
+            return $http.get(adminurl + 'addToCart?product='+product+'&quantity='+quantity, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        deletecart: function(id, callback) {
+            return $http.get(adminurl + 'deletecart?id='+id, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        gettotalcart: function(callback) {
+            return $http.get(adminurl + 'totalitemcart', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        showCart: function(callback) {
+            return $http.get(adminurl + 'showCart', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        totalcart: function(callback) {
+            return $http.get(adminurl + 'totalcart', {}, {
                 withCredentials: true
             }).success(callback);
         },
