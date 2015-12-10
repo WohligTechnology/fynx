@@ -9,10 +9,10 @@
 		<div class="col-md-6">
 			<div class="account">
 				<ul>
-					<li class="tab-item {{classa}}" ng-click="tabchange('step1',1)">STEP 1</li>
-					<li class="tab-item {{classb}}" ng-click="tabchange('step2',2)">STEP 2</li>
-					<li class="tab-item {{classc}}" ng-click="tabchange('step3',3)">STEP 3</li>
-					<li class="tab-item {{classd}}" ng-click="tabchange('step4',4)">STEP 4</li>
+					<li class="tab-item {{classa}}">STEP 1</li>
+					<li class="tab-item {{classb}}">STEP 2</li>
+					<li class="tab-item {{classc}}">STEP 3</li>
+					<li class="tab-item {{classd}}">STEP 4</li>
 
 				</ul>
 			</div>
@@ -21,25 +21,28 @@
 	<hr>
 </div>
 <div class="container">
+<div class="alert-postion">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+  </div>
 	<div ng-show="tab=='step1'">
 		<div class="row">
 			<div class="col-md-3">
 				<div class="login-form content-view pad0">
 					<h4 class="login">LOGIN</h4>
 					<div class="form-group">
-						<label>EMAIL ADDRESS</label>
-						<input type="email" class="form-control">
+						<label>EMAIL ADDRESS *</label>
+						<input type="email" class="form-control" ng-model="login.email" required>
 					</div>
 					<div class="form-group">
-						<label>PASSWORD</label>
-						<input type="password" class="form-control">
+						<label>PASSWORD *</label>
+						<input type="password" class="form-control" ng-model="login.password" required>
 					</div>
 
 
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<button class="btn btn-danger mar0 con-btn">SIGN IN</button>
+						<button class="btn btn-danger mar0 con-btn" ng-click="checkoutLogin()">SIGN IN</button>
 					</div>
 					<div class="col-md-6 ">
 						<div class="class-forget">
@@ -63,41 +66,50 @@
 						</button>
 					</div>
 				</div>
+				<div class="text-center list">
+					<p class="or">OR</p>
+					<div class="form-group i-check">
+
+						<input type="checkbox" name="vehicle" ng-model="asguest" class="iagree" ng-change="checkoutAsGuest(asguest)">Checkout as guest
+					</div>
+				</div>
 			</div>
 			<div class="col-md-offset-2 col-md-3">
 				<div class="login-form content-view pad0">
 					<h4 class="login">SIGN UP</h4>
 					<div class="form-group">
 						<label>FIRST NAME</label>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" ng-model="register.firstname">
 					</div>
 					<div class="form-group">
 						<label>LAST NAME</label>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" ng-model="register.lastname">
 					</div>
 					<div class="form-group">
 						<label>EMAIL ADDRESS</label>
-						<input type="email" class="form-control">
+						<input type="email" class="form-control" ng-model="register.email">
 					</div>
 					<div class="form-group">
 						<label>PASSWORD<span>(Minimum 6 Characters)</span></label>
-						<input type="password" class="form-control">
+						<input type="password" class="form-control" ng-model="register.password">
 					</div>
 					<div class="form-group">
 						<label>CONFIRM PASSWORD</label>
-						<input type="password" class="form-control">
+						<input type="password" class="form-control" ng-model="register.cpassword">
 					</div>
+<!--
 					<div class="form-group">
 						<label>MOBILE NUMBER <span>(Optional)</span></label>
-						<input type="number" class="form-control">
+						<input type="number" class="form-control" ng-model="register.">
 					</div>
+-->
 					<div class="form-group i-check">
 
-						<input type="checkbox" name="vehicle" value="Bike" class="iagree">I agree with the terms & conditions and privacy policy
+						<input type="checkbox" name="vehicle" ng-model="register.accept" value="Bike" class="iagree">I agree with the terms & conditions and privacy policy
 					</div>
 				</div>
 				<div class="text-center list mar-btm">
-					<button class="btn btn-danger mar0 con-btn">REGISTER</button>
+					<button class="btn btn-danger mar0 con-btn" ng-click="checkoutRegister()">REGISTER</button>
 					<p class="or">OR</p>
 					<p>LOGIN VIA</p>
 					<div class="button-set">
@@ -190,7 +202,7 @@
 				<div class="row">
 					<div class="col-md-offset-2 col-md-4">
 						<div class="text-center">
-							<button type="submit" class="btn-blue btn btn-danger text-center">NEXT</button>
+							<button type="submit" class="btn-blue btn btn-danger text-center" ng-click="tabchange('step3',3)">NEXT</button>
 						</div>
 					</div>
 				</div>
@@ -211,26 +223,22 @@
 		<div class="row content-view">
 			<div class="col-md-3">
 				<div class="form-group">
-
-					<input type="email" class="form-control" placeholder="FIRST NAME">
+					<input type="text" class="form-control" ng-model="checkout.firstname" placeholder="FIRST NAME">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-
-					<input type="email" class="form-control" placeholder="LAST NAME">
+					<input type="text" class="form-control" ng-model="checkout.lastname" placeholder="LAST NAME">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-
-					<input type="email" class="form-control" placeholder="MOBILE NUMBER ">
+					<input type="text" class="form-control" ng-model="checkout.billingcontact" placeholder="MOBILE NUMBER ">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-
-					<input type="email" class="form-control" placeholder="EMAIL ADDRESS">
+					<input type="email" class="form-control" ng-model="checkout.email" placeholder="EMAIL ADDRESS">
 				</div>
 			</div>
 		</div>
@@ -240,26 +248,28 @@
 					<h4 class="login">BILLING ADDRESS</h4>
 					<div class="form-group">
 						<label>LINE 1*</label>
-						<input type="email" class="form-control">
+						<input type="text" ng-model="billingaddress.line1" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 2</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="billingaddress.line2" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 3</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="billingaddress.line3" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>CITY *</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="checkout.billingcity" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>PINCODE *</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="checkout.billingpincode" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>STATE</label>
+						<input type="text" class="form-control" ng-model="checkout.billingstate">
+<!--
 						<div class="fynx-select">
 							<select>
 								<option value=""></option>
@@ -269,10 +279,11 @@
 							</select>
 							<span class="only-border"></span>
 						</div>
+-->
 					</div>
 					<div class="form-group">
 						<label>COUNTRY</label>
-						<input type="password" class="form-control">
+						<input type="text" class="form-control" ng-model="checkout.billingcountry">
 					</div>
 
 
@@ -282,31 +293,32 @@
 				<div class="login-form content-view pad0">
 					<h4 class="login">SHIPPING ADDRESS</h4>
 					<div class="form-group i-check">
-
-						<input type="checkbox" name="vehicle" value="Bike" class="iagree">Same as billing address
+						<input type="checkbox" class="iagree" ng-model="sameasbilling" ng-change="sameAsBilling(sameasbilling)">Same as billing address
 					</div>
 					<div class="form-group">
 						<label>LINE 1*</label>
-						<input type="email" class="form-control">
+						<input type="text" ng-model="shippingaddress.line1" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 2</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="shippingaddress.line2" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 3</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="shippingaddress.line3" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>CITY *</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="checkout.shippingcity" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>PINCODE *</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="checkout.shippingpincode" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>STATE</label>
+						<input type="text" ng-model="checkout.shippingstate" class="form-control">
+<!--
 						<div class="fynx-select">
 							<select>
 								<option value=""></option>
@@ -316,10 +328,11 @@
 							</select>
 							<span class="only-border"></span>
 						</div>
+-->
 					</div>
 					<div class="form-group">
 						<label>COUNTRY</label>
-						<input type="password" class="form-control">
+						<input type="text" ng-model="checkout.shippingcountry" class="form-control">
 					</div>
 
 
@@ -361,7 +374,7 @@
 		</div>
 		<div class="row">
 			<div class="text-center">
-				<button class="btn btn-danger m-30 con-btn">CONTINUE</button>
+				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4)">CONTINUE</button>
 			</div>
 		</div>
 		<div class="row mar-btm">

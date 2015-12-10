@@ -146,6 +146,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.footerBlack = true;
 	$scope.product = {};
 	$scope.alerts = [];
+	//selcted color
+	$scope.filter = {};
+	$scope.filter.color = "";
+	//selected size
+	$scope.filter.size = "";
+	$scope.filter.product = $stateParams.id;
 
 	$scope.addAlert = function (type, msg) {
 		$scope.alerts.push({
@@ -162,68 +168,95 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.alerts.splice(index, 1);
 	};
 
-	$scope.onColorClick= function(color){
-		_.each($scope.product.color, function(n){
+	$scope.onColorClick = function (color) {
+		console.log(color);
+		_.each($scope.product.color, function (n) {
 			n.selected = "";
 		});
 		color.selected = "selected";
+		$scope.filter.color = color.id;
+		$scope.loadProduct($scope.filter);
 	}
 
-	NavigationService.getProductDetails($stateParams.id, function (data, status) {
+	$scope.onSizeClick = function (size) {
+		_.each($scope.sizes, function (n) {
+			n.style = "";
+		});
+		if (size.status != 'canceled') {
+			size.style = "color:#FC483F";
+			$scope.filter.size = size.id;
+			$scope.loadProduct($scope.filter);
+		}
+	}
+	$scope.loadProduct = function (filter) {
+		NavigationService.getProductDetails(filter, function (data, status) {
 
-		data.product.image = [];
-		_.each(data.product, function (n, key) {
-			if (key.split('image')[1]) {
-				data.product.image.push(n);
-			}
-		})
-		$scope.viewImage = data.product.image1;
-		NavigationService.getAllSize(function (data1) {
-			$scope.sizes = data1;
-			
-			//	set size canceled
-			_.each(data1, function(n, key){
-				_.each(data.size, function(m, key1){
-					if(n.id != m.id){
-						n.status = "canceled";
-					}else{
-						n.status = "";
-					}
-				})
+			data.product.image = [];
+			_.each(data.product, function (n, key) {
+				if (key.split('image')[1]) {
+					data.product.image.push(n);
+				}
 			})
-			//	set color selected
-			_.each(data.color, function(n, key){
-					if(n.id == data.product.color){
+			$scope.viewImage = data.product.image1;
+			NavigationService.getAllSize(function (data1) {
+				$scope.sizes = data1;
+
+				//	set size canceled
+				_.each(data1, function (n, key) {
+						if (data.size && data.size != '') {
+							_.each(data.size, function (m, key1) {
+								if (n.id != m.id) {
+									n.status = "canceled";
+								} else {
+									n.status = "";
+								}
+							})
+						} else {
+							n.status = "canceled";
+						}
+					})
+					//	set color selected
+				_.each(data.color, function (n, key) {
+					if (n.id == data.product.color) {
 						n.selected = "selected";
-					}else{
+					} else {
 						n.selected = "";
 					}
-			})
-			
-		$scope.product = data;
-			
+				})
+
+				$scope.product = data;
+
+			});
+			$scope.filter.product = data.product.id;
 		});
-	});
+	}
+	$scope.loadProduct($scope.filter);
+
 	$scope.otherImage = function (image) {
 		$scope.viewImage = image;
 	}
 
 	//	ADD TO BAG
 	$scope.addToCart = function () {
-		NavigationService.addToCart($scope.product.product.id, 1, function (data, status) {
-			if (data == "true") {
-				$scope.addAlert("success", "Added to cart");
-			} else {
-				$scope.addAlert("danger", "Something has gone wrong");
-			}
-			myfunction();
-		});
+		console.log($scope.filter.size);
+		if ($scope.filter.size != "") {
+			NavigationService.addToCart($scope.filter, function (data, status) {
+				if (data == "true") {
+					$scope.addAlert("success", "Added to cart");
+				} else {
+					$scope.addAlert("danger", "Something has gone wrong");
+				}
+				myfunction();
+			});
+		} else {
+			$scope.addAlert("danger", "Select SIZE to add to Shopping Bag");
+		}
 	}
 
 	//	ADD TO WISHLIST
 	$scope.addToWishlist = function () {
 		if (NavigationService.getUser()) {
-			NavigationService.addToWishlist($scope.product.product.id, function (data, status) {
+			NavigationService.addToWishlist($scope.filter, function (data, status) {
 				console.log(data);
 				if (data == "true")
 					$scope.addAlert("success", "Added to wishlist");
@@ -382,57 +415,178 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		});
 
 	})
-	.controller('ConfirmationmailCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService.changecontent("confirmationmail");
-		$scope.menutitle = NavigationService.makeactive("Confirmationmail");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-		$scope.footerBlack = true;
 
-	})
-	.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService.changecontent("checkout");
-		$scope.menutitle = NavigationService.makeactive("Checkout");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-		$scope.footerBlack = true;
+.controller('ConfirmationmailCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService.changecontent("confirmationmail");
+	$scope.menutitle = NavigationService.makeactive("Confirmationmail");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.footerBlack = true;
 
-		$scope.tab = 'step1';
-		$scope.classa = 'yellow-btn';
-		$scope.classb = '';
-		$scope.classc = '';
-		$scope.classd = '';
-		$scope.tabchange = function (tab, a) {
-			//        console.log(tab);
-			$scope.tab = tab;
-			if (a == 1) {
+})
 
+.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService,$state,$timeout) {
+	$scope.template = TemplateService.changecontent("checkout");
+	$scope.menutitle = NavigationService.makeactive("Checkout");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.footerBlack = true;
+	$scope.login = {};
+	$scope.sameasbilling = false;
+	$scope.checkout = {};
+	$scope.shippingaddress = {};
+	$scope.billingaddress = {};
+	$scope.register = {};
+
+	$scope.alerts = [];
+
+	$scope.addAlert = function (type, msg) {
+		$scope.alerts.push({
+			type: type,
+			msg: msg
+		});
+	};
+
+	$scope.closeAlert = function (index) {
+		$scope.alerts.splice(index, 1);
+	};
+	
+	$scope.checkoutAsGuest = function(asguest){
+		if(asguest==true){
+			$timeout(function(){
+				$scope.tabchange('step2', 2);
+			},1000);
+			
+		}
+	}
+
+	$scope.tabchange = function (tab, a) {
+		//        console.log(tab);
+		$scope.tab = tab;
+		if (a == 1) {
+			if (!NavigationService.getUser()) {
 				$scope.classa = "yellow-btn";
 				$scope.classb = '';
 				$scope.classc = '';
-				$scope.classc = '';
-			} else if (a == 2) {
-
-				$scope.classa = '';
-				$scope.classb = "yellow-btn";
-				$scope.classc = '';
-				$scope.classd = '';
-			} else if (a == 3) {
-
-				$scope.classa = '';
-				$scope.classb = '';
-				$scope.classc = "yellow-btn";
 				$scope.classd = '';
 			} else {
-				$scope.classa = '';
-				$scope.classb = '';
-				$scope.classc = '';
-				$scope.classd = "yellow-btn";
+				$scope.tabchange('step2', 2);
 			}
-		};
+		} else if (a == 2) {
+
+			$scope.classa = '';
+			$scope.classb = "yellow-btn";
+			$scope.classc = '';
+			$scope.classd = '';
+		} else if (a == 3) {
+
+			$scope.classa = '';
+			$scope.classb = '';
+			$scope.classc = "yellow-btn";
+			$scope.classd = '';
+		} else {
+			$scope.classa = '';
+			$scope.classb = '';
+			$scope.classc = '';
+			$scope.classd = "yellow-btn";
+		}
+	};
+	$scope.tabchange('step1', 1);
+
+	$scope.sameAsBilling = function (sameasbilling) {
+		if (sameasbilling == true) {
+			$scope.shippingaddress.line1 = $scope.billingaddress.line1;
+			$scope.shippingaddress.line2 = $scope.billingaddress.line2;
+			$scope.shippingaddress.line3 = $scope.billingaddress.line3;
+			$scope.checkout.shippingcity = $scope.checkout.billingcity;
+			$scope.checkout.shippingpincode = $scope.checkout.billingpincode;
+			$scope.checkout.shippingstate = $scope.checkout.billingstate;
+			$scope.checkout.shippingcountry = $scope.checkout.billingcountry;
+		} else {
+			$scope.shippingaddress.line1 = "";
+			$scope.shippingaddress.line2 = "";
+			$scope.shippingaddress.line3 = "";
+			$scope.checkout.shippingcity = "";
+			$scope.checkout.shippingpincode = "";
+			$scope.checkout.shippingstate = "";
+			$scope.checkout.shippingcountry = "";
+		}
+	}
+
+	$scope.checkoutLogin = function () {
+		console.log($scope.login);
+
+		$scope.allvalidation = [{
+			field: $scope.login.email,
+			validation: ""
+        }, {
+			field: $scope.login.password,
+			validation: ""
+        }];
+
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			NavigationService.login($scope.login, function (data) {
+				if (data) {
+					console.log(data);
+					if (data != "false") {
+						NavigationService.setUser(data);
+						window.location.reload();
+						// $state.go('setting');
+					} else {
+						$scope.addAlert("danger", "Invalid email or password");
+					}
+				}
+			})
+		} else {
+			$scope.addAlert("danger", "Please enter a valid email");
+		}
+	}
 
 
-	})
+	$scope.checkoutRegister = function () {
+		console.log($scope.login);
+
+		$scope.allvalidation = [{
+			field: $scope.register.firstname,
+			validation: ""
+        }, {
+			field: $scope.register.lastname,
+			validation: ""
+        }, {
+			field: $scope.register.email,
+			validation: ""	
+        }, {
+			field: $scope.register.password,
+			validation: ""
+        }, {
+			field: $scope.register.cpassword,
+			validation: ""
+        }];
+
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			if ($scope.register.accept == true) {
+				$scope.acceptTerms = false;
+				NavigationService.registerUser($scope.register, function (data) {
+					console.log(data);
+					if (data != 'false') {
+						NavigationService.setUser(data);
+						// $uibModal.hide();
+						window.location.reload();
+					} else {
+						$scope.alreadyRegistered = true;
+					}
+				})
+			} else {
+				$scope.addAlert("danger", "Please accept the terms & conditions");
+			}
+		} else {
+			$scope.addAlert("danger", "Please enter a valid email");
+		}
+	}
+
+})
 
 .controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService.changecontent("wishlist");
