@@ -1,4 +1,5 @@
-var mainurl = "http://localhost/newfynx/index.php/";
+var mainurl = "http://wohlig.co.in/newfynx/index.php/";
+//var mainurl = "http://192.168.0.122/newfynx/index.php/";
 var adminurl = mainurl + "json/";
 
 var navigationservice = angular.module('navigationservice', [])
@@ -94,8 +95,8 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true,
 				data: {
 					"product": filter.product,
-					"color": filter.size,
-					"size": filter.size
+					"quantity": 1,
+					"design":filter.design
 				}
 			}).success(callback);
 		},
@@ -115,12 +116,29 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		addToCart: function (filter, callback) {
-			return $http.get(adminurl + 'addToCart?product=' + filter.product + '&quantity=1&size=' + filter.size + "&color=" + filter.color, {}, {
+			return $http.get(adminurl + 'addToCart?product=' + filter.product + '&quantity=1&design=' +filter.design, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
 		deletecart: function (id, callback) {
 			return $http.get(adminurl + 'deletecart?id=' + id, {}, {
+				withCredentials: true
+			}).success(callback);
+		},
+		removeFromWishlist: function (product, design, callback) {
+			
+			$http({
+				url: adminurl + 'removeFromWishlist',
+				method: 'POST',
+				withCredentials: true,
+				data: {
+					"product": product,
+					"design": design
+				}
+			}).success(callback);
+		},
+		showWishlist: function (callback) {
+			return $http.get(adminurl + 'showwishlist?user=' + $.jStorage.get("user").id, {}, {
 				withCredentials: true
 			}).success(callback);
 		},

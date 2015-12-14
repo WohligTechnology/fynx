@@ -1,114 +1,97 @@
 <div class="left-bar hidden-sm hidden-xs">
-    <div class="text-center">
-        <img src="img/mrfynx2.png" class="small-mascot">
-    </div>
-    <form class="search-box" ng-submit="">
-        <button class="search-btn" type="submit"><i class="fa fa-search"></i>
-        </button>
-        <div class="input-box">
-            <input type="search" placeholder="search here">
-        </div>
-    </form>
-    <h5 class="text-upper">Highlights</h5>
-    <ul class="list-unstyled">
-        <li ui-sref="home">Home</li>
-        <li>New Arrivals</li>
-        <li>Best Sellers</li>
-        <li>Trend Styles</li>
-    </ul>
-    <h5 class="text-upper">Shop by category</h5>
-    <ul class="list-unstyled">
-        <li class="econ tshirt">T-Shirts
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="tshirts"><span>Polo Shirts</span>
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="tshirts"><span>Graphic T-shirts</span>
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="tshirts"><span>Tanks</span>
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="tshirts"><span>Hoodies</span>
-                </label>
-            </div>
-        </li>
-        <li class="econ cap">Caps</li>
-        <li class="econ shoe">Shoes</li>
-    </ul>
-    <h5 class="text-upper">Miscellaneous</h5>
-    <ul class="list-unstyled">
-        <li>Help</li>
-        <li>Newsletter</li>
-    </ul>
+	<div class="text-center">
+		<img src="img/mrfynx2.png" class="small-mascot">
+	</div>
+	<form class="search-box" ng-submit="">
+		<button class="search-btn" type="submit"><i class="fa fa-search"></i>
+		</button>
+		<div class="input-box">
+			<input type="search" placeholder="search here">
+		</div>
+	</form>
+	<h5 class="text-upper">Highlights</h5>
+	<ul class="list-unstyled">
+		<li ui-sref="home">Home</li>
+		<li>New Arrivals</li>
+		<li>Best Sellers</li>
+		<li>Trend Styles</li>
+	</ul>
+	<h5 class="text-upper">Shop by category</h5>
+	<ul class="list-unstyled">
+		<li class="econ tshirt" ng-repeat="category in subcategory"> <span ng-click="hideshow(category)">{{category.name}}</span>
+			<div class="checkbox" ng-repeat="type in category.types" ng-if="category.state == true">
+				<label>
+					<input type="checkbox" ng-click="addtype(type,$index)" name="tshirts"><span>{{type.name}}</span>
+				</label>
+			</div>
+		</li>
+	</ul>
+	<h5 class="text-upper">Miscellaneous</h5>
+	<ul class="list-unstyled">
+		<li>Help</li>
+		<li>Newsletter</li>
+	</ul>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-md-offset-2 col-md-10 col-sm-offset-0 col-sm-12">
-            <div class="site-map">
-                <ul>
-                    <li><a href="#/home">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-10 col-sm-offset-0 col-sm-12">
+			<div class="site-map">
+				<ul>
+					<li><a href="#/home">
                         Home
                     </a>
-                    </li>
-                    <li><a href="#/product/men">
-                        Printed T-Shirts for Men
-                    </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="page-title text-center text-upper">
-                <h2>Mens</h2>
-                <h1 class="primary">T-Shirts</h1>
-            </div>
-            <div class="filter-bar text-center">
-                <span class="arrow"><select>
-                        <option value="">Size</option>
-                        <option value="">S</option>
-                        <option value="">M</option>
-                        <option value="">L</option>
-                        <option value="">XL</option>
-                        <option value="">XXL</option>
-                    </select></span>
-                <span class="arrow"><select>
-                        <option value="">Colors</option>
-                        <option value="">Red</option>
-                        <option value="">Green</option>
-                        <option value="">Blue</option>
-                    </select></span>
-                <span class="arrow"><select>
-                        <option value="">Price</option>
-                        <option value="">Low - High</option>
-                        <option value="">High - Low</option>
-                    </select></span>
-            </div>
-            <div class="product-list">
-                <div class="row">
-                    <div class="col-sm-4 col-xs-6" ng-repeat="product in productList" ui-sref="productview({id: product.id})">
-                        <div class="image-holder">
-                            <img ng-src="{{product.image1 | serverimage}}">
-                        </div>
-                        <div class="product-info">
-                            <div class="primary price">
-                                Rs. {{product.price}}
-                            </div>
-                            <div class="product-name">
-                                {{product.name}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center" ng-show="noData">
-                    <h3>No products found.</h3>
-                </div>
-            </div>
-        </div>
-    </div>
+					</li>
+					<li>
+						<a href="#/product/men" ng-bind="categoryName | uppercase">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="page-title text-center text-upper">
+				<h2 ng-bind="categoryName | uppercase"></h2>
+				<!--                <h1 class="primary">T-Shirts</h1>-->
+			</div>
+			<div class="filter-bar text-center">
+				<span class="arrow">
+                       	<select ng-model="filters.size" ng-change="changeFilter(1)">
+					    <option value="">Size</option>
+					    <option value="{{size.id}}" ng-repeat="size in sizes">{{size.name}}</option>
+                    	</select>
+                    </span>
+				<span class="arrow">
+					<select ng-model="filters.color" ng-change="changeFilter(2)">
+					    <option value="">Color</option>
+					    <option value="{{color.id}}" ng-repeat="color in colors">{{color.name}}</option>
+					</select>
+                    </span>
+				<span class="arrow">
+                     	<select ng-model="filters.price" ng-change="changeFilter(3)"> 
+					    <option value="">Price</option>
+					    <option value="1">Low - High</option>
+					    <option value="2">High - Low</option>
+                    	</select>
+                    </span>
+			</div>
+			<div class="product-list">
+				<div class="row">
+					<div class="col-sm-4 col-xs-6" ng-repeat="product in productList" ui-sref="productview({id: product.id,design:product.designId})">
+						<div class="image-holder">
+							<img ng-src="{{product.image1 | serverimage}}">
+						</div>
+						<div class="product-info">
+							<div class="primary price">
+								Rs. {{product.price}}
+							</div>
+							<div class="product-name">
+								{{product.name}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center" ng-show="noData">
+					<h3>No products found.</h3>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

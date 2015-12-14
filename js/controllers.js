@@ -75,7 +75,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.footerBlack = true;
 })
 
-.controller('ProductListCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ProductListCtrl', function ($scope, TemplateService, NavigationService, $stateParams) {
 	$scope.template = TemplateService.changecontent("product-list");
 	$scope.menutitle = NavigationService.makeactive("Men");
 	TemplateService.title = $scope.menutitle;
@@ -83,59 +83,107 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.footerBlack = true;
 	$scope.filters = {};
 	$scope.filters.pageno = 1;
-	$scope.filters.category = 1;
+	$scope.filters.category = $stateParams.category;
 	$scope.filters.subcategory = '';
 	$scope.filters.color = '';
 	$scope.filters.size = '';
 	$scope.filters.price = '';
-	$scope.filters.type = '';
+	$scope.filters.type = [];
+	$scope.filters.check = '';
+	$scope.freeze = {};
+	$scope.freeze.freezeSize = "";
+	$scope.freeze.freezeColor = "";
+	$scope.freeze.freezeType = [];
 	$scope.noData = false;
+	$scope.check = false;
+	$scope.sizes = [];
+	$scope.colors = [];
+	$scope.subcategory = [];
 
-	// $scope.productList = [{
-	//     src: "img/tee.jpg",
-	//     name: "SPACE PRINT SLIM FIT T-SHIRT",
-	//     price: "699"
-	// }, {
-	//     src: "img/t2.jpg",
-	//     name: "SPACE PRINT SLIM FIT T-SHIRT",
-	//     price: "699"
-	// }, {
-	//     src: "img/t3.jpg",
-	//     name: "SPACE PRINT SLIM FIT T-SHIRT",
-	//     price: "699"
-	// }, {
-	//     src: "img/t4.jpg",
-	//     name: "SPACE PRINT SLIM FIT T-SHIRT",
-	//     price: "699"
-	// }, {
-	//     src: "img/t5.jpg",
-	//     name: "SPACE PRINT SLIM FIT T-SHIRT",
-	//     price: "699"
-	// }, {
-	//     src: "img/t6.jpg",
-	//     name: "SPACE PRINT SLIM FIT T-SHIRT",
-	//     price: "699"
-	// }];
+	$scope.categoryName = $stateParams.category;
 
-	NavigationService.getProductByCategory($scope.filters, function (data) {
-		if (data) {
-			console.log(data);
-			$scope.productList = data.queryresult;
-			// $scope.productList = [];
-			if (data.queryresult.length == 0 && $scope.productList.length == 0) {
-				$scope.noData = true;
-			} else {
-				$scope.noData = false;
+	$scope.loadProducts = function () {
+		NavigationService.getProductByCategory($scope.filters, function (data) {
+			if (data) {
+
+				if ($scope.freeze.freezeColor == "") {
+					$scope.colors = data.filter.color;
+				}
+				if ($scope.freeze.freezeSize == "") {
+					$scope.sizes = data.filter.size;
+				}
+				if ($scope.freeze.freezeType == "") {
+					$scope.subcategory = data.filter.subcategory;
+					_.each($scope.subcategory, function (n) {
+						n.state = false;
+					});
+				}
+
+				$scope.productList = data.product.queryresult;
+
+				if (data.product.queryresult.length == 0 && $scope.productList.length == 0) {
+					$scope.noData = true;
+				} else {
+					$scope.noData = false;
+				}
 			}
-		}
-	});
+		});
+	}
 
-	NavigationService.getFilters($scope.filters.category, function (data) {
-		if (data) {
-			console.log(data);
-			// $scope.productList = data.queryresult;
+	$scope.loadProducts();
+	$scope.addtype = function (type, index) {
+		var addToArray = true;
+		_.each($scope.filters.type, function (n, key) {
+			if (n === type.id) {
+				addToArray = false;
+			}
+		});
+		if (addToArray) {
+			$scope.filters.type.push(type.id);
+		} else {
+			$scope.filters.type.splice(index, 1);
 		}
-	});
+		if ($scope.filters.type == "") {
+			$scope.freeze.freezeType = "";
+		} else {
+			$scope.freeze.freezeType = $scope.subcategory;
+		}
+		$scope.loadProducts();
+	}
+
+	$scope.hideshow = function (cat) {
+		if (cat.state == true) {
+			cat.state = false;
+		} else {
+			cat.state = true;
+		}
+	}
+
+	$scope.changeFilter = function (check) {
+		switch (check) {
+		case 1:
+			{
+				if ($scope.filters.size == "")
+					$scope.freeze.freezeSize = "";
+				else
+					$scope.freeze.freezeSize = $scope.sizes;
+			}
+			break;
+		case 2:
+			{
+				if ($scope.filters.color == "")
+					$scope.freeze.freezeColor = "";
+				else
+					$scope.freeze.freezeColor = $scope.colors;
+			}
+			break;
+				default:
+		}
+		$scope.filters.check = check;
+		console.log($scope.freeze);
+		$scope.loadProducts();
+	}
+
 })
 
 .controller('ProductViewCtrl', function ($scope, TemplateService, NavigationService, $stateParams) {
@@ -175,59 +223,96 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		});
 		color.selected = "selected";
 		$scope.filter.color = color.id;
-		$scope.loadProduct($scope.filter);
+		if ($scope.filter.size && $scope.filter.size != '' && $scope.filter.color && $scope.filter.color != '') {
+			$scope.loadProduct($scope.filter);
+		}
 	}
 
 	$scope.onSizeClick = function (size) {
 		_.each($scope.sizes, function (n) {
 			n.style = "";
 		});
-		if (size.status != 'canceled') {
+		if (size.state != 'canceled') {
 			size.style = "color:#FC483F";
 			$scope.filter.size = size.id;
-			$scope.loadProduct($scope.filter);
+			if ($scope.filter.size && $scope.filter.size != '' && $scope.filter.color && $scope.filter.color != '') {
+				$scope.loadProduct($scope.filter);
+			}
 		}
 	}
 	$scope.loadProduct = function (filter) {
 		NavigationService.getProductDetails(filter, function (data, status) {
-
-			data.product.image = [];
-			_.each(data.product, function (n, key) {
-				if (key.split('image')[1]) {
-					data.product.image.push(n);
-				}
-			})
-			$scope.viewImage = data.product.image1;
-			NavigationService.getAllSize(function (data1) {
-				$scope.sizes = data1;
-
-				//	set size canceled
-				_.each(data1, function (n, key) {
-						if (data.size && data.size != '') {
-							_.each(data.size, function (m, key1) {
-								if (n.id != m.id) {
-									n.status = "canceled";
-								} else {
-									n.status = "";
-								}
-							})
-						} else {
-							n.status = "canceled";
-						}
-					})
-					//	set color selected
-				_.each(data.color, function (n, key) {
-					if (n.id == data.product.color) {
-						n.selected = "selected";
-					} else {
-						n.selected = "";
+			if (data.product != '') {
+				data.product.image = [];
+				_.each(data.product, function (n, key) {
+					if (key.split('image')[1]) {
+						data.product.image.push(n);
 					}
 				})
+				$scope.viewImage = data.product.image1;
+				NavigationService.getAllSize(function (data1) {
 
-				$scope.product = data;
+					_.each(data.size, function (n, key1) {
+						_.each(data1, function (m, key2) {
 
-			});
-			$scope.filter.product = data.product.id;
+							if (n.id == m.id) {
+								m.state = "";
+
+							} else {
+								console.log(m.state);
+								if (!m.state && m.state != '') {
+									m.state = "canceled";
+								}
+							}
+							if (m.id == data.product.size) {
+								$scope.filter.size = n.id;
+								m.style = "color:#FC483F";
+							}
+						});
+						//					if (key1 == data.sportname.length - 1) {
+						//						$scope.checkmenu = true;
+						//						demo = 1;
+						//						//                    $scope.loadStudents();
+						//					}
+
+
+					});
+
+
+					//	set size canceled
+					//				_.each(data1, function (n, key) {
+					//						if (data.size && data.size != '') {
+					//							_.each(data.size, function (m, key1) {
+					//								if (n.id == m.id) {
+					//									n.status = "";
+					//								} else {
+					//									n.status = "canceled";
+					//								}
+					//								if(n.id==data.product.size){
+					//									$scope.filter.size = n.id;
+					//									n.style = "color:#FC483F";
+					//								}
+					//							})
+					//						} else {
+					//							n.status = "canceled";
+					//						}
+					//					})
+					//	set color selected
+					_.each(data.color, function (n, key) {
+						if (n.id == data.product.color) {
+							n.selected = "selected";
+							$scope.filter.color = n.id;
+						} else {
+							n.selected = "";
+						}
+					})
+					$scope.sizes = data1;
+
+
+					$scope.product = data;
+				});
+				$scope.filter.product = data.product.id;
+			}
 		});
 	}
 	$scope.loadProduct($scope.filter);
@@ -238,8 +323,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	//	ADD TO BAG
 	$scope.addToCart = function () {
-		console.log($scope.filter.size);
 		if ($scope.filter.size != "") {
+			$scope.filter.design = $stateParams.design;
 			NavigationService.addToCart($scope.filter, function (data, status) {
 				if (data == "true") {
 					$scope.addAlert("success", "Added to cart");
@@ -256,8 +341,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	//	ADD TO WISHLIST
 	$scope.addToWishlist = function () {
 		if (NavigationService.getUser()) {
+			$scope.filter.design = $stateParams.design;
 			NavigationService.addToWishlist($scope.filter, function (data, status) {
-				console.log(data);
 				if (data == "true")
 					$scope.addAlert("success", "Added to wishlist");
 				else
@@ -267,7 +352,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.addAlert("danger", "Please login first");
 		}
 	}
-
 })
 
 
@@ -341,9 +425,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.footerBlack = true;
-
-
-
 })
 
 .controller('CustomChooseCtrl', function ($scope, TemplateService, NavigationService) {
@@ -425,7 +506,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService,$state,$timeout) {
+.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, $state, $timeout) {
 	$scope.template = TemplateService.changecontent("checkout");
 	$scope.menutitle = NavigationService.makeactive("Checkout");
 	TemplateService.title = $scope.menutitle;
@@ -450,13 +531,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.closeAlert = function (index) {
 		$scope.alerts.splice(index, 1);
 	};
-	
-	$scope.checkoutAsGuest = function(asguest){
-		if(asguest==true){
-			$timeout(function(){
+
+	$scope.checkoutAsGuest = function (asguest) {
+		if (asguest == true) {
+			$timeout(function () {
 				$scope.tabchange('step2', 2);
-			},1000);
-			
+			}, 1000);
+
 		}
 	}
 
@@ -555,7 +636,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			validation: ""
         }, {
 			field: $scope.register.email,
-			validation: ""	
+			validation: ""
         }, {
 			field: $scope.register.password,
 			validation: ""
@@ -594,8 +675,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.footerBlack = true;
+	$scope.alerts = [];
+
+	$scope.addAlert = function (type, msg) {
+		$scope.alerts.push({
+			type: type,
+			msg: msg
+		});
+	};
+
+	$scope.closeAlert = function (index) {
+		$scope.alerts.splice(index, 1);
+	};
 
 	// GET WISHLIST
+	$scope.loadWishlist = function () {
+		NavigationService.showWishlist(function (data, status) {
+			console.log(data);
+			$scope.wishlistProduct = data.queryresult;
+		})
+	}
+	$scope.loadWishlist();
+
+	$scope.removeFromWishlist = function (mywish) {
+		NavigationService.removeFromWishlist(mywish.id, mywish.designId , function (data) {
+			console.log(data);
+			$scope.loadWishlist();
+		})
+	}
+
+	$scope.addToCart = function (mywish) {
+		console.log(mywish);
+		if (mywish.size != "") {
+			mywish.product = mywish.id;
+			NavigationService.addToCart(mywish, function (data, status) {
+				if (data == "true") {
+					$scope.addAlert("success", "Added to cart");
+				} else {
+					$scope.addAlert("danger", "Something has gone wrong");
+				}
+				myfunction();
+			});
+		} else {
+			$scope.addAlert("danger", "Select SIZE to add to Shopping Bag");
+		}
+	}
 
 
 })
