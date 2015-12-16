@@ -12,6 +12,7 @@ var jsArray = [
     './bower_components/angular-flexslider/angular-flexslider.js',
     './bower_components/lodash/lodash.min.js',
     './bower_components/jStorage/jstorage.min.js',
+    './bower_components/fancyBox/source/jquery.fancybox.pack.js',
     './js/app.js',
     './js/controllers.js',
     './js/templateservice.js',
