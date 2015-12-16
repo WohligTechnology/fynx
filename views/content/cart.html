@@ -1,78 +1,78 @@
 <div class="breadcrumb">
-    <div class="container relative">
-        <h3>MY CART</h3>
-        <img src="img/mrfynx2.png" alt="Mr. Fynx" class="mascot">
-    </div>
+  <div class="container relative">
+    <h3>MY CART</h3>
+    <img alt="Mr. Fynx" class="mascot" src="img/mrfynx2.png">
+  </div>
 </div>
 
 <div class="container">
-    <div class="row" ng-show="msg==''">
-        <div class="col-md-12">
-            <div class="order-table">
-                <table class="table">
-                    <thead>
-                        <tr class="text-center">
-                            <th>ITEM</th>
-                            <th>COLOUR</th>
-                            <th>SIZE</th>
-                            <th>QUANTITY</th>
-                            <th>SUBTOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="text-center text-bold" ng-repeat="cart in allCart">
-                            <td>
-                                <figure>
-                                    <img ng-src="{{cart.image | serverimage}}">
-                                    <figcaption>{{cart.options.realname}}</figcaption>
-                                </figure>
-                            </td>
-                            <td>{{cart.options.colorname}}</td>
-                            <td>{{cart.options.sizename}}</td>
-                            <td>{{cart.qty}}</td>
-                            <td>
-                                <p>{{cart.subtotal}}</p>
-                                <button type="submit" class="btn btn-blue btn-primary" ng-click="deleteCart (cart)">remove</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+  <div class="row" ng-show="msg==''">
+    <div class="col-md-12">
+      <div class="order-table">
+        <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th>ITEM</th>
+              <th>COLOUR</th>
+              <th>SIZE</th>
+              <th>QUANTITY</th>
+              <th>SUBTOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center text-bold" ng-repeat="cart in allCart">
+              <td>
+                <figure>
+                  <img ng-src="{{cart.image | serverimage}}">
+                  <figcaption>{{cart.options.realname}}</figcaption>
+                </figure>
+              </td>
+              <td>{{cart.options.colorname}}</td>
+              <td>{{cart.options.sizename}}</td>
+              <td>{{cart.qty}}</td>
+              <td>
+                <p>{{cart.subtotal}}</p>
+                <button class="btn btn-blue btn-primary" ng-click="deleteCart(cart);" type="submit">remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </div>
-    <div class="row mar-btm" ng-show="msg==''">
-        <div class="col-md-offset-8 col-md-4">
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="category">
-                        <p>TOTAL:</p>
-                        <p>SHIPPING:</p>
-                        <p>GIFT CARD:</p>
-                        <p>STORE CREDIT:</p>
-                        <p>DISCOUNT:</p>
-                        <p>GRAND TOTAL:</p>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="list ">
-                        <p>{{amount}}</p>
-                        <p>0</p>
-                        <p>0</p>
-                        <p>0</p>
-                        <p>0</p>
-                        <p>{{amount}}</p>
-                    </div>
-                </div>
-            </div>
-            <a href="#/product/men" type="submit" class="btn-blue btn btn-danger">CONTINUE SHOPPING</a>
-            <a href="#/checkout" type="submit" class="btn-blue btn btn-danger">CHECK OUT</a>
+
+  </div>
+  <div class="row mar-btm" ng-show="msg==''">
+    <div class="col-md-offset-8 col-md-4">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="category">
+            <p>TOTAL:</p>
+            <p>SHIPPING:</p>
+            <p>GIFT CARD:</p>
+            <p>STORE CREDIT:</p>
+            <p>DISCOUNT:</p>
+            <p>GRAND TOTAL:</p>
+          </div>
         </div>
-    </div>
-    <div class="row mar-btm" ng-show="msg!=''">
-        <div class="col-md-offset-8 col-md-4">
-		   {{msg}}
+        <div class="col-xs-6">
+          <div class="list ">
+            <p>{{amount}}</p>
+            <p>0</p>
+            <p>0</p>
+            <p>0</p>
+            <p>0</p>
+            <p>{{amount}}</p>
+          </div>
         </div>
+      </div>
+      <a class="btn-blue btn btn-danger" href="#/product/men" type="submit">CONTINUE SHOPPING</a>
+      <a class="btn-blue btn btn-danger" href="#/checkout" type="submit">CHECK OUT</a>
     </div>
+  </div>
+  <div class="row mar-btm" ng-show="msg!=''">
+    <div class="text-center">
+      {{msg}}
+    </div>
+  </div>
 </div>
