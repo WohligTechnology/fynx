@@ -189,6 +189,9 @@ nav {
     }
   }
 }
+.size-selected {
+  font-weight: bold;
+}
 .navbar {
   margin: 0;
   .icon-bar {
@@ -1304,7 +1307,7 @@ h4.bold,
 
   &.black-select {
     width: 100px;
-    
+
     select {
       color: black;
     }
