@@ -4,7 +4,7 @@ var firstapp = angular.module('firstapp', [
   'phonecatControllers',
   'templateservicemod',
   'navigationservice'
-]);
+  ]);
 
 firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -13,7 +13,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
   $stateProvider
 
-    .state('home', {
+  .state('home', {
     url: "/home",
     templateUrl: "views/template.html",
     controller: 'HomeCtrl'
@@ -23,6 +23,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     url: "/privacy",
     templateUrl: "views/template.html",
     controller: 'PrivacyCtrl'
+  })
+  .state('comingsoon', {
+    url: "/comingsoon",
+    templateUrl: "views/template.html",
+    controller: 'ComingsoonCtrl'
   })
 
   .state('profile', {
