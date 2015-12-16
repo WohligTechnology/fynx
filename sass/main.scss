@@ -2098,6 +2098,7 @@ font-size: 32px;
 margin-bottom: 25px;
 }
 .content-view {
+padding-bottom: 30px;
 input {
 width: 200px;
 }
@@ -2116,8 +2117,11 @@ width: 150px;
 @media (max-width: 360px) {
 .comingsoon {
 .white-bg {
+.content-view {
+padding-bottom: 20px;
 .submit {
 margin-top: 10px;
+}
 }
 }
 }
