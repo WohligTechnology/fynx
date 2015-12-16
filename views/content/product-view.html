@@ -112,7 +112,7 @@
                             <span class="very-bold">Size</span>
                             <button class="btn btn-tiny btn-gray btn-outline">Size Guide</button>
 
-                            <ul class="list-inline">
+                            <ul class="list-inline text-upper">
                                 <li ng-repeat="size in sizes" class="{{size.state}}" ng-click="onSizeClick(size)" style="{{size.style}}">{{size.name}}</li>
 <!--                                <li class="canceled">XXL</li>-->
                             </ul>
@@ -129,10 +129,10 @@
 -->
                             </ul>
                         </div>
-                        
+
                         <div class="color-picker" ng-if="product.color">
                             <span class="very-bold">Quantity</span>
-                            
+
                         </div>
 
                         <button class="btn btn-huge btn-black btn-outline" ng-click="addToCart()">Add to bag</button>

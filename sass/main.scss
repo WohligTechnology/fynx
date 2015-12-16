@@ -157,7 +157,7 @@ img.doneLoading {
   opacity: 1;
   cursor: pointer;
 }
-.pointer {
+a, .pointer {
   cursor: pointer;
 }
 .form-control:focus {
@@ -562,6 +562,9 @@ span.mobile {
     text-align: justify;
   }
   a {
+    &.btn {
+      color: inherit;
+    }
     color: $gray;
   }
   ol,
