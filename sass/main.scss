@@ -1318,6 +1318,15 @@ h4.bold,
       background-color: black
     }
   }
+
+  &.gray-select {
+    .only-border {
+      border: 1px solid #ccc;
+    }
+    &:after {
+      background-color: #ccc
+    }
+  }
   .selected-text {
     height: $select-height;
     line-height: $select-height;
@@ -1537,10 +1546,11 @@ h4.bold,
 .account-name {
   p {
     color: #515151;
-    line-height: 100%;
+    line-height: 150%;
     text-indent: 0;
     span {
       padding-left: 34px;
+      outline: none;
     }
   }
   h5 {
