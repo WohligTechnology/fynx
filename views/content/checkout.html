@@ -144,33 +144,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center text-bold">
+							<tr class="text-center text-bold" ng-repeat="cart in allCart">
 								<td>
 									<figure>
-										<img src="img/wishlist.jpg">
-										<figcaption>SPACE PRINT SLIM FIT T-SHIRT</figcaption>
+										<img ng-src="{{cart.image | serverimage}}">
+										<figcaption>{{cart.options.realname}}</figcaption>
 									</figure>
 								</td>
-								<td>White</td>
-								<td>m</td>
-								<td>1</td>
+								<td>{{cart.options.colorname}}</td>
+              <td>{{cart.options.sizename}}</td>
+              <td>{{cart.qty}}</td>
 								<td>
-									<p>699</p>
-
-								</td>
-							</tr>
-							<tr class="text-center text-bold">
-								<td>
-									<figure>
-										<img src="img/wishlist.jpg">
-										<figcaption>SPACE PRINT SLIM FIT T-SHIRT</figcaption>
-									</figure>
-								</td>
-								<td>White</td>
-								<td>m</td>
-								<td>1</td>
-								<td>
-									<p>699</p>
+									<p>{{cart.subtotal}}</p>
 
 								</td>
 							</tr>
@@ -193,9 +178,9 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="list ">
-							<p>1398</p>
+							<p>{{amount}}</p>
 							<p>0</p>
-							<p>1399</p>
+							<p>{{amount}}</p>
 						</div>
 					</div>
 				</div>
@@ -206,9 +191,6 @@
 						</div>
 					</div>
 				</div>
-
-
-
 			</div>
 		</div>
 	</div>

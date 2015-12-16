@@ -201,6 +201,15 @@ firstapp.filter('serverimage', function () {
 	};
 });
 
+firstapp.filter('capitalize', function () {
+	return function (input, all) {
+		var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+		return (!!input) ? input.replace(reg, function (txt) {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		}) : '';
+	}
+});
+
 var setfilter = function (freezed, newdata) {
 	_.each(newdata, function (n) {
 		var check = false;
@@ -235,27 +244,27 @@ var clearvalidation = function (allvalidation) {
 	}
 };
 
-firstapp.directive('fancyboxBox', function($document) {
-    return {
-        restrict: 'EA',
-        replace: false,
-        link: function(scope, element, attr) {
-            var $element = $(element);
-            if (attr.rel) {
-                var target = $("[rel='" + attr.rel + "']");
-            } else {
-                var target = element;
-            }
+firstapp.directive('fancyboxBox', function ($document) {
+	return {
+		restrict: 'EA',
+		replace: false,
+		link: function (scope, element, attr) {
+			var $element = $(element);
+			if (attr.rel) {
+				var target = $("[rel='" + attr.rel + "']");
+			} else {
+				var target = element;
+			}
 
-            target.fancybox({
-                openEffect: 'fade',
-                closeEffect: 'fade',
-                closeBtn: true,
-                helpers: {
-                    media: {}
-                }
-            });
+			target.fancybox({
+				openEffect: 'fade',
+				closeEffect: 'fade',
+				closeBtn: true,
+				helpers: {
+					media: {}
+				}
+			});
 
-        }
-    }
+		}
+	}
 });

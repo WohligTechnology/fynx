@@ -83,9 +83,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.footerBlack = true;
 })
 
-.controller('ProductListCtrl', function ($scope, TemplateService, NavigationService, $stateParams) {
+.controller('ProductListCtrl', function ($scope, TemplateService, NavigationService, $stateParams, $filter) {
 	$scope.template = TemplateService.changecontent("product-list");
-	$scope.menutitle = NavigationService.makeactive("Men");
+	$scope.menutitle = NavigationService.makeactive($filter('capitalize','true')($stateParams.category));
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.footerBlack = true;
@@ -559,6 +559,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 		}
 	}
+	
+	$scope.loadCart = function(){
+		NavigationService.totalcart(function (data) {
+			$scope.amount = data;
+		});
+		NavigationService.showCart(function (data, status) {
+				$scope.allCart = data;
+				if(data==0){
+					$scope.msg = "Cart is empty.";
+				}else{
+					$scope.msg = "";
+				}
+				//			$scope.isNoCart();
+			})
+	}
 
 	$scope.tabchange = function (tab, a) {
 		//        console.log(tab);
@@ -578,6 +593,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.classb = "yellow-btn";
 			$scope.classc = '';
 			$scope.classd = '';
+			$scope.loadCart();
 		} else if (a == 3) {
 
 			$scope.classa = '';
