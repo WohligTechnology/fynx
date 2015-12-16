@@ -1,6 +1,7 @@
-var mainurl = "http://wohlig.co.in/newfynx/index.php/";
+
+var mainurl = "http://wohlig.co.in/newfynx/";
 //var mainurl = "http://localhost/newfynx/index.php/";
-var adminurl = mainurl + "json/";
+var adminurl = mainurl + "index.php/json/";
 
 var navigationservice = angular.module('navigationservice', [])
 

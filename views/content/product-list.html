@@ -76,7 +76,7 @@
 				<div class="row">
 					<div class="col-sm-4 col-xs-6" ng-repeat="product in productList" ui-sref="productview({id: product.id,design:product.designId})">
 						<div class="image-holder">
-							<img ng-src="{{product.image1 | serverimage}}">
+							<img ng-src="{{product.image | serverimage}}">
 						</div>
 						<div class="product-info">
 							<div class="primary price">

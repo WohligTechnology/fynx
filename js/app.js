@@ -193,8 +193,7 @@ firstapp.directive('onlyDigits', function () {
 firstapp.filter('serverimage', function () {
 	return function (input) {
 		if (input) {
-			//            return adminimage + input;
-			return "http://localhost/newfynx/uploads/" + input;
+			return  mainurl + "uploads/" + input;
 		} else {
 			return "img/logo.png";
 		}
