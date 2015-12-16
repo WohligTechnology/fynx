@@ -1302,6 +1302,19 @@ h4.bold,
 .fynx-select {
   position: relative;
 
+  &.black-select {
+    width: 100px;
+    
+    select {
+      color: black;
+    }
+    .only-border {
+      border: 2px solid black;
+    }
+    &:after {
+      background-color: black
+    }
+  }
   .selected-text {
     height: $select-height;
     line-height: $select-height;
