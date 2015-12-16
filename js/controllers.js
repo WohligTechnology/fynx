@@ -207,6 +207,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.filter.color = "";
 	//selected size
 	$scope.filter.size = "";
+	$scope.filter.quantity = "1";
 	$scope.filter.product = $stateParams.id;
 
 	$scope.addAlert = function (type, msg) {

@@ -133,7 +133,7 @@
                         <div class="color-picker" ng-if="product.color">
                             <span class="very-bold">Quantity</span>
                             <div class="fynx-select black-select txt-img">
-                              <select>
+                              <select ng-model="filter.quantity">
                                 <option value="1" selected="">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -157,6 +157,8 @@
                         <div class="detail-tab">
                             <uib-tabset>
                                 <uib-tab heading="Description">
+                                <p ng-bind-html="product.product.description"></p>
+<!--
                                     <p>- Slim fit
                                         <br>- Crew neck
                                         <br>- Print at front
@@ -167,6 +169,7 @@
                                         <img src="img/material.jpg">
                                         <br>More questions? Please contact us and our great customer services team will answer all your questions.</p>
                                     <p>Alternatively, consult our <span ui-sref="faq">FAQ</span> page</p>
+-->
                                 </uib-tab>
                                 <uib-tab heading="Delivery"></uib-tab>
                                 <uib-tab heading="Easy Returns"></uib-tab>

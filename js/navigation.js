@@ -1,5 +1,5 @@
-//var mainurl = "http://wohlig.co.in/newfynx/index.php/";
-var mainurl = "http://localhost/newfynx/index.php/";
+var mainurl = "http://wohlig.co.in/newfynx/index.php/";
+//var mainurl = "http://localhost/newfynx/index.php/";
 var adminurl = mainurl + "json/";
 
 var navigationservice = angular.module('navigationservice', [])
@@ -95,7 +95,7 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true,
 				data: {
 					"product": filter.product,
-					"quantity": 1,
+					"quantity": filter.quantity,
 					"design":filter.design
 				}
 			}).success(callback);
@@ -116,7 +116,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		addToCart: function (filter, callback) {
-			return $http.get(adminurl + 'addToCart?product=' + filter.product + '&quantity=1&design=' +filter.design, {}, {
+			return $http.get(adminurl + 'addToCart?product=' + filter.product + '&quantity=' + filter.quantity + '&design=' +filter.design, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
