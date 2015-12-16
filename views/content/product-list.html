@@ -53,19 +53,19 @@
 			</div>
 			<div class="filter-bar text-center">
 				<span class="arrow">
-                       	<select ng-model="filters.size" ng-change="changeFilter(1)">
+                       	<select ng-model="filters.size" ng-change="changeFilter(1)" value="">
 					    <option value="">Size</option>
 					    <option value="{{size.id}}" ng-repeat="size in sizes">{{size.name}}</option>
                     	</select>
                     </span>
 				<span class="arrow">
-					<select ng-model="filters.color" ng-change="changeFilter(2)">
+					<select ng-model="filters.color" ng-change="changeFilter(2)" value="">
 					    <option value="">Color</option>
 					    <option value="{{color.id}}" ng-repeat="color in colors">{{color.name}}</option>
 					</select>
                     </span>
 				<span class="arrow">
-                     	<select ng-model="filters.price" ng-change="changeFilter(3)"> 
+                     	<select ng-model="filters.price" ng-change="changeFilter(3)" value="">
 					    <option value="">Price</option>
 					    <option value="1">Low - High</option>
 					    <option value="2">High - Low</option>
