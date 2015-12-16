@@ -149,9 +149,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		if (addToArray) {
 			$scope.filters.type.push(type.id);
 		} else {
-			console.log("spliced");
-			console.log(index);
-			index = $scope.filters.type.indexOf(type.id);
 			$scope.filters.type.splice(index, 1);
 		}
 		if ($scope.filters.type == "") {
@@ -159,7 +156,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		} else {
 			$scope.freeze.freezeType = $scope.subcategory;
 		}
-		console.log($scope.filters.type);
 		$scope.loadProducts();
 	}
 
@@ -189,7 +185,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 					$scope.freeze.freezeColor = $scope.colors;
 			}
 			break;
-				default:
+		default:
 		}
 		$scope.filters.check = check;
 		console.log($scope.freeze);
@@ -245,7 +241,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			n.style = "";
 		});
 		if (size.state != 'canceled') {
-			size.style = "color:#FC483F";
+			size.style = "size-selected";
 			$scope.filter.size = size.id;
 			if ($scope.filter.size && $scope.filter.size != '' && $scope.filter.color && $scope.filter.color != '') {
 				$scope.loadProduct($scope.filter);
@@ -278,7 +274,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 							}
 							if (m.id == data.product.size) {
 								$scope.filter.size = n.id;
-								m.style = "color:#FC483F";
+								m.style = "size-selected";
 							}
 						});
 						//					if (key1 == data.sportname.length - 1) {
@@ -472,6 +468,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.allCart = [];
 		$scope.alerts = [];
 		$scope.amount = 0;
+		$scope.msg = "Loading...";
 
 		$scope.addAlert = function (type, msg) {
 			$scope.alerts.push({
@@ -490,16 +487,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			}
 		}
 
-		NavigationService.showCart(function (data, status) {
-			$scope.allCart = data;
-			$scope.isNoCart();
-		})
+		$scope.loadcart = function () {
+			NavigationService.showCart(function (data, status) {
+				$scope.allCart = data;
+				if(data==0){
+					$scope.msg = "Cart is empty.";
+				}else{
+					$scope.msg = "";
+				}
+				//			$scope.isNoCart();
+			})
+		}
+		
+		$scope.loadcart();
 
 		$scope.deleteCart = function (cart) {
 			NavigationService.deletecart(cart.id, function (data, status) {
-				$scope.allCart = data;
+				$scope.loadcart();
 				myfunction();
-				$scope.isNoCart();
+				//				$scope.isNoCart();
 			})
 		}
 
@@ -710,7 +716,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.loadWishlist();
 
 	$scope.removeFromWishlist = function (mywish) {
-		NavigationService.removeFromWishlist(mywish.id, mywish.designId , function (data) {
+		NavigationService.removeFromWishlist(mywish.id, mywish.designId, function (data) {
 			console.log(data);
 			$scope.loadWishlist();
 		})
@@ -1047,7 +1053,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService) {
+.controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state) {
 	$scope.template = TemplateService;
 	$scope.register = {};
 	$scope.login = {};
@@ -1129,6 +1135,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.logout = function () {
 		$scope.showLogout = false;
+		if(window.location.hash == "#/profile"){
+			$state.go('home');
+		}
 		$.jStorage.flush();
 	}
 

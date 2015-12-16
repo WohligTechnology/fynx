@@ -6,7 +6,7 @@
 </div>
 
 <div class="container">
-    <div class="row">
+    <div class="row" ng-show="msg==''">
         <div class="col-md-12">
             <div class="order-table">
                 <table class="table">
@@ -42,7 +42,7 @@
         </div>
 
     </div>
-    <div class="row mar-btm">
+    <div class="row mar-btm" ng-show="msg==''">
         <div class="col-md-offset-8 col-md-4">
             <div class="row">
                 <div class="col-xs-6">
@@ -68,6 +68,11 @@
             </div>
             <a href="#/product/men" type="submit" class="btn-blue btn btn-danger">CONTINUE SHOPPING</a>
             <a href="#/checkout" type="submit" class="btn-blue btn btn-danger">CHECK OUT</a>
+        </div>
+    </div>
+    <div class="row mar-btm" ng-show="msg!=''">
+        <div class="col-md-offset-8 col-md-4">
+		   {{msg}}
         </div>
     </div>
 </div>

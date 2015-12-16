@@ -1,5 +1,5 @@
-var mainurl = "http://wohlig.co.in/newfynx/index.php/";
-//var mainurl = "http://192.168.0.122/newfynx/index.php/";
+//var mainurl = "http://wohlig.co.in/newfynx/index.php/";
+var mainurl = "http://localhost/newfynx/index.php/";
 var adminurl = mainurl + "json/";
 
 var navigationservice = angular.module('navigationservice', [])
