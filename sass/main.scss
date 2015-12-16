@@ -669,14 +669,14 @@ h4.bold,
 }
 .filter-bar {
   background-color: black;
-  padding: 15px 0;
+  padding: 0;
   margin: 10px 0 20px;
   .arrow {
     &:after {
       content: "\f107";
       font-family: FontAwesome;
       color: white;
-      margin-left: 5px;
+      margin-left: 0;
     }
     +.arrow {
       margin-left: 20px;
@@ -689,6 +689,7 @@ h4.bold,
     border: none;
     text-transform: uppercase;
     outline: none;
+    padding: 15px;
   }
 }
 .product-list {
