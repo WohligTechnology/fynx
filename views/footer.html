@@ -21,16 +21,9 @@
             </div>
             <div class="col-sm-2 col-xs-6">
                 <ul class="footer-nav">
-                    <li><a href="#/product/men">Men</a>
-                    </li>
-                    <li><a href="">Women</a>
-                    </li>
-                    <li><a href="">Infants</a>
-                    </li>
-                    <li><a href="">Pets</a>
-                    </li>
-                    <li><a href="">Custom</a>
-                    </li>
+                  <li ng-repeat="menu in navigation" class="{{menu.classis}}">
+                    <a href="{{menu.link}}">{{menu.name}}</a>
+                  </li>
                     <li><a href="#/about">About Us</a>
                     </li>
                     <li><a href="">Careers</a>
