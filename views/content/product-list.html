@@ -19,9 +19,9 @@
 	<h5 class="text-upper">Shop by category</h5>
 	<ul class="list-unstyled">
 		<li class="econ tshirt" ng-repeat="category in subcategory"> <span ng-click="hideshow(category)">{{category.name}}</span>
-			<div class="checkbox" ng-repeat="type in category.types" ng-if="category.state == true">
+			<div class="checkbox" ng-repeat="type in category.types" ng-if="category.state">
 				<label>
-					<input type="checkbox" ng-checked="addtype(type,$index)" name="tshirts"><span>{{type.name}}</span>
+					<input type="checkbox" ng-click="addtype(type,$index)" name="tshirts"><span>{{type.name}}</span>
 				</label>
 			</div>
 		</li>

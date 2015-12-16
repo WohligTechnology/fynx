@@ -107,7 +107,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.sizes = [];
 	$scope.colors = [];
 	$scope.subcategory = [];
-
 	$scope.categoryName = $stateParams.category;
 
 	$scope.loadProducts = function () {
@@ -140,6 +139,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.loadProducts();
 	$scope.addtype = function (type, index) {
+		console.log(type);
+		console.log(index);
 		var addToArray = true;
 		_.each($scope.filters.type, function (n, key) {
 			if (n === type.id) {
@@ -157,14 +158,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.freeze.freezeType = $scope.subcategory;
 		}
 		$scope.loadProducts();
+		
 	}
 
 	$scope.hideshow = function (cat) {
-		if (cat.state == true) {
-			cat.state = false;
-		} else {
-			cat.state = true;
-		}
+		console.log("AAA");
+		cat.state = !cat.state;
+		setTimeout(function() {
+			showingalldone = true;
+		},600);
 	}
 
 	$scope.changeFilter = function (check) {
@@ -188,7 +190,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		default:
 		}
 		$scope.filters.check = check;
-		console.log($scope.freeze);
 		$scope.loadProducts();
 	}
 
