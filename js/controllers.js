@@ -149,6 +149,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		if (addToArray) {
 			$scope.filters.type.push(type.id);
 		} else {
+			console.log("spliced");
+			console.log(index);
+			index = $scope.filters.type.indexOf(type.id);
 			$scope.filters.type.splice(index, 1);
 		}
 		if ($scope.filters.type == "") {
@@ -156,6 +159,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		} else {
 			$scope.freeze.freezeType = $scope.subcategory;
 		}
+		console.log($scope.filters.type);
 		$scope.loadProducts();
 	}
 
