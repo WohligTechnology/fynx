@@ -85,13 +85,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   TemplateService.header = "";
   TemplateService.footer = "";
 
-  $scope.newsletter = '';
+  $scope.email = '';
+  $scope.msg = 'HAND US YOUR EMAIL ID SO WE CAN STALK YOU ONCE WE GO LIVE!';
+  $scope.class = '';
 
   $scope.subscribe = function(email) {
-    console.log(email);
-    MyServices.getsubscribe(email, function(data) {
-    console.log(data);
-    });
+
+    if ($scope.email == '') {
+      $scope.class = 'danger';
+    } else {
+      MyServices.getsubscribe(email, function(data) {
+        console.log(data);
+        if (data == "true") {
+          $scope.msg = 'THANK YOU FOR SHARING YOUR EMAIL WITH US!';
+          $scope.class = 'success';
+        } else {
+          $scope.msg = 'SOMETHING IS NOT RIGHT, PLEASE TRY AGAIN!';
+          $scope.class = 'danger';
+        }
+      });
+    }
+
+
   };
 
 })
