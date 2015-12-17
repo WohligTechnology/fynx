@@ -1,9 +1,15 @@
-var admin_url = "http://wohlig.co.in/myfynxbackend/";
+var admin_url = "http://wohlig.co.in/newfynx/index.php/";
+// var admin_url = "http://localhost/newfynx/index.php/";
 
 angular.module('api.services', [])
 
 .factory('MyServices', function($http) {
   return {
+    getsubsribe: function(email, callback) {
+      return $http.get(admin_url + 'json/getsubsribe?email=' + email, {}, {
+        withCredentials: true
+      }).success(callback);
+    },
     registeruser: function(account, callback) {
       return $http({
         url: admin_url + "json/registeruser",

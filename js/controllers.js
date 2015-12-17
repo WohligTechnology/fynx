@@ -76,7 +76,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.footerBlack = true;
 })
 
-.controller('ComingsoonCtrl', function($scope, TemplateService, NavigationService) {
+.controller('ComingsoonCtrl', function($scope, TemplateService, NavigationService, MyServices) {
   $scope.template = TemplateService.changecontent("comingsoon");
   $scope.menutitle = NavigationService.makeactive("Coming Soon");
   TemplateService.title = $scope.menutitle;
@@ -84,6 +84,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.footerBlack = true;
   TemplateService.header = "";
   TemplateService.footer = "";
+
+  $scope.newsletter = '';
+
+  $scope.subscribe = function(email) {
+    console.log(email);
+    MyServices.getsubscribe(email, function(data) {
+    console.log(data);
+    });
+  };
 
 })
 
@@ -170,50 +179,50 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 .controller('ProfileCtrl', function($scope, TemplateService, NavigationService) {
-  $scope.template = TemplateService.changecontent("profile");
-  $scope.menutitle = NavigationService.makeactive("Profile");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
+    $scope.template = TemplateService.changecontent("profile");
+    $scope.menutitle = NavigationService.makeactive("Profile");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
 
-})
-.controller('OrderCtrl', function($scope, TemplateService, NavigationService) {
-  $scope.template = TemplateService.changecontent("order");
-  $scope.menutitle = NavigationService.makeactive("Orders");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
+  })
+  .controller('OrderCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("order");
+    $scope.menutitle = NavigationService.makeactive("Orders");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
 
-})
-.controller('CartCtrl', function($scope, TemplateService, NavigationService) {
-  $scope.template = TemplateService.changecontent("cart");
-  $scope.menutitle = NavigationService.makeactive("Cart");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
+  })
+  .controller('CartCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("cart");
+    $scope.menutitle = NavigationService.makeactive("Cart");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
 
-})
-.controller('ConfirmationmailCtrl', function($scope, TemplateService, NavigationService) {
-  $scope.template = TemplateService.changecontent("confirmationmail");
-  $scope.menutitle = NavigationService.makeactive("Confirmationmail");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
+  })
+  .controller('ConfirmationmailCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("confirmationmail");
+    $scope.menutitle = NavigationService.makeactive("Confirmationmail");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
 
-})
-.controller('CheckoutCtrl', function($scope, TemplateService, NavigationService) {
-  $scope.template = TemplateService.changecontent("checkout");
-  $scope.menutitle = NavigationService.makeactive("Checkout");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
+  })
+  .controller('CheckoutCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("checkout");
+    $scope.menutitle = NavigationService.makeactive("Checkout");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
 
-  $scope.tab = 'step1';
-  $scope.classa = 'yellow-btn';
-  $scope.classb = '';
-  $scope.classc = '';
-  $scope.classd = '';
-  $scope.tabchange = function(tab, a) {
+    $scope.tab = 'step1';
+    $scope.classa = 'yellow-btn';
+    $scope.classb = '';
+    $scope.classc = '';
+    $scope.classd = '';
+    $scope.tabchange = function(tab, a) {
       //        console.log(tab);
       $scope.tab = tab;
       if (a == 1) {
@@ -245,14 +254,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
   })
-.controller('WishlistCtrl', function($scope, TemplateService, NavigationService) {
-  $scope.template = TemplateService.changecontent("wishlist");
-  $scope.menutitle = NavigationService.makeactive("Wishlist");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
+  .controller('WishlistCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("wishlist");
+    $scope.menutitle = NavigationService.makeactive("Wishlist");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
 
-})
+  })
 
 .controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService, $uibModal) {
   $scope.template = TemplateService.changecontent("custom-create");

@@ -9,9 +9,9 @@
 					<h3 class="primary">Coming soon</h3>
 					<div class="content-view">
 						<p>Hand us your email ID so we can stalk you once we go live!</p>
-						<form action="" class="form-inline">
+						<form ng-submit="subscribe(email);" class="form-inline">
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Enter Your Email Address">
+								<input type="email" class="form-control" placeholder="Enter Your Email Address" ng-model="email" required>
 								<button type="submit" class="submit form-control btn btn-danger">Submit</button>
 							</div>
 						</form>
