@@ -85,7 +85,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   TemplateService.header = "";
   TemplateService.footer = "";
 
-  $scope.email = '';
   $scope.msg = 'HAND US YOUR EMAIL ID SO WE CAN STALK YOU ONCE WE GO LIVE!';
   $scope.class = '';
 
@@ -94,6 +93,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     if ($scope.email == '') {
       $scope.class = 'danger';
     } else {
+
       MyServices.getsubscribe(email, function(data) {
         console.log(data);
         if (data == "true") {
@@ -105,7 +105,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
       });
     }
-
 
   };
 
