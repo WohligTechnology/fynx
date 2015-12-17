@@ -99,8 +99,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if (data == "true") {
           $scope.msg = 'THANK YOU FOR SHARING YOUR EMAIL WITH US!';
           $scope.class = 'success';
-        } else {
+        } else if (data == "false") {
           $scope.msg = 'SOMETHING IS NOT RIGHT, PLEASE TRY AGAIN!';
+          $scope.class = 'danger';
+        } else if (data == 0) {
+          $scope.msg = 'WE ALREADY HAVE YOUR EMAIL!';
           $scope.class = 'danger';
         }
       });
