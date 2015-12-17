@@ -1,5 +1,4 @@
 var admin_url = "http://wohlig.co.in/newfynx/index.php/";
-// var admin_url = "http://localhost/newfynx/index.php/";
 
 angular.module('api.services', [])
 
