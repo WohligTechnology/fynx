@@ -677,11 +677,19 @@ h4.bold,
   padding: 0;
   margin: 10px 0 20px;
   .arrow {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+
     &:after {
       content: "\f107";
       font-family: FontAwesome;
       color: white;
-      margin-left: 0;
+      margin-left: -10px;
+      z-index: -1;
+      position: absolute;
+      right: 0px;
+      top: 15px;
     }
     +.arrow {
       margin-left: 20px;
@@ -695,6 +703,8 @@ h4.bold,
     text-transform: uppercase;
     outline: none;
     padding: 15px;
+    position: relative;
+    cursor: pointer;
   }
 }
 .product-list {
@@ -2090,5 +2100,12 @@ h4.bold,
 
 .fancybox-image {
 	opacity: 1;
+}
+.fancybox-skin {
+  background-color: white;
+  @include border-top-radius(0px);
+  @include border-right-radius(0px);
+  @include border-bottom-radius(0px);
+  @include border-left-radius(0px);
 }
 //@import "main/mobile";
