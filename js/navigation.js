@@ -1,6 +1,6 @@
 
 var mainurl = "http://wohlig.co.in/newfynx/";
-//var mainurl = "http://localhost/newfynx/index.php/";
+var mainurl = "http://localhost/newfynx/";
 var adminurl = mainurl + "index.php/json/";
 
 var navigationservice = angular.module('navigationservice', [])
@@ -63,7 +63,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		getProductByCategory: function (filters, callback) {
-			return $http.get(adminurl + 'getproductbycategory?category=' + filters.category + '&subcategory=' + filters.subcategory + '&color=' + filters.color + '&size=' + filters.size + '&price=' + filters.price + '&type=' + filters.type, {}, {
+			return $http.get(adminurl + 'getproductbycategory?name=' + filters.name + '&category=' + filters.category + '&subcategory=' + filters.subcategory + '&color=' + filters.color + '&size=' + filters.size + '&price=' + filters.price + '&type=' + filters.type + '&maxrow=5' + '&pageno=' + filters.pageno, {}, {
 				withCredentials: true
 			}).success(callback);
 		},

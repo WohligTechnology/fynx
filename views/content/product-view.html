@@ -20,6 +20,7 @@
         <li>Trend Styles</li>
     </ul>
 
+<!--
     <h5 class="text-upper">Shop by category</h5>
     <ul class="list-unstyled">
         <li class="econ tshirt">T-Shirts
@@ -47,6 +48,7 @@
         <li class="econ cap">Caps</li>
         <li class="econ shoe">Shoes</li>
     </ul>
+-->
 
     <h5 class="text-upper">Miscellaneous</h5>
     <ul class="list-unstyled">
@@ -68,11 +70,11 @@
                     </a>
                     </li>
                     <li><a href="#/product/men">
-                        Printed T-Shirts for Men
+                        {{categoryname}}
                     </a>
                     </li>
-                    <li><a href="#/product/men/1">
-                        {{product.name}}
+                    <li><a ui-sref="product({category:categoryname})">
+                        {{product.product.name}}
                     </a>
                     </li>
                 </ul>
