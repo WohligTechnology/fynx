@@ -13,7 +13,6 @@
 					<li class="tab-item {{classb}}">STEP 2</li>
 					<li class="tab-item {{classc}}">STEP 3</li>
 					<li class="tab-item {{classd}}">STEP 4</li>
-
 				</ul>
 			</div>
 		</div>
@@ -205,7 +204,7 @@
 		<div class="row content-view">
 			<div class="col-md-3">
 				<div class="form-group">
-					<input type="text" class="form-control" ng-model="checkout.firstname" placeholder="FIRST NAME">
+					<input type="text" class="form-control" ng-model="checkout.name" placeholder="FIRST NAME">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -215,7 +214,7 @@
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<input type="text" class="form-control" ng-model="checkout.billingcontact" placeholder="MOBILE NUMBER ">
+					<input type="text" class="form-control" ng-model="checkout.phone" placeholder="MOBILE NUMBER ">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -230,15 +229,15 @@
 					<h4 class="login">BILLING ADDRESS</h4>
 					<div class="form-group">
 						<label>LINE 1*</label>
-						<input type="text" ng-model="billingaddress.line1" class="form-control">
+						<input type="text" ng-model="checkout.billingline1" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 2</label>
-						<input type="text" ng-model="billingaddress.line2" class="form-control">
+						<input type="text" ng-model="checkout.billingline2" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 3</label>
-						<input type="text" ng-model="billingaddress.line3" class="form-control">
+						<input type="text" ng-model="checkout.billingline3" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>CITY *</label>
@@ -279,15 +278,15 @@
 					</div>
 					<div class="form-group">
 						<label>LINE 1*</label>
-						<input type="text" ng-model="shippingaddress.line1" class="form-control">
+						<input type="text" ng-model="checkout.shippingline1" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 2</label>
-						<input type="text" ng-model="shippingaddress.line2" class="form-control">
+						<input type="text" ng-model="checkout.shippingline2" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>LINE 3</label>
-						<input type="text" ng-model="shippingaddress.line3" class="form-control">
+						<input type="text" ng-model="checkout.shippingline3" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>CITY *</label>
@@ -321,7 +320,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12 content-view paddbtm m-45" style="padding-left:15px;">
 				<h4 class="login">PAYMENT METHOD</h4>
 			</div>
@@ -353,7 +352,7 @@
 					<label for="radio04"><span></span>CASH ON DELIVERY</label>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row">
 			<div class="text-center">
 				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4)">CONTINUE</button>
@@ -367,7 +366,6 @@
 						<li><img src="img/visa.png"></li>
 						<li><img src="img/card.png"></li>
 						<li><img src="img/meastro.png"></li>
-
 					</ul>
 				</div>
 			</div>

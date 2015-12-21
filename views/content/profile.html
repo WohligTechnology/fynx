@@ -13,32 +13,35 @@
 	<hr>
 </div>
 <div class="container min-hght">
+	<div class="alert-postion">
+ <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+ </div>
 	<div class="row">
 		<div class="col-md-4">
 			<div class="account-name">
 				<form ng-submit="editProfile(1)">
 					<button class="pull-right edit" type="submit">{{profile.nameemailedit}}</button>
 					<p>Name:
-						<span>Manan Vora</span>
+						<span>{{user.name}}</span>
 					</p>
 					<p>Email:
-						<span>mananvora@me.com</span>
+						<span>{{user.email}}</span>
 					</p>
 					<p>Phone:
-						<span>+91 98904 46192</span>
+						<span>{{user.phone}}</span>
 					</p>
 					<div ng-show="profile.nameemailedit=='save'">
 						<div class="form-group">
 							<label>Name</label>
-							<input class="form-control" ng-model="name" type="text">
+							<input class="form-control" ng-model="updateuser.user.name" type="text">
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input class="form-control" ng-model="email" type="email">
+							<input class="form-control" ng-model="updateuser.user.email" type="email">
 						</div>
 						<div class="form-group">
 							<label>Phone</label>
-							<input class="form-control" ng-model="email" type="tel">
+							<input class="form-control" ng-model="updateuser.user.phone" type="tel">
 						</div>
 					</div>
 				</form>
@@ -49,15 +52,15 @@
 					<div ng-if="profile.changepasswordedit=='save'">
 						<div class="form-group">
 							<label>Old Password</label>
-							<input class="form-control" ng-model="oldpassword" required type="password">
+							<input class="form-control" ng-model="password.oldpassword" required type="password">
 						</div>
 						<div class="form-group">
 							<label>New Password</label>
-							<input class="form-control" ng-model="newpassword" required type="password">
+							<input class="form-control" ng-model="password.newpassword" required type="password">
 						</div>
 						<div class="form-group">
 							<label>Re-enter Password</label>
-							<input class="form-control" ng-model="renewpassword" required type="password">
+							<input class="form-control" ng-model="password.confirmpassword" required type="password">
 						</div>
 					</div>
 				</form>
@@ -70,37 +73,37 @@
 				<form ng-submit="">
 					<button class="pull-right edit" ng-click="editProfile(3)" type="submit">{{profile.billingaddressedit}}</button>
 					<h5 class="h5-class mar0 class-p">BILLING ADDRESS</h5>
-					<p>Manan Vora
-						<br>B-808 Sambhavnath Apt.
-						<br>Sudha Park, Garodia Nagar,
-						<br>Ghatkopar east,
-						<br>Mumbai, Maharashtra.
+					<p>{{user.billingline1}}
+						<br>{{user.billingline2}}
+						<br>{{user.billingline3}}
+						<br>{{user.billingcity}}  {{user.billingpincode}}
+						<br>{{user.billingstate}}  {{user.billingcountry}}
 					</p>
 					<div ng-if="profile.billingaddressedit=='save'">
 						<div class="form-group">
 							<label>Line1*</label>
-							<input class="form-control" ng-model="line1" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline1" type="text">
 						</div>
 						<div class="form-group">
 							<label>Line2</label>
-							<input class="form-control" ng-model="lin2" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline2" type="text">
 						</div>
 						<div class="form-group">
 							<label>Line3</label>
-							<input class="form-control" ng-model="line3" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline3" type="text">
 						</div>
 
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>City*</label>
-									<input class="form-control" ng-model="city" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingcity" type="text">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pincode*</label>
-									<input class="form-control" ng-model="pincode" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingpincode" type="text">
 								</div>
 							</div>
 						</div>
@@ -109,14 +112,16 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>State*</label>
-									<input class="form-control" ng-model="state" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingstate" type="text">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
-										<select ng-model="country"></select>
+										<select ng-model="updateuser.user.billingcountry">
+											<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
+										</select>
 										<span class="only-border"></span>
 									</div>
 								</div>
@@ -130,37 +135,37 @@
 				<form ng-submit="">
 					<button class="pull-right edit" ng-click="editProfile(4)" type="submit">{{profile.shippingaddressedit}}</button>
 					<h5 class="h5-class mar0 class-p">SHIPPING ADDRESS</h5>
-					<p>Manan Vora
-						<br>B-808 Sambhavnath Apt.
-						<br>Sudha Park, Garodia Nagar,
-						<br>Ghatkopar east,
-						<br>Mumbai, Maharashtra.
+					<p>{{user.shippingline1}}
+						<br>{{user.shippingline2}}
+						<br>{{user.shippingline3}}
+						<br>{{user.shippingcity}}  {{user.shippingpincode}}
+						<br>{{user.shippingstate}}  {{user.shippingcountry}}
 					</p>
 					<div ng-if="profile.shippingaddressedit=='save'">
 						<div class="form-group">
 							<label>Line1*</label>
-							<input class="form-control" ng-model="line1" type="text">
+							<input class="form-control" ng-model="updateuser.user.shippingline1" type="text">
 						</div>
 						<div class="form-group">
 							<label>Line2</label>
-							<input class="form-control" ng-model="line2" type="text">
+							<input class="form-control" ng-model="updateuser.user.shippingline2" type="text">
 						</div>
 						<div class="form-group">
 							<label>Line3</label>
-							<input class="form-control" ng-model="line3" type="text">
+							<input class="form-control" ng-model="updateuser.user.shippingline3" type="text">
 						</div>
 
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>City*</label>
-									<input class="form-control" ng-model="city" type="text">
+									<input class="form-control" ng-model="updateuser.user.shippingcity" type="text">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pincode*</label>
-									<input class="form-control" ng-model="pincode" type="text">
+									<input class="form-control" ng-model="updateuser.user.shippingpincode" type="text">
 								</div>
 							</div>
 						</div>
@@ -169,14 +174,16 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>State*</label>
-									<input class="form-control" ng-model="state" type="text">
+									<input class="form-control" ng-model="updateuser.user.shippingstate" type="text">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
-										<select ng-model="country"></select>
+										<select ng-model="updateuser.user.shippingcountry">
+											<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
+										</select>
 										<span class="only-border"></span>
 									</div>
 								</div>

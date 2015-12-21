@@ -490,6 +490,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.profile.changepasswordedit = 'edit';
 	$scope.profile.billingaddressedit = 'edit';
 	$scope.profile.shippingaddressedit = 'edit';
+	$scope.password = {};
+	$scope.alerts = [];
+	$scope.countries = countries;
+	$scope.updateuser = {};
+	$scope.updateuser.user = {};
+
+	$scope.addAlert = function (type, msg) {
+		$scope.alerts.push({
+			type: type,
+			msg: msg
+		});
+	};
+
+	$scope.closeAlert = function (index) {
+		$scope.alerts.splice(index, 1);
+	};
+
+	$scope.myProfile = {};
+	NavigationService.getUserDetails(function(data){
+		console.log(data);
+		$scope.user = data;
+		$scope.updateuser.user = data;
+	});
+
+	$scope.saveUser = function(){
+		NavigationService.updateProfile($scope.updateuser.user, function(data){
+			console.log(data);
+		})
+	}
 
 	$scope.editProfile = function (num) {
 		switch (num) {
@@ -501,6 +530,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 					$scope.profile.nameemailedit = 'save';
 				} else {
 					$scope.profile.nameemailedit = 'edit';
+					$scope.saveUser()
 				}
 			}
 			break;
@@ -509,7 +539,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 				if ($scope.profile.changepasswordedit == 'edit') {
 					$scope.profile.changepasswordedit = 'save';
 				} else {
-					$scope.profile.changepasswordedit = 'edit';
+
+					NavigationService.changepassword($scope.password, function(data){
+						console.log(data);
+						switch (data) {
+							case '-1':{
+								$scope.addAlert("danger","Re-enter password. ");
+							}
+								break;
+								case '1':{
+									$scope.addAlert("success","Password changed successfully. ");
+									$scope.profile.changepasswordedit = 'edit';
+								}
+								break;
+								case '0':{
+									$scope.addAlert("danger","Wrong password");
+								}
+								break;
+							default:{}
+
+						}
+					});
 				}
 			}
 			break;
@@ -519,6 +569,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 					$scope.profile.billingaddressedit = 'save';
 				} else {
 					$scope.profile.billingaddressedit = 'edit';
+					$scope.saveUser();
 				}
 			}
 			break;
@@ -528,6 +579,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 					$scope.profile.shippingaddressedit = 'save';
 				} else {
 					$scope.profile.shippingaddressedit = 'edit';
+					$scope.saveUser();
 				}
 			}
 			break;
@@ -547,6 +599,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.footerBlack = true;
+	$scope.orders = [];
+
+	NavigationService.getorders(function(data){
+		console.log(data);
+		$scope.orders = data;
+	});
 
 })
 
@@ -637,7 +695,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.register = {};
 
 	$scope.alerts = [];
-
+	NavigationService.getUserDetails(function(data){
+		$scope.checkout = data;
+	});
 	$scope.addAlert = function (type, msg) {
 		$scope.alerts.push({
 			type: type,
@@ -675,7 +735,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.tabchange = function (tab, a) {
 		//        console.log(tab);
-		$scope.tab = tab;
+		$scope.tab = 'step3';
 		if (a == 1) {
 			if (!NavigationService.getUser()) {
 				$scope.classa = "yellow-btn";
@@ -699,10 +759,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.classd = '';
 		} else {
 			console.log("checkout");
-			$scope.classa = '';
-			$scope.classb = '';
-			$scope.classc = '';
-			$scope.classd = "yellow-btn";
+			console.log($scope.checkout);
+			// $scope.classa = '';
+			// $scope.classb = '';
+			// $scope.classc = '';
+			// $scope.classd = "yellow-btn";
 		}
 	};
 	$scope.tabchange('step1', 1);
