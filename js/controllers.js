@@ -601,10 +601,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.footerBlack = true;
 	$scope.orders = [];
 
-	NavigationService.getorders(function(data){
-		console.log(data);
-		$scope.orders = data;
-	});
+	// NavigationService.getorders(function(data){
+	// 	console.log(data);
+	// 	$scope.orders = data;
+	// });
 
 })
 
@@ -693,6 +693,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.shippingaddress = {};
 	$scope.billingaddress = {};
 	$scope.register = {};
+	$scope.predetail = {};
 
 	$scope.alerts = [];
 	NavigationService.getUserDetails(function(data){
@@ -759,7 +760,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.classd = '';
 		} else {
 			console.log("checkout");
+			$scope.checkout.cart = $scope.allCart;
 			console.log($scope.checkout);
+			// checkout cade goes here..
+
 			// $scope.classa = '';
 			// $scope.classb = '';
 			// $scope.classc = '';
@@ -768,25 +772,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	};
 	$scope.tabchange('step1', 1);
 
-	$scope.sameAsBilling = function (sameasbilling) {
-		if (sameasbilling == true) {
-			$scope.shippingaddress.line1 = $scope.billingaddress.line1;
-			$scope.shippingaddress.line2 = $scope.billingaddress.line2;
-			$scope.shippingaddress.line3 = $scope.billingaddress.line3;
-			$scope.checkout.shippingcity = $scope.checkout.billingcity;
-			$scope.checkout.shippingpincode = $scope.checkout.billingpincode;
-			$scope.checkout.shippingstate = $scope.checkout.billingstate;
-			$scope.checkout.shippingcountry = $scope.checkout.billingcountry;
-		} else {
-			$scope.shippingaddress.line1 = "";
-			$scope.shippingaddress.line2 = "";
-			$scope.shippingaddress.line3 = "";
-			$scope.checkout.shippingcity = "";
-			$scope.checkout.shippingpincode = "";
-			$scope.checkout.shippingstate = "";
-			$scope.checkout.shippingcountry = "";
+	$scope.assign = function(line1,line2,line3,city,pincode,state,country){
+		$scope.checkout.shippingline1 = line1;
+		$scope.checkout.shippingline2 = line2;
+		$scope.checkout.shippingline3 = line3;
+		$scope.checkout.shippingcity = city;
+		$scope.checkout.shippingpincode = pincode;
+		$scope.checkout.shippingstate = state;
+		$scope.checkout.shippingcountry = country;
+	}
+
+	$scope.shippingchange = function(data,num){
+		switch (num) {
+			case 1:{
+					$scope.predetail.shippingline1 = data;
+			}
+				break;
+				case 2:{
+					$scope.predetail.shippingline2 = data;
+				}
+				break;
+				case 3:{
+					$scope.predetail.shippingline3 = data;
+				}
+				break;
+				case 4:{
+					$scope.predetail.shippingcity = data;
+				}
+				break;
+				case 5:{
+					$scope.predetail.shippingpincode = data;
+				}
+				break;
+				case 6:{
+					$scope.predetail.shippingstate = data;
+				}
+				break;
+				case 7:{
+					$scope.predetail.shippingcountry = data;
+				}
+				break;
+			default:{}
+
 		}
 	}
+
+	$scope.sameAsBilling = function (sameasbilling) {
+
+		if (sameasbilling == true) {
+			$scope.assign($scope.checkout.billingline1,$scope.checkout.billingline2,$scope.billingline3,$scope.checkout.billingcity,$scope.checkout.billingpincode,$scope.checkout.billingstate,$scope.checkout.billingcountry);
+
+		} else {
+			$scope.assign($scope.predetail.shippingline1,$scope.predetail.shippingline2,$scope.predetail.shippingline3,$scope.predetail.shippingcity,$scope.predetail.shippingpincode,$scope.predetail.shippingstate,$scope.predetail.shippingcountry);
+		}
+	}
+
+
 
 	$scope.checkoutLogin = function () {
 		console.log($scope.login);
