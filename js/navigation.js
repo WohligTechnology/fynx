@@ -1,6 +1,9 @@
 
-var mainurl = "http://wohlig.co.in/newfynx/";
-var mainurl = "http://localhost/newfynx/";
+// var mainurl = "http://wohlig.co.in/newfynx/";
+// var mainurl = "http://localhost/newfynx/";
+var mainurl = "http://www.myfynx.com/newfynx/";
+// mainurlpaymentgateway is url for frontend
+var mainurlpaymentgateway = "http://www.myfynx.com/newfynx/";
 var adminurl = mainurl + "index.php/json/";
 var countries = [{
         "value": "Please Select"
@@ -661,6 +664,14 @@ var navigationservice = angular.module('navigationservice', [])
 				data: profile
 			}).success(callback);
 		},
+		placeOrder: function (checkout, callback) {
+			$http({
+				url: adminurl + 'placeOrder',
+				method: 'POST',
+				withCredentials: true,
+				data: checkout
+			}).success(callback);
+		},
 		showWishlist: function (callback) {
 			return $http.get(adminurl + 'showwishlist?user=' + $.jStorage.get("user").id, {}, {
 				withCredentials: true
@@ -683,6 +694,12 @@ var navigationservice = angular.module('navigationservice', [])
 		},
 		getUser: function () {
 			return $.jStorage.get('user');
+		},
+		setOrder: function (order) {
+			$.jStorage.set('order',order);
+		},
+		getOrder: function () {
+			return $.jStorage.get('order');
 		},
 		setUser: function (data) {
 			return $.jStorage.set('user', data);

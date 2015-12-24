@@ -690,15 +690,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.login = {};
 	$scope.sameasbilling = false;
 	$scope.checkout = {};
+	$scope.checkout.payment_mode = "";
 	$scope.shippingaddress = {};
 	$scope.billingaddress = {};
 	$scope.register = {};
 	$scope.predetail = {};
+	$scope.order = "";
+	$scope.mainurl = mainurlpaymentgateway;
 
 	$scope.alerts = [];
-	NavigationService.getUserDetails(function(data){
-		$scope.checkout = data;
-	});
+	if (NavigationService.getUser()) {
+		NavigationService.getUserDetails(function(data){
+			$scope.checkout = data;
+		});
+	}
+
 	$scope.addAlert = function (type, msg) {
 		$scope.alerts.push({
 			type: type,
@@ -736,7 +742,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.tabchange = function (tab, a) {
 		//        console.log(tab);
-		$scope.tab = 'step3';
+		$scope.tab = tab;
 		if (a == 1) {
 			if (!NavigationService.getUser()) {
 				$scope.classa = "yellow-btn";
@@ -759,15 +765,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.classc = "yellow-btn";
 			$scope.classd = '';
 		} else {
-			console.log("checkout");
 			$scope.checkout.cart = $scope.allCart;
-			console.log($scope.checkout);
+			NavigationService.placeOrder($scope.checkout, function(data){
+				$scope.order = data;
+				$scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
+				$scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
+				NavigationService.setOrder(data);
+				$scope.classa = '';
+				$scope.classb = '';
+				$scope.classc = '';
+				$scope.classd = "yellow-btn";
+			})
 			// checkout cade goes here..
 
-			// $scope.classa = '';
-			// $scope.classb = '';
-			// $scope.classc = '';
-			// $scope.classd = "yellow-btn";
 		}
 	};
 	$scope.tabchange('step1', 1);

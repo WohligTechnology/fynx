@@ -264,7 +264,11 @@
 					</div>
 					<div class="form-group">
 						<label>COUNTRY</label>
-						<input type="text" class="form-control" ng-model="checkout.billingcountry">
+						<select name="country" ng-model="checkout.billingcountry" class="form-control">
+							<option value="IND"	>India</option>
+							<option value="JPN"	>Japan</option>
+							<option value="ITA"	>Italy</option>
+						</select>
 					</div>
 
 
@@ -313,51 +317,66 @@
 					</div>
 					<div class="form-group">
 						<label>COUNTRY</label>
-						<input type="text" ng-model="checkout.shippingcountry" ng-change="shippingchange(checkout.shippingcountry,7)" class="form-control">
+						<select name="country" ng-model="checkout.shippingcountry" ng-change="shippingchange(checkout.shippingcountry,7)" class="form-control">
+							<option value="IND"	>India</option>
+							<option value="JPN"	>Japan</option>
+							<option value="ITA"	>Italy</option>
+						</select>
 					</div>
 
 
 				</div>
 			</div>
 		</div>
-		<!-- <div class="row">
+
+
+		<div class="row">
 			<div class="col-md-12 content-view paddbtm m-45" style="padding-left:15px;">
 				<h4 class="login">PAYMENT METHOD</h4>
 			</div>
 
-		</div>
+		</div>{{checkout.payment_mode}}
 		<div class="row content-view paddbtm">
 			<div class="col-md-3">
 				<div class="form-group radio-cust">
 
-					<input type="radio" id="radio01" name="radio" />
+					<input type="radio" id="radio01" ng-model="checkout.paymentmode" value="1" name="radio" />
 					<label for="radio01"><span></span>CREDIT CARD</label>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group radio-cust">
-					<input type="radio" id="radio02" name="radio" />
+					<input type="radio" id="radio02" ng-model="checkout.paymentmode" value="2" name="radio" />
 					<label for="radio02"><span></span>DEBIT CARD</label>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group radio-cust">
-					<input type="radio" id="radio03" name="radio" />
+					<input type="radio" id="radio03" ng-model="checkout.paymentmode" value="3" name="radio" />
 					<label for="radio03"><span></span>NET BANKING</label>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group radio-cust">
-					<input type="radio" id="radio04" name="radio" />
+					<input type="radio" id="radio04" ng-model="checkout.paymentmode" value="4" name="radio" />
 					<label for="radio04"><span></span>CASH ON DELIVERY</label>
 				</div>
 			</div>
-		</div> -->
-		<div class="row">
-			<div class="text-center">
-				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4)">CONTINUE</button>
-			</div>
 		</div>
+
+
+				<div class="row" ng-if="checkout.paymentmode!=4">
+					<div class="text-center">
+						<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4)">CONTINUE</button>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="text-center" ng-if="checkout.paymentmode==4">
+						<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4)">Place Order</button>
+					</div>
+				</div>
+
 		<div class="row mar-btm">
 			<div class="col-md-6">
 				<div class="payment list">
@@ -367,6 +386,184 @@
 						<li><img src="img/card.png"></li>
 						<li><img src="img/meastro.png"></li>
 					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-show="tab=='step4'">
+		<div class="row">
+			<div class="col-md-12">
+				<h3 ng-if="checkout.paymentmode==4">Your order is placed successfully.</h3>
+				<h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
+				<div class="order-table" ng-if="checkout.paymentmode!=4">
+					<form  method="post" ng-action="{{mainurl + 'paymentgateway/post.php'}}" name="frmTransaction" id="frmTransaction" >
+				     <table width="600" cellpadding="2" cellspacing="2" border="0">
+				        <tr>
+				            <th colspan="2">Transaction Details</th>
+				        </tr>
+						<tr>
+				            <td class="fieldName"><span class="error">*</span> Channel</td>
+				            <td align="left"><select name="channel" >
+								<option value="10">Standard</option>
+							</select></td>
+				        </tr>
+
+					   <tr>
+				            <td class="fieldName" width="50%"><span class="error">*</span> Account Id</td>
+				            <td  align="left" width="50%"> <input name="account_id" type="text" value="18195"/><br><span><font color="red"> Please Enter your Account ID provided.</font></span> </td>
+				        </tr>
+				        <tr>
+				            <td class="fieldName" width="50%"><span class="error">*</span> Secret Key</td>
+				            <td  align="left" width="50%"> <input name="secretkey" type="text" value="8867f47644aded51aac79afbf24dfc92" size="35"/><br><span><font color="red"> Please Enter your Secret Key provided.</font></span></td>
+				        </tr>
+					   <tr>
+				            <td class="fieldName" width="50%"><span class="error">*</span> Reference No</td>
+
+				            <td  align="left" width="50%"> <input name="reference_no" type="text" ng-model="order" /></td>
+				        </tr>
+				        <tr>
+				            <td class="fieldName" width="50%"><span class="error">*</span> Sale Amount</td>
+				            <td  align="left" width="50%"> <input name="amount" type="text" ng-model="amount" /> <select name="currency" >
+								<option value="INR">INR</option>
+
+							</select></td>
+				        </tr>
+						<tr>
+						  <td class="fieldName"><span class="error">*</span> Description</td>
+						  <td align="left"><input name="description" type="text" value="Test Product" /></td>
+					   </tr>
+						<tr>
+						  <td class="fieldName"><span class="error">*</span> Return Url</td>
+						  <td align="left"><input name="return_url" type="text" size="60" value="{{mainurl}}" /></td>
+					   </tr>
+						<tr>
+						  <td class="fieldName"><span class="error">*</span> Mode</td>
+						  <td align="left"><select name="mode" >
+				            <option value="LIVE" selected>LIVE</option>
+				          </select></td>
+					   </tr>
+				        <tr>
+				            <th colspan="2">Billing Address</th>
+				        </tr>
+
+					    <tr>
+				            <td class="fieldName"><span class="error">*</span> Name</td>
+				            <td align="left">
+				                <input name="name" type="text"  ng-model="checkout.firstname" /></td>
+				        </tr>
+
+				        <tr>
+
+				            <td class="fieldName"><span class="error">*</span>Address</td>
+				            <td align="left">
+				                <textarea name="address"  ng-model="checkout.billingaddress"></textarea>            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName"><span class="error">*</span>City</td>
+
+				            <td align="left">
+				                <input name="city" type="text" ng-model="checkout.billingcity" />            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName">State/Province</td>
+				            <td align="left">
+				               <input name="state" type="text"  ng-model="checkout.billingstate" />            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName"><span class="error">*</span>ZIP/Postal Code</td>
+				            <td align="left">
+				                <input name="postal_code" type="text" ng-model="checkout.billingpincode"  />            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName"><span class="error">*</span>Country</td>
+				            <td align="left">
+				                                <input name="country" type="text" ng-model="checkout.billingcountry"  />
+
+																			           </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName"><span class="error">*</span>Email</td>
+				            <td align="left">
+				                <input name="email" type="text" ng-model="checkout.email"  />            </td>
+				        </tr>
+
+				        <tr>
+
+				            <td class="fieldName"><span class="error">*</span>Telephone</td>
+				            <td align="left"><input name="phone" type="text" ng-model="checkout.phone"  /></td>
+				        </tr>
+
+				        <tr>
+				            <th colspan="2">Delivery Address</th>
+				        </tr>
+
+						<tr>
+
+				            <td class="fieldName"> Name</td>
+				            <td align="left">
+				                <input name="ship_name" type="text" ng-model="checkout.firstname"  /></td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName">Address</td>
+				            <td align="left">
+
+				                <input name="ship_address" type="text" ng-model="checkout.shippingaddress"  />            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName">City</td>
+				            <td align="left">
+				                <input name="ship_city" type="text" ng-model="checkout.shippingcity" />            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName">State/Province</td>
+				            <td align="left">
+				               <input name="ship_state" type="text" ng-model="checkout.shippingstate" />            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName">ZIP/Postal Code</td>
+				            <td align="left">
+				                <input name="ship_postal_code" type="text" ng-model="checkout.shippingpincode"  />            </td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName">Country</td>
+
+				            <td align="left"><input name="ship_country" type="text" ng-model="checkout.shippingcountry"  /></td>
+				        </tr>
+
+
+				        <tr>
+				            <td class="fieldName">Telephone</td>
+				            <td align="left"><input name="ship_phone" type="text" ng-model="checkout.phone"  /></td>
+				        </tr>
+
+				        <tr>
+				            <td class="fieldName">payment_mode</td>
+				            <td align="left"><input name="payment_mode" type="text" ng-model="checkout.paymentmode" /></td>
+				        </tr>
+
+				        <tr>
+				            <td valign="top" align="center" colspan="2">
+				                <span class="error">*</span>
+				                <span>denotes required field</span>            </td>
+				        </tr>
+				    </table>
+						<div class="row">
+							<div class="text-center">
+								<button class="btn btn-danger m-30 con-btn" type="submit">Place order</button>
+							</div>
+						</div>
+				</form>
 				</div>
 			</div>
 		</div>
