@@ -1,0 +1,36 @@
+<div class="modal-heights bg-imgupload login-tab" ng- controller="CustomCreateCtrl" ng-repeat="siz in size">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="img-box">
+                <img src="img/img-upload.jpg" class="img-responsive">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="img-content">
+                <h3>FILE UPLOAD</h3>
+                <div class="txt-img">
+                    <h4>We accept the following file type</h4>
+                    <p>JPG, GIF, PNG, BMP, TIF, AI, EPS, PDF, PSD</p>
+
+                    <h4>5.0 Maximum file size</h4>
+                    <p>Files may take anywhere from a few seconds to a few minutes to upload.</p>
+                </div>
+
+                <div class="choose-image">
+                    <i class="fa fa-user" ng-if="!user.personal.image"></i>
+                    <div class="image-uploaded" ng-if="user.personal.image">
+                        <img class="img-responsive" ng-src="{{user.personal.image | serverimage}}">
+                    </div>
+                    <div class="choose-btn">
+                        <span>Choose File</span>
+                        <div ng-init="httpMethod = 'POST';howToSend = 1;"></div>
+                        <input type="file" class="form-control" name="image" ng-file-select="onFileSelect($files)" onclick="this.value=null">
+                        <!-- <div class="response" ng-show="uploadResult.length > 0">
+                            <span ng-repeat="result in uploadResult"></span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

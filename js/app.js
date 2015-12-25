@@ -98,7 +98,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 	})
 
 	.state('customCreate', {
-		url: "/custom/create",
+		url: "/custom/create/:id",
 		templateUrl: "views/template.html",
 		controller: 'CustomCreateCtrl'
 	})
@@ -199,6 +199,7 @@ firstapp.filter('serverimage', function () {
 		}
 	};
 });
+
 
 firstapp.filter('capitalize', function () {
 	return function (input, all) {

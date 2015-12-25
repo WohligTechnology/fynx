@@ -1,6 +1,8 @@
 var myfunction = '';
 
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll'])
+var uploadres = [];
+window.uploadUrl = 'http://localhost/newfynx/index.php/json/uploadImage';
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
 
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -767,14 +769,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		} else {
 			$scope.checkout.cart = $scope.allCart;
 			NavigationService.placeOrder($scope.checkout, function(data){
-				$scope.order = data;
-				$scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
-				$scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
-				NavigationService.setOrder(data);
-				$scope.classa = '';
-				$scope.classb = '';
-				$scope.classc = '';
-				$scope.classd = "yellow-btn";
+				if (data!=0) {
+					$scope.order = data;
+					$scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
+					$scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
+					NavigationService.setOrder(data);
+					$scope.classa = '';
+					$scope.classb = '';
+					$scope.classc = '';
+					$scope.classd = "yellow-btn";
+				}else{
+					$scope.tab = "step3";
+				}
+
 			})
 			// checkout cade goes here..
 
@@ -972,7 +979,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal) {
+.controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal, $http, $upload, $timeout, $filter,$stateParams) {
 
 	$scope.template = TemplateService.changecontent("custom-create");
 	$scope.menutitle = NavigationService.makeactive("Custom");
@@ -985,6 +992,60 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.first = false;
 	$scope.second = false;
 	$scope.third = false;
+	$scope.filter = {};
+	$scope.type = $stateParams.id;
+	$scope.color = "";
+	// $scope.filter.
+	// modal
+	$scope.tab = {};
+	$scope.tab.editpro = true;
+	$scope.tab.addimage = false;
+	$scope.tab.addtext = false;
+	$scope.tab.buy = false;
+
+	$scope.tabchange = function(tab){
+		switch (tab) {
+			case 2:
+				{
+					$scope.tab.editpro = false;
+					$scope.tab.addimage = true;
+					$scope.tab.addtext = false;
+					$scope.tab.buy = false;
+				}
+				break;
+			case 3:
+				{
+					$scope.tab.editpro = false;
+					$scope.tab.addimage = false;
+					$scope.tab.addtext = true;
+					$scope.tab.buy = false;
+				}
+				break;
+			case 4:
+				{
+					$scope.tab.editpro = false;
+					$scope.tab.addimage = false;
+					$scope.tab.addtext = false;
+					$scope.tab.buy = true;
+				}
+				break;
+			default:
+			{
+				$scope.tab.editpro = false;
+				$scope.tab.addimage = false;
+				$scope.tab.addtext = false;
+				$scope.tab.buy = true;
+			}
+
+		}
+	}
+
+	// NavigationService.getproductbycategory($scope.filter, function(data){
+	// 	console.log(data);
+	// });
+	NavigationService.getImageForCustomize($scope.type, $scope.color, function(data){
+		console.log(data);
+	});
 
 	//T-shirt front-back
 	$scope.isfront = true;
@@ -1273,14 +1334,151 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	// image upload popup
 	$scope.width = "720px";
+	var imagempdel = '';
 	$scope.imgUpload = function () {
-		$uibModal.open({
+			imagempdel = $uibModal.open({
 			animation: true,
 			windowClass: 'large-Modal',
 			templateUrl: 'views/modal/upload.html',
 			controller: 'CustomCreateCtrl'
 		})
 	}
+
+	$scope.imgUploadModel = function () {
+		$uibModal.open({
+			animation: true,
+			windowClass: 'large-Modal',
+			templateUrl: 'views/modal/uploadimage.html',
+			controller: 'CustomCreateCtrl'
+		})
+	}
+
+  $scope.user ='';
+	//imageupload
+  var imagejstupld = "";
+  $scope.usingFlash = FileAPI && FileAPI.upload != null;
+  $scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
+  $scope.uploadRightAway = true;
+  $scope.changeAngularVersion = function() {
+    window.location.hash = $scope.angularVersion;
+    window.location.reload(true);
+  };
+  $scope.hasUploader = function(index) {
+    return $scope.upload[index] != null;
+  };
+  $scope.abort = function(index) {
+    $scope.upload[index].abort();
+    $scope.upload[index] = null;
+  };
+  $scope.angularVersion = window.location.hash.length > 1 ? (window.location.hash.indexOf('/') === 1 ?
+    window.location.hash.substring(2) : window.location.hash.substring(1)) : '1.2.20';
+
+		$scope.onFileSelect = function($files) {
+	    $scope.selectedFiles = [];
+	    $scope.progress = [];
+	    console.log($files);
+	    if ($scope.upload && $scope.upload.length > 0) {
+	      for (var i = 0; i < $scope.upload.length; i++) {
+	        if ($scope.upload[i] != null) {
+	          $scope.upload[i].abort();
+	        }
+	      }
+	    }
+	    $scope.upload = [];
+	    $scope.uploadResult = uploadres;
+	    $scope.selectedFiles = $files;
+	    $scope.dataUrls = [];
+	    for (var i = 0; i < $files.length; i++) {
+	      var $file = $files[i];
+	      if ($scope.fileReaderSupported && $file.type.indexOf('image') > -1) {
+	        var fileReader = new FileReader();
+	        fileReader.readAsDataURL($files[i]);
+	        var loadFile = function(fileReader, index) {
+	          fileReader.onload = function(e) {
+	            $timeout(function() {
+	              $scope.dataUrls[index] = e.target.result;
+	            });
+	          }
+	        }(fileReader, i);
+	      }
+	      $scope.progress[i] = -1;
+	      if ($scope.uploadRightAway) {
+	        $scope.start(i);
+	      }
+	    }
+	  };
+		$scope.start = function(index) {
+			// cfpLoadingBar.start();
+			$scope.progress[index] = 0;
+			$scope.errorMsg = null;
+			$scope.howToSend = 1;
+			if ($scope.howToSend == 1) {
+				$scope.upload[index] = $upload.upload({
+					url: uploadUrl,
+					method: "POST",
+					headers: {
+						'Content-Type': 'Content-Type'
+					},
+					data: {
+						myModel: $scope.myModel
+					},
+					file: $scope.selectedFiles[index],
+					fileFormDataName: 'image'
+				});
+				$scope.upload[index].then(function(response) {
+					console.log(response)
+					$timeout(function() {
+						// cfpLoadingBar.complete();
+						$scope.uploadResult.push(response.data);
+						imagejstupld = response.data;
+						if (imagejstupld != "") {
+								$scope.user = imagejstupld;
+								imagejstupld = "";
+						}
+					});
+				}, function(response) {
+					if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
+				}, function(evt) {
+					$scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+				});
+				$scope.upload[index].xhr(function(xhr) {});
+			} else {
+				var fileReader = new FileReader();
+				fileReader.onload = function(e) {
+					$scope.upload[index] = $upload.http({
+						url: uploadUrl,
+						headers: {
+							'Content-Type': $scope.selectedFiles[index].type
+						},
+						data: e.target.result
+					}).then(function(response) {
+						$scope.uploadResult.push(response.data);
+					}, function(response) {
+						if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
+					}, function(evt) {
+						$scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+					});
+				}
+				fileReader.readAsArrayBuffer($scope.selectedFiles[index]);
+			}
+		};
+
+		$scope.dragOverClass = function($event) {
+			var items = $event.dataTransfer.items;
+			var hasFile = false;
+			if (items != null) {
+				for (var i = 0; i < items.length; i++) {
+					if (items[i].kind == 'file') {
+						hasFile = true;
+						break;
+					}
+				}
+			} else {
+				hasFile = true;
+			}
+			return hasFile ? "dragover" : "dragover-err";
+		};
+		//imageupload
 
 })
 

@@ -68,7 +68,7 @@
 				<h3 class="danger">FUNK IT UP</h3>
 				<div class="detail-tab customize">
 					<uib-tabset>
-						<uib-tab>
+						<uib-tab active="tab.editpro">
 							<uib-tab-heading>
 								<div class="icon-font">
 									<i class="flaticon flaticon-t-shirt"></i>
@@ -91,11 +91,11 @@
 
 
 									</ul>
-									<button class="btn btn-danger con-btn">CONTINUE</button>
+									<button class="btn btn-danger con-btn" ng-click="tabchange(2)">CONTINUE</button>
 								</div>
 							</div>
 						</uib-tab>
-						<uib-tab>
+						<uib-tab active="tab.addimage">
 							<uib-tab-heading>
 								<div class="icon-font">
 									<i class="flaticon flaticon-camera"></i>
@@ -107,8 +107,9 @@
 								<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
 
 							</div>
+							<button class="btn btn-danger con-btn" ng-click="tabchange(3)">CONTINUE</button>
 						</uib-tab>
-						<uib-tab>
+						<uib-tab active="tab.addtext">
 							<uib-tab-heading>
 								<div class="icon-font">
 									<i class="not-icon">aA</i>
@@ -417,11 +418,11 @@
 
 
 								</div>
-
+									<button class="btn btn-danger con-btn" ng-click="tabchange(4)">CONTINUE</button>
 							</div>
 						</uib-tab>
 
-						<uib-tab>
+						<uib-tab active="tab.buy">
 							<uib-tab-heading>
 								<div class="icon-font">
 									<i class="fa fa-rupee"></i>

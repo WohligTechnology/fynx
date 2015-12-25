@@ -1,7 +1,7 @@
 
 // var mainurl = "http://wohlig.co.in/newfynx/";
-// var mainurl = "http://localhost/newfynx/";
-var mainurl = "http://www.myfynx.com/newfynx/";
+var mainurl = "http://localhost/newfynx/";
+// var mainurl = "http://www.myfynx.com/newfynx/";
 // mainurlpaymentgateway is url for frontend
 var mainurlpaymentgateway = "http://www.myfynx.com/newfynx/";
 var adminurl = mainurl + "index.php/json/";
@@ -677,8 +677,18 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
+		getproductbycategory: function (filter, callback) {
+			return $http.get(adminurl + 'getproductbycategory?type=' + filter.type + '&color='+filter.color+ '&size='+filter.size+'&price='+filter.price, {}, {
+				withCredentials: true
+			}).success(callback);
+		},
 		gettotalcart: function (callback) {
 			return $http.get(adminurl + 'totalitemcart', {}, {
+				withCredentials: true
+			}).success(callback);
+		},
+		getImageForCustomize: function (type, color, callback) {
+			return $http.get(adminurl + 'getImageForCustomize?type='+type+'&color='+color, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
