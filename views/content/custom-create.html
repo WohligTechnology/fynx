@@ -9,7 +9,6 @@
 	<div class="product-detail">
 		<div class="row">
 			<div class="col-md-5">
-
 				<div class="custom-img">
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
 
@@ -19,7 +18,7 @@
 								<span style="font-family: '{{selectedFont}}';">{{filter.text}}</span>
 							</div>
 							<div class="on-img" style="top:309px;width:30%">
-								<img class="img-responsive m-center" src="img/mrfynx2.png">
+								<img class="img-responsive m-center" ng-src="{{filter.image.image | serverimage}}">
 							</div>
 						</div>
 						<div ng-show="!isfront">

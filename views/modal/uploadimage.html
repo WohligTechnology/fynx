@@ -1,8 +1,8 @@
-<div class="modal-heights bg-imgupload login-tab" ng- controller="CustomCreateCtrl" ng-repeat="siz in size">
+<div class="modal-heights bg-imgupload login-tab" ng-controller="CustomCreateCtrl">
     <div class="row">
         <div class="col-md-4">
             <div class="img-box">
-                <img src="img/img-upload.jpg" class="img-responsive">
+                <img ng-src="{{filter.image.image | serverimage}}" class="img-responsive">
             </div>
         </div>
         <div class="col-md-8">
@@ -15,12 +15,12 @@
                     <h4>5.0 Maximum file size</h4>
                     <p>Files may take anywhere from a few seconds to a few minutes to upload.</p>
                 </div>
-
+{{filter.image}}
                 <div class="choose-image">
-                    <i class="fa fa-user" ng-if="!user.personal.image"></i>
-                    <div class="image-uploaded" ng-if="user.personal.image">
-                        <img class="img-responsive" ng-src="{{user.personal.image | serverimage}}">
-                    </div>
+                    <!-- <i class="fa fa-user" ng-if="!user.personal.image"></i> -->
+                    <!-- <div class="image-uploaded" ng-if="filter.image">
+                        <img class="img-responsive" ng-src="{{filter.image | serverimage}}">
+                    </div> -->
                     <div class="choose-btn">
                         <span>Choose File</span>
                         <div ng-init="httpMethod = 'POST';howToSend = 1;"></div>
@@ -30,6 +30,7 @@
                         </div> -->
                     </div>
                 </div>
+                <button class="btn btn-danger con-btn" ng-click="doneimage()">Done</button>
             </div>
         </div>
     </div>

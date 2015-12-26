@@ -1,5 +1,5 @@
 var myfunction = '';
-
+var myImage = {image: "download.jpg"};
 var uploadres = [];
 window.uploadUrl = 'http://localhost/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
@@ -997,6 +997,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.filter.color = "";
 	$scope.filter.size = "";
 	$scope.filter.price = "";
+	$scope.filter.image =myImage;
 	$scope.type = $stateParams.id;
 	$scope.color = "";
 	// $scope.filter.
@@ -1394,7 +1395,7 @@ $scope.loadProduct();
 			animation: true,
 			windowClass: 'large-Modal',
 			templateUrl: 'views/modal/upload.html',
-			controller: 'CustomCreateCtrl'
+			scope: $scope
 		})
 	}
 
@@ -1403,11 +1404,14 @@ $scope.loadProduct();
 			animation: true,
 			windowClass: 'large-Modal',
 			templateUrl: 'views/modal/uploadimage.html',
-			controller: 'CustomCreateCtrl'
+			scope:$scope
 		})
 	}
 
-  $scope.filter.image ='';
+$scope.doneimage = function(){
+	$scope.newimage = $.jStorage.get("designimage");
+}
+
 	//imageupload
   var imagejstupld = "";
   $scope.usingFlash = FileAPI && FileAPI.upload != null;
@@ -1484,10 +1488,10 @@ $scope.loadProduct();
 					$timeout(function() {
 						// cfpLoadingBar.complete();
 						$scope.uploadResult.push(response.data);
-						imagejstupld = response.data;
-						if (imagejstupld != "") {
-								$scope.filter.image = imagejstupld;
-								imagejstupld = "";
+						if (response.data.value != "") {
+							console.log("TUSHAR");
+							$.jStorage.set("designimage",response.data.value);
+								$scope.filter.image.image = response.data.value;
 						}
 					});
 				}, function(response) {
