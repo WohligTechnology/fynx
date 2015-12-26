@@ -193,7 +193,8 @@ firstapp.directive('onlyDigits', function () {
 firstapp.filter('serverimage', function () {
 	return function (input) {
 		if (input) {
-			return  mainurl + "uploads/" + input;
+			// return  mainurl + "uploads/" + input;
+			return  "http://wohlig.co.in/newfynx/uploads/" + input;
 		} else {
 			return "img/logo.png";
 		}

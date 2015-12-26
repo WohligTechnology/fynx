@@ -979,7 +979,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $uibModal, $http, $upload, $timeout, $filter,$stateParams) {
+.controller('CustomCreateCtrl', function ($scope, TemplateService, NavigationService, $filter, $uibModal, $http, $upload, $timeout, $filter,$stateParams) {
 
 	$scope.template = TemplateService.changecontent("custom-create");
 	$scope.menutitle = NavigationService.makeactive("Custom");
@@ -993,6 +993,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.second = false;
 	$scope.third = false;
 	$scope.filter = {};
+	$scope.filter.type = $stateParams.id;
+	$scope.filter.color = "";
+	$scope.filter.size = "";
+	$scope.filter.price = "";
 	$scope.type = $stateParams.id;
 	$scope.color = "";
 	// $scope.filter.
@@ -1002,6 +1006,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.tab.addimage = false;
 	$scope.tab.addtext = false;
 	$scope.tab.buy = false;
+	$scope.design = {};
 
 	$scope.tabchange = function(tab){
 		switch (tab) {
@@ -1040,19 +1045,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		}
 	}
 
-	// NavigationService.getproductbycategory($scope.filter, function(data){
-	// 	console.log(data);
-	// });
-	NavigationService.getImageForCustomize($scope.type, $scope.color, function(data){
+	NavigationService.getproductbycategory($scope.filter, function(data){
 		console.log(data);
 	});
+	$scope.loadProduct = function(){
+	NavigationService.getImageForCustomize($scope.filter.type, $scope.filter.color, function(data){
+		console.log(data);
+			$scope.color = data.color;
+		_.each($scope.color, function(n){
+			n.class = "";
+		});
+			$scope.images = data.image;
+			$scope.size = data.size;
+			if ($scope.size.length>1) {
+				$scope.sizelength = $scope.size[$scope.size.length-1];
+			}
+
+			$scope.custom = {
+				frontSrc: $filter('serverimage')(data.image.image1),
+				backSrc: $filter('serverimage')(data.image.image2)
+			};
+	});
+}
+
+$scope.loadProduct();
 
 	//T-shirt front-back
 	$scope.isfront = true;
-	$scope.custom = {
-		frontSrc: "img/custom/tshirt/white-front.jpg",
-		backSrc: "img/custom/tshirt/white-back.jpg"
-	};
+
 
 	//Text on Cloth
 	$scope.imgText = {
@@ -1061,18 +1081,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	//Select FONT
 	$scope.showSelect = false;
-	$scope.selectedFont = "Advent Pro";
+	// $scope.productStyle = {
+	// 	font-family: 'Advent Pro';
+	// };
 	$scope.fonts = [{
 		family: "Advent Pro"
     }, {
 		family: "Roboto Condensed"
     }];
+
 	$scope.showSelecter = function () {
 		$scope.showSelect = true;
 		console.log($scope.showSelect);
 	};
 	$scope.fontSelect = function (val) {
 		$scope.selectedFont = val;
+		$scope.filter.font = val;
 		$scope.showSelect = false;
 	};
 
@@ -1105,53 +1129,59 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.showFirst = false;
 	}
 	$scope.showor = function () {
-		$scope.showSecond = false;
+		console.log("enter");
+		console.log($scope.showSecond);
+		if ($scope.showSecond==true) {
+			$scope.amount = $scope.images.price * $scope.filter.quantity;
+		}
+
+		$scope.showSecond = !$scope.showSecond;
 	}
 
 	$scope.size = [{
 		src: "img/sizechart.jpg"
     }];
 
-	$scope.tshirt = [{
+	$scope.tshirt = {
 		name: "ULTRA COTTON TSHIRT",
 		from: "YXS",
 		to: "3XL"
 
-    }];
+	};
 
-	$scope.color = [{
-		color: "red",
-		class: "active"
-
-    }, {
-		color: "black",
-		class: ""
-
-    }, {
-		color: "grey",
-		class: ""
-
-    }, {
-		color: "cyan",
-		class: ""
-
-    }, {
-		color: "blue",
-		class: ""
-
-    }, {
-		color: "pink",
-		class: ""
-
-    }, {
-		color: "green",
-		class: ""
-
-    }, {
-		color: "orange",
-		class: ""
-
-    }];
+	// $scope.color = [{
+	// 	color: "red",
+	// 	class: "active"
+	//
+  //   }, {
+	// 	color: "black",
+	// 	class: ""
+	//
+  //   }, {
+	// 	color: "grey",
+	// 	class: ""
+	//
+  //   }, {
+	// 	color: "cyan",
+	// 	class: ""
+	//
+  //   }, {
+	// 	color: "blue",
+	// 	class: ""
+	//
+  //   }, {
+	// 	color: "pink",
+	// 	class: ""
+	//
+  //   }, {
+	// 	color: "green",
+	// 	class: ""
+	//
+  //   }, {
+	// 	color: "orange",
+	// 	class: ""
+	//
+  //   }];
 
 	$scope.colour = [{
 		color: "red",
@@ -1256,6 +1286,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		name: "SHADOW"
     }];
 
+		$scope.design.design = [{
+			name: 'Size',
+			value: 100
+		},{
+			name: 'Arc',
+			value: 100
+		},{
+			name: 'Rotation',
+			value: 100
+		},{
+			name: 'Spacing',
+			value: 100
+		},{
+			name: 'Stetch',
+			value: 100
+		}];
+
 	$scope.items = [{
 		name: 'First Item',
 		value: 500
@@ -1311,16 +1358,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		value: 700
     }];
 
-	$scope.makeactive = function (index) {
-		var i = 0;
-		_.each($scope.color, function (n) {
-			if (i == index) {
-				n.class = "active";
-			} else {
-				n.class = "";
-			}
-			i++;
-		})
+	$scope.makeactive = function (color) {
+		_.each($scope.color, function(n){
+			n.class = "";
+		});
+		color.class = "active";
+		$scope.filter.color = color.id;
+		$scope.loadProduct();
+
+		// var i = 0;
+		// _.each($scope.color, function (n) {
+		// 	if (i == index) {
+		// 		n.class = "active";
+		// 	} else {
+		// 		n.class = "";
+		// 	}
+		// 	i++;
+		// })
 	};
 
 	//    sizechart popup
@@ -1353,7 +1407,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		})
 	}
 
-  $scope.user ='';
+  $scope.filter.image ='';
 	//imageupload
   var imagejstupld = "";
   $scope.usingFlash = FileAPI && FileAPI.upload != null;
@@ -1432,7 +1486,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 						$scope.uploadResult.push(response.data);
 						imagejstupld = response.data;
 						if (imagejstupld != "") {
-								$scope.user = imagejstupld;
+								$scope.filter.image = imagejstupld;
 								imagejstupld = "";
 						}
 					});
