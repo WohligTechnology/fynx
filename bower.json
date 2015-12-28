@@ -33,7 +33,8 @@
     "angular-range-slider": "~1.1.8",
     "angular-rangeslider": "~0.0.14",
     "jStorage": "~0.4.12",
-    "fancyBox": "~2.1.5"
+    "fancyBox": "~2.1.5",
+    "ngInfiniteScroll": "~1.2.1"
   },
   "resolutions": {
     "angular": "1.4.8"
