@@ -1,7 +1,8 @@
 
-// var mainurl = "http://wohlig.co.in/newfynx/";
-var mainurl = "http://localhost/newfynx/";
+var mainurl = "http://wohlig.co.in/newfynx/";
+// var mainurl = "http://localhost/newfynx/";
 // var mainurl = "http://www.myfynx.com/newfynx/";
+var mainurl = "http://192.168.0.121/newfynx/";
 // mainurlpaymentgateway is url for frontend
 var mainurlpaymentgateway = "http://www.myfynx.com/newfynx/";
 var adminurl = mainurl + "index.php/json/";
