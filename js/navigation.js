@@ -627,6 +627,11 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
+		addToCartCustom: function (filter, callback) {
+			return $http.get(adminurl + 'addToCart?product=' + filter.id + '&quantity=' + filter.quantity + '&design=&json=' + JSON.stringify(filter), {}, {
+				withCredentials: true
+			}).success(callback);
+		},
 		deletecart: function (id, callback) {
 			return $http.get(adminurl + 'deletecart?id=' + id, {}, {
 				withCredentials: true

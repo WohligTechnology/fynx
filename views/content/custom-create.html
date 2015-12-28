@@ -5,6 +5,9 @@
 	</div>
 </div>
 <div class="container">
+	<div class="alert-postion">
+ <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+ </div>
 	<hr>
 	<div class="product-detail">
 		<div class="row">
@@ -98,7 +101,7 @@
 							</div>
 						</uib-tab>
 						<uib-tab active="tab.addimage">
-							<uib-tab-heading>
+							<uib-tab-heading ng-click="tabchange(2)">
 								<div class="icon-font">
 									<i class="flaticon flaticon-camera"></i>
 								</div>
@@ -112,7 +115,7 @@
 							<button class="btn btn-danger con-btn" ng-click="tabchange(3)">CONTINUE</button>
 						</uib-tab>
 						<uib-tab active="tab.addtext">
-							<uib-tab-heading>
+							<uib-tab-heading ng-click="tabchange(3)">
 								<div class="icon-font">
 									<i class="not-icon">aA</i>
 								</div>
@@ -129,7 +132,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="4" ng-model="filter.text"></textarea>
+													<textarea type="text" class="form-control" rows="4" ng-model="filter.text" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -424,8 +427,8 @@
 										<div class="edit_content">
 											<p>ENTER YOUR DESIGN NAME</p>
 										</div>
-										<input type="text" class="form-control"> </input>
-										<button class="btn btn-danger m-30 con-btns">ADD TO CART</button>
+										<input type="text" class="form-control" ng-model="filter.designname"> </input>
+										<button class="btn btn-danger m-30 con-btns" ng-click="addToCart()">ADD TO CART</button>
 									</div>
 								</div>
 							</div>

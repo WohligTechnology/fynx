@@ -1,5 +1,5 @@
 var myfunction = '';
-var myImage = {image: "download.jpg"};
+var myImage = {image: ""};
 var uploadres = [];
 window.uploadUrl = 'http://localhost/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
@@ -1008,11 +1008,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.tab.addtext = false;
 	$scope.tab.buy = false;
 	$scope.design = {};
+	$scope.alerts = [];
+
+
+		$scope.addAlert = function (type, msg) {
+			$scope.alerts.push({
+				type: type,
+				msg: msg
+			});
+		};
+
+		$scope.closeAlert = function (index) {
+			$scope.alerts.splice(index, 1);
+		};
 
 	$scope.tabchange = function(tab){
 		switch (tab) {
 			case 2:
 				{
+					$scope.isfront = true;
 					$scope.tab.editpro = false;
 					$scope.tab.addimage = true;
 					$scope.tab.addtext = false;
@@ -1021,6 +1035,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 				break;
 			case 3:
 				{
+					console.log("text text");
+					$scope.isfront = false;
 					$scope.tab.editpro = false;
 					$scope.tab.addimage = false;
 					$scope.tab.addtext = true;
@@ -1046,9 +1062,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		}
 	}
 
-	NavigationService.getproductbycategory($scope.filter, function(data){
-		console.log(data);
-	});
 	$scope.loadProduct = function(){
 	NavigationService.getImageForCustomize($scope.filter.type, $scope.filter.color, function(data){
 		console.log(data);
@@ -1057,6 +1070,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			n.class = "";
 		});
 			$scope.images = data.image;
+			if($scope.images.id){
+				$scope.filter.id = $scope.images.id;
+			}
 			$scope.size = data.size;
 			if ($scope.size.length>1) {
 				$scope.sizelength = $scope.size[$scope.size.length-1];
@@ -1073,7 +1089,9 @@ $scope.loadProduct();
 
 	//T-shirt front-back
 	$scope.isfront = true;
-
+$scope.textchange = function(){
+	$scope.isfront = false;
+}
 
 	//Text on Cloth
 	$scope.imgText = {
@@ -1103,6 +1121,7 @@ $scope.loadProduct();
 
 	$scope.changeColor = function (index) {
 		$scope.showSize = false;
+		$scope.isfront = false;
 		console.log(index);
 		if (index == 0) {
 			$scope.first = true;
@@ -1130,13 +1149,15 @@ $scope.loadProduct();
 		$scope.showFirst = false;
 	}
 	$scope.showor = function () {
-		console.log("enter");
-		console.log($scope.showSecond);
+		console.log($scope.filter.size);
+		if($scope.filter.quantity && $scope.filter.size!=''){
 		if ($scope.showSecond==true) {
 			$scope.amount = $scope.images.price * $scope.filter.quantity;
 		}
-
 		$scope.showSecond = !$scope.showSecond;
+	}else {
+		$scope.addAlert('danger','Enter valid quantity and size');
+	}
 	}
 
 	$scope.size = [{
@@ -1410,6 +1431,18 @@ $scope.loadProduct();
 
 $scope.doneimage = function(){
 	$scope.newimage = $.jStorage.get("designimage");
+}
+
+$scope.addToCart = function(){
+	console.log($scope.filter);
+	NavigationService.addToCartCustom($scope.filter, function(data){
+		if (data == "true") {
+			$scope.addAlert("success", "Added to cart");
+		} else {
+			$scope.addAlert("danger", "Something has gone wrong");
+		}
+		myfunction();
+	});
 }
 
 	//imageupload
