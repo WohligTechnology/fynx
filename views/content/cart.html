@@ -24,7 +24,7 @@
               <td>
                 <figure>
                   <img ng-src="{{cart.image | serverimage}}">
-                  <img ng-src="{{cart.json.image.image | serverimage}}">
+                  <img ng-src="{{cart.json.image.image | serverimage}}" ng-if="cart.json!=false">
                   <figcaption>{{cart.options.realname}}</figcaption>
                 </figure>
               </td>
