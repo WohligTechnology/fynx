@@ -15,14 +15,12 @@
                     <h4>5.0 Maximum file size</h4>
                     <p>Files may take anywhere from a few seconds to a few minutes to upload.</p>
                 </div>
-{{filter.image}}
                 <div class="choose-image">
                     <!-- <i class="fa fa-user" ng-if="!user.personal.image"></i> -->
                     <!-- <div class="image-uploaded" ng-if="filter.image">
                         <img class="img-responsive" ng-src="{{filter.image | serverimage}}">
                     </div> -->
                     <div class="choose-btn">
-                        <span>Choose File</span>
                         <div ng-init="httpMethod = 'POST';howToSend = 1;"></div>
                         <input type="file" class="form-control" name="image" ng-file-select="onFileSelect($files)" onclick="this.value=null">
                         <!-- <div class="response" ng-show="uploadResult.length > 0">
@@ -30,7 +28,6 @@
                         </div> -->
                     </div>
                 </div>
-                <button class="btn btn-danger con-btn" ng-click="doneimage()">Done</button>
             </div>
         </div>
     </div>

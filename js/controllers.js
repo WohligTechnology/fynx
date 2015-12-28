@@ -1,7 +1,7 @@
 var myfunction = '';
 var myImage = {image: ""};
 var uploadres = [];
-window.uploadUrl = 'http://localhost/newfynx/index.php/json/uploadImage';
+window.uploadUrl = 'http://192.168.0.121/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
 
 
@@ -642,6 +642,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.loadcart = function () {
 		NavigationService.showCart(function (data, status) {
 			$scope.allCart = data;
+			_.each($scope.allCart, function(n){
+				n.json = JSON.parse(n.json);
+			})
+			console.log($scope.allCart);
 			if (data == 0) {
 				$scope.msg = "Cart is empty.";
 			} else {
@@ -1411,7 +1415,7 @@ $scope.textchange = function(){
 	// image upload popup
 	$scope.width = "720px";
 	var imagempdel = '';
-	$scope.imgUpload = function () {
+	$scope.imgUploadModal = function () {
 			imagempdel = $uibModal.open({
 			animation: true,
 			windowClass: 'large-Modal',
@@ -1420,7 +1424,7 @@ $scope.textchange = function(){
 		})
 	}
 
-	$scope.imgUploadModel = function () {
+	$scope.imgUpload = function () {
 		$uibModal.open({
 			animation: true,
 			windowClass: 'large-Modal',
@@ -1429,9 +1433,6 @@ $scope.textchange = function(){
 		})
 	}
 
-$scope.doneimage = function(){
-	$scope.newimage = $.jStorage.get("designimage");
-}
 
 $scope.addToCart = function(){
 	console.log($scope.filter);
@@ -1522,8 +1523,6 @@ $scope.addToCart = function(){
 						// cfpLoadingBar.complete();
 						$scope.uploadResult.push(response.data);
 						if (response.data.value != "") {
-							console.log("TUSHAR");
-							$.jStorage.set("designimage",response.data.value);
 								$scope.filter.image.image = response.data.value;
 						}
 					});
