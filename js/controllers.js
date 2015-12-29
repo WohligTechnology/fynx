@@ -1,7 +1,7 @@
 var myfunction = '';
 var myImage = {image: ""};
 var uploadres = [];
-window.uploadUrl = 'http://192.168.0.121/newfynx/index.php/json/uploadImage';
+window.uploadUrl = 'http://wohlig.co.in/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
 
 
@@ -643,7 +643,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		NavigationService.showCart(function (data, status) {
 			$scope.allCart = data;
 			_.each($scope.allCart, function(n){
-				n.json = JSON.parse(n.json);
+				if (n.json) {
+					n.json = JSON.parse(n.json);
+				}
 			})
 			console.log($scope.allCart);
 			if (data == 0) {
@@ -1013,6 +1015,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.tab.buy = false;
 	$scope.design = {};
 	$scope.alerts = [];
+	myImage = {image: ""};
 
 
 		$scope.addAlert = function (type, msg) {
