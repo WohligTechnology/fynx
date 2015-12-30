@@ -17,17 +17,14 @@
 
 						<div ng-show="isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
-							<div class="on-img">
-								<span style="font-family: '{{selectedFont}}';">{{filter.text}}</span>
-							</div>
-							<div class="on-img" style="top:309px;width:30%">
+							<div class="on-img" style="top:309px;width:30%" ng-if="filter.image.image!=''">
 								<img class="img-responsive m-center" ng-src="{{filter.image.image | serverimage}}">
 							</div>
 						</div>
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
 							<div class="on-img">
-								<span style="font-family: '{{selectedFont}}';">{{filter.text}}</span>
+								<span ng-style="filter.css">{{filter.text}}</span>
 							</div>
 						</div>
 					</div>
@@ -156,7 +153,7 @@
 
 												<span class="only-border"></span>
 											</div>
-											<!-- <button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();" ng-show="showFirst">ADD TO DESIGN</button> -->
+											<button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();" ng-show="showFirst">ADD TO DESIGN</button>
 										</div>
 
 										<div class="col-md-5" ng-hide="showFirst">
@@ -189,14 +186,14 @@
 													<div class="color-pick mar">
 
 														<ul>
-															<li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
+															<li ng-repeat="col in colour" ng-click="colorText(col.color)" class="{{col.class}}">
 																<div class="color-bx" ng-style="{'background':col.color}"></div>
 															</li>
 														</ul>
 
 													</div>
 													<div class="text-line p70">
-														<p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+														<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 													</div>
 
 												</div>
@@ -218,7 +215,7 @@
 													<div class="color-pick mar">
 
 														<ul>
-															<li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
+															<li ng-repeat="col in colour" ng-click="strokeText(col)" class="{{col.class}}">
 																<div class="color-bx" ng-style="{'background':col.color}"></div>
 															</li>
 
@@ -227,7 +224,7 @@
 
 													</div>
 													<div class="text-line ">
-														<p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+														<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 													</div>
 													<div class="text-line">
 
@@ -237,7 +234,7 @@
 																<p class="mar0 f-size">Weight</p>
 															</div>
 															<div class="col-xs-8">
-																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+																<div id="demo" data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
 
 															</div>
 															<div class="col-xs-2">
@@ -275,7 +272,7 @@
 													<div class="color-pick mar">
 
 														<ul>
-															<li ng-repeat="col in colour" ng-click="makeactive($index)" class="{{col.class}}">
+															<li ng-repeat="col in colour" ng-click="shadowText(col)" class="{{col.class}}">
 																<div class="color-bx" ng-style="{'background':col.color}"></div>
 															</li>
 
@@ -284,9 +281,15 @@
 
 													</div>
 													<div class="text-line ">
-														<p><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+														<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 													</div>
 													<div class="text-line">
+														<input type="button" value="+" ng-click="distancechange(1)">
+														{{filter.distance}}
+														<input type="button" value="-" ng-click="distancechange(2)">
+														<input type="button" value="+" ng-click="anglechange(1)">
+														{{filter.angle}}
+														<input type="button" value="-" ng-click="anglechange(2)">
 														<div class="row ">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">Distance</p>
@@ -329,7 +332,7 @@
 																<p class="mar0 f-size">{{des.name}}</p>
 															</div>
 															<div class="col-xs-6">
-																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="20" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
+																<div  data-range-slider data-floor="100" data-ceiling="1000" data-step="20" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
 															</div>
 															<div class="col-xs-3">
 																<p class="range-value">{{des.value}}</p>
@@ -349,7 +352,7 @@
 																	<span class="only-border"></span>
 																</div>
 															</div>
-															<div class="col-md-3 col-xs-4">
+															<!-- <div class="col-md-3 col-xs-4">
 																<div class="edit_content mt-10 front">
 																	<p>LAYER ORDER</p>
 																</div>
@@ -358,7 +361,7 @@
 															<div class="col-md-3 col-xs-4">
 
 																<button class="btn btn-dangers m-45 "><i class="fa fa-angle-down"></i> Send Backward</button>
-															</div>
+															</div> -->
 															<div class="col-md-3 col-xs-4">
 																<div class="edit_content mt-10 front">
 																	<p>Alignment</p>

@@ -1,7 +1,7 @@
 var myfunction = '';
 var myImage = {image: ""};
 var uploadres = [];
-window.uploadUrl = 'http://wohlig.co.in/newfynx/index.php/json/uploadImage';
+window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
 
 
@@ -126,6 +126,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.filters.pageno = 0;
 
 	$scope.loadProducts = function () {
+		console.log("demo");
 		if (lastpage >= $scope.filters.pageno) {
 			++$scope.filters.pageno;
 			NavigationService.getProductByCategory($scope.filters, function (data) {
@@ -161,7 +162,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.loadProducts();
 
+	$scope.loadProductsSearch = function(){
+		lastpage = 0;
+		$scope.filters.pageno = 0;
+		$scope.loadProducts();
+	}
+
 	$scope.addtype = function (type, index) {
+		lastpage = 0;
+		$scope.filters.pageno = 0;
 		console.log(type);
 		console.log(index);
 		var addToArray = true;
@@ -1003,7 +1012,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.filter.color = "";
 	$scope.filter.size = "";
 	$scope.filter.price = "";
+	$scope.filter.css = {};
 	$scope.filter.image =myImage;
+	$scope.filter.distance =1;
+	$scope.filter.angle =1;
 	$scope.type = $stateParams.id;
 	$scope.color = "";
 	// $scope.filter.
@@ -1015,8 +1027,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.tab.buy = false;
 	$scope.design = {};
 	$scope.alerts = [];
-	myImage = {image: ""};
 
+	// myImage = {image: ""};
+	function calculateTextShadow(angle, distance)
+	{
+		angle   = angle*((Math.PI)/180);
+		x       = Math.round(distance * Math.cos(angle));
+		y       = Math.round(distance * Math.sin(angle));
+		console.log(x);
+		_.each($scope.filter.css, function(n,key){
+			if (key=='text-shadow') {
+				// console.log(x+'px 'y+'px 10px '+ n.split(' ')[2]);
+				var mi = x+'px '+y+'px 10px ' + n.split(' ')[3]
+				_.merge($scope.filter.css,{"text-shadow":mi});
+			}
+		})
+		// blur    = Math.round(blur);
+		// opacity = Math.round(opacity*100)/100; // 2dp
+		// colour  = 'rgba('+Math.round(r)+', '+Math.round(g)+', '+Math.round(b)+', '+opacity+')';
+		// return x +'px '+ y +'px 10px red';
+	}
+
+	// function placeAngleShadow(calulated){
+	// 	_.each($scope.filter.css, function(n,key){
+	// 		if (key=='text-shadow') {
+	// 			_.merge($scope.filter.css,{"text-shadow":x+'px 'y+'px 10px '+n.split(' ')[3]});
+	// 		}
+	// 	})
+	// }
+
+$scope.distancechange = function(val){
+	if (val==1) {
+		$scope.filter.distance++;
+	}else {
+		$scope.filter.distance--;
+	}
+	calculateTextShadow($scope.filter.angle,$scope.filter.distance);
+}
+
+$scope.anglechange = function(val){
+	if (val==1) {
+		$scope.filter.angle++;
+	}else {
+		$scope.filter.angle--;
+	}
+	calculateTextShadow($scope.filter.angle,$scope.filter.distance);
+}
 
 		$scope.addAlert = function (type, msg) {
 			$scope.alerts.push({
@@ -1099,6 +1155,22 @@ $scope.loadProduct();
 $scope.textchange = function(){
 	$scope.isfront = false;
 }
+$scope.colorText = function(col){
+	console.log(col);
+	_.merge($scope.filter.css,{"color":col});
+}
+$scope.strokeText = function(){
+	_.merge($scope.filter.css,{"text-decoration":'line-through'});
+}
+$scope.strokeRemoveText = function(){
+	_.merge($scope.filter.css,{"text-decoration":''});
+}
+$scope.shadowText= function(col){
+	_.merge($scope.filter.css,{"text-shadow":'1px 1px 10px '+col.color});
+}
+$scope.shadowRemoveText= function(){
+	_.merge($scope.filter.css,{"text-shadow":''});
+}
 
 	//Text on Cloth
 	$scope.imgText = {
@@ -1124,6 +1196,7 @@ $scope.textchange = function(){
 		$scope.selectedFont = val;
 		$scope.filter.font = val;
 		$scope.showSelect = false;
+		$scope.filter.css = {'font-family':val};
 	};
 
 	$scope.changeColor = function (index) {
@@ -1177,6 +1250,10 @@ $scope.textchange = function(){
 		to: "3XL"
 
 	};
+
+	$scope.changefont=function(data){
+		console.log(data);
+	}
 
 	// $scope.color = [{
 	// 	color: "red",
@@ -1317,24 +1394,34 @@ $scope.textchange = function(){
 
 		$scope.design.design = [{
 			name: 'Size',
-			value: 100
-		},{
-			name: 'Arc',
-			value: 100
-		},{
-			name: 'Rotation',
-			value: 100
-		},{
+			value: 100,
+			id: 'size'
+		}
+		// ,{
+		// 	name: 'Arc',
+		// 	value: 100
+		// },{
+		// 	name: 'Rotation',
+		// 	value: 100
+		// }
+		,{
 			name: 'Spacing',
-			value: 100
-		},{
-			name: 'Stetch',
-			value: 100
-		}];
+			value: 100,
+			id:'spacing'
+		}
+		// ,{
+		// 	name: 'Stetch',
+		// 	value: 100
+		// }
+	];
+
+	$scope.changedDis = function(){
+		console.log("lkasdfj");
+	}
 
 	$scope.items = [{
 		name: 'First Item',
-		value: 500
+		value: 20
     }, {
 		name: 'Second Item',
 		value: 200

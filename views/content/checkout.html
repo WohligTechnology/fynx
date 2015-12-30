@@ -397,7 +397,7 @@
 				<h3 ng-if="checkout.paymentmode==4">Your order is placed successfully.</h3>
 				<h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
 				<div class="order-table" ng-if="checkout.paymentmode!=4">
-					<form  method="post" ng-action="{{mainurl + 'paymentgateway/post.php'}}" name="frmTransaction" id="frmTransaction" >
+					<form  method="post" action="http://www.myfynx.com/fynx/paymentgateway/post.php" name="frmTransaction" id="frmTransaction" >
 				     <table width="600" cellpadding="2" cellspacing="2" border="0">
 				        <tr>
 				            <th colspan="2">Transaction Details</th>
