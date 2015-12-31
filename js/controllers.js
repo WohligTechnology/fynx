@@ -1017,6 +1017,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.filter.distance =1;
 	$scope.filter.angle =1;
 	$scope.type = $stateParams.id;
+	$scope.shadowColor = "";
+	$scope.selectedJustify = "center";
+	// $scope.strokeWidth = 5;
 	$scope.color = "";
 	// $scope.filter.
 	// modal
@@ -1031,50 +1034,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	// myImage = {image: ""};
 	function calculateTextShadow(angle, distance)
 	{
+		if($scope.shadowColor!=''){
 		angle   = angle*((Math.PI)/180);
 		x       = Math.round(distance * Math.cos(angle));
 		y       = Math.round(distance * Math.sin(angle));
-		console.log(x);
-		_.each($scope.filter.css, function(n,key){
-			if (key=='text-shadow') {
-				// console.log(x+'px 'y+'px 10px '+ n.split(' ')[2]);
-				var mi = x+'px '+y+'px 10px ' + n.split(' ')[3]
+				var mi = x+'px '+y+'px 10px ' + $scope.shadowColor;
 				_.merge($scope.filter.css,{"text-shadow":mi});
 			}
-		})
-		// blur    = Math.round(blur);
-		// opacity = Math.round(opacity*100)/100; // 2dp
-		// colour  = 'rgba('+Math.round(r)+', '+Math.round(g)+', '+Math.round(b)+', '+opacity+')';
-		// return x +'px '+ y +'px 10px red';
 	}
-
-	// function placeAngleShadow(calulated){
-	// 	_.each($scope.filter.css, function(n,key){
-	// 		if (key=='text-shadow') {
-	// 			_.merge($scope.filter.css,{"text-shadow":x+'px 'y+'px 10px '+n.split(' ')[3]});
-	// 		}
-	// 	})
-	// }
-
-$scope.distancechange = function(val){
-	if (val==1) {
-		$scope.filter.distance++;
-	}else {
-		$scope.filter.distance--;
-	}
-	calculateTextShadow($scope.filter.angle,$scope.filter.distance);
-}
-
-$scope.anglechange = function(val){
-	if (val==1) {
-		$scope.filter.angle++;
-	}else {
-		$scope.filter.angle--;
-	}
-	calculateTextShadow($scope.filter.angle,$scope.filter.distance);
-}
-
-		$scope.addAlert = function (type, msg) {
+	$scope.addAlert = function (type, msg) {
 			$scope.alerts.push({
 				type: type,
 				msg: msg
@@ -1159,17 +1127,49 @@ $scope.colorText = function(col){
 	console.log(col);
 	_.merge($scope.filter.css,{"color":col});
 }
-$scope.strokeText = function(){
-	_.merge($scope.filter.css,{"text-decoration":'line-through'});
+$scope.strokeText = function(col){
+	_.merge($scope.filter.css,{'-webkit-text-stroke-color': col.color});
 }
 $scope.strokeRemoveText = function(){
-	_.merge($scope.filter.css,{"text-decoration":''});
+	_.merge($scope.filter.css,{"-webkit-text-stroke-color":''});
 }
 $scope.shadowText= function(col){
-	_.merge($scope.filter.css,{"text-shadow":'1px 1px 10px '+col.color});
+	$scope.shadowColor = col.color;
+	calculateTextShadow($scope.items[1].value,$scope.items[0].value);
 }
 $scope.shadowRemoveText= function(){
+	$scope.shadowColor = "";
 	_.merge($scope.filter.css,{"text-shadow":''});
+}
+
+$scope.$watch('items[0].value', function(newValue, oldValue) {
+	calculateTextShadow($scope.items[1].value,newValue);
+});
+
+$scope.$watch('items[1].value', function(newValue, oldValue) {
+	calculateTextShadow(newValue,$scope.items[0].value);
+});
+
+$scope.$watch('design.design[0].value', function(newValue, oldValue) {
+	_.merge($scope.filter.css,{"font-size":newValue});
+});
+
+$scope.$watch('design.design[2].value', function(newValue, oldValue) {
+	_.merge($scope.filter.css,{"letter-spacing":newValue});
+});
+
+$scope.$watch('design.design[1].value', function(newValue, oldValue) {
+	_.merge($scope.filter.css,{"-webkit-transform":"rotate("+newValue+"deg)"});
+});
+
+$scope.$watch('items[3].value', function(newValue, oldValue) {
+	console.log(newValue);
+	_.merge($scope.filter.css,{"-webkit-text-stroke-width":newValue});
+});
+
+$scope.changeJustify = function(val){
+	console.log(val);
+	_.merge($scope.filter.css,{"text-align":val});
 }
 
 	//Text on Cloth
@@ -1227,6 +1227,10 @@ $scope.shadowRemoveText= function(){
 
 	$scope.showorfirst = function () {
 		$scope.showFirst = false;
+	}
+
+	$scope.closeorfirst = function () {
+		$scope.showFirst = true;
 	}
 	$scope.showor = function () {
 		console.log($scope.filter.size);
@@ -1395,19 +1399,24 @@ $scope.shadowRemoveText= function(){
 		$scope.design.design = [{
 			name: 'Size',
 			value: 100,
-			id: 'size'
+			from:10,
+			to:200
 		}
 		// ,{
 		// 	name: 'Arc',
 		// 	value: 100
-		// },{
-		// 	name: 'Rotation',
-		// 	value: 100
 		// }
 		,{
+			name: 'Rotation',
+			value: 0,
+			from:0,
+			to:360
+		}
+		,{
 			name: 'Spacing',
-			value: 100,
-			id:'spacing'
+			value: 20,
+			from:10,
+			to:200
 		}
 		// ,{
 		// 	name: 'Stetch',
@@ -1424,10 +1433,16 @@ $scope.shadowRemoveText= function(){
 		value: 20
     }, {
 		name: 'Second Item',
-		value: 200
+		value: 1
     }, {
 		name: 'Third Item',
 		value: 700
+		},{
+		name: 'fourth Item',
+		value: 1
+	},{
+		name: 'fifth Item',
+		value: 10
     }];
 
 	$scope.item = [{

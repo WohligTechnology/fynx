@@ -234,11 +234,11 @@
 																<p class="mar0 f-size">Weight</p>
 															</div>
 															<div class="col-xs-8">
-																<div id="demo" data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+																<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
 
 															</div>
 															<div class="col-xs-2">
-																<p class="range-value">{{items[0].value}}</p>
+																<p class="range-value">{{items[3].value}}</p>
 															</div>
 														</div>
 
@@ -247,11 +247,11 @@
 																<p class="mar0 f-size">Offset</p>
 															</div>
 															<div class="col-xs-8 text-center">
-																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
-																<button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button>
+																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
+																<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
 															</div>
 															<div class="col-xs-2">
-																<p class="range-value">{{item1[0].value}}</p>
+																<p class="range-value">{{items[4].value}}</p>
 															</div>
 														</div>
 													</div>
@@ -283,19 +283,13 @@
 													<div class="text-line ">
 														<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 													</div>
-													<div class="text-line">
-														<input type="button" value="+" ng-click="distancechange(1)">
-														{{filter.distance}}
-														<input type="button" value="-" ng-click="distancechange(2)">
-														<input type="button" value="+" ng-click="anglechange(1)">
-														{{filter.angle}}
-														<input type="button" value="-" ng-click="anglechange(2)">
+													<div class="text-line" ng-if="shadowColor!=''">
 														<div class="row ">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">Distance</p>
 															</div>
 															<div class="col-xs-8">
-																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+																<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
 
 															</div>
 															<div class="col-xs-2">
@@ -308,11 +302,11 @@
 																<p class="mar0 f-size">Angle</p>
 															</div>
 															<div class="col-xs-8 text-center">
-																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[0].value"></div>
-																<button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button>
+																<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
 															</div>
 															<div class="col-xs-2">
-																<p class="range-value">{{item1[0].value}}</p>
+																<p class="range-value">{{items[1].value}}</p>
 															</div>
 														</div>
 													</div>
@@ -332,7 +326,7 @@
 																<p class="mar0 f-size">{{des.name}}</p>
 															</div>
 															<div class="col-xs-6">
-																<div  data-range-slider data-floor="100" data-ceiling="1000" data-step="20" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
+																<div  data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="1" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
 															</div>
 															<div class="col-xs-3">
 																<p class="range-value">{{des.value}}</p>
@@ -344,10 +338,10 @@
 																	<p>JUSTIFY</p>
 																</div>
 																<div class="fynx-select txt-img">
-																	<select>
-																		<option selected>Center</option>
-																		<option>Left</option>
-																		<option>Right</option>
+																	<select ng-change="changeJustify(selectedJustify)" ng-model="selectedJustify">
+																		<option value="center">Center</option>
+																		<option value="left">Left</option>
+																		<option value="right">Right</option>
 																	</select>
 																	<span class="only-border"></span>
 																</div>
@@ -362,13 +356,15 @@
 
 																<button class="btn btn-dangers m-45 "><i class="fa fa-angle-down"></i> Send Backward</button>
 															</div> -->
-															<div class="col-md-3 col-xs-4">
+															<!-- <div class="col-md-3 col-xs-4">
 																<div class="edit_content mt-10 front">
 																	<p>Alignment</p>
 																</div>
 																<button class="btn btn-dangers"><i class="fa fa-align-center"></i> Align to center</button>
-															</div>
+															</div> -->
+
 														</div>
+														<button class="text-center btn btn-danger m-30 con-btn" ng-click="closeorfirst()">Cancel</button>
 													</div>
 
 												</div>

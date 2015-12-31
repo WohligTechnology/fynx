@@ -1828,10 +1828,14 @@ h4.bold,
       font-weight: 700;
       text-align: center;
       font-size: 80px;
-      overflow: hidden;
-      line-height: 100%;
+      display: block;
+      // line-height: 100%;
       @include transform(translate(-50%, -50%));
       @include user-select(none);
+      span{
+        display: block;
+        line-height: 1;
+      }
     }
 }
 .alert-postion {
