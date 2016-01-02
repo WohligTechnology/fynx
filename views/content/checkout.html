@@ -147,6 +147,8 @@
 								<td>
 									<figure>
 										<img ng-src="{{cart.image | serverimage}}">
+										<span ng-if="cart.json!=false && cart.json">+</span>
+	                  <img ng-src="{{cart.json.image.image | serverimage}}" ng-if="cart.json!=false && cart.json">
 										<figcaption>{{cart.options.realname}}</figcaption>
 									</figure>
 								</td>
@@ -397,7 +399,7 @@
 				<h3 ng-if="checkout.paymentmode==4">Your order is placed successfully.</h3>
 				<h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
 				<div class="order-table" ng-if="checkout.paymentmode!=4">
-					<form  method="post" action="http://www.myfynx.com/fynx/paymentgateway/post.php" name="frmTransaction" id="frmTransaction" >
+					<form  method="post" action="{{mainurl + 'paymentgateway/post.php'}}" name="frmTransaction" id="frmTransaction" >
 				     <table width="600" cellpadding="2" cellspacing="2" border="0">
 				        <tr>
 				            <th colspan="2">Transaction Details</th>
@@ -435,7 +437,8 @@
 					   </tr>
 						<tr>
 						  <td class="fieldName"><span class="error">*</span> Return Url</td>
-						  <td align="left"><input name="return_url" type="text" size="60" value="{{mainurl}}" /></td>
+						  <!-- <td align="left"><input name="return_url" type="text" size="60" value="{{adminurl + 'payumoneysuccess'}}" /></td> -->
+						  <td align="left"><input name="return_url" type="text" size="60" value="http://www.myfynx.com/newfynx/paymentgateway/response.php" /></td>
 					   </tr>
 						<tr>
 						  <td class="fieldName"><span class="error">*</span> Mode</td>

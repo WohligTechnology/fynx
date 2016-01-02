@@ -1,10 +1,10 @@
 
-var mainurl = "http://wohlig.co.in/newfynx/";
+// var mainurl = "http://wohlig.co.in/newfynx/";
 // var mainurl = "http://localhost/newfynx/";
-// var mainurl = "http://www.myfynx.com/newfynx/";
+var mainurl = "http://www.myfynx.com/newfynx/";
 // var mainurl = "http://192.168.0.121/newfynx/";
 // mainurlpaymentgateway is url for frontend
-var websiteurl = "http://wohlig.co.in/myfynx/testing/";
+var websiteurl = "http://www.myfynx.com/testing/";
 var mainurlpaymentgateway = "http://www.myfynx.com/newfynx/";
 var adminurl = mainurl + "index.php/json/";
 var countries = [{
@@ -625,7 +625,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		addToCart: function (filter, callback) {
-			return $http.get(adminurl + 'addToCart?product=' + filter.product + '&quantity=' + filter.quantity + '&design=' +filter.design, {}, {
+			return $http.get(adminurl + 'addToCart?product=' + filter.product + '&quantity=' + filter.quantity + '&design=' +filter.design+'&json=', {}, {
 				withCredentials: true
 			}).success(callback);
 		},

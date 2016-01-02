@@ -1,7 +1,7 @@
 var myfunction = '';
 var myImage = {image: ""};
 var uploadres = [];
-window.uploadUrl = 'http://wohlig.co.in/newfynx/index.php/json/uploadImage';
+window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
 
 
@@ -719,6 +719,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.predetail = {};
 	$scope.order = "";
 	$scope.mainurl = mainurlpaymentgateway;
+	$scope.adminurl = adminurl;
 
 	$scope.alerts = [];
 	if (NavigationService.getUser()) {
@@ -1537,7 +1538,7 @@ $scope.changeJustify = function(val){
 		,{
 			name: 'Spacing',
 			value: 20,
-			from:10,
+			from:0,
 			to:200
 		}
 		// ,{
@@ -1666,6 +1667,7 @@ $scope.addToCart = function(){
 	NavigationService.addToCartCustom($scope.filter, function(data){
 		if (data == "true") {
 			$scope.addAlert("success", "Added to cart");
+			myImage = {image: ""};
 		} else {
 			$scope.addAlert("danger", "Something has gone wrong");
 		}
