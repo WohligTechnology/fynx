@@ -1,7 +1,7 @@
 var myfunction = '';
 var myImage = {image: ""};
 var uploadres = [];
-window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
+window.uploadUrl = 'http://wohlig.co.in/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
 
 
@@ -165,14 +165,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.loadProductsSearch = function(){
 		lastpage = 0;
 		$scope.filters.pageno = 0;
+		$scope.productList = [];
 		$scope.loadProducts();
 	}
 
 	$scope.addtype = function (type, index) {
+		$scope.productList = [];
 		lastpage = 0;
 		$scope.filters.pageno = 0;
-		console.log(type);
-		console.log(index);
 		var addToArray = true;
 		_.each($scope.filters.type, function (n, key) {
 			if (n === type.id) {
@@ -182,13 +182,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		if (addToArray) {
 			$scope.filters.type.push(type.id);
 		} else {
-			$scope.filters.type.splice(index, 1);
+			$scope.filters.type = _.filter($scope.filters.type,function(n){
+				return n != type.id;
+			});
+
 		}
 		if ($scope.filters.type == "") {
 			$scope.freeze.freezeType = "";
 		} else {
 			$scope.freeze.freezeType = $scope.subcategory;
 		}
+		console.log($scope.filters.type);
 		$scope.loadProducts();
 
 	}
@@ -202,6 +206,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	}
 
 	$scope.changeFilter = function (check) {
+		$scope.productList = [];
 		switch (check) {
 		case 1:
 			{
@@ -697,7 +702,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, $state, $timeout) {
+.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, $state, $timeout, $interval) {
 
 	$scope.template = TemplateService.changecontent("checkout");
 	$scope.menutitle = NavigationService.makeactive("Checkout");
@@ -759,8 +764,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.tabchange = function (tab, a) {
 		//        console.log(tab);
-		$scope.tab = tab;
+
 		if (a == 1) {
+			$scope.tab = tab;
 			if (!NavigationService.getUser()) {
 				$scope.classa = "yellow-btn";
 				$scope.classb = '';
@@ -770,34 +776,100 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 				$scope.tabchange('step2', 2);
 			}
 		} else if (a == 2) {
-
+$scope.tab = tab;
 			$scope.classa = '';
 			$scope.classb = "yellow-btn";
 			$scope.classc = '';
 			$scope.classd = '';
 			$scope.loadCart();
 		} else if (a == 3) {
+			$scope.tab = tab;
 			$scope.classa = '';
 			$scope.classb = '';
 			$scope.classc = "yellow-btn";
 			$scope.classd = '';
 		} else {
-			$scope.checkout.cart = $scope.allCart;
-			NavigationService.placeOrder($scope.checkout, function(data){
-				if (data!=0) {
-					$scope.order = data;
-					$scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
-					$scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
-					NavigationService.setOrder(data);
-					$scope.classa = '';
-					$scope.classb = '';
-					$scope.classc = '';
-					$scope.classd = "yellow-btn";
-				}else{
-					$scope.tab = "step3";
-				}
 
-			})
+			$scope.allvalidation = [{
+				field: $scope.checkout.firstname,
+				validation: ""
+	        }, {
+				field: $scope.checkout.lastname,
+				validation: ""
+			},{
+				field: $scope.checkout.phone,
+				validation: ""
+			},{
+				field: $scope.checkout.email,
+				validation: ""
+			},{
+				field: $scope.checkout.billingline1,
+				validation: ""
+			},{
+				field: $scope.checkout.billingline2,
+				validation: ""
+			},{
+				field: $scope.checkout.billingline3,
+				validation: ""
+			},{
+				field: $scope.checkout.billingcity,
+				validation: ""
+			},{
+				field: $scope.checkout.billingpincode,
+				validation: ""
+			},{
+				field: $scope.checkout.billingstate,
+				validation: ""
+			},{
+				field: $scope.checkout.billingcountry,
+				validation: ""
+			},{
+				field: $scope.checkout.shippingline1,
+				validation: ""
+			},{
+				field: $scope.checkout.shippingline2,
+				validation: ""
+			},{
+				field: $scope.checkout.shippingline3,
+				validation: ""
+			},{
+				field: $scope.checkout.shippingcity,
+				validation: ""
+			},{
+				field: $scope.checkout.shippingpincode,
+				validation: ""
+			},{
+				field: $scope.checkout.shippingstate,
+				validation: ""
+			},{
+				field: $scope.checkout.shippingcountry,
+				validation: ""
+	        }];
+
+			var check = formvalidation($scope.allvalidation);
+			if (check) {
+				$scope.tab = tab;
+				$scope.checkout.cart = $scope.allCart;
+				NavigationService.placeOrder($scope.checkout, function(data){
+					if (data!=0) {
+						$scope.order = data;
+						$scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
+						$scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
+						NavigationService.setOrder(data);
+						$scope.classa = '';
+						$scope.classb = '';
+						$scope.classc = '';
+						$scope.classd = "yellow-btn";
+					}else{
+						$scope.tab = "step3";
+					}
+
+				})
+			} else {
+				$scope.addAlert("danger", "Please enter all Information");
+			}
+
+
 			// checkout cade goes here..
 
 		}
@@ -932,6 +1004,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		} else {
 			$scope.addAlert("danger", "Please enter a valid email");
 		}
+	}
+
+	// GOOGLE AND FACEBOOK LOGIN
+	var checktwitter = function(data, status) {
+			if (data != "false") {
+					$interval.cancel(stopinterval);
+					ref.close();
+					NavigationService.authenticate(authenticatesuccess);
+			} else {
+
+			}
+
+	};
+
+	var callAtIntervaltwitter = function() {
+			NavigationService.authenticate(checktwitter);
+	};
+	var authenticatesuccess = function(data, status) {
+			if (data != "false") {
+					$.jStorage.set("user", data);
+					user = data;
+					$state.go('checkout');
+					window.location.reload();
+			}
+	};
+
+	$scope.facebooklogin = function() {
+			ref = window.open(mainurl + 'index.php/hauth/login/Facebook?returnurl='+websiteurl, '_blank', 'location=yes');
+			stopinterval = $interval(callAtIntervaltwitter, 2000);
+			ref.addEventListener('exit', function(event) {
+					NavigationService.authenticate(authenticatesuccess);
+					$interval.cancel(stopinterval);
+			});
+	}
+	$scope.googlelogin = function() {
+			ref = window.open(mainurl + 'index.php/hauth/login/Google?returnurl='+websiteurl, '_blank', 'location=yes');
+			stopinterval = $interval(callAtIntervaltwitter, 2000);
+			ref.addEventListener('exit', function(event) {
+					NavigationService.authenticate(authenticatesuccess);
+					$interval.cancel(stopinterval);
+			});
+	}
+
+	$scope.twitterlogin = function() {
+			ref = window.open(mainurl + 'index.php/hauth/login/Twitter?returnurl='+websiteurl, '_blank', 'location=yes');
+			stopinterval = $interval(callAtIntervaltwitter, 2000);
+			ref.addEventListener('exit', function(event) {
+					NavigationService.authenticate(authenticatesuccess);
+					$interval.cancel(stopinterval);
+			});
 	}
 
 })
@@ -1678,7 +1800,7 @@ $scope.addToCart = function(){
 })
 
 
-.controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state) {
+.controller('headerctrl', function ($scope, TemplateService, $uibModal, NavigationService, $state, $interval, $location) {
 
 	$scope.template = TemplateService;
 	$scope.register = {};
@@ -1720,7 +1842,12 @@ $scope.addToCart = function(){
 
 	if (NavigationService.getUser()) {
 		$scope.showLogout = true;
+		$scope.myuser = NavigationService.getUser('user');
+		if($scope.myuser.firstname!=''||$scope.myuser.lastname!=''){
 		$scope.user.name = NavigationService.getUser('user').firstname + " " + NavigationService.getUser('user').lastname;
+	}else{
+		$scope.user.name = $scope.myuser.name;
+	}
 	}
 
 	$scope.registerUser = function () {
@@ -1765,6 +1892,56 @@ $scope.addToCart = function(){
 			$state.go('home');
 		}
 		$.jStorage.flush();
+	}
+
+	// GOOGLE AND FACEBOOK LOGIN
+	var checktwitter = function(data, status) {
+			if (data != "false") {
+					$interval.cancel(stopinterval);
+					ref.close();
+					NavigationService.authenticate(authenticatesuccess);
+			} else {
+
+			}
+
+	};
+
+	var callAtIntervaltwitter = function() {
+			NavigationService.authenticate(checktwitter);
+	};
+	var authenticatesuccess = function(data, status) {
+			if (data != "false") {
+					$.jStorage.set("user", data);
+					user = data;
+					$state.go('home');
+					window.location.reload();
+			}
+	};
+
+	$scope.facebooklogin = function() {
+			ref = window.open(mainurl + 'index.php/hauth/login/Facebook?returnurl='+websiteurl, '_blank', 'location=yes');
+			stopinterval = $interval(callAtIntervaltwitter, 2000);
+			ref.addEventListener('exit', function(event) {
+					NavigationService.authenticate(authenticatesuccess);
+					$interval.cancel(stopinterval);
+			});
+	}
+	$scope.googlelogin = function() {
+			ref = window.open(mainurl + 'index.php/hauth/login/Google?returnurl='+websiteurl, '_blank', 'location=yes');
+			stopinterval = $interval(callAtIntervaltwitter, 2000);
+			ref.addEventListener('exit', function(event) {
+					NavigationService.authenticate(authenticatesuccess);
+					$interval.cancel(stopinterval);
+			});
+	}
+
+	$scope.twitterlogin = function() {
+			ref = window.open(mainurl + 'index.php/hauth/login/Twitter?returnurl='+websiteurl, '_blank', 'location=yes');
+			stopinterval = $interval(callAtIntervaltwitter, 2000);
+			ref.addEventListener('exit', function(event) {
+					NavigationService.authenticate(authenticatesuccess);
+					$interval.cancel(stopinterval);
+			});
 	}
 
 });

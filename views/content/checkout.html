@@ -54,13 +54,13 @@
 					<p class="or">OR</p>
 					<p>LOGIN VIA</p>
 					<div class="button-set">
-						<button class="btn btn-facebook pad-btn">
+						<button class="btn btn-facebook pad-btn" ng-click="facebooklogin()">
 							<i class="fa fa-facebook social-f"></i>
 						</button>
-						<button class="btn btn-google pad-btn">
+						<button class="btn btn-google pad-btn" ng-click="googlelogin()">
 							<i class="fa fa-google-plus"></i>
 						</button>
-						<button class="btn btn-twitter pad-btn">
+						<button class="btn btn-twitter pad-btn" ng-click="twitterlogin()">
 							<i class="fa fa-twitter"></i>
 						</button>
 					</div>
@@ -112,13 +112,13 @@
 					<p class="or">OR</p>
 					<p>LOGIN VIA</p>
 					<div class="button-set">
-						<button class="btn btn-facebook pad-btn">
+						<button class="btn btn-facebook pad-btn" ng-click="facebooklogin()">
 							<i class="fa fa-facebook social-f"></i>
 						</button>
-						<button class="btn btn-google pad-btn">
+						<button class="btn btn-google pad-btn" ng-click="googlelogin()">
 							<i class="fa fa-google-plus"></i>
 						</button>
-						<button class="btn btn-twitter pad-btn">
+						<button class="btn btn-twitter pad-btn" ng-click="twitterlogin()">
 							<i class="fa fa-twitter"></i>
 						</button>
 					</div>
@@ -204,22 +204,22 @@
 		<div class="row content-view">
 			<div class="col-md-3">
 				<div class="form-group">
-					<input type="text" class="form-control" ng-model="checkout.firstname" placeholder="FIRST NAME">
+					<input type="text" class="form-control" ng-model="checkout.firstname" placeholder="FIRST NAME *">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<input type="text" class="form-control" ng-model="checkout.lastname" placeholder="LAST NAME">
+					<input type="text" class="form-control" ng-model="checkout.lastname" placeholder="LAST NAME *">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<input type="text" class="form-control" ng-model="checkout.phone" placeholder="MOBILE NUMBER ">
+					<input type="text" class="form-control" ng-model="checkout.phone" placeholder="MOBILE NUMBER *">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<input type="email" class="form-control" ng-model="checkout.email" placeholder="EMAIL ADDRESS">
+					<input type="email" class="form-control" ng-model="checkout.email" placeholder="EMAIL ADDRESS *">
 				</div>
 			</div>
 		</div>
@@ -232,11 +232,11 @@
 						<input type="text" ng-model="checkout.billingline1" class="form-control">
 					</div>
 					<div class="form-group">
-						<label>LINE 2</label>
+						<label>LINE 2*</label>
 						<input type="text" ng-model="checkout.billingline2" class="form-control">
 					</div>
 					<div class="form-group">
-						<label>LINE 3</label>
+						<label>LINE 3*</label>
 						<input type="text" ng-model="checkout.billingline3" class="form-control">
 					</div>
 					<div class="form-group">
@@ -248,7 +248,7 @@
 						<input type="text" ng-model="checkout.billingpincode" class="form-control">
 					</div>
 					<div class="form-group">
-						<label>STATE</label>
+						<label>STATE*</label>
 						<input type="text" class="form-control" ng-model="checkout.billingstate">
 <!--
 						<div class="fynx-select">
@@ -263,7 +263,7 @@
 -->
 					</div>
 					<div class="form-group">
-						<label>COUNTRY</label>
+						<label>COUNTRY*</label>
 						<select name="country" ng-model="checkout.billingcountry" class="form-control">
 							<option value="IND"	>India</option>
 							<option value="JPN"	>Japan</option>
@@ -285,11 +285,11 @@
 						<input type="text" ng-model="checkout.shippingline1" ng-change="shippingchange(checkout.shippingline1,1)" class="form-control">
 					</div>
 					<div class="form-group">
-						<label>LINE 2</label>
+						<label>LINE 2*</label>
 						<input type="text" ng-model="checkout.shippingline2" ng-change="shippingchange(checkout.shippingline2,2)" class="form-control">
 					</div>
 					<div class="form-group">
-						<label>LINE 3</label>
+						<label>LINE 3*</label>
 						<input type="text" ng-model="checkout.shippingline3" ng-change="shippingchange(checkout.shippingline3,3)" class="form-control">
 					</div>
 					<div class="form-group">
@@ -301,7 +301,7 @@
 						<input type="text" ng-model="checkout.shippingpincode" ng-change="shippingchange(checkout.shippingpincode,5)" class="form-control">
 					</div>
 					<div class="form-group">
-						<label>STATE</label>
+						<label>STATE*</label>
 						<input type="text" ng-model="checkout.shippingstate" ng-change="shippingchange(checkout.shippingstate,6)" class="form-control">
 <!--
 						<div class="fynx-select">
@@ -316,7 +316,7 @@
 -->
 					</div>
 					<div class="form-group">
-						<label>COUNTRY</label>
+						<label>COUNTRY*</label>
 						<select name="country" ng-model="checkout.shippingcountry" ng-change="shippingchange(checkout.shippingcountry,7)" class="form-control">
 							<option value="IND"	>India</option>
 							<option value="JPN"	>Japan</option>

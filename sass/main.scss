@@ -1822,14 +1822,18 @@ h4.bold,
 
     .on-img {
       position: absolute;
-      top: 200px;
-      width: 230px;
-      left: 50%;
-      font-weight: 700;
-      text-align: center;
-      font-size: 80px;
-      display: block;
-      // line-height: 100%;
+    top: 50%;
+    width: 186px;
+    left: 50%;
+    font-weight: 700;
+    text-align: center;
+    font-size: 80px;
+    display: block;
+    transform: translate(-50%,-50%);
+    -webkit-user-select: none;
+    user-select: none;
+    min-height: 308px;
+    overflow: hidden;
       @include transform(translate(-50%, -50%));
       @include user-select(none);
       span{
