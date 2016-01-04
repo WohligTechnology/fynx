@@ -940,7 +940,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.sameAsBilling = function(sameasbilling) {
 
     if (sameasbilling == true) {
-      $scope.assign($scope.checkout.billingline1, $scope.checkout.billingline2, $scope.billingline3, $scope.checkout.billingcity, $scope.checkout.billingpincode, $scope.checkout.billingstate, $scope.checkout.billingcountry);
+      $scope.assign($scope.checkout.billingline1, $scope.checkout.billingline2, $scope.checkout.billingline3, $scope.checkout.billingcity, $scope.checkout.billingpincode, $scope.checkout.billingstate, $scope.checkout.billingcountry);
 
     } else {
       $scope.assign($scope.predetail.shippingline1, $scope.predetail.shippingline2, $scope.predetail.shippingline3, $scope.predetail.shippingcity, $scope.predetail.shippingpincode, $scope.predetail.shippingstate, $scope.predetail.shippingcountry);

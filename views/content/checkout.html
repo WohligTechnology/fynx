@@ -422,23 +422,23 @@
 					   <tr>
 				            <td class="fieldName" width="50%"><span class="error">*</span> Reference No</td>
 
-				            <td  align="left" width="50%"> <input name="reference_no" type="text" ng-model="order" /></td>
+				            <td  align="left" width="50%"> <input name="reference_no" type="text" ng-model="order" readonly /></td>
 				        </tr>
 				        <tr>
 				            <td class="fieldName" width="50%"><span class="error">*</span> Sale Amount</td>
-				            <td  align="left" width="50%"> <input name="amount" type="text" ng-model="amount" /> <select name="currency" >
+				            <td  align="left" width="50%"> <input name="amount" type="text" readonly  ng-model="amount" /> <select name="currency" >
 								<option value="INR">INR</option>
 
 							</select></td>
 				        </tr>
 						<tr>
 						  <td class="fieldName"><span class="error">*</span> Description</td>
-						  <td align="left"><input name="description" type="text" value="Test Product" /></td>
+						  <td align="left"><input name="description" type="text" value="Test Product" readonly /></td>
 					   </tr>
 						<tr>
 						  <td class="fieldName"><span class="error">*</span> Return Url</td>
 						  <!-- <td align="left"><input name="return_url" type="text" size="60" value="{{adminurl + 'payumoneysuccess'}}" /></td> -->
-						  <td align="left"><input name="return_url" type="text" size="60" value="http://www.myfynx.com/newfynx/paymentgateway/response.php" /></td>
+						  <td align="left"><input name="return_url" type="text" size="60" value="http://www.myfynx.com/newfynx/paymentgateway/response.php" readonly /></td>
 					   </tr>
 						<tr>
 						  <td class="fieldName"><span class="error">*</span> Mode</td>
@@ -453,39 +453,39 @@
 					    <tr>
 				            <td class="fieldName"><span class="error">*</span> Name</td>
 				            <td align="left">
-				                <input name="name" type="text"  ng-model="checkout.firstname" /></td>
+				                <input name="name" type="text"  ng-model="checkout.firstname" readonly /></td>
 				        </tr>
 
 				        <tr>
 
 				            <td class="fieldName"><span class="error">*</span>Address</td>
 				            <td align="left">
-				                <textarea name="address"  ng-model="checkout.billingaddress"></textarea>            </td>
+				                <textarea name="address" ng-model="checkout.billingaddress" readonly></textarea>            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName"><span class="error">*</span>City</td>
 
 				            <td align="left">
-				                <input name="city" type="text" ng-model="checkout.billingcity" />            </td>
+				                <input name="city" type="text" ng-model="checkout.billingcity" readonly/>            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName">State/Province</td>
 				            <td align="left">
-				               <input name="state" type="text"  ng-model="checkout.billingstate" />            </td>
+				               <input name="state" type="text"  ng-model="checkout.billingstate" readonly/>            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName"><span class="error">*</span>ZIP/Postal Code</td>
 				            <td align="left">
-				                <input name="postal_code" type="text" ng-model="checkout.billingpincode"  />            </td>
+				                <input name="postal_code" type="text" ng-model="checkout.billingpincode" readonly />            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName"><span class="error">*</span>Country</td>
 				            <td align="left">
-				                                <input name="country" type="text" ng-model="checkout.billingcountry"  />
+				                                <input name="country" type="text" ng-model="checkout.billingcountry" readonly />
 
 																			           </td>
 				        </tr>
@@ -493,13 +493,13 @@
 				        <tr>
 				            <td class="fieldName"><span class="error">*</span>Email</td>
 				            <td align="left">
-				                <input name="email" type="text" ng-model="checkout.email"  />            </td>
+				                <input name="email" type="text" ng-model="checkout.email" readonly />            </td>
 				        </tr>
 
 				        <tr>
 
 				            <td class="fieldName"><span class="error">*</span>Telephone</td>
-				            <td align="left"><input name="phone" type="text" ng-model="checkout.phone"  /></td>
+				            <td align="left"><input name="phone" type="text" ng-model="checkout.phone" readonly /></td>
 				        </tr>
 
 				        <tr>
@@ -510,49 +510,49 @@
 
 				            <td class="fieldName"> Name</td>
 				            <td align="left">
-				                <input name="ship_name" type="text" ng-model="checkout.firstname"  /></td>
+				                <input name="ship_name" type="text" ng-model="checkout.firstname" readonly /></td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName">Address</td>
 				            <td align="left">
 
-				                <input name="ship_address" type="text" ng-model="checkout.shippingaddress"  />            </td>
+				                <input name="ship_address" type="text" ng-model="checkout.shippingaddress" readonly />            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName">City</td>
 				            <td align="left">
-				                <input name="ship_city" type="text" ng-model="checkout.shippingcity" />            </td>
+				                <input name="ship_city" type="text" ng-model="checkout.shippingcity" readonly />            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName">State/Province</td>
 				            <td align="left">
-				               <input name="ship_state" type="text" ng-model="checkout.shippingstate" />            </td>
+				               <input name="ship_state" type="text" ng-model="checkout.shippingstate" readonly />            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName">ZIP/Postal Code</td>
 				            <td align="left">
-				                <input name="ship_postal_code" type="text" ng-model="checkout.shippingpincode"  />            </td>
+				                <input name="ship_postal_code" type="text" ng-model="checkout.shippingpincode" readonly />            </td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName">Country</td>
 
-				            <td align="left"><input name="ship_country" type="text" ng-model="checkout.shippingcountry"  /></td>
+				            <td align="left"><input name="ship_country" type="text" ng-model="checkout.shippingcountry" readonly /></td>
 				        </tr>
 
 
 				        <tr>
 				            <td class="fieldName">Telephone</td>
-				            <td align="left"><input name="ship_phone" type="text" ng-model="checkout.phone"  /></td>
+				            <td align="left"><input name="ship_phone" type="text" ng-model="checkout.phone" readonly /></td>
 				        </tr>
 
 				        <tr>
 				            <td class="fieldName">payment_mode</td>
-				            <td align="left"><input name="payment_mode" type="text" ng-model="checkout.paymentmode" /></td>
+				            <td align="left"><input name="payment_mode" type="text" ng-model="checkout.paymentmode" readonly /></td>
 				        </tr>
 
 				        <tr>
