@@ -73,6 +73,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 		controller: 'AboutCtrl'
 	})
 
+	.state('thankyou', {
+		url: "/thankyou",
+		templateUrl: "views/template.html",
+		controller: 'ThankYouCtrl'
+	})
+
 	.state('productlist', {
 		url: "/product/:category",
 		templateUrl: "views/template.html",
