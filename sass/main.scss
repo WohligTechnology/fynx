@@ -609,6 +609,9 @@ span.mobile {
   display: inline-block;
   float: none;
 }
+.strong {
+  font-weight: bold;
+}
 h4.bold,
 .bold {
   font-weight: bold;
@@ -1865,8 +1868,32 @@ h4.bold,
     }
 }
 
-
-
+.padding-few {
+  padding: 6px 5px;
+  display: inline-block;
+  min-width: 120px;
+}
+.primary-shadow {
+    text-shadow: 5px 5px 0px $brand-primary;
+}
+h4.strong.font-smart {
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+.transaction-view {
+  padding-bottom: 40px;
+    .min-width {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 87px;
+      .primary-shadow {
+        font-size: 99px;
+      }
+    }
+}
 
 //mobile
 @media (max-width:$screen-xs-max) {
