@@ -583,6 +583,11 @@ var navigationservice = angular.module('navigationservice', [])
 				data: userData
 			}).success(callback);
 		},
+    getorderbyorderid: function(id,callback) {
+        return $http.get(admin_url + 'json/getorderbyorderid?id=' + id , {}, {
+            withCredentials: true
+        }).success(callback);
+    },
 		login: function (userData, callback) {
 			$http({
 				url: adminurl + 'loginuser',
