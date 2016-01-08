@@ -584,7 +584,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
     getorderbyorderid: function(id,callback) {
-        return $http.get(admin_url + 'json/getorderbyorderid?id=' + id , {}, {
+        return $http.get(adminurl + 'getorderbyorderid?id=' + id , {}, {
             withCredentials: true
         }).success(callback);
     },
