@@ -86,22 +86,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.footerBlack = true;
 })
 
-.controller('ThankYouCtrl', function($scope, TemplateService, NavigationService) {
+.controller('ThankYouCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
 
   $scope.template = TemplateService.changecontent("thankyou");
   $scope.menutitle = NavigationService.makeactive("Thank You");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+  NavigationService.getorderbyorderid($stateParams.order, function(data){
+    $scope.order = data;
+  })
 })
 
-.controller('SorryCtrl', function($scope, TemplateService, NavigationService) {
+.controller('SorryCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
 
   $scope.template = TemplateService.changecontent("sorry");
   $scope.menutitle = NavigationService.makeactive("Sorry");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+  NavigationService.getorderbyorderid($stateParams.order, function(data){
+    $scope.order = data;
+  })
 })
 
 
