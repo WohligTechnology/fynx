@@ -93,6 +93,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+  myfunction();
   NavigationService.getorderbyorderid($stateParams.order, function(data){
     $scope.order = data;
   })
@@ -105,6 +106,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+  myfunction();
   NavigationService.getorderbyorderid($stateParams.order, function(data){
     $scope.order = data;
   })
@@ -582,31 +584,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           if ($scope.profile.changepasswordedit == 'edit') {
             $scope.profile.changepasswordedit = 'save';
           } else {
+            if ($scope.password.newpassword===$scope.password.confirmpassword) {
+              NavigationService.changePassword($scope.password, function(data) {
+                console.log(data);
+                if (data.value==true) {
+                  $scope.addAlert("success", "Password changed successfully. ");
+                  $scope.profile.changepasswordedit = 'edit';
+                }else {
+                  $scope.addAlert("danger", "Wrong password");
+                }
+              });
 
-            NavigationService.changepassword($scope.password, function(data) {
-              console.log(data);
-              switch (data) {
-                case '-1':
-                  {
-                    $scope.addAlert("danger", "Re-enter password. ");
-                  }
-                  break;
-                case '1':
-                  {
-                    $scope.addAlert("success", "Password changed successfully. ");
-                    $scope.profile.changepasswordedit = 'edit';
-                  }
-                  break;
-                case '0':
-                  {
-                    $scope.addAlert("danger", "Wrong password");
-                  }
-                  break;
-                default:
-                  {}
+            }else {
+              $scope.addAlert("danger", "Re-entered password should be same as new password.");
+            }
 
-              }
-            });
           }
         }
         break;
