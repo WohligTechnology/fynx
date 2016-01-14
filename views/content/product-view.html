@@ -135,7 +135,7 @@
                         <div class="color-picker" ng-if="product.color">
                             <span class="very-bold">Quantity</span>
                             <div class="fynx-select black-select txt-img">
-                              <select ng-model="filter.quantity">
+                              <select ng-model="filter.quantity" ng-change="validateQuantity(product)">
                                 <option value="1" selected="">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -152,7 +152,10 @@
 
                         </div>
 
-                        <button class="btn btn-huge btn-black btn-outline" ng-click="addToCart()">Add to bag</button>
+                        <button class="btn btn-huge btn-black btn-outline" ng-click="addToCart()" ng-hide="outofstock">Add to bag</button>
+                        <div class="" ng-show="outofstock">
+                          Out of Stock.
+                        </div>
                         <br>
                         <button class="btn btn-black btn-clear text-upper" ng-click="addToWishlist()">Add to Wishlist</button>
 

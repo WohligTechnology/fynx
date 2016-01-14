@@ -94,7 +94,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
   myfunction();
-  NavigationService.getorderbyorderid($stateParams.order, function(data){
+  NavigationService.getorderbyorderid($stateParams.order, function(data) {
     $scope.order = data;
   })
 })
@@ -107,7 +107,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
   myfunction();
-  NavigationService.getorderbyorderid($stateParams.order, function(data){
+  NavigationService.getorderbyorderid($stateParams.order, function(data) {
     $scope.order = data;
   })
 })
@@ -269,6 +269,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+  $scope.outofstock = false;
   $scope.product = {};
   $scope.alerts = [];
   //selcted color
@@ -290,7 +291,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.myfunc = function(n) {
     console.log(n);
   }
-
+  $scope.validateQuantity = function(data) {
+    console.log(data);
+    if (parseInt($scope.filter.quantity) > parseInt(data.product.quantity)) {
+      $scope.outofstock = true;
+    } else {
+      $scope.outofstock = false;
+    }
+  }
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
@@ -320,9 +328,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
   }
   $scope.loadProduct = function(filter) {
+    $scope.outofstock = false;
     NavigationService.getProductDetails(filter, function(data, status) {
+      console.log(data);
       if (data.product != '') {
         data.product.image = [];
+        if (data.product.quantity === "0") {
+          $scope.outofstock = true;
+        }
         _.each(data.product, function(n, key) {
           if (key.split('image')[1]) {
             data.product.image.push(n);
@@ -405,6 +418,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     if ($scope.filter.size != "") {
       $scope.filter.design = $stateParams.design;
       NavigationService.addToCart($scope.filter, function(data, status) {
+        console.log(data);
         if (data == "true") {
           $scope.addAlert("success", "Added to cart");
         } else {
@@ -584,18 +598,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           if ($scope.profile.changepasswordedit == 'edit') {
             $scope.profile.changepasswordedit = 'save';
           } else {
-            if ($scope.password.newpassword===$scope.password.confirmpassword) {
+            if ($scope.password.newpassword === $scope.password.confirmpassword) {
               NavigationService.changePassword($scope.password, function(data) {
                 console.log(data);
-                if (data.value==true) {
+                if (data.value == true) {
                   $scope.addAlert("success", "Password changed successfully. ");
                   $scope.profile.changepasswordedit = 'edit';
-                }else {
+                } else {
                   $scope.addAlert("danger", "Wrong password");
                 }
               });
 
-            }else {
+            } else {
               $scope.addAlert("danger", "Re-entered password should be same as new password.");
             }
 
