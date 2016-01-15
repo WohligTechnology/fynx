@@ -1111,7 +1111,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   };
 
   $scope.facebooklogin = function() {
-    ref = window.open(mainurl + 'index.php/hauth/login/Facebook?returnurl=' + websiteurl, '_blank', 'location=yes');
+    ref = window.open(mainurl + 'index.php/hauth/login/Facebook', '_blank', 'location=yes');
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
       NavigationService.authenticate(authenticatesuccess);
@@ -1119,7 +1119,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   }
   $scope.googlelogin = function() {
-    ref = window.open(mainurl + 'index.php/hauth/login/Google?returnurl=' + websiteurl, '_blank', 'location=yes');
+    ref = window.open(mainurl + 'index.php/hauth/login/Google', '_blank', 'location=yes');
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
       NavigationService.authenticate(authenticatesuccess);
@@ -1128,7 +1128,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.twitterlogin = function() {
-    ref = window.open(mainurl + 'index.php/hauth/login/Twitter?returnurl=' + websiteurl, '_blank', 'location=yes');
+    ref = window.open(mainurl + 'index.php/hauth/login/Twitter', '_blank', 'location=yes');
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
       NavigationService.authenticate(authenticatesuccess);
