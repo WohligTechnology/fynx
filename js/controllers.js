@@ -160,6 +160,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       ++$scope.filters.pageno;
       NavigationService.getProductByCategory($scope.filters, function(data) {
         if (data) {
+          console.log(data);
           lastpage = data.product.lastpage;
           if ($scope.freeze.freezeColor == "") {
             $scope.colors = data.filter.color;
@@ -686,10 +687,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.checkoutCheck = function() {
     NavigationService.checkoutCheck(function(data) {
       console.log(data);
-      if (data.value == true) {
+      if (data === "true") {
+        console.log("here");
         $state.go("checkout");
       } else {
-        $scope.addAlert('danger', 'Remove out of stock items.');
+        $scope.addAlert('danger', 'Remove out of stock items and proceed.');
       }
     });
   };
@@ -827,10 +829,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.checkoutCheck = function() {
     NavigationService.checkoutCheck(function(data) {
       console.log(data);
-      if (data.value == true) {
+      if (data == "true") {
         $scope.tabchange('step3', 3);
       } else {
         $scope.addAlert('danger', 'Remove out of stock items and proceed.');
+        $timeout(function(){
+          $state.go("cart");
+        },3000);
       }
     });
   };

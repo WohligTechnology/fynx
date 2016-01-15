@@ -6,6 +6,9 @@
 </div>
 
 <div class="container">
+  <div class="alert-postion">
+    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+    </div>
   <div class="row" ng-show="msg==''">
     <div class="col-md-12">
       <div class="order-table">
