@@ -31,7 +31,8 @@
               </td>
               <td>{{cart.options.colorname}}</td>
               <td>{{cart.options.sizename}}</td>
-              <td>{{cart.qty}}</td>
+              <td>{{cart.qty}}
+              <p class="text-center danger quantity-text" ng-show="cart.exceeds">Item went out of stock. Please remove item.</p></td>
               <td>
                 <p>{{cart.subtotal}}</p>
                 <button class="btn btn-blue btn-primary" ng-click="deleteCart(cart);" type="submit">remove</button>
@@ -69,7 +70,7 @@
         </div>
       </div>
       <a class="btn-blue btn btn-danger" href="#/product/men" type="submit">CONTINUE SHOPPING</a>
-      <a class="btn-blue btn btn-danger" href="#/checkout" type="submit">CHECK OUT</a>
+      <a class="btn-blue btn btn-danger" ng-click="checkoutCheck()" type="submit">CHECK OUT</a>
     </div>
   </div>
   <div class="row mar-btm" ng-show="msg!=''">

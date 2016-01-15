@@ -683,17 +683,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
-
+  $scope.checkoutCheck = function() {
+    NavigationService.checkoutCheck(function(data) {
+      console.log(data);
+      if (data.value == true) {
+        $state.go("checkout");
+      } else {
+        $scope.addAlert('danger', 'Remove out of stock items.');
+      }
+    });
+  };
   $scope.isNoCart = function() {
     if ($scope.allCart == '') {
       $state.go('home');
     }
   }
-
+  $scope.validateQuantity = function(cart) {
+    if (parseInt(cart.qty) > parseInt(cart.maxQuantity)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   $scope.loadcart = function() {
     NavigationService.showCart(function(data, status) {
       $scope.allCart = data;
       _.each($scope.allCart, function(n) {
+        n.exceeds=$scope.validateQuantity(n);
         if (n.json) {
           n.json = JSON.parse(n.json);
         }
@@ -771,7 +787,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       msg: msg
     });
   };
-
+  $scope.validateQuantity = function(cart) {
+    if (parseInt(cart.qty) > parseInt(cart.maxQuantity)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
@@ -791,6 +813,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
     NavigationService.showCart(function(data, status) {
       $scope.allCart = data;
+      _.each($scope.allCart,function(key){
+        key.exceeds = $scope.validateQuantity(key);
+      });
       if (data == 0) {
         $scope.msg = "Cart is empty.";
       } else {
@@ -799,7 +824,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       //			$scope.isNoCart();
     })
   }
-
+  $scope.checkoutCheck = function() {
+    NavigationService.checkoutCheck(function(data) {
+      console.log(data);
+      if (data.value == true) {
+        $scope.tabchange('step3',3);
+      } else {
+        $scope.addAlert('danger', 'Remove out of stock items and proceed.');
+      }
+    });
+  };
   $scope.tabchange = function(tab, a) {
     //        console.log(tab);
 

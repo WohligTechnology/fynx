@@ -2144,4 +2144,7 @@ h4.strong.font-smart {
   @include border-bottom-radius(0px);
   @include border-left-radius(0px);
 }
+.quantity-text{
+  font-size: 12px;
+}
 //@import "main/mobile";
