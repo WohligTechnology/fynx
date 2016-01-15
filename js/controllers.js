@@ -709,7 +709,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     NavigationService.showCart(function(data, status) {
       $scope.allCart = data;
       _.each($scope.allCart, function(n) {
-        n.exceeds=$scope.validateQuantity(n);
+        n.exceeds = $scope.validateQuantity(n);
         if (n.json) {
           n.json = JSON.parse(n.json);
         }
@@ -813,7 +813,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
     NavigationService.showCart(function(data, status) {
       $scope.allCart = data;
-      _.each($scope.allCart,function(key){
+      _.each($scope.allCart, function(key) {
         key.exceeds = $scope.validateQuantity(key);
       });
       if (data == 0) {
@@ -828,7 +828,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     NavigationService.checkoutCheck(function(data) {
       console.log(data);
       if (data.value == true) {
-        $scope.tabchange('step3',3);
+        $scope.tabchange('step3', 3);
       } else {
         $scope.addAlert('danger', 'Remove out of stock items and proceed.');
       }
@@ -1230,6 +1230,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.tab.addimage = false;
   $scope.tab.addtext = false;
   $scope.tab.buy = false;
+  $scope.nostockquantity = false;
   $scope.design = {};
   $scope.alerts = [];
 
@@ -1253,6 +1254,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   };
 
   // myImage = {image: ""};
+  $scope.validateQuantity = function(data) {
+    $scope.nostockquantity = false;
+    if ($scope.filter.quantity > parseInt(data.quantity)){
+      $scope.nostockquantity = true;
+    }else{
+      $scope.nostockquantity = false;
+
+    }
+  };
+
   function calculateTextShadow(angle, distance) {
     if ($scope.shadowColor != '') {
       angle = angle * ((Math.PI) / 180);
@@ -1317,11 +1328,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.loadProduct = function() {
     NavigationService.getImageForCustomize($scope.filter.type, $scope.filter.color, function(data) {
+      $scope.outofstock = false;
       console.log(data);
       $scope.color = data.color;
       _.each($scope.color, function(n) {
         n.class = "";
       });
+      if (parseInt(data.image.quantity) <= 0) {
+        $scope.outofstock = true;
+      }
       $scope.images = data.image;
       if ($scope.images.id) {
         $scope.filter.id = $scope.images.id;

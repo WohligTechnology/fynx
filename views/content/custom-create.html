@@ -10,7 +10,10 @@
  </div>
 	<hr>
 	<div class="product-detail">
-		<div class="row">
+		<div class="text-center" ng-show="outofstock">
+			Product is out of stock
+		</div>
+		<div class="row" >
 			<div class="col-md-5">
 				<div class="custom-img">
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
@@ -66,7 +69,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-7">
+			<div class="col-md-7" ng-hide="outofstock">
 				<h3 class="danger">FUNK IT UP</h3>
 				<div class="detail-tab customize">
 					<uib-tabset>
@@ -327,7 +330,7 @@
 																<p class="mar0 f-size">{{des.name}}</p>
 															</div>
 															<div class="col-xs-6">
-															
+
 																<div data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="1" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
 
 															</div>
@@ -410,12 +413,14 @@
 											<form class="form-inline" role="form">
 												<div class="form-group">
 													<label for="">QUANTITY:</label>
-													<input type="text" class="form-control" ng-model="filter.quantity">
+													<input type="text" class="form-control" ng-change="validateQuantity(images)" ng-model="filter.quantity">
 												</div>
 											</form>
 										</div>
 									</div>
-									<button class="btn btn-danger con-btn" ng-click="showor();">CALCULATE PRIZE</button>
+
+									<button class="btn btn-danger con-btn" ng-click="showor();" ng-hide="nostockquantity">CALCULATE PRIZE</button>
+									<p class="danger create-nostock" ng-show="nostockquantity">item quantity out of stock</p>
 								</div>
 
 							</div>
