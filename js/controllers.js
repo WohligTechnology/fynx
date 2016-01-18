@@ -2036,10 +2036,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.logout = function() {
     $scope.showLogout = false;
-    if (window.location.hash == "#/profile") {
-      $state.go('home');
-    }
-    $.jStorage.flush();
+    NavigationService.logout(function(data){
+      if (data=="true") {
+        if (window.location.hash == "#/profile") {
+          $state.go('home');
+        }
+        $.jStorage.flush();
+      }
+    });
   }
 
   // GOOGLE AND FACEBOOK LOGIN
