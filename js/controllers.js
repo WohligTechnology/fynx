@@ -333,15 +333,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     NavigationService.getProductDetails(filter, function(data, status) {
       console.log(data);
       if (data.product != '') {
-        data.product.image = [];
+        data.product.image = data.productdesignimage;
+        console.log(data.product.image);
         if (data.product.quantity === "0") {
           $scope.outofstock = true;
         }
-        _.each(data.product, function(n, key) {
-          if (key.split('image')[1]) {
-            data.product.image.push(n);
-          }
-        })
+        // _.each(data.product, function(n, key) {
+        //   if (key.split('image')[1]) {
+        //     console.log(n);
+        //     data.product.image.push(n);
+        //   }
+        // })
         $scope.viewImage = data.product.image1;
         NavigationService.getAllSize(function(data1) {
 
@@ -411,7 +413,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.loadProduct($scope.filter);
 
   $scope.otherImage = function(image) {
-    $scope.viewImage = image;
+    $scope.viewImage = image.image;
   }
 
   //	ADD TO BAG

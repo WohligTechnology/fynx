@@ -85,7 +85,7 @@
                     <div class="col-md-6">
                         <div class="image-sidebar">
                             <div class="thumb-img " ng-repeat="image in product.product.image track by $index" ng-click="otherImage(image)">
-                                <img ng-src="{{image | serverimage}}">
+                                <img ng-src="{{image.image | serverimage}}">
                             </div>
                         </div>
                         <div class="full-img">
