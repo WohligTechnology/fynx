@@ -331,7 +331,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.loadProduct = function(filter) {
     $scope.outofstock = false;
     NavigationService.getProductDetails(filter, function(data, status) {
-      console.log(data);
+      
       if (data.product != '') {
         data.product.image = data.productdesignimage;
         console.log(data.product.image);
@@ -407,6 +407,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           $scope.product = data;
         });
         $scope.filter.product = data.product.id;
+      }else {
+        $scope.outofstock = true;
       }
     });
   }
