@@ -189,7 +189,7 @@
 													<div class="color-pick mar">
 
 														<ul>
-															<li ng-repeat="col in colour" ng-click="colorText(col.color)" class="{{col.class}}">
+															<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
 																<div class="color-bx" ng-style="{'background':col.color}"></div>
 															</li>
 														</ul>
@@ -218,7 +218,7 @@
 													<div class="color-pick mar">
 
 														<ul>
-															<li ng-repeat="col in colour" ng-click="strokeText(col)" class="{{col.class}}">
+															<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
 																<div class="color-bx" ng-style="{'background':col.color}"></div>
 															</li>
 
@@ -276,7 +276,7 @@
 													<div class="color-pick mar">
 
 														<ul>
-															<li ng-repeat="col in colour" ng-click="shadowText(col)" class="{{col.class}}">
+															<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
 																<div class="color-bx" ng-style="{'background':col.color}"></div>
 															</li>
 

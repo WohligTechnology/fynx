@@ -21,27 +21,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // $scope.mySlides = data;
   });
 
-  $scope.mySlides = [{
-    id: 1,
-    src: "img/slider2.jpg",
-    template: '<img src="img/custom-tee.png" class="img-responsive doneLoading img-spacer"/>',
-    button: {
-      class: 'btn-dark',
-      text: 'Enter Now',
-      url: '#/custom',
-      centerAlign: true
-    }
-  }, {
-    id: 2,
-    src: "img/slider1.jpg",
-    template: '<h3>Superhero <br>Stuff</h3><p>EXCLUSIVE DC COMICS COLLECTION BY MY FYNX</p>',
-    button: {
-      class: 'btn-primary',
-      text: 'Shop Now',
-      url: '#/product/men',
-      centerAlign: false
-    }
-  }];
+  NavigationService.getHomeSlider(function(data){
+    $scope.mySlides = data;
+  })
+
+  // $scope.mySlides = [{
+  //   id: 1,
+  //   src: "img/slider2.jpg",
+  //   template: '<img src="img/custom-tee.png" class="img-responsive doneLoading img-spacer"/>',
+  //   button: {
+  //     class: 'btn-dark',
+  //     text: 'Enter Now',
+  //     url: '#/custom',
+  //     centerAlign: true
+  //   }
+  // }, {
+  //   id: 2,
+  //   src: "img/slider1.jpg",
+  //   template: '<h3>Superhero <br>Stuff</h3><p>EXCLUSIVE DC COMICS COLLECTION BY MY FYNX</p>',
+  //   button: {
+  //     class: 'btn-primary',
+  //     text: 'Shop Now',
+  //     url: '#/product/men',
+  //     centerAlign: false
+  //   }
+  // }];
 
   $scope.slideSet = [{
     src: 'img/shoe1.png'
@@ -331,7 +335,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.loadProduct = function(filter) {
     $scope.outofstock = false;
     NavigationService.getProductDetails(filter, function(data, status) {
-      
+
       if (data.product != '') {
         data.product.image = data.productdesignimage;
         console.log(data.product.image);
@@ -1242,6 +1246,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.nostockquantity = false;
   $scope.design = {};
   $scope.alerts = [];
+  $scope.clr='red';
 
   myfunc = $scope;
 

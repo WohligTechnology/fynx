@@ -1,8 +1,8 @@
 <flex-slider flex-slide="s in mySlides track by $index">
     <li>
-        <img ng-src="{{s.src}}">
+        <img ng-src="{{s.image | serverimage}}">
         <div class="text-above">
-            <div class="container">
+            <!-- <div class="container">
                 <div class="row">
                     <div class="col-md-offset-7 col-md-4 col-xs-offset-6 col-xs-5">
                         <div ng-bind-html="s.template" ng-if="s.template"></div>
@@ -11,12 +11,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </li>
 </flex-slider>
 <div class="container">
-    <uib-tabset class="product-slideset">
+    <!-- <uib-tabset class="product-slideset"> -->
         <!-- <uib-tab heading="Shoes">
             <uib-carousel>
                 <uib-slide ng-repeat="slide in slideSet">
@@ -28,7 +28,7 @@
                 </uib-slide>
             </uib-carousel>
         </uib-tab> -->
-        <uib-tab heading="Tshirts">
+        <!-- <uib-tab heading="Tshirts">
             <div class="nothing">
                 <div class="center-margin">No products found.</div>
             </div>
@@ -42,8 +42,8 @@
             <div class="nothing">
                 <div class="center-margin">No products found.</div>
             </div>
-        </uib-tab>
-    </uib-tabset>
+        </uib-tab> -->
+    <!-- </uib-tabset> -->
 </div>{{loginUrl}}
 <div class="row-flex">
     <div class="col-flex">

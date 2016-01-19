@@ -723,6 +723,11 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
+		getHomeSlider: function (callback) {
+			return $http.get(adminurl + 'getallslider', {}, {
+				withCredentials: true
+			}).success(callback);
+		},
 		getUser: function () {
 			return $.jStorage.get('user');
 		},
