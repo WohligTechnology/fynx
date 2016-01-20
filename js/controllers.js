@@ -157,6 +157,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.categoryName = $stateParams.category;
   var lastpage = 0;
   $scope.filters.pageno = 0;
+  $scope.price = [{id:"",name:"Price"},
+  {id:"1",name:"Low - High"},
+  {id:"2",name:"High - Low"}];
 
   $scope.loadProducts = function() {
     console.log("demo");
@@ -168,9 +171,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           lastpage = data.product.lastpage;
           if ($scope.freeze.freezeColor == "") {
             $scope.colors = data.filter.color;
+            $scope.colors.unshift({id:"",name:"Color"});
           }
           if ($scope.freeze.freezeSize == "") {
             $scope.sizes = data.filter.size;
+            $scope.sizes.unshift({id:"",name:"size"});
           }
           if ($scope.freeze.freezeType == "") {
             $scope.subcategory = data.filter.subcategory;
