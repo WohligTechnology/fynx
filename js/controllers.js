@@ -265,6 +265,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         break;
       default:
     }
+    lastpage = 0;
+    $scope.filters.pageno = 0;
     $scope.filters.check = check;
     $scope.loadProducts();
   }
