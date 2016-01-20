@@ -614,7 +614,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		getProductDetails: function (filter, callback) {
-			return $http.get(adminurl + 'getProductDetails?id=' + filter.product + "&color=" + filter.color + "&size=" + filter.size, {}, {
+			return $http.get(adminurl + 'getProductDetails?id=' + filter.product + "&color=" + filter.color + "&size=" + filter.size+"&design="+filter.design, {}, {
 				withCredentials: true
 			}).success(callback);
 		},

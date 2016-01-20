@@ -339,6 +339,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
   $scope.loadProduct = function(filter) {
     $scope.outofstock = false;
+    filter.design=$stateParams.design;
     NavigationService.getProductDetails(filter, function(data, status) {
 
       if (data.product != '') {
