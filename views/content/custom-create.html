@@ -82,9 +82,11 @@
 							</uib-tab-heading>
 							<div class="edit_content">
 								<p>{{images.name}}</p>
-								<p>SIZES <span ng-if="size[0]">: {{size[0].name}}</span> <span ng-if="sizelength"> to </span>  <span ng-if="sizelength">{{sizelength.name}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b></p>
-								<p>FABRIC: <span>100% PRESHRUNK COTTON</span></p>
-								<p class="b-color"> + SHOW MORE INFORMATION</p>
+<!-- <span ng-if="size[0]">: {{size[0].name}}</span> <span ng-if="sizelength"> to </span>  <span ng-if="sizelength">{{sizelength.name}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b> -->
+								<p>SIZES: <span>S,M,L,XL,XXL,XXXL</span> </p>
+								<p>FABRIC: <span>100% Pre-Shrunk Cotton</span></p>
+								<p class="b-color" ng-init="showMore = false;" ng-click="showMore = !showMore;"> + SHOW MORE INFORMATION</p>
+								<p ng-show="showMore" class="no-transform"><span>Our Best Selling and Most cost-effective t-shirt. My Fynx Super Premium Compressed  Cotton T-shirt is standard crew-neck T-shirt, made of 100% Super premium pre-shrunk cotton with Bio-wash.</span></p>
 
 
 								<div class="color-pick">

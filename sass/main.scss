@@ -2150,4 +2150,10 @@ h4.strong.font-smart {
 .create-nostock{
   padding-top: 20px;
 }
+.no-transform {
+  text-transform: none;
+}
+.bordered input[type="checkbox"] {
+    border: 1px solid black;
+}
 //@import "main/mobile";
