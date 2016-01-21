@@ -1260,16 +1260,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.changeDesign = function() {
 
-    console.log("demo");
     _.each($scope.design.design, function(n) {
-      console.log(n);
-      n.value++;
+      if (n.name!='Arc') {
+        n.value++;
+      }
+
 
     });
     $scope.$apply();
     _.each($scope.design.design, function(n) {
-      console.log(n);
-      n.value--;
+      if (n.name!='Arc') {
+        n.value--;
+      }
 
     });
     $scope.$apply();
@@ -1423,15 +1425,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   });
 
-  $scope.$watch('design.design[2].value', function(newValue, oldValue) {
+    $scope.$watch('design.design[1].value', function(newValue, oldValue) {
+
+      var $example1	= $('#example1').hide();
+      $example1.show().arctext({radius: newValue});
+      $example1.arctext('set', {
+        radius		: newValue,
+        dir			: 1,
+        animation	: {
+          speed	: 300,
+          easing  : 'ease-out'
+        }
+      });
+    });
+
+  $scope.$watch('design.design[3].value', function(newValue, oldValue) {
     _.merge($scope.filter.css, {
       "letter-spacing": newValue
     });
   });
 
-  $scope.$watch('design.design[1].value', function(newValue, oldValue) {
+  $scope.$watch('design.design[2].value', function(newValue, oldValue) {
+    var scale = $scope.design.design[4].value;
     _.merge($scope.filter.css, {
-      "-webkit-transform": "rotate(" + newValue + "deg)"
+      "-webkit-transform": "rotate(" + newValue + "deg) scale(1," + scale / 100 + ")"
     });
   });
 
@@ -1441,6 +1458,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "-webkit-text-stroke-width": newValue
     });
   });
+
+  $scope.$watch('design.design[4].value', function(newValue, oldValue) {
+      var rotate = $scope.design.design[2].value;
+      _.merge($scope.filter.css, {
+        "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
+      });
+    });
 
   $scope.changeJustify = function(val) {
     console.log(val);
@@ -1684,26 +1708,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       value: 100,
       from: 10,
       to: 200
-    }
-    // ,{
-    // 	name: 'Arc',
-    // 	value: 100
-    // }
-    , {
+    },{
+    	name: 'Arc',
+      value: 100,
+      from: 0,
+      to: 300
+    },{
       name: 'Rotation',
       value: 0,
       from: 0,
       to: 360
     }, {
       name: 'Spacing',
-      value: 20,
+      value: 0,
       from: 0,
       to: 200
+    },{
+    	name: 'Stetch',
+      value: 40,
+      from: 20,
+      to: 200
     }
-    // ,{
-    // 	name: 'Stetch',
-    // 	value: 100
-    // }
   ];
 
   $scope.changedDis = function() {

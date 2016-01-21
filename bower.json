@@ -35,7 +35,8 @@
     "jStorage": "~0.4.12",
     "fancyBox": "~2.1.5",
     "ngInfiniteScroll": "~1.2.1",
-    "angular-loading-bar": "~0.8.0"
+    "angular-loading-bar": "~0.8.0",
+    "Arctext.js": "arctext-js#*"
   },
   "resolutions": {
     "angular": "1.4.8"
