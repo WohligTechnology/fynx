@@ -708,6 +708,10 @@ h4.bold,
     padding: 15px;
     position: relative;
     cursor: pointer;
+
+    option {
+      color: black;
+    }
   }
 }
 .product-list {
@@ -1255,8 +1259,8 @@ h4.bold,
       .color-bx {
         height: 28px;
         width: 28px;
-        background: black;
         cursor: pointer;
+        border: 1px solid black;
       }
     }
     .active {
