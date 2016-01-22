@@ -1424,6 +1424,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "font-size": newValue
     });
   });
+  $scope.$watch('filter.text', function(newValue, oldValue) {
+    console.log(newValue);
+  });
 
     $scope.$watch('design.design[1].value', function(newValue, oldValue) {
 
