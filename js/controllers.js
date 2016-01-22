@@ -21,7 +21,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // $scope.mySlides = data;
   });
 
-  NavigationService.getHomeSlider(function(data){
+  NavigationService.getHomeSlider(function(data) {
     $scope.mySlides = data;
   })
 
@@ -157,9 +157,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.categoryName = $stateParams.category;
   var lastpage = 0;
   $scope.filters.pageno = 0;
-  $scope.price = [{id:"",name:"Price"},
-  {id:"1",name:"Low - High"},
-  {id:"2",name:"High - Low"}];
+  $scope.price = [{
+    id: "",
+    name: "Price"
+  }, {
+    id: "1",
+    name: "Low - High"
+  }, {
+    id: "2",
+    name: "High - Low"
+  }];
 
   $scope.loadProducts = function() {
     console.log("demo");
@@ -171,11 +178,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           lastpage = data.product.lastpage;
           if ($scope.freeze.freezeColor == "") {
             $scope.colors = data.filter.color;
-            $scope.colors.unshift({id:"",name:"Color"});
+            $scope.colors.unshift({
+              id: "",
+              name: "Color"
+            });
           }
           if ($scope.freeze.freezeSize == "") {
             $scope.sizes = data.filter.size;
-            $scope.sizes.unshift({id:"",name:"size"});
+            $scope.sizes.unshift({
+              id: "",
+              name: "size"
+            });
           }
           if ($scope.freeze.freezeType == "") {
             $scope.subcategory = data.filter.subcategory;
@@ -274,7 +287,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
+.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal) {
 
   $scope.template = TemplateService.changecontent("product-view");
   $scope.menutitle = NavigationService.makeactive("Men");
@@ -341,7 +354,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
   $scope.loadProduct = function(filter) {
     $scope.outofstock = false;
-    filter.design=$stateParams.design;
+    filter.design = $stateParams.design;
     NavigationService.getProductDetails(filter, function(data, status) {
 
       if (data.product != '') {
@@ -419,7 +432,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           $scope.product = data;
         });
         $scope.filter.product = data.product.id;
-      }else {
+      } else {
         $scope.outofstock = true;
       }
     });
@@ -446,6 +459,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     } else {
       $scope.addAlert("danger", "Select SIZE to add to Shopping Bag");
     }
+  }
+
+  //    sizechart popup
+  $scope.sizeChart = function() {
+    $uibModal.open({
+      animation: true,
+      templateUrl: 'views/modal/sizechart.html',
+      controller: 'CustomCreateCtrl'
+    })
   }
 
   //	ADD TO WISHLIST
@@ -658,11 +680,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             var check = formvalidation($scope.allvalidation);
             if (check) {
-            $scope.saveUser();
-            $scope.profile.billingaddressedit = 'edit';
-          }else {
-            $scope.addAlert("danger", "Enter Manditory Fields.");
-          }
+              $scope.saveUser();
+              $scope.profile.billingaddressedit = 'edit';
+            } else {
+              $scope.addAlert("danger", "Enter Manditory Fields.");
+            }
           }
         }
         break;
@@ -691,11 +713,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             var check = formvalidation($scope.allvalidation);
             if (check) {
-            $scope.saveUser();
-            $scope.profile.shippingaddressedit = 'edit';
-          }else {
-            $scope.addAlert("danger", "Enter Manditory Fields.");
-          }
+              $scope.saveUser();
+              $scope.profile.shippingaddressedit = 'edit';
+            } else {
+              $scope.addAlert("danger", "Enter Manditory Fields.");
+            }
           }
         }
         break;
@@ -707,8 +729,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
 
-    $scope.assign = function(sameasbilling,line1, line2, line3, city, pincode, state, country) {
-      if (sameasbilling == true) {
+  $scope.assign = function(sameasbilling, line1, line2, line3, city, pincode, state, country) {
+    console.log("sdfasdfs");
+    if (sameasbilling == true) {
+      console.log("intrue");
       $scope.updateuser.user.shippingline1 = line1;
       $scope.updateuser.user.shippingline2 = line2;
       $scope.updateuser.user.shippingline3 = line3;
@@ -717,13 +741,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.updateuser.user.shippingstate = state;
       $scope.updateuser.user.shippingcountry = country;
     }
-    }
+  }
 
 
   $scope.sameAsBilling = function(sameasbilling) {
-
+    console.log(sameasbilling);
     if (sameasbilling == true) {
-      $scope.assign($scope.updateuser.user.billingline1, $scope.updateuser.user.billingline2, $scope.updateuser.user.billingline3, $scope.updateuser.user.billingcity, $scope.updateuser.user.billingpincode, $scope.updateuser.user.billingstate, $scope.updateuser.user.billingcountry);
+      $scope.assign(true, $scope.updateuser.user.billingline1, $scope.updateuser.user.billingline2, $scope.updateuser.user.billingline3, $scope.updateuser.user.billingcity, $scope.updateuser.user.billingpincode, $scope.updateuser.user.billingstate, $scope.updateuser.user.billingcountry);
     }
   }
 
@@ -813,7 +837,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.deleteCart = function(cart) {
     console.log(cart);
-    NavigationService.deletecart(cart.id,cart.design, function(data, status) {
+    NavigationService.deletecart(cart.id, cart.design, function(data, status) {
       $scope.loadcart();
       myfunction();
       $scope.inTotalCart();
@@ -917,9 +941,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.tabchange('step3', 3);
       } else {
         $scope.addAlert('danger', 'Remove out of stock items and proceed.');
-        $timeout(function(){
+        $timeout(function() {
           $state.go("cart");
-        },3000);
+        }, 3000);
       }
     });
   };
@@ -1322,14 +1346,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.nostockquantity = false;
   $scope.design = {};
   $scope.alerts = [];
-  $scope.clr='red';
+  $scope.clr = 'red';
 
   myfunc = $scope;
 
   $scope.changeDesign = function() {
 
     _.each($scope.design.design, function(n) {
-      if (n.name!='Arc') {
+      if (n.name != 'Arc') {
         n.value++;
       }
 
@@ -1337,7 +1361,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
     $scope.$apply();
     _.each($scope.design.design, function(n) {
-      if (n.name!='Arc') {
+      if (n.name != 'Arc') {
         n.value--;
       }
 
@@ -1348,9 +1372,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   // myImage = {image: ""};
   $scope.validateQuantity = function(data) {
     $scope.nostockquantity = false;
-    if ($scope.filter.quantity > parseInt(data.quantity)){
+    if ($scope.filter.quantity > parseInt(data.quantity)) {
       $scope.nostockquantity = true;
-    }else{
+    } else {
       $scope.nostockquantity = false;
 
     }
@@ -1494,21 +1518,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   });
   $scope.$watch('filter.text', function(newValue, oldValue) {
     console.log(newValue);
+    $scope.filter.text = newValue;
+    $('#example1').arctext('destroy');
+    $('#example1').html($(this).val().replace(/\n/newValue, '<br/>'));
+    $scope.changeArc();
+    // $('#example1').arctext({
+    //   radius: 1100
+    // });
+
   });
 
-    $scope.$watch('design.design[1].value', function(newValue, oldValue) {
-
-      var $example1	= $('#example1').hide();
-      $example1.show().arctext({radius: newValue});
-      $example1.arctext('set', {
-        radius		: newValue,
-        dir			: 1,
-        animation	: {
-          speed	: 300,
-          easing  : 'ease-out'
-        }
-      });
+  $scope.changeArc = function() {
+    var newValue = $scope.design.design[1].value;
+    var pos;
+    if(newValue>0)
+      pos=1;
+    else{
+      pos=-1;
+    }
+    var $example1 = $('#example1').hide();
+    $example1.show().arctext({
+      radius: newValue
     });
+    $example1.arctext('set', {
+      radius: newValue,
+      dir: pos,
+      animation: {
+        speed: 300,
+        easing: 'ease-out'
+      }
+    });
+  }
+
+  $scope.$watch('design.design[1].value', function(newValue, oldValue) {
+
+    // var $example1	= $('#example1').hide();
+    // $example1.show().arctext({radius: newValue});
+    // $example1.arctext('set', {
+    //   radius		: newValue,
+    //   dir			: 1,
+    //   animation	: {
+    //     speed	: 300,
+    //     easing  : 'ease-out'
+    //   }
+    // });
+    $scope.changeArc();
+  });
 
   $scope.$watch('design.design[3].value', function(newValue, oldValue) {
     _.merge($scope.filter.css, {
@@ -1531,11 +1586,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   });
 
   $scope.$watch('design.design[4].value', function(newValue, oldValue) {
-      var rotate = $scope.design.design[2].value;
-      _.merge($scope.filter.css, {
-        "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
-      });
+    var rotate = $scope.design.design[2].value;
+    _.merge($scope.filter.css, {
+      "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
     });
+  });
 
   $scope.changeJustify = function(val) {
     console.log(val);
@@ -1797,32 +1852,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }];
 
   $scope.design.design = [{
-      name: 'Size',
-      value: 100,
-      from: 10,
-      to: 200
-    },{
-    	name: 'Arc',
-      value: 100,
-      from: 0,
-      to: 300
-    },{
-      name: 'Rotation',
-      value: 0,
-      from: 0,
-      to: 360
-    }, {
-      name: 'Spacing',
-      value: 0,
-      from: 0,
-      to: 200
-    },{
-    	name: 'Stetch',
-      value: 40,
-      from: 20,
-      to: 200
-    }
-  ];
+    name: 'Size',
+    value: 100,
+    from: 10,
+    to: 200,
+    step:1,
+  }, {
+    name: 'Arc',
+    value: -1000,
+    from: -1000,
+    to: 1000,
+    step:1
+  }, {
+    name: 'Rotation',
+    value: 0,
+    from: 0,
+    to: 3602,
+    step:1
+  }, {
+    name: 'Spacing',
+    value: 0,
+    from: 0,
+    to: 2002,
+    step:1
+  }, {
+    name: 'Stetch',
+    value: 40,
+    from: 20,
+    to: 2002,
+    step:1
+  }];
 
   $scope.changedDis = function() {
     console.log("lkasdfj");
@@ -2170,8 +2229,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.logout = function() {
     $scope.showLogout = false;
-    NavigationService.logout(function(data){
-      if (data=="true") {
+    NavigationService.logout(function(data) {
+      if (data == "true") {
         if (window.location.hash == "#/profile") {
           $state.go('home');
         }

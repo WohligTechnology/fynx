@@ -27,7 +27,7 @@
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
 							<div class="on-img">
-								<span id="example1" name="distext" ng-style="filter.css" ng-bind="filter.text">{{filter.text}}</span>
+								<span id="example1"  name="distext" ng-style="filter.css" ng-bind="filter.text"></span>
 							</div>
 						</div>
 					</div>
@@ -333,7 +333,7 @@
 															</div>
 															<div class="col-xs-6">
 
-																<div data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="1" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
+																<div data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="{{des.step}}" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
 
 															</div>
 															<div class="col-xs-3">

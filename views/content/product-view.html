@@ -113,7 +113,7 @@
                         </div>
                         <div class="size-chart">
                             <span class="very-bold">Size</span>
-                            <button class="btn btn-tiny btn-gray btn-outline">Size Guide</button>
+                            <button class="btn btn-tiny btn-gray btn-outline" ng-click="sizeChart()">Size Guide</button>
 
                             <ul class="list-inline text-upper">
                                 <li ng-repeat="size in sizes" class="{{size.state}} {{size.style}}" ng-click="onSizeClick(size)">{{size.name}}</li>
