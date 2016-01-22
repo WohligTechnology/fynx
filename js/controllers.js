@@ -618,7 +618,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if ($scope.password.newpassword === $scope.password.confirmpassword) {
               NavigationService.changePassword($scope.password, function(data) {
                 console.log(data);
-                if (data.value == true) {
+                if (data == 1) {
                   $scope.addAlert("success", "Password changed successfully. ");
                   $scope.profile.changepasswordedit = 'edit';
                 } else {
@@ -638,8 +638,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           if ($scope.profile.billingaddressedit == 'edit') {
             $scope.profile.billingaddressedit = 'save';
           } else {
-            $scope.profile.billingaddressedit = 'edit';
+            $scope.allvalidation = [];
+            $scope.allvalidation = [{
+              field: $scope.updateuser.user.billingline1,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.billingcity,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.billingpincode,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.billingstate,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.billingcountry,
+              validation: ""
+            }];
+
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
             $scope.saveUser();
+            $scope.profile.billingaddressedit = 'edit';
+          }else {
+            $scope.addAlert("danger", "Enter Manditory Fields.");
+          }
           }
         }
         break;
@@ -648,8 +671,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           if ($scope.profile.shippingaddressedit == 'edit') {
             $scope.profile.shippingaddressedit = 'save';
           } else {
-            $scope.profile.shippingaddressedit = 'edit';
+            $scope.allvalidation = [];
+            $scope.allvalidation = [{
+              field: $scope.updateuser.user.shippingline1,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.shippingcity,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.shippingpincode,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.shippingstate,
+              validation: ""
+            }, {
+              field: $scope.updateuser.user.shippingcountry,
+              validation: ""
+            }];
+
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
             $scope.saveUser();
+            $scope.profile.shippingaddressedit = 'edit';
+          }else {
+            $scope.addAlert("danger", "Enter Manditory Fields.");
+          }
           }
         }
         break;
@@ -657,6 +703,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         {
 
         }
+    }
+  }
+
+
+    $scope.assign = function(sameasbilling,line1, line2, line3, city, pincode, state, country) {
+      if (sameasbilling == true) {
+      $scope.updateuser.user.shippingline1 = line1;
+      $scope.updateuser.user.shippingline2 = line2;
+      $scope.updateuser.user.shippingline3 = line3;
+      $scope.updateuser.user.shippingcity = city;
+      $scope.updateuser.user.shippingpincode = pincode;
+      $scope.updateuser.user.shippingstate = state;
+      $scope.updateuser.user.shippingcountry = country;
+    }
+    }
+
+
+  $scope.sameAsBilling = function(sameasbilling) {
+
+    if (sameasbilling == true) {
+      $scope.assign($scope.updateuser.user.billingline1, $scope.updateuser.user.billingline2, $scope.updateuser.user.billingline3, $scope.updateuser.user.billingcity, $scope.updateuser.user.billingpincode, $scope.updateuser.user.billingstate, $scope.updateuser.user.billingcountry);
     }
   }
 
@@ -745,7 +812,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.loadcart();
 
   $scope.deleteCart = function(cart) {
-    NavigationService.deletecart(cart.id, function(data, status) {
+    console.log(cart);
+    NavigationService.deletecart(cart.id,cart.design, function(data, status) {
       $scope.loadcart();
       myfunction();
       $scope.inTotalCart();
@@ -1489,7 +1557,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.fonts = [{
     family: "Advent Pro"
   }, {
+    family: "Roboto"
+  }, {
+    family: "Slabo 27px"
+  }, {
     family: "Roboto Condensed"
+  }, {
+    family: "Oswald"
+  }, {
+    family: "Fjalla One"
+  }, {
+    family: "Abel"
+  }, {
+    family: "Archivo Narrow"
+  }, {
+    family: "Ubuntu Condensed"
+  }, {
+    family: "Cuprum"
+  }, {
+    family: "Varela Round"
+  }, {
+    family: "Istok Web"
+  }, {
+    family: "News Cycle"
   }];
 
   $scope.showSelecter = function() {
@@ -2068,6 +2158,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         console.log(data);
         if (data != "false") {
           NavigationService.setUser(data);
+          myfunction();
           window.location.reload();
           // $state.go('setting');
         } else {
@@ -2085,6 +2176,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           $state.go('home');
         }
         $.jStorage.flush();
+        window.location.reload();
       }
     });
   }

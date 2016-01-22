@@ -643,8 +643,8 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
-		deletecart: function (id, callback) {
-			return $http.get(adminurl + 'deletecart?id=' + id, {}, {
+		deletecart: function (id, design, callback) {
+			return $http.get(adminurl + 'deletecart?id=' + id + '&design=' + design, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
@@ -659,7 +659,7 @@ var navigationservice = angular.module('navigationservice', [])
 				}
 			}).success(callback);
 		},
-		changepassword: function (password, callback) {
+		changePassword: function (password, callback) {
 			$http({
 				url: adminurl + 'changepassword',
 				method: 'POST',

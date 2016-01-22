@@ -86,7 +86,7 @@
 								<p>SIZES: <span>S,M,L,XL,XXL,XXXL</span> </p>
 								<p>FABRIC: <span>100% Pre-Shrunk Cotton</span></p>
 								<p class="b-color" ng-init="showMore = false;" ng-click="showMore = !showMore;"> <span ng-show="showMore" class="bold">-</span><span ng-show="!showMore" class="bold">+</span> SHOW <span ng-show="showMore" class="bold">LESS</span> <span ng-show="!showMore" class="bold">MORE</span> INFORMATION</p>
-								<p ng-show="showMore" class="no-transform"><span>Our Best Selling and Most cost-effective t-shirt. My Fynx Super Premium Compressed  Cotton T-shirt is standard crew-neck T-shirt, made of 100% Super premium pre-shrunk cotton with Bio-wash. It is available in various Colours.</span></p>
+								<p ng-show="showMore" class="no-transform"><span ng-bind-html="images.description"></span></p>
 
 
 								<div class="color-pick">

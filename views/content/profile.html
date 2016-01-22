@@ -82,28 +82,28 @@
 					<div ng-if="profile.billingaddressedit=='save'">
 						<div class="form-group">
 							<label>Line1*</label>
-							<input class="form-control" ng-model="updateuser.user.billingline1" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline1" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
 						</div>
 						<div class="form-group">
 							<label>Line2</label>
-							<input class="form-control" ng-model="updateuser.user.billingline2" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline2" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
 						</div>
 						<div class="form-group">
 							<label>Line3</label>
-							<input class="form-control" ng-model="updateuser.user.billingline3" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline3" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
 						</div>
 
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>City*</label>
-									<input class="form-control" ng-model="updateuser.user.billingcity" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingcity" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pincode*</label>
-									<input class="form-control" ng-model="updateuser.user.billingpincode" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingpincode" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
 								</div>
 							</div>
 						</div>
@@ -112,14 +112,14 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>State*</label>
-									<input class="form-control" ng-model="updateuser.user.billingstate" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingstate" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
-										<select ng-model="updateuser.user.billingcountry">
+										<select ng-model="updateuser.user.billingcountry" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)">
 											<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
 										</select>
 										<span class="only-border"></span>
@@ -142,6 +142,9 @@
 						<br>{{user.shippingstate}}  {{user.shippingcountry}}
 					</p>
 					<div ng-if="profile.shippingaddressedit=='save'">
+						<div class="form-group i-check">
+							<input type="checkbox" class="iagree" ng-model="sameasbilling" ng-change="sameAsBilling(sameasbilling)">Same as billing address
+						</div>
 						<div class="form-group">
 							<label>Line1*</label>
 							<input class="form-control" ng-model="updateuser.user.shippingline1" type="text">
