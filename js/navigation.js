@@ -520,19 +520,21 @@ var navigationservice = angular.module('navigationservice', [])
 		link: "#/product/women",
 		classis: "active",
 		subnav: []
-    }, {
-		name: "Infants",
-		active: "",
-		link: "#/product/infants",
-		classis: "active",
-		subnav: []
-    }, {
-		name: "Pets",
-		active: "",
-		link: "#/product/pets",
-		classis: "active",
-		subnav: []
-    }, {
+    },
+//					  {
+//		name: "Infants",
+//		active: "",
+//		link: "#/product/infants",
+//		classis: "active",
+//		subnav: []
+//    }, {
+//		name: "Pets",
+//		active: "",
+//		link: "#/product/pets",
+//		classis: "active",
+//		subnav: []
+//    },
+					   {
 		name: "Custom",
 		active: "",
 		link: "#/custom",
