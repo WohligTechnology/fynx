@@ -1516,12 +1516,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "font-size": newValue
     });
   });
+  $scope.isArcChange = false;
   $scope.$watch('filter.text', function(newValue, oldValue) {
-    console.log(newValue);
     $scope.filter.text = newValue;
-    $('#example1').arctext('destroy');
-    $('#example1').html($(this).val().replace(/\n/newValue, '<br/>'));
-    $scope.changeArc();
+    console.log($scope.isArcChange);
+    if ($scope.isArcChange == true) {
+      $('#example1').show().arctext({
+        radius: newValue
+      });
+      $('#example1').arctext('destroy');
+      // $('#example1').html($(this).val().replace(newValue));
+    }
+
+    // $scope.changeArc();
     // $('#example1').arctext({
     //   radius: 1100
     // });
@@ -1562,6 +1569,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //     easing  : 'ease-out'
     //   }
     // });
+    $scope.isArcChange = true;
     $scope.changeArc();
   });
 
