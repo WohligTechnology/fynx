@@ -1,7 +1,231 @@
-$screen-xs: 480px !default;
-$screen-sm: 768px !default;
-$screen-md: 992px !default;
-$screen-lg: 1200px !default;
+//mobile
+@media (max-width:$screen-xs-max) {
+  .navbar-collapse {
+    background-color: white;
+  }
+  .product-slideset {
+    ul.nav {
+      li {
+        a {
+          padding: 3px 15px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .btn-middle-big {
+    font-size: 20px;
+    padding: 0 7%;
+  }
+  .breadcrumb {
+    h3 {
+      margin: 50px 0 25px;
+      font-size: 18px;
+    }
+    .mascot {
+      position: absolute;
+      width: 125px;
+      bottom: -48px;
+      right: 0;
+      z-index: 9;
+    }
+  }
+  .btn-dangers {
+    padding: 8px 5px !important;
+    font-size: 10px;
+  }
+  .detail-tab {
+    .tab-content p {
+      margin: 0 0 15px;
+      font-size: 10px;
+    }
+  }
+  h1.danger.text-center.bold-head {
+    font-size: 24px;
+  }
+  .big-text {
+    font-size: 18px;
+  }
+  .box-outlined {
+    font-size: 20px;
+  }
+  .navbar-fixed-top {
+    .navbar-collapse {
+      max-height: 340px;
+      padding: 0;
+    }
+  }
+  .menu {
+    .nav {
+      width: 100%;
+    }
+    > li {
+      width: 100%;
+      a {
+        padding-bottom: 20px;
+        padding-top: 20px;
+      }
+    }
+  }
+  .navbar-nav {
+    li {
+      a {
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-bottom: 1px solid #f5f5f5;
+      }
+    }
+  }
+  .follow-text {
+    margin-top: 20px;
+  }
+  .flexslider {
+    .flex-direction-nav {
+      a {
+        height: 30px;
+        width: 30px;
+        &:before {
+          font-size: 25px;
+        }
+      }
+    }
+  }
+  .text-above {
+    h3 {
+      font-size: 24px;
+      letter-spacing: -2px;
+    }
+    p {
+      margin-bottom: 5px;
+      line-height: 110%;
+    }
+  }
+  .banner {
+    padding: 60px 0;
+  }
+  .logo {
+    left: 10px;
+    top: 22px;
+    img {
+      height: 80px;
+    }
+  }
+  .fynx-select {
+    height: 40px;
+  }
+  .con-btn {
+    margin-top: 5px;
+  }
+  .tab-title {
+    font-size: 10px;
+  }
+  .detail-tab .nav-tabs > li + li {
+    margin-left: 12px;
+  }
+  .edit_content {
+    text-transform: uppercase;
+    padding-top: 0;
+  }
+  .m-30 {
+    margin-top: 15px !important;
+  }
+  .order-table table thead tr {
+    th {
+      padding: 4px 5px;
+      font-size: 12px;
+    }
+    td {
+      font-size: 18px !important;
+    }
+  }
+  .account {
+    margin-bottom: 0;
+    ul li {
+      padding: 5px 15px;
+    }
+  }
+  .mar-btm {
+    margin-bottom: 30px;
+  }
+  .font-big p {
+    line-height: 150%;
+  }
+  .m-45 {
+    margin-top: 29px;
+  }
+  .order-table {
+    table {
+      .desktop {
+        display: none;
+      }
+      tbody tr td.mobile {
+        padding: 8px 0 0;
+        display: block;
+        text-align: left;
+        span.mobile {
+          padding-right: 10px;
+          color: red;
+          width: 110px;
+          display: block;
+          float: left;
+        }
+      }
+    }
+  }
+  .product-list .image-holder {
+    height: 200px;
+  }
+  .site-map li + li:before {
+    font-size: 10px;
+    margin-right: 0;
+  }
+  .site-map li + li {
+    margin-left: 0;
+  }
+  .site-map {
+    a {
+      font-size: 11px;
+    }
+  }
+  .right-bar h3 {
+    font-size: 20px;
+  }
+  .text-bold td {
+    font-size: 18px !important;
+  }
+  .min-hght {
+    min-height: 400px;
+  }
+  .login-tab {
+    .fixed-down {
+      position: absolute;
+      bottom: -25px;
+      right: -30px;
+      width: 90px;
+    }
+    .button-set .btn {
+      padding: 1px 20px 0;
+      font-size: 16px;
+    }
+  }
+  .navbar-toggle {
+    right: 0;
+    top: 12px;
+  }
+  .large-Modal {
+    .modal-dialog {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  .mobile-margin {
+    margin-top: 20px;
+  }
+  .mobile-margintop {
+    margin-top: 5px;
+  }
+}
+
 @media (max-width: $screen-xs-max) {
 	.navbar-collapse {
 		background-color: white;
@@ -16,6 +240,18 @@ $screen-lg: 1200px !default;
 			}
 		}
 	}
+}
+
+@media (min-width: $screen-sm-min) {
+  .left-bar {
+    width: 175px;
+  }
+  .btn-dangers {
+    padding: 8px 10px !important;
+  }
+  .m-17 {
+    margin: 0 6px !important;
+  }
 }
 
 @media (min-width: $screen-xs-max) {}
