@@ -1934,5 +1934,28 @@ h4.strong.font-smart {
 .edit_content p span {
   a { margin-left: 10px; }
 }
+.up-arrow {
+  @include position(absolute, -19px auto auto 25px);
+  color: $brand-danger;
+  font-size: 50px;
+}
+.layer-buttons {
+  button + button { margin-left: 15px; }
+}
+.ml-30 { margin-left: 30px !important; }
+.bod-x {
+  padding: 7px;
+  background-color: white;
+  border: 1px solid $brand-danger;
+}
+
+//previewdesign
+.close-button {
+  @include square(20px);
+  @include position(absolute, 10px 10px auto auto);
+  background-color: $brand-danger;
+  cursor: pointer;
+  span i { color: white; }
+}
 
 @import "main/mobile";

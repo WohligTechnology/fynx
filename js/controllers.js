@@ -2005,6 +2005,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
+  $scope.previewDesign = function() {
+    $uibModal.open({
+      animation: true,
+      windowClass: 'large-Modal',
+      templateUrl: 'views/modal/previewdesign.html',
+      scope: $scope
+    })
+  }
+
 
   $scope.addToCart = function() {
     console.log($scope.filter);

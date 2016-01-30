@@ -6,14 +6,14 @@
 </div>
 <div class="container">
 	<div class="alert-postion">
- <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
- </div>
+		<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+	</div>
 	<hr>
 	<div class="product-detail">
 		<div class="text-center" ng-show="outofstock">
 			Item is out of stock
 		</div>
-		<div class="row" >
+		<div class="row">
 			<div class="col-md-5">
 				<div class="custom-img">
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
@@ -27,7 +27,7 @@
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
 							<div class="on-img">
-								<span id="example1"  name="distext" ng-style="filter.css" ng-bind="filter.text"></span>
+								<span id="example1" name="distext" ng-style="filter.css" ng-bind="filter.text"></span>
 							</div>
 						</div>
 					</div>
@@ -82,7 +82,7 @@
 							</uib-tab-heading>
 							<div class="edit_content">
 								<p>{{images.name}}</p>
-<!-- <span ng-if="size[0]">: {{size[0].name}}</span> <span ng-if="sizelength"> to </span>  <span ng-if="sizelength">{{sizelength.name}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b> -->
+								<!-- <span ng-if="size[0]">: {{size[0].name}}</span> <span ng-if="sizelength"> to </span>  <span ng-if="sizelength">{{sizelength.name}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b> -->
 								<p>SIZES: <span>S,M,L,XL,XXL,XXXL</span> <span class="size-chart"><a href="" class="danger bold">Size Chart</a></span></p>
 								<p>FABRIC: <span>100% Pre-Shrunk Cotton</span></p>
 								<p class="b-color" ng-init="showMore = false;" ng-click="showMore = !showMore;"> <span ng-show="showMore" class="bold">-</span><span ng-show="!showMore" class="bold">+</span> SHOW <span ng-show="showMore" class="bold">LESS</span> <span ng-show="!showMore" class="bold">MORE</span> INFORMATION</p>
@@ -133,7 +133,7 @@
 												</div>
 
 												<ul class="options list-unstyled" ng-show="showSelect">
-													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);"  style="font-family: '{{font.family}}'; font-weight: 700;">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
 												</ul>
@@ -144,7 +144,7 @@
 											<div class="color-pick">
 												<ul class="m-minus">
 													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
-														<p class="class-p">{{col.name}}kjhkhj</p>
+														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>
 												</ul>
@@ -298,6 +298,63 @@
 											</div>
 										</div>
 									</div>
+
+									<div class="row" ng-show="text-properties">
+										<div class="col-md-12">
+											<div class="slider-show" ng-show="showSize">
+												<div class="rang-slider">
+													<span class="up-arrow"><i class="fa fa-caret-up"></i></span>
+													<div class="ul-class">
+														<div class="row" ng-repeat="des in design.design">
+															<div class="col-xs-2">
+																<p class="mar0 f-size">{{des.name}}</p>
+															</div>
+															<div class="col-xs-8">
+
+																<div data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="{{des.step}}" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
+
+															</div>
+															<div class="col-xs-2">
+																<p class="range-value">{{des.value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-3 col-xs-12">
+																<div class="edit_content mt-10 front">
+																	<p>JUSTIFY</p>
+																</div>
+																<div class="fynx-select txt-img">
+																	<select ng-change="changeJustify(selectedJustify)" ng-model="selectedJustify">
+																		<option value="center">Center</option>
+																		<option value="left">Left</option>
+																		<option value="right">Right</option>
+																	</select>
+																	<span class="only-border"></span>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="edit_content mt-10 front">
+																	<p class="text-uppercase ml-30">Layer Order</p>
+																</div>
+																<div class="layer-buttons">
+																	<button class="btn bring-front bod-x ml-30"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x"><i class="fa fa-angle-down"></i> Send Backward</button>
+																</div>
+															</div>
+															<div class="col-md-3">
+																<div class="edit_content mt-10 front">
+																	<p class="text-uppercase">Alignment</p>
+																</div>
+																<div class="align-buttons">
+																	<button class="btn bod-x">Align to center</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 
 								<div class="front-text">
@@ -322,7 +379,7 @@
 												</div>
 
 												<ul class="options list-unstyled" ng-show="showSelect">
-													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);"  style="font-family: '{{font.family}}'; font-weight: 700;">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
 												</ul>
@@ -338,236 +395,172 @@
 													</li>
 												</ul>
 											</div>
-										</div>
-									</div>
-								</div>
 
-								<p>ADD IMAGE TO YOUR TSHIRT</p>
-								<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
-							</div>
-							<button class="btn btn-danger con-btn" ng-click="tabchange(3)">CONTINUE</button>
-						</uib-tab>
-						<uib-tab active="tab.addtext">
-							<uib-tab-heading ng-click="tabchange(3)">
-								<div class="icon-font">
-									<i class="flaticon flaticon-t-shirt"></i>
-								</div>
-								<div class="tab-title">Back</div>
-							</uib-tab-heading>
-							<div class="add-input">
+											<div class="second" ng-hide="showFirst">
 
-								<div class="first">
-									<div class="row">
-										<div class="col-md-10">
+												<!--//color-->
 
-											<div class="front">
-												<div class="edit_content">
-													<p>ENTER YOUR TEXT BELOW</p>
-												</div>
-												<div class="form-group">
-													<textarea type="text" class="form-control" rows="4" ng-model="filter.text" ng-change="textchange()"></textarea>
-												</div>
-											</div>
-										</div>
-									</div>
+												<div class="color-show" ng-show="first">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="color-bxs">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
 
-									<div class="row">
-										<div class="col-md-5">
-											<div class="edit_content mt-10 front">
-												<p>Font</p>
-											</div>
-											<div class="fynx-select">
-												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
-													{{selectedFont}}
-												</div>
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+																	</ul>
 
-													<ul class="options list-unstyled" ng-show="showSelect">
-														<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);"  style="font-family: '{{font.family}}'; font-weight: 700;">
-															{{font.family}}
-														</li>
-													</ul>
+																</div>
+																<div class="text-line p70">
+																	<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
 
-												<span class="only-border"></span>
-											</div>
-											<button class="btn btn-danger m-30 con-btn" ng-click="showorfirst();" ng-show="showFirst">ADD TO DESIGN</button>
-										</div>
-
-										<div class="col-md-5" ng-hide="showFirst">
-											<div class="color-pick">
-												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
-														<p class="class-p">{{col.name}}</p>
-														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
-													</li>
-												</ul>
-											</div>
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="second" ng-hide="showFirst">
-
-									<!--//color-->
-
-									<div class="color-show" ng-show="first">
-										<div class="row">
-											<div class="col-md-10">
-												<div class="color-bxs">
-													<div class="close-btn pull-right" ng-click="closeandshowsize();">
-														<img src="img/close.jpg">
-													</div>
-													<div class="color-pick mar">
-
-														<ul>
-															<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
-																<div class="color-bx" ng-style="{'background':col.color}"></div>
-															</li>
-														</ul>
-
-													</div>
-													<div class="text-line p70">
-														<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-													</div>
-
-												</div>
-											</div>
-										</div>
-									</div>
-
-
-									<!--//strok-->
-
-
-									<div class="color-show" ng-show="second">
-										<div class="row">
-											<div class="col-md-10">
-												<div class="strok ">
-													<div class="close-btn pull-right" ng-click="closeandshowsize();">
-														<img src="img/close.jpg">
-													</div>
-													<div class="color-pick mar">
-
-														<ul>
-															<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
-																<div class="color-bx" ng-style="{'background':col.color}"></div>
-															</li>
-
-
-														</ul>
-
-													</div>
-													<div class="text-line ">
-														<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-													</div>
-													<div class="text-line">
-
-
-														<div class="row ">
-															<div class="col-xs-2">
-																<p class="mar0 f-size">Weight</p>
-															</div>
-															<div class="col-xs-8">
-
-																<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
-
-															</div>
-															<div class="col-xs-2">
-																<p class="range-value">{{items[3].value}}</p>
-															</div>
-														</div>
-
-														<div class="row ">
-															<div class="col-xs-2">
-																<p class="mar0 f-size">Offset</p>
-															</div>
-															<div class="col-xs-8 text-center">
-																<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
-																<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
-															</div>
-															<div class="col-xs-2">
-																<p class="range-value">{{items[4].value}}</p>
 															</div>
 														</div>
 													</div>
-
 												</div>
+
+
+												<!--//strok-->
+
+
+												<div class="color-show" ng-show="second">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="strok ">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+
+
+																	</ul>
+
+																</div>
+																<div class="text-line ">
+																	<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+																<div class="text-line">
+
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Weight</p>
+																		</div>
+																		<div class="col-xs-8">
+
+																			<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
+
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[3].value}}</p>
+																		</div>
+																	</div>
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Offset</p>
+																		</div>
+																		<div class="col-xs-8 text-center">
+																			<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
+																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[4].value}}</p>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<!--//shadow-->
+												<div class="color-show" ng-show="third">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="shadow ">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+
+
+																	</ul>
+
+																</div>
+																<div class="text-line ">
+																	<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+																<div class="text-line" ng-if="shadowColor!=''">
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Distance</p>
+																		</div>
+																		<div class="col-xs-8">
+																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[0].value}}</p>
+																		</div>
+																	</div>
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Angle</p>
+																		</div>
+																		<div class="col-xs-8 text-center">
+																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[1].value}}</p>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--//end-->
 											</div>
 										</div>
 									</div>
 
-									<!--//shadow-->
-									<div class="color-show" ng-show="third">
-										<div class="row">
-											<div class="col-md-10">
-												<div class="shadow ">
-													<div class="close-btn pull-right" ng-click="closeandshowsize();">
-														<img src="img/close.jpg">
-													</div>
-													<div class="color-pick mar">
-
-														<ul>
-															<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
-																<div class="color-bx" ng-style="{'background':col.color}"></div>
-															</li>
-
-
-														</ul>
-
-													</div>
-													<div class="text-line ">
-														<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-													</div>
-													<div class="text-line" ng-if="shadowColor!=''">
-														<div class="row ">
-															<div class="col-xs-2">
-																<p class="mar0 f-size">Distance</p>
-															</div>
-															<div class="col-xs-8">
-																<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
-
-															</div>
-															<div class="col-xs-2">
-																<p class="range-value">{{items[0].value}}</p>
-															</div>
-														</div>
-
-														<div class="row ">
-															<div class="col-xs-2">
-																<p class="mar0 f-size">Angle</p>
-															</div>
-															<div class="col-xs-8 text-center">
-																<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
-																<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
-															</div>
-															<div class="col-xs-2">
-																<p class="range-value">{{items[1].value}}</p>
-															</div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-									</div>
-									<!--//end-->
-									<div class="slider-show" ng-show="showSize">
-										<div class="row">
-											<div class="col-md-10">
+									<div class="row" ng-show="text-properties">
+										<div class="col-md-12">
+											<div class="slider-show" ng-show="showSize">
 												<div class="rang-slider">
+													<span class="up-arrow"><i class="fa fa-caret-up"></i></span>
 													<div class="ul-class">
 														<div class="row" ng-repeat="des in design.design">
-															<div class="col-xs-3">
+															<div class="col-xs-2">
 																<p class="mar0 f-size">{{des.name}}</p>
 															</div>
-															<div class="col-xs-6">
+															<div class="col-xs-8">
 
 																<div data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="{{des.step}}" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
 
 															</div>
-															<div class="col-xs-3">
+															<div class="col-xs-2">
 																<p class="range-value">{{des.value}}</p>
 															</div>
 														</div>
@@ -585,38 +578,544 @@
 																	<span class="only-border"></span>
 																</div>
 															</div>
-															<!-- <div class="col-md-3 col-xs-4">
+															<div class="col-md-6">
 																<div class="edit_content mt-10 front">
-																	<p>LAYER ORDER</p>
+																	<p class="text-uppercase ml-30">Layer Order</p>
 																</div>
-																<button class="btn btn-dangers "><i class="fa fa-angle-up"></i> Bring Forward</button>
+																<div class="layer-buttons">
+																	<button class="btn bring-front bod-x ml-30"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x"><i class="fa fa-angle-down"></i> Send Backward</button>
+																</div>
 															</div>
-															<div class="col-md-3 col-xs-4">
-
-																<button class="btn btn-dangers m-45 "><i class="fa fa-angle-down"></i> Send Backward</button>
-															</div> -->
-															<!-- <div class="col-md-3 col-xs-4">
+															<div class="col-md-3">
 																<div class="edit_content mt-10 front">
-																	<p>Alignment</p>
+																	<p class="text-uppercase">Alignment</p>
 																</div>
-																<button class="btn btn-dangers"><i class="fa fa-align-center"></i> Align to center</button>
-															</div> -->
-
+																<div class="align-buttons">
+																	<button class="btn bod-x">Align to center</button>
+																</div>
+															</div>
 														</div>
-														<button class="text-center btn btn-danger m-30 con-btn" ng-click="closeorfirst()">Cancel</button>
 													</div>
-
 												</div>
 											</div>
 										</div>
+									</div>
+								</div>
+
+								<p>ADD IMAGE TO YOUR TSHIRT</p>
+								<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
+							</div>
+							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
+							<button class="btn btn-danger con-btn" ng-click="tabchange(3)">ADD TO DESIGN</button>
+						</uib-tab>
+						<uib-tab active="tab.addtext">
+							<uib-tab-heading ng-click="tabchange(3)">
+								<div class="icon-font">
+									<i class="flaticon flaticon-t-shirt"></i>
+								</div>
+								<div class="tab-title">Back</div>
+							</uib-tab-heading>
+							<div class="add-input">
+
+								<div class="front-text">
+									<div class="row">
+										<div class="col-md-7">
+											<div class="front">
+												<div class="edit_content">
+													<p>ENTER YOUR TEXT BELOW</p>
+												</div>
+												<div class="form-group">
+													<textarea type="text" class="form-control" rows="5" ng-model="filter.text" ng-change="textchange()"></textarea>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-5">
+											<div class="edit_content front">
+												<p>Font</p>
+											</div>
+											<div class="fynx-select">
+												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
+													{{selectedFont}}
+												</div>
+
+												<ul class="options list-unstyled" ng-show="showSelect">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
+														{{font.family}}
+													</li>
+												</ul>
+
+												<span class="only-border"></span>
+											</div>
+
+											<div class="color-pick">
+												<ul class="m-minus">
+													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+														<p class="class-p">{{col.name}}</p>
+														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="second" ng-hide="showFirst">
+
+												<!--//color-->
+
+												<div class="color-show" ng-show="first">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="color-bxs">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+																	</ul>
+
+																</div>
+																<div class="text-line p70">
+																	<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
 
 
+												<!--//strok-->
+
+
+												<div class="color-show" ng-show="second">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="strok ">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+
+
+																	</ul>
+
+																</div>
+																<div class="text-line ">
+																	<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+																<div class="text-line">
+
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Weight</p>
+																		</div>
+																		<div class="col-xs-8">
+
+																			<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
+
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[3].value}}</p>
+																		</div>
+																	</div>
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Offset</p>
+																		</div>
+																		<div class="col-xs-8 text-center">
+																			<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
+																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[4].value}}</p>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<!--//shadow-->
+												<div class="color-show" ng-show="third">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="shadow ">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+
+
+																	</ul>
+
+																</div>
+																<div class="text-line ">
+																	<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+																<div class="text-line" ng-if="shadowColor!=''">
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Distance</p>
+																		</div>
+																		<div class="col-xs-8">
+																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[0].value}}</p>
+																		</div>
+																	</div>
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Angle</p>
+																		</div>
+																		<div class="col-xs-8 text-center">
+																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[1].value}}</p>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--//end-->
+											</div>
+										</div>
 									</div>
 
+									<div class="row" ng-show="text-properties">
+										<div class="col-md-12">
+											<div class="slider-show" ng-show="showSize">
+												<div class="rang-slider">
+													<span class="up-arrow"><i class="fa fa-caret-up"></i></span>
+													<div class="ul-class">
+														<div class="row" ng-repeat="des in design.design">
+															<div class="col-xs-2">
+																<p class="mar0 f-size">{{des.name}}</p>
+															</div>
+															<div class="col-xs-8">
 
+																<div data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="{{des.step}}" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
+
+															</div>
+															<div class="col-xs-2">
+																<p class="range-value">{{des.value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-3 col-xs-12">
+																<div class="edit_content mt-10 front">
+																	<p>JUSTIFY</p>
+																</div>
+																<div class="fynx-select txt-img">
+																	<select ng-change="changeJustify(selectedJustify)" ng-model="selectedJustify">
+																		<option value="center">Center</option>
+																		<option value="left">Left</option>
+																		<option value="right">Right</option>
+																	</select>
+																	<span class="only-border"></span>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="edit_content mt-10 front">
+																	<p class="text-uppercase ml-30">Layer Order</p>
+																</div>
+																<div class="layer-buttons">
+																	<button class="btn bring-front bod-x ml-30"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x"><i class="fa fa-angle-down"></i> Send Backward</button>
+																</div>
+															</div>
+															<div class="col-md-3">
+																<div class="edit_content mt-10 front">
+																	<p class="text-uppercase">Alignment</p>
+																</div>
+																<div class="align-buttons">
+																	<button class="btn bod-x">Align to center</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-									<button class="btn btn-danger con-btn" ng-click="tabchange(4)">CONTINUE</button>
+
+								<div class="front-text">
+									<div class="row">
+										<div class="col-md-7">
+											<div class="front">
+												<div class="edit_content">
+													<p>ENTER YOUR TEXT BELOW</p>
+												</div>
+												<div class="form-group">
+													<textarea type="text" class="form-control" rows="5" ng-model="filter.text" ng-change="textchange()"></textarea>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-5">
+											<div class="edit_content front">
+												<p>Font</p>
+											</div>
+											<div class="fynx-select">
+												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
+													{{selectedFont}}
+												</div>
+
+												<ul class="options list-unstyled" ng-show="showSelect">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
+														{{font.family}}
+													</li>
+												</ul>
+
+												<span class="only-border"></span>
+											</div>
+
+											<div class="color-pick">
+												<ul class="m-minus">
+													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+														<p class="class-p">{{col.name}}</p>
+														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="second" ng-hide="showFirst">
+
+												<!--//color-->
+
+												<div class="color-show" ng-show="first">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="color-bxs">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+																	</ul>
+
+																</div>
+																<div class="text-line p70">
+																	<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+												<!--//strok-->
+
+
+												<div class="color-show" ng-show="second">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="strok ">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+
+
+																	</ul>
+
+																</div>
+																<div class="text-line ">
+																	<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+																<div class="text-line">
+
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Weight</p>
+																		</div>
+																		<div class="col-xs-8">
+
+																			<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
+
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[3].value}}</p>
+																		</div>
+																	</div>
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Offset</p>
+																		</div>
+																		<div class="col-xs-8 text-center">
+																			<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
+																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[4].value}}</p>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<!--//shadow-->
+												<div class="color-show" ng-show="third">
+													<div class="row">
+														<div class="col-md-10">
+															<div class="shadow ">
+																<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																	<img src="img/close.jpg">
+																</div>
+																<div class="color-pick mar">
+
+																	<ul>
+																		<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																			<div class="color-bx" ng-style="{'background':col.color}"></div>
+																		</li>
+
+
+																	</ul>
+
+																</div>
+																<div class="text-line ">
+																	<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																</div>
+																<div class="text-line" ng-if="shadowColor!=''">
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Distance</p>
+																		</div>
+																		<div class="col-xs-8">
+																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[0].value}}</p>
+																		</div>
+																	</div>
+
+																	<div class="row ">
+																		<div class="col-xs-2">
+																			<p class="mar0 f-size">Angle</p>
+																		</div>
+																		<div class="col-xs-8 text-center">
+																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																		</div>
+																		<div class="col-xs-2">
+																			<p class="range-value">{{items[1].value}}</p>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--//end-->
+											</div>
+										</div>
+									</div>
+
+									<div class="row" ng-show="text-properties">
+										<div class="col-md-12">
+											<div class="slider-show" ng-show="showSize">
+												<div class="rang-slider">
+													<span class="up-arrow"><i class="fa fa-caret-up"></i></span>
+													<div class="ul-class">
+														<div class="row" ng-repeat="des in design.design">
+															<div class="col-xs-2">
+																<p class="mar0 f-size">{{des.name}}</p>
+															</div>
+															<div class="col-xs-8">
+
+																<div data-range-slider data-floor="{{des.from}}" data-ceiling="{{des.to}}" data-step="{{des.step}}" data-precision="2" data-highlight="left" data-ng-model="des.value"></div>
+
+															</div>
+															<div class="col-xs-2">
+																<p class="range-value">{{des.value}}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-3 col-xs-12">
+																<div class="edit_content mt-10 front">
+																	<p>JUSTIFY</p>
+																</div>
+																<div class="fynx-select txt-img">
+																	<select ng-change="changeJustify(selectedJustify)" ng-model="selectedJustify">
+																		<option value="center">Center</option>
+																		<option value="left">Left</option>
+																		<option value="right">Right</option>
+																	</select>
+																	<span class="only-border"></span>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="edit_content mt-10 front">
+																	<p class="text-uppercase ml-30">Layer Order</p>
+																</div>
+																<div class="layer-buttons">
+																	<button class="btn bring-front bod-x ml-30"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x"><i class="fa fa-angle-down"></i> Send Backward</button>
+																</div>
+															</div>
+															<div class="col-md-3">
+																<div class="edit_content mt-10 front">
+																	<p class="text-uppercase">Alignment</p>
+																</div>
+																<div class="align-buttons">
+																	<button class="btn bod-x">Align to center</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<p>ADD IMAGE TO YOUR TSHIRT</p>
+								<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
 							</div>
+								<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
+								<button class="btn btn-danger con-btn" ng-click="tabchange(4)">ADD TO DESIGN</button>
+
 						</uib-tab>
 
 						<uib-tab active="tab.buy">
