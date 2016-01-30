@@ -119,7 +119,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-model="filter.text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-focus="firstTextSetting=true;secondTextSetting=false" ng-model="filter.text" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -150,156 +150,157 @@
 												</ul>
 											</div>
 
-											<div class="second" ng-hide="showFirst">
-
-												<!--//color-->
-
-												<div class="color-show" ng-show="first">
-													<div class="row">
-														<div class="col-md-10">
-															<div class="color-bxs">
-																<div class="close-btn pull-right" ng-click="closeandshowsize();">
-																	<img src="img/close.jpg">
-																</div>
-																<div class="color-pick mar">
-
-																	<ul>
-																		<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
-																			<div class="color-bx" ng-style="{'background':col.color}"></div>
-																		</li>
-																	</ul>
-
-																</div>
-																<div class="text-line p70">
-																	<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-
-
-												<!--//strok-->
-
-
-												<div class="color-show" ng-show="second">
-													<div class="row">
-														<div class="col-md-10">
-															<div class="strok ">
-																<div class="close-btn pull-right" ng-click="closeandshowsize();">
-																	<img src="img/close.jpg">
-																</div>
-																<div class="color-pick mar">
-
-																	<ul>
-																		<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
-																			<div class="color-bx" ng-style="{'background':col.color}"></div>
-																		</li>
-
-
-																	</ul>
-
-																</div>
-																<div class="text-line ">
-																	<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-																</div>
-																<div class="text-line">
-
-
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Weight</p>
-																		</div>
-																		<div class="col-xs-8">
-
-																			<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
-
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[3].value}}</p>
-																		</div>
-																	</div>
-
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Offset</p>
-																		</div>
-																		<div class="col-xs-8 text-center">
-																			<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
-																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[4].value}}</p>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-
-												<!--//shadow-->
-												<div class="color-show" ng-show="third">
-													<div class="row">
-														<div class="col-md-10">
-															<div class="shadow ">
-																<div class="close-btn pull-right" ng-click="closeandshowsize();">
-																	<img src="img/close.jpg">
-																</div>
-																<div class="color-pick mar">
-
-																	<ul>
-																		<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
-																			<div class="color-bx" ng-style="{'background':col.color}"></div>
-																		</li>
-
-
-																	</ul>
-
-																</div>
-																<div class="text-line ">
-																	<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-																</div>
-																<div class="text-line" ng-if="shadowColor!=''">
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Distance</p>
-																		</div>
-																		<div class="col-xs-8">
-																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
-
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[0].value}}</p>
-																		</div>
-																	</div>
-
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Angle</p>
-																		</div>
-																		<div class="col-xs-8 text-center">
-																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
-																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[1].value}}</p>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-												<!--//end-->
-											</div>
 										</div>
+										<div class="color-second">
+
+											<!--//color-->
+
+											<div class="color-show" ng-show="first">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="color-bxs">
+															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																<img src="img/close.jpg">
+															</div>
+															<div class="color-pick mar">
+
+																<ul>
+																	<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																		<div class="color-bx" ng-style="{'background':col.color}"></div>
+																	</li>
+																</ul>
+
+															</div>
+															<div class="text-line p70">
+																<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<!--//strok-->
+
+
+											<div class="color-show" ng-show="second">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="strok ">
+															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																<img src="img/close.jpg">
+															</div>
+															<div class="color-pick mar">
+
+																<ul>
+																	<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																		<div class="color-bx" ng-style="{'background':col.color}"></div>
+																	</li>
+
+
+																</ul>
+
+															</div>
+															<div class="text-line ">
+																<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+															</div>
+															<div class="text-line">
+
+
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Weight</p>
+																	</div>
+																	<div class="col-xs-8">
+
+																		<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
+
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[3].value}}</p>
+																	</div>
+																</div>
+
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Offset</p>
+																	</div>
+																	<div class="col-xs-8 text-center">
+																		<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
+																		<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[4].value}}</p>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!--//shadow-->
+											<div class="color-show" ng-show="third">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="shadow ">
+															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																<img src="img/close.jpg">
+															</div>
+															<div class="color-pick mar">
+
+																<ul>
+																	<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																		<div class="color-bx" ng-style="{'background':col.color}"></div>
+																	</li>
+
+
+																</ul>
+
+															</div>
+															<div class="text-line ">
+																<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+															</div>
+															<div class="text-line" ng-if="shadowColor!=''">
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Distance</p>
+																	</div>
+																	<div class="col-xs-8">
+																		<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[0].value}}</p>
+																	</div>
+																</div>
+
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Angle</p>
+																	</div>
+																	<div class="col-xs-8 text-center">
+																		<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																		<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[1].value}}</p>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--//end-->
+										</div>
+
 									</div>
 
-									<div class="row" ng-show="text-properties">
+									<div class="row" ng-show="firstTextSetting">
 										<div class="col-md-12">
 											<div class="slider-show" ng-show="showSize">
 												<div class="rang-slider">
@@ -365,7 +366,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-model="filter.text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-focus="secondTextSetting=true;firstTextSetting=false" ng-model="filter.text" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -396,156 +397,157 @@
 												</ul>
 											</div>
 
-											<div class="second" ng-hide="showFirst">
-
-												<!--//color-->
-
-												<div class="color-show" ng-show="first">
-													<div class="row">
-														<div class="col-md-10">
-															<div class="color-bxs">
-																<div class="close-btn pull-right" ng-click="closeandshowsize();">
-																	<img src="img/close.jpg">
-																</div>
-																<div class="color-pick mar">
-
-																	<ul>
-																		<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
-																			<div class="color-bx" ng-style="{'background':col.color}"></div>
-																		</li>
-																	</ul>
-
-																</div>
-																<div class="text-line p70">
-																	<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-
-
-												<!--//strok-->
-
-
-												<div class="color-show" ng-show="second">
-													<div class="row">
-														<div class="col-md-10">
-															<div class="strok ">
-																<div class="close-btn pull-right" ng-click="closeandshowsize();">
-																	<img src="img/close.jpg">
-																</div>
-																<div class="color-pick mar">
-
-																	<ul>
-																		<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
-																			<div class="color-bx" ng-style="{'background':col.color}"></div>
-																		</li>
-
-
-																	</ul>
-
-																</div>
-																<div class="text-line ">
-																	<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-																</div>
-																<div class="text-line">
-
-
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Weight</p>
-																		</div>
-																		<div class="col-xs-8">
-
-																			<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
-
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[3].value}}</p>
-																		</div>
-																	</div>
-
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Offset</p>
-																		</div>
-																		<div class="col-xs-8 text-center">
-																			<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
-																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[4].value}}</p>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-
-												<!--//shadow-->
-												<div class="color-show" ng-show="third">
-													<div class="row">
-														<div class="col-md-10">
-															<div class="shadow ">
-																<div class="close-btn pull-right" ng-click="closeandshowsize();">
-																	<img src="img/close.jpg">
-																</div>
-																<div class="color-pick mar">
-
-																	<ul>
-																		<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
-																			<div class="color-bx" ng-style="{'background':col.color}"></div>
-																		</li>
-
-
-																	</ul>
-
-																</div>
-																<div class="text-line ">
-																	<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
-																</div>
-																<div class="text-line" ng-if="shadowColor!=''">
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Distance</p>
-																		</div>
-																		<div class="col-xs-8">
-																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
-
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[0].value}}</p>
-																		</div>
-																	</div>
-
-																	<div class="row ">
-																		<div class="col-xs-2">
-																			<p class="mar0 f-size">Angle</p>
-																		</div>
-																		<div class="col-xs-8 text-center">
-																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
-																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
-																		</div>
-																		<div class="col-xs-2">
-																			<p class="range-value">{{items[1].value}}</p>
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-														</div>
-													</div>
-												</div>
-												<!--//end-->
-											</div>
 										</div>
+										<div class="color-second" ng-hide="showFirst">
+
+											<!--//color-->
+
+											<div class="color-show" ng-show="first">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="color-bxs">
+															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																<img src="img/close.jpg">
+															</div>
+															<div class="color-pick mar">
+
+																<ul>
+																	<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																		<div class="color-bx" ng-style="{'background':col.color}"></div>
+																	</li>
+																</ul>
+
+															</div>
+															<div class="text-line p70">
+																<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<!--//strok-->
+
+
+											<div class="color-show" ng-show="second">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="strok ">
+															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																<img src="img/close.jpg">
+															</div>
+															<div class="color-pick mar">
+
+																<ul>
+																	<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																		<div class="color-bx" ng-style="{'background':col.color}"></div>
+																	</li>
+
+
+																</ul>
+
+															</div>
+															<div class="text-line ">
+																<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+															</div>
+															<div class="text-line">
+
+
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Weight</p>
+																	</div>
+																	<div class="col-xs-8">
+
+																		<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
+
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[3].value}}</p>
+																	</div>
+																</div>
+
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Offset</p>
+																	</div>
+																	<div class="col-xs-8 text-center">
+																		<div data-range-slider data-floor="100" data-ceiling="1000" data-step="50" data-precision="2" data-highlight="left" data-ng-model="item[4].value"></div>
+																		<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[4].value}}</p>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!--//shadow-->
+											<div class="color-show" ng-show="third">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="shadow ">
+															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+																<img src="img/close.jpg">
+															</div>
+															<div class="color-pick mar">
+
+																<ul>
+																	<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																		<div class="color-bx" ng-style="{'background':col.color}"></div>
+																	</li>
+
+
+																</ul>
+
+															</div>
+															<div class="text-line ">
+																<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+															</div>
+															<div class="text-line" ng-if="shadowColor!=''">
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Distance</p>
+																	</div>
+																	<div class="col-xs-8">
+																		<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[0].value}}</p>
+																	</div>
+																</div>
+
+																<div class="row ">
+																	<div class="col-xs-2">
+																		<p class="mar0 f-size">Angle</p>
+																	</div>
+																	<div class="col-xs-8 text-center">
+																		<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																		<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
+																	</div>
+																	<div class="col-xs-2">
+																		<p class="range-value">{{items[1].value}}</p>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--//end-->
+										</div>
+
 									</div>
 
-									<div class="row" ng-show="text-properties">
+									<div class="row" ng-show="secondTextSetting">
 										<div class="col-md-12">
 											<div class="slider-show" ng-show="showSize">
 												<div class="rang-slider">
