@@ -143,7 +143,7 @@
 
 											<div class="color-pick">
 												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index,0);">
 														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>
@@ -302,7 +302,7 @@
 
 									<div class="row" ng-show="firstTextSetting">
 										<div class="col-md-12">
-											<div class="slider-show" ng-show="showSize">
+											<div class="slider-show" ng-show="showSize1">
 												<div class="rang-slider">
 													<span class="up-arrow"><i class="fa fa-caret-up"></i></span>
 													<div class="ul-class">
@@ -390,7 +390,7 @@
 
 											<div class="color-pick">
 												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index,1);">
 														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>
@@ -398,15 +398,15 @@
 											</div>
 
 										</div>
-										<div class="color-second" ng-hide="showFirst">
+										<div class="color-second">
 
 											<!--//color-->
 
-											<div class="color-show" ng-show="first">
+											<div class="color-show" ng-show="first1">
 												<div class="row">
 													<div class="col-md-12">
 														<div class="color-bxs">
-															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+															<div class="close-btn pull-right" ng-click="closeandshowsize1();">
 																<img src="img/close.jpg">
 															</div>
 															<div class="color-pick mar">
@@ -431,11 +431,11 @@
 											<!--//strok-->
 
 
-											<div class="color-show" ng-show="second">
+											<div class="color-show" ng-show="second1">
 												<div class="row">
 													<div class="col-md-12">
 														<div class="strok ">
-															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+															<div class="close-btn pull-right" ng-click="closeandshowsize1();">
 																<img src="img/close.jpg">
 															</div>
 															<div class="color-pick mar">
@@ -489,11 +489,11 @@
 											</div>
 
 											<!--//shadow-->
-											<div class="color-show" ng-show="third">
+											<div class="color-show" ng-show="third1">
 												<div class="row">
 													<div class="col-md-12">
 														<div class="shadow ">
-															<div class="close-btn pull-right" ng-click="closeandshowsize();">
+															<div class="close-btn pull-right" ng-click="closeandshowsize1();">
 																<img src="img/close.jpg">
 															</div>
 															<div class="color-pick mar">
@@ -659,7 +659,7 @@
 												</ul>
 											</div>
 
-											<div class="second" ng-hide="showFirst">
+											<div class="second">
 
 												<!--//color-->
 

@@ -1538,10 +1538,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.changeArc = function() {
     var newValue = $scope.design.design[1].value;
     var pos;
-    if(newValue>0)
-      pos=1;
-    else{
-      pos=-1;
+    if (newValue > 0)
+      pos = 1;
+    else {
+      pos = -1;
     }
     var $example1 = $('#example1').hide();
     $example1.show().arctext({
@@ -1658,23 +1658,66 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
   };
 
-  $scope.changeColor = function(index) {
+  $scope.changeColor = function(index, val) {
     $scope.showSize = false;
     $scope.isfront = false;
     console.log(index);
-    if (index == 0) {
-      $scope.first = true;
-      $scope.second = false;
-      $scope.third = false;
-    } else if (index == 1) {
-      $scope.first = false;
-      $scope.second = true;
-      $scope.third = false;
-    } else {
-      $scope.first = false;
-      $scope.second = false;
-      $scope.third = true;
+    if (val==0) {
+      switch (index) {
+        case 0:
+          {
+            $scope.first = true;
+            $scope.second = false;
+            $scope.third = false;
+          }
+          break;
+        case 1:
+          {
+            $scope.first = false;
+            $scope.second = true;
+            $scope.third = false;
+          }
+          break;
+        case 2:
+          {
+            $scope.first = false;
+            $scope.second = false;
+            $scope.third = true;
+          }
+          break;
+
+        default:
+
+      }
+    }else{
+      switch (index) {
+        case 0:
+          {
+            $scope.first1 = true;
+            $scope.second1 = false;
+            $scope.third1 = false;
+          }
+          break;
+        case 1:
+          {
+            $scope.first1 = false;
+            $scope.second1 = true;
+            $scope.third1 = false;
+          }
+          break;
+        case 2:
+          {
+            $scope.first1 = false;
+            $scope.second1 = false;
+            $scope.third1 = true;
+          }
+          break;
+
+        default:
+
+      }
     }
+
   }
 
   $scope.closeandshowsize = function() {
@@ -1682,6 +1725,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.first = false;
     $scope.second = false;
     $scope.third = false;
+  }
+
+  $scope.closeandshowsize1 = function() {
+    $scope.showSize1 = !$scope.showSize1;
+    $scope.first1 = false;
+    $scope.second1 = false;
+    $scope.third1 = false;
   }
 
   $scope.showorfirst = function() {
@@ -1864,31 +1914,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     value: 100,
     from: 10,
     to: 200,
-    step:1,
+    step: 1,
   }, {
     name: 'Arc',
     value: -1000,
     from: -1000,
     to: 1000,
-    step:1
+    step: 1
   }, {
     name: 'Rotation',
     value: 0,
     from: 0,
     to: 3602,
-    step:1
+    step: 1
   }, {
     name: 'Spacing',
     value: 0,
     from: 0,
     to: 2002,
-    step:1
+    step: 1
   }, {
     name: 'Stetch',
     value: 40,
     from: 20,
     to: 2002,
-    step:1
+    step: 1
   }];
 
   $scope.changedDis = function() {
