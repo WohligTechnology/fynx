@@ -1934,10 +1934,21 @@ h4.strong.font-smart {
 .edit_content p span {
   a { margin-left: 10px; }
 }
-.up-arrow {
-  @include position(absolute, -19px auto auto 25px);
-  color: $brand-danger;
-  font-size: 50px;
+.rang-slider:before {
+  position: absolute;
+  top: 7px;
+  left: 20px;
+  width: 22px;
+  height: 19px;
+  border-bottom: 16px solid;
+  border-right: 20px solid transparent;
+  border-left: 18px solid transparent;
+  color: #f00;
+  content: "";
+  pointer-events: none;
+}
+.add-image {
+  margin-top: 20px;
 }
 .layer-buttons {
   button + button { margin-left: 15px; }
@@ -1954,7 +1965,6 @@ h4.strong.font-smart {
 
 //previewdesign
 .close-button {
-  @include square(20px);
   @include position(absolute, 10px 10px auto auto);
   background-color: $brand-danger;
   cursor: pointer;
