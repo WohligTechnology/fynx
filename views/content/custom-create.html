@@ -26,8 +26,10 @@
 						</div>
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
-							<div class="on-img">
+							<div class="on-img shirtcanvas">
+								<div class="canvasitem" dragcanvasitem>
 								<span id="example1" name="distext" ng-style="filter.css" ng-bind="filter.text"></span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -365,7 +367,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-focus="secondTextSetting=true;firstTextSetting=false" ng-model="filter.text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-focus="secondTextSetting=true;firstTextSetting=false" ng-model="filter.text1" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -389,7 +391,7 @@
 
 											<div class="color-pick">
 												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index,1);">
+													<li ng-repeat="col in colors1 track by $index" class="m-17" ng-click="changeColor($index,1);">
 														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>

@@ -5,7 +5,7 @@ var myImage = {
 var uploadres = [];
 var myfunc = {};
 window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload', 'angular-loading-bar'])
 
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -287,7 +287,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal) {
+.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal, cfpLoadingBar) {
 
   $scope.template = TemplateService.changecontent("product-view");
   $scope.menutitle = NavigationService.makeactive("Men");
@@ -305,6 +305,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.quantity = "1";
   $scope.filter.product = $stateParams.id;
   $scope.categoryname = $stateParams.category;
+  cfpLoadingBar.start();
 
   $scope.addAlert = function(type, msg) {
     $scope.alerts.push({
@@ -356,7 +357,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.outofstock = false;
     filter.design = $stateParams.design;
     NavigationService.getProductDetails(filter, function(data, status) {
-
+      cfpLoadingBar.complete();
       if (data.product != '') {
         data.product.image = data.productdesignimage;
         console.log(data.product.image);
@@ -974,7 +975,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.classc = "yellow-btn";
       $scope.classd = '';
     } else {
-
       $scope.allvalidation = [{
         field: $scope.checkout.firstname,
         validation: ""
@@ -1309,7 +1309,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService, $filter, $uibModal, $http, $upload, $timeout, $filter, $stateParams) {
+.controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService, $filter, $uibModal, $http, $upload, $timeout, $filter, $stateParams, cfpLoadingBar) {
 
   $scope.template = TemplateService.changecontent("custom-create");
   $scope.menutitle = NavigationService.makeactive("Custom");
@@ -1317,6 +1317,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
   $scope.showSize = true;
+  $scope.showSize1 = true;
   $scope.showFirst = true;
   $scope.showSecond = true;
   $scope.first = false;
@@ -1347,6 +1348,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.design = {};
   $scope.alerts = [];
   $scope.clr = 'red';
+  cfpLoadingBar.start();
 
   myfunc = $scope;
 
@@ -1391,6 +1393,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       });
     }
   }
+
   $scope.addAlert = function(type, msg) {
     $scope.alerts.push({
       type: type,
@@ -1446,6 +1449,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     NavigationService.getImageForCustomize($scope.filter.type, $scope.filter.color, function(data) {
       $scope.outofstock = false;
       console.log(data);
+      cfpLoadingBar.complete();
       $scope.color = data.color;
       _.each($scope.color, function(n) {
         n.class = "";
@@ -1660,6 +1664,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.changeColor = function(index, val) {
     $scope.showSize = false;
+    $scope.showSize1 = false;
     $scope.isfront = false;
     console.log(index);
     if (val==0) {
@@ -1899,6 +1904,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }];
 
   $scope.colors = [{
+    color: "red",
+    name: "COLOR",
+  }, {
+    color: "black",
+    name: "STROKE"
+  }, {
+    color: "grey",
+    name: "SHADOW"
+  }];
+  $scope.colors1 = [{
     color: "red",
     name: "COLOR",
   }, {

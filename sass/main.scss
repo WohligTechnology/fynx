@@ -5,6 +5,7 @@
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/font-awesome/css/font-awesome.min.css";
+@import "../bower_components/angular-loading-bar/src/loading-bar.css";
 @import "../sass/angular-range-slider.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
 
@@ -1961,6 +1962,18 @@ h4.strong.font-smart {
 }
 .color-second {
   margin: 0 15px;
+}
+.shirtcanvas {
+  margin: 0 auto;
+  overflow: hidden;
+  height: 300px;
+  width: 414px;
+  position: relative;
+  background-color: rgba(0,0,0,0);
+  .canvasitem {
+    position: absolute;
+    height: auto;
+  }
 }
 
 //previewdesign

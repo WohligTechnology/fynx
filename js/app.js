@@ -281,3 +281,96 @@ firstapp.directive('fancyboxBox', function ($document) {
 		}
 	}
 });
+
+firstapp.directive('dragcanvasitem', function(){
+  return{
+    link: function(scope, element, attr){
+        var $element = $(element);
+
+var drag = {
+    elem: null,
+    x: 0,
+    y: 0,
+    state: false
+};
+var delta = {
+    x: 0,
+    y: 0
+};
+$element.on("taphold",function(){
+  delta.x = e.pageX - drag.x;
+  delta.y = e.pageY - drag.y;
+
+  var cur_offset = $(drag.elem).offset();
+
+  $(drag.elem).offset({
+      left: (cur_offset.left + delta.x),
+      top: (cur_offset.top + delta.y)
+  });
+
+  drag.x = e.pageX;
+  drag.y = e.pageY;
+});
+$element.mousedown(function(e) {
+  // drag.state = false;
+  drag = {
+      elem: null,
+      x: e.pageX,
+      y: e.pageY,
+      state: false
+  };
+  console.log(drag);
+    if (!drag.state) {
+        drag.elem = this;
+        drag.x = e.pageX;
+        drag.y = e.pageY;
+        drag.state = true;
+    }
+    return false;
+});
+
+$(document).bind("mousemove", bindMouse);
+function bindMouse(e){
+  console.log("mouse move");
+    if (drag.state) {
+        delta.x = e.pageX - drag.x;
+        delta.y = e.pageY - drag.y;
+
+        var cur_offset = $(drag.elem).offset();
+
+        $(drag.elem).offset({
+            left: (cur_offset.left + delta.x),
+            top: (cur_offset.top + delta.y)
+        });
+
+        drag.x = e.pageX;
+        drag.y = e.pageY;
+    }
+}
+// $(document).mousemove(function(e) {
+//   console.log("mouse move");
+//     if (drag.state) {
+//         delta.x = e.pageX - drag.x;
+//         delta.y = e.pageY - drag.y;
+//
+//         var cur_offset = $(drag.elem).offset();
+//
+//         $(drag.elem).offset({
+//             left: (cur_offset.left + delta.x),
+//             top: (cur_offset.top + delta.y)
+//         });
+//
+//         drag.x = e.pageX;
+//         drag.y = e.pageY;
+//     }
+// });
+
+$(document).mouseup(function() {
+    if (drag.state) {
+        drag.state = false;
+    }
+});
+    }
+  }
+
+});
