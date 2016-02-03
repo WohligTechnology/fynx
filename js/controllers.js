@@ -1324,12 +1324,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.second = false;
   $scope.third = false;
   $scope.filter = {};
+  $scope.filter.custom = [{
+    "id": 1,
+    "text": "jag",
+    "css": {
+      "z-index": 1
+    }
+  }, {
+    "id": 2,
+    "text": "jag",
+    "css": {
+      "z-index": 2
+    }
+  }, {
+    "id": 3,
+    "text": "jag",
+    "css": {
+      "z-index": 3
+    }
+  }, {
+    "id": 4,
+    "text": "jag",
+    "css": {
+      "z-index": 4
+    }
+  }];
   $scope.filter.type = $stateParams.id;
   $scope.filter.color = "";
   $scope.filter.size = "";
   $scope.filter.price = "";
-  $scope.filter.css = {};
-  $scope.filter.image = myImage;
+  $scope.filter.image1 = myImage;
+  $scope.filter.image2 = myImage;
   $scope.filter.distance = 1;
   $scope.filter.angle = 1;
   $scope.type = $stateParams.id;
@@ -1480,11 +1505,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.textchange = function() {
     $scope.isfront = false;
   }
-  $scope.colorText = function(col) {
-    console.log(col);
-    _.merge($scope.filter.css, {
-      "color": col
-    });
+  $scope.textchange1 = function() {
+    $scope.isfront = true;
+  }
+  $scope.colorText = function(col,num) {
+    switch (num) {
+      case 1:
+        {
+          _.merge($scope.filter.custom[0].css, {
+            "color": col
+          });
+        }
+        break;
+      case 2:
+        {
+          _.merge($scope.filter.custom[1].css, {
+            "color": col
+          });
+        }
+        break;
+      case 3:
+        {
+          _.merge($scope.filter.custom[2].css, {
+            "color": col
+          });
+        }
+        break;
+      case 4:
+        {
+          _.merge($scope.filter.custom[3].css, {
+            "color": col
+          });
+        }
+        break;
+      default:
+
+    }
+
   }
   $scope.strokeText = function(col) {
     _.merge($scope.filter.css, {
@@ -1515,14 +1572,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     calculateTextShadow(newValue, $scope.items[0].value);
   });
 
-  $scope.$watch('design.design[0].value', function(newValue, oldValue) {
-    _.merge($scope.filter.css, {
-      "font-size": newValue
-    });
-  });
   $scope.isArcChange = false;
-  $scope.$watch('filter.text', function(newValue, oldValue) {
-    $scope.filter.text = newValue;
+  $scope.$watch('filter.custom[0].text', function(newValue, oldValue) {
+    $scope.filter.custom[0].text = newValue;
     console.log($scope.isArcChange);
     if ($scope.isArcChange == true) {
       $('#example1').show().arctext({
@@ -1539,15 +1591,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   });
 
-  $scope.changeArc = function() {
-    var newValue = $scope.design.design[1].value;
+  $scope.changeArc = function(value, num) {
+    var newValue = value;
     var pos;
     if (newValue > 0)
       pos = 1;
     else {
       pos = -1;
     }
-    var $example1 = $('#example1').hide();
+    switch (num) {
+      case 1:
+        {
+          var $example1 = $('#example1').hide();
+        }
+        break;
+      case 2:
+        {
+          var $example1 = $('#example2').hide();
+        }
+        break;
+      case 3:
+        {
+          var $example1 = $('#example3').hide();
+        }
+        break;
+      case 4:
+        {
+          var $example1 = $('#example4').hide();
+        }
+        break;
+      default:
+
+    }
+
     $example1.show().arctext({
       radius: newValue
     });
@@ -1560,49 +1636,162 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     });
   }
-
+// Start For First Text
+  $scope.$watch('design.design[0].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[0].css, {
+      "font-size": newValue
+    });
+  });
   $scope.$watch('design.design[1].value', function(newValue, oldValue) {
 
-    // var $example1	= $('#example1').hide();
-    // $example1.show().arctext({radius: newValue});
-    // $example1.arctext('set', {
-    //   radius		: newValue,
-    //   dir			: 1,
-    //   animation	: {
-    //     speed	: 300,
-    //     easing  : 'ease-out'
-    //   }
-    // });
     $scope.isArcChange = true;
-    $scope.changeArc();
+    $scope.changeArc($scope.design.design[1].value, 1);
   });
 
   $scope.$watch('design.design[3].value', function(newValue, oldValue) {
-    _.merge($scope.filter.css, {
+    _.merge($scope.filter.custom[0].css, {
       "letter-spacing": newValue
     });
   });
 
   $scope.$watch('design.design[2].value', function(newValue, oldValue) {
     var scale = $scope.design.design[4].value;
-    _.merge($scope.filter.css, {
+    _.merge($scope.filter.custom[0].css, {
       "-webkit-transform": "rotate(" + newValue + "deg) scale(1," + scale / 100 + ")"
     });
   });
 
   $scope.$watch('items[3].value', function(newValue, oldValue) {
     console.log(newValue);
-    _.merge($scope.filter.css, {
+    _.merge($scope.filter.custom[0].css, {
       "-webkit-text-stroke-width": newValue
     });
   });
 
   $scope.$watch('design.design[4].value', function(newValue, oldValue) {
     var rotate = $scope.design.design[2].value;
-    _.merge($scope.filter.css, {
+    _.merge($scope.filter.custom[0].css, {
       "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
     });
   });
+// End For First Text
+// Start For Second Text
+  $scope.$watch('design.design1[0].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[1].css, {
+      "font-size": newValue
+    });
+  });
+  $scope.$watch('design.design1[1].value', function(newValue, oldValue) {
+
+    $scope.isArcChange = true;
+    $scope.changeArc($scope.design.design1[1].value, 2);
+  });
+
+  $scope.$watch('design.design1[3].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[1].css, {
+      "letter-spacing": newValue
+    });
+  });
+
+  $scope.$watch('design.design1[2].value', function(newValue, oldValue) {
+    var scale = $scope.design.design1[4].value;
+    _.merge($scope.filter.custom[1].css, {
+      "-webkit-transform": "rotate(" + newValue + "deg) scale(1," + scale / 100 + ")"
+    });
+  });
+
+  $scope.$watch('items1[3].value', function(newValue, oldValue) {
+    console.log(newValue);
+    _.merge($scope.filter.custom[1].css, {
+      "-webkit-text-stroke-width": newValue
+    });
+  });
+
+  $scope.$watch('design.design1[4].value', function(newValue, oldValue) {
+    var rotate = $scope.design.design1[2].value;
+    _.merge($scope.filter.custom[1].css, {
+      "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
+    });
+  });
+// End For Second Text
+// Start For Third Text
+  $scope.$watch('design.design2[0].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[2].css, {
+      "font-size": newValue
+    });
+  });
+  $scope.$watch('design.design2[1].value', function(newValue, oldValue) {
+
+    $scope.isArcChange = true;
+    $scope.changeArc($scope.design.design2[1].value, 3);
+  });
+
+  $scope.$watch('design.design2[3].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[2].css, {
+      "letter-spacing": newValue
+    });
+  });
+
+  $scope.$watch('design.design2[2].value', function(newValue, oldValue) {
+    var scale = $scope.design.design2[4].value;
+    _.merge($scope.filter.custom[2].css, {
+      "-webkit-transform": "rotate(" + newValue + "deg) scale(1," + scale / 100 + ")"
+    });
+  });
+
+  $scope.$watch('items2[3].value', function(newValue, oldValue) {
+    console.log(newValue);
+    _.merge($scope.filter.custom[2].css, {
+      "-webkit-text-stroke-width": newValue
+    });
+  });
+
+  $scope.$watch('design.design2[4].value', function(newValue, oldValue) {
+    var rotate = $scope.design.design2[2].value;
+    _.merge($scope.filter.custom[2].css, {
+      "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
+    });
+  });
+// End For Third Text
+// Start For Fourth Text
+  $scope.$watch('design.design3[0].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[3].css, {
+      "font-size": newValue
+    });
+  });
+  $scope.$watch('design.design3[1].value', function(newValue, oldValue) {
+
+    $scope.isArcChange = true;
+    $scope.changeArc($scope.design.design3[1].value, 4);
+  });
+
+  $scope.$watch('design.design3[3].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[3].css, {
+      "letter-spacing": newValue
+    });
+  });
+
+  $scope.$watch('design.design3[2].value', function(newValue, oldValue) {
+    var scale = $scope.design.design3[4].value;
+    _.merge($scope.filter.custom[3].css, {
+      "-webkit-transform": "rotate(" + newValue + "deg) scale(1," + scale / 100 + ")"
+    });
+  });
+
+  $scope.$watch('items3[3].value', function(newValue, oldValue) {
+    console.log(newValue);
+    _.merge($scope.filter.custom[3].css, {
+      "-webkit-text-stroke-width": newValue
+    });
+  });
+
+  $scope.$watch('design.design3[4].value', function(newValue, oldValue) {
+    var rotate = $scope.design.design3[2].value;
+    _.merge($scope.filter.custom[3].css, {
+      "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
+    });
+  });
+// End For Fourth Text
 
   $scope.changeJustify = function(val) {
     console.log(val);
@@ -1667,7 +1856,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.showSize1 = false;
     $scope.isfront = false;
     console.log(index);
-    if (val==0) {
+    if (val == 0) {
       switch (index) {
         case 0:
           {
@@ -1694,7 +1883,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         default:
 
       }
-    }else{
+    } else {
       switch (index) {
         case 0:
           {
@@ -1940,19 +2129,115 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     name: 'Rotation',
     value: 0,
     from: 0,
-    to: 3602,
+    to: 360,
     step: 1
   }, {
     name: 'Spacing',
     value: 0,
     from: 0,
-    to: 2002,
+    to: 200,
     step: 1
   }, {
     name: 'Stetch',
     value: 40,
     from: 20,
-    to: 2002,
+    to: 200,
+    step: 1
+  }];
+
+  $scope.design.design1 = [{
+    name: 'Size',
+    value: 100,
+    from: 10,
+    to: 200,
+    step: 1,
+  }, {
+    name: 'Arc',
+    value: -1000,
+    from: -1000,
+    to: 1000,
+    step: 1
+  }, {
+    name: 'Rotation',
+    value: 0,
+    from: 0,
+    to: 360,
+    step: 1
+  }, {
+    name: 'Spacing',
+    value: 0,
+    from: 0,
+    to: 200,
+    step: 1
+  }, {
+    name: 'Stetch',
+    value: 40,
+    from: 20,
+    to: 200,
+    step: 1
+  }];
+
+  $scope.design.design2 = [{
+    name: 'Size',
+    value: 100,
+    from: 10,
+    to: 200,
+    step: 1,
+  }, {
+    name: 'Arc',
+    value: -1000,
+    from: -1000,
+    to: 1000,
+    step: 1
+  }, {
+    name: 'Rotation',
+    value: 0,
+    from: 0,
+    to: 360,
+    step: 1
+  }, {
+    name: 'Spacing',
+    value: 0,
+    from: 0,
+    to: 200,
+    step: 1
+  }, {
+    name: 'Stetch',
+    value: 40,
+    from: 20,
+    to: 200,
+    step: 1
+  }];
+
+  $scope.design.design3 = [{
+    name: 'Size',
+    value: 100,
+    from: 10,
+    to: 200,
+    step: 1,
+  }, {
+    name: 'Arc',
+    value: -1000,
+    from: -1000,
+    to: 1000,
+    step: 1
+  }, {
+    name: 'Rotation',
+    value: 0,
+    from: 0,
+    to: 360,
+    step: 1
+  }, {
+    name: 'Spacing',
+    value: 0,
+    from: 0,
+    to: 200,
+    step: 1
+  }, {
+    name: 'Stetch',
+    value: 40,
+    from: 20,
+    to: 200,
     step: 1
   }];
 

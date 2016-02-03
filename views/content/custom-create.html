@@ -27,8 +27,8 @@
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
 							<div class="on-img shirtcanvas">
-								<div class="canvasitem" dragcanvasitem>
-								<span id="example1" name="distext" ng-style="filter.css" ng-bind="filter.text"></span>
+								<div class="canvasitem" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
+								<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text"></span>
 								</div>
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-focus="firstTextSetting=true;secondTextSetting=false" ng-model="filter.text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-focus="firstTextSetting=true;secondTextSetting=false" ng-model="filter.custom[0].text" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -167,14 +167,14 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col.color,1);colors[0].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
 
 															</div>
 															<div class="text-line p70">
-																<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="colorText(col.color='black',1)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
 
 														</div>
@@ -367,7 +367,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-focus="secondTextSetting=true;firstTextSetting=false" ng-model="filter.text1" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-focus="secondTextSetting=true;firstTextSetting=false" ng-model="filter.custom[1].text" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -381,7 +381,7 @@
 												</div>
 
 												<ul class="options list-unstyled" ng-show="showSelect">
-													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family,1);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
 												</ul>
@@ -413,14 +413,14 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col.color,2);colors1[0].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
 
 															</div>
 															<div class="text-line p70">
-																<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="colorText(col.color='black',2)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
 
 														</div>
@@ -553,7 +553,7 @@
 											<div class="slider-show" ng-show="showSize">
 												<div class="rang-slider">
 													<div class="ul-class">
-														<div class="row" ng-repeat="des in design.design">
+														<div class="row" ng-repeat="des in design.design1">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">{{des.name}}</p>
 															</div>
@@ -630,7 +630,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-model="filter.text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-model="filter.custom[2].text" ng-change="textchange1()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -644,7 +644,7 @@
 												</div>
 
 												<ul class="options list-unstyled" ng-show="showSelect">
-													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family,2);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
 												</ul>
@@ -654,7 +654,7 @@
 
 											<div class="color-pick">
 												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+													<li ng-repeat="col in colors1 track by $index" class="m-17" ng-click="changeColor($index, 2);">
 														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>
@@ -675,14 +675,14 @@
 																<div class="color-pick mar">
 
 																	<ul>
-																		<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																		<li ng-repeat="col in colour" ng-click="colorText(col.color,3);colors[0].color=col.color;" class="{{col.class}}">
 																			<div class="color-bx" ng-style="{'background':col.color}"></div>
 																		</li>
 																	</ul>
 
 																</div>
 																<div class="text-line p70">
-																	<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="colorText(col.color='black',3)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
 
 															</div>
@@ -815,7 +815,7 @@
 											<div class="slider-show" ng-show="showSize">
 												<div class="rang-slider">
 													<div class="ul-class">
-														<div class="row" ng-repeat="des in design.design">
+														<div class="row" ng-repeat="des in design.design2">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">{{des.name}}</p>
 															</div>
@@ -875,7 +875,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-model="filter.text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-model="filter.custom[3].text" ng-change="textchange1()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -889,7 +889,7 @@
 												</div>
 
 												<ul class="options list-unstyled" ng-show="showSelect">
-													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family,3);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
 												</ul>
@@ -899,7 +899,7 @@
 
 											<div class="color-pick">
 												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index);">
+													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index,3);">
 														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>
@@ -920,14 +920,14 @@
 																<div class="color-pick mar">
 
 																	<ul>
-																		<li ng-repeat="col in colour" ng-click="colorText(col.color);colors[0].color=col.color;" class="{{col.class}}">
+																		<li ng-repeat="col in colour" ng-click="colorText(col.color,4);colors[0].color=col.color;" class="{{col.class}}">
 																			<div class="color-bx" ng-style="{'background':col.color}"></div>
 																		</li>
 																	</ul>
 
 																</div>
 																<div class="text-line p70">
-																	<p ng-click="colorText(col.color='black')"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="colorText(col.color='black',4)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
 
 															</div>
@@ -1060,7 +1060,7 @@
 											<div class="slider-show" ng-show="showSize">
 												<div class="rang-slider">
 													<div class="ul-class">
-														<div class="row" ng-repeat="des in design.design">
+														<div class="row" ng-repeat="des in design.design3">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">{{des.name}}</p>
 															</div>
