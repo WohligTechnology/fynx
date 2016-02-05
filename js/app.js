@@ -263,10 +263,11 @@ firstapp.directive('fancyboxBox', function($document) {
     replace: false,
     link: function(scope, element, attr) {
       var $element = $(element);
+      var target;
       if (attr.rel) {
-        var target = $("[rel='" + attr.rel + "']");
+        target = $("[rel='" + attr.rel + "']");
       } else {
-        var target = element;
+        target = element;
       }
 
       target.fancybox({
@@ -279,7 +280,7 @@ firstapp.directive('fancyboxBox', function($document) {
       });
 
     }
-  }
+  };
 });
 
 firstapp.directive('dragcanvasitem', function() {
@@ -297,21 +298,6 @@ firstapp.directive('dragcanvasitem', function() {
         x: 0,
         y: 0
       };
-      $element.on("taphold", function() {
-        delta.x = e.pageX - drag.x;
-        delta.y = e.pageY - drag.y;
-        console.log("hold tap");
-
-        var cur_offset = $(drag.elem).offset();
-
-        $(drag.elem).offset({
-          left: (cur_offset.left + delta.x),
-          top: (cur_offset.top + delta.y)
-        });
-
-        drag.x = e.pageX;
-        drag.y = e.pageY;
-      });
       $element.mousedown(function(e) {
         // drag.state = false;
         drag = {
@@ -321,7 +307,7 @@ firstapp.directive('dragcanvasitem', function() {
           state: false
         };
         console.log(drag);
-        $(document).bind("mousemove", bindMouse);
+
         if (!drag.state) {
           drag.elem = this;
           drag.x = e.pageX;
@@ -331,7 +317,7 @@ firstapp.directive('dragcanvasitem', function() {
         return false;
       });
 
-      $(document).bind("mousemove", bindMouse);
+      $element.bind("mousemove", bindMouse);
 
       function bindMouse(e) {
         console.log("mouse move");
@@ -351,13 +337,13 @@ firstapp.directive('dragcanvasitem', function() {
         }
       }
 
-      $(document).mouseup(function() {
+      $element.mouseup(function() {
         console.log("on leave");
         if (drag.state) {
           drag.state = false;
         }
       });
     }
-  }
+  };
 
 });

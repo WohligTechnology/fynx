@@ -23,7 +23,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   NavigationService.getHomeSlider(function(data) {
     $scope.mySlides = data;
-  })
+  });
 
   // $scope.mySlides = [{
   //   id: 1,
