@@ -23,7 +23,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   NavigationService.getHomeSlider(function(data) {
     $scope.mySlides = data;
-  });
+  })
 
   // $scope.mySlides = [{
   //   id: 1,
@@ -1326,27 +1326,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter = {};
   $scope.filter.custom = [{
     "id": 1,
-    "text": "jag",
+    "text": "",
     "css": {
       "z-index": 1
     }
   }, {
     "id": 2,
-    "text": "jag",
+    "text": "",
     "css": {
       "z-index": 2
     }
   }, {
     "id": 3,
-    "text": "jag",
+    "text": "",
     "css": {
-      "z-index": 3
+      "z-index": 1
     }
   }, {
     "id": 4,
-    "text": "jag",
+    "text": "",
     "css": {
-      "z-index": 4
+      "z-index": 2
     }
   }];
   $scope.filter.type = $stateParams.id;
@@ -1354,6 +1354,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.size = "";
   $scope.filter.price = "";
   $scope.filter.image1 = myImage;
+  $scope.filter.image ={};
   $scope.filter.image2 = myImage;
   $scope.filter.distance = 1;
   $scope.filter.angle = 1;
@@ -1376,6 +1377,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   cfpLoadingBar.start();
 
   myfunc = $scope;
+
+  $scope.bringForward = function(data){
+    _.merge(data.css, {
+      "position":"relative",
+      "z-index": 2
+    });
+  }
+  $scope.sendBackward = function(data){
+    console.log("send backword");
+    _.merge(data.css, {
+      "position":"relative",
+      "z-index": 1
+    });
+  }
 
   $scope.changeDesign = function() {
 
@@ -1407,16 +1422,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
   };
 
-  function calculateTextShadow(angle, distance) {
-    if ($scope.shadowColor != '') {
-      angle = angle * ((Math.PI) / 180);
-      x = Math.round(distance * Math.cos(angle));
-      y = Math.round(distance * Math.sin(angle));
-      var mi = x + 'px ' + y + 'px 10px ' + $scope.shadowColor;
-      _.merge($scope.filter.css, {
-        "text-shadow": mi
-      });
+  function calculateTextShadow(angle, distance, num) {
+    switch (num) {
+      case 0:
+      if ($scope.shadowColor != '') {
+        angle = angle * ((Math.PI) / 180);
+        x = Math.round(distance * Math.cos(angle));
+        y = Math.round(distance * Math.sin(angle));
+        var mi = x + 'px ' + y + 'px 10px ' + $scope.shadowColor;
+        _.merge($scope.filter.custom[0].css, {
+          "text-shadow": mi
+        });
+      }
+        break;
+        case 1:
+        if ($scope.shadowColor1 != '') {
+          angle = angle * ((Math.PI) / 180);
+          x = Math.round(distance * Math.cos(angle));
+          y = Math.round(distance * Math.sin(angle));
+          var mi = x + 'px ' + y + 'px 10px ' + $scope.shadowColor1;
+          _.merge($scope.filter.custom[1].css, {
+            "text-shadow": mi
+          });
+        }
+          break;
+          case 2:
+          if ($scope.shadowColor2 != '') {
+            angle = angle * ((Math.PI) / 180);
+            x = Math.round(distance * Math.cos(angle));
+            y = Math.round(distance * Math.sin(angle));
+            var mi = x + 'px ' + y + 'px 10px ' + $scope.shadowColor2;
+            _.merge($scope.filter.custom[2].css, {
+              "text-shadow": mi
+            });
+          }
+            break;
+            case 3:
+            if ($scope.shadowColor3 != '') {
+              angle = angle * ((Math.PI) / 180);
+              x = Math.round(distance * Math.cos(angle));
+              y = Math.round(distance * Math.sin(angle));
+              var mi = x + 'px ' + y + 'px 10px ' + $scope.shadowColor3;
+              _.merge($scope.filter.custom[3].css, {
+                "text-shadow": mi
+              });
+            }
+              break;
+      default:
+
     }
+
   }
 
   $scope.addAlert = function(type, msg) {
@@ -1503,12 +1558,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   //T-shirt front-back
   $scope.isfront = true;
   $scope.textchange = function() {
-    $scope.isfront = false;
-  }
-  $scope.textchange1 = function() {
     $scope.isfront = true;
   }
-  $scope.colorText = function(col,num) {
+  $scope.textchange1 = function() {
+    $scope.isfront = false;
+  }
+  $scope.colorText = function(col, num) {
     switch (num) {
       case 1:
         {
@@ -1543,19 +1598,77 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
 
   }
-  $scope.strokeText = function(col) {
-    _.merge($scope.filter.css, {
-      '-webkit-text-stroke-color': col.color
-    });
+  $scope.strokeText = function(col,num) {
+    switch (num) {
+      case 0:
+        {
+          _.merge($scope.filter.custom[0].css, {
+            '-webkit-text-stroke-color': col.color
+          });
+        }
+        break;
+        case 1:
+          {
+            _.merge($scope.filter.custom[1].css, {
+              '-webkit-text-stroke-color': col.color
+            });
+          }
+          break;
+          case 2:
+            {
+              _.merge($scope.filter.custom[2].css, {
+                '-webkit-text-stroke-color': col.color
+              });
+            }
+            break;
+            case 3:
+              {
+                _.merge($scope.filter.custom[3].css, {
+                  '-webkit-text-stroke-color': col.color
+                });
+              }
+              break;
+      default:
+
+    }
+
   }
   $scope.strokeRemoveText = function() {
     _.merge($scope.filter.css, {
       "-webkit-text-stroke-color": ''
     });
   }
-  $scope.shadowText = function(col) {
-    $scope.shadowColor = col.color;
-    calculateTextShadow($scope.items[1].value, $scope.items[0].value);
+  $scope.shadowText = function(col, num) {
+
+    switch (num) {
+      case 0:
+        {
+          $scope.shadowColor = col.color;
+          calculateTextShadow($scope.items[1].value, $scope.items[0].value, num);
+        }
+        break;
+        case 1:
+          {
+            $scope.shadowColor1 = col.color;
+            calculateTextShadow($scope.items1[1].value, $scope.items1[0].value, num);
+          }
+          break;
+          case 2:
+            {
+              $scope.shadowColor2 = col.color;
+              calculateTextShadow($scope.items2[1].value, $scope.items2[0].value, num);
+            }
+            break;
+            case 3:
+              {
+                $scope.shadowColor3 = col.color;
+                calculateTextShadow($scope.items3[1].value, $scope.items3[0].value, num);
+              }
+              break;
+      default:
+
+    }
+
   }
   $scope.shadowRemoveText = function() {
     $scope.shadowColor = "";
@@ -1563,14 +1676,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "text-shadow": ''
     });
   }
-
+// distance and angle of shadow
   $scope.$watch('items[0].value', function(newValue, oldValue) {
-    calculateTextShadow($scope.items[1].value, newValue);
+    calculateTextShadow($scope.items[1].value, newValue, 0);
   });
 
   $scope.$watch('items[1].value', function(newValue, oldValue) {
-    calculateTextShadow(newValue, $scope.items[0].value);
+    calculateTextShadow(newValue, $scope.items[0].value, 0);
   });
+// distance and angle of shadow
+// distance and angle of shadow
+  $scope.$watch('items1[0].value', function(newValue, oldValue) {
+    calculateTextShadow($scope.items[1].value, newValue,1);
+  });
+
+  $scope.$watch('items1[1].value', function(newValue, oldValue) {
+    calculateTextShadow(newValue, $scope.items[0].value,1);
+  });
+// distance and angle of shadow
+// distance and angle of shadow
+  $scope.$watch('items2[0].value', function(newValue, oldValue) {
+    calculateTextShadow($scope.items[1].value, newValue, 2);
+  });
+
+  $scope.$watch('items2[1].value', function(newValue, oldValue) {
+    calculateTextShadow(newValue, $scope.items[0].value, 2);
+  });
+// distance and angle of shadow
+// distance and angle of shadow
+  $scope.$watch('items3[0].value', function(newValue, oldValue) {
+    calculateTextShadow($scope.items[1].value, newValue, 3);
+  });
+
+  $scope.$watch('items3[1].value', function(newValue, oldValue) {
+    calculateTextShadow(newValue, $scope.items[0].value, 3);
+  });
+// distance and angle of shadow
 
   $scope.isArcChange = false;
   $scope.$watch('filter.custom[0].text', function(newValue, oldValue) {
@@ -1592,51 +1733,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   });
 
   $scope.changeArc = function(value, num) {
-    var newValue = value;
-    var pos;
-    if (newValue > 0)
-      pos = 1;
-    else {
-      pos = -1;
-    }
-    switch (num) {
-      case 1:
-        {
-          var $example1 = $('#example1').hide();
-        }
-        break;
-      case 2:
-        {
-          var $example1 = $('#example2').hide();
-        }
-        break;
-      case 3:
-        {
-          var $example1 = $('#example3').hide();
-        }
-        break;
-      case 4:
-        {
-          var $example1 = $('#example4').hide();
-        }
-        break;
-      default:
-
-    }
-
-    $example1.show().arctext({
-      radius: newValue
-    });
-    $example1.arctext('set', {
-      radius: newValue,
-      dir: pos,
-      animation: {
-        speed: 300,
-        easing: 'ease-out'
+      var newValue = value;
+      var pos;
+      if (newValue > 0)
+        pos = 1;
+      else {
+        pos = -1;
       }
-    });
-  }
-// Start For First Text
+      switch (num) {
+        case 1:
+          {
+            var $example1 = $('#example1').hide();
+          }
+          break;
+        case 2:
+          {
+            var $example1 = $('#example2').hide();
+          }
+          break;
+        case 3:
+          {
+            var $example1 = $('#example3').hide();
+          }
+          break;
+        case 4:
+          {
+            var $example1 = $('#example4').hide();
+          }
+          break;
+        default:
+
+      }
+
+      $example1.show().arctext({
+        radius: newValue
+      });
+      $example1.arctext('set', {
+        radius: newValue,
+        dir: pos,
+        animation: {
+          speed: 300,
+          easing: 'ease-out'
+        }
+      });
+    }
+    // Start For First Text
   $scope.$watch('design.design[0].value', function(newValue, oldValue) {
     _.merge($scope.filter.custom[0].css, {
       "font-size": newValue
@@ -1674,8 +1815,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
     });
   });
-// End For First Text
-// Start For Second Text
+  // End For First Text
+  // Start For Second Text
   $scope.$watch('design.design1[0].value', function(newValue, oldValue) {
     _.merge($scope.filter.custom[1].css, {
       "font-size": newValue
@@ -1713,8 +1854,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
     });
   });
-// End For Second Text
-// Start For Third Text
+  // End For Second Text
+  // Start For Third Text
   $scope.$watch('design.design2[0].value', function(newValue, oldValue) {
     _.merge($scope.filter.custom[2].css, {
       "font-size": newValue
@@ -1752,8 +1893,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
     });
   });
-// End For Third Text
-// Start For Fourth Text
+  // End For Third Text
+  // Start For Fourth Text
   $scope.$watch('design.design3[0].value', function(newValue, oldValue) {
     _.merge($scope.filter.custom[3].css, {
       "font-size": newValue
@@ -1791,7 +1932,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       "-webkit-transform": "rotate(" + rotate + "deg) scale(1," + newValue / 100 + ")"
     });
   });
-// End For Fourth Text
+  // End For Fourth Text
 
   $scope.changeJustify = function(val) {
     console.log(val);
@@ -1838,23 +1979,81 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     family: "News Cycle"
   }];
 
-  $scope.showSelecter = function() {
-    $scope.showSelect = true;
-    console.log($scope.showSelect);
+  $scope.showSelecter = function(num) {
+    switch (num) {
+      case 0:
+        {
+          $scope.showSelect = true;
+        }
+        break;
+      case 1:
+        {
+          $scope.showSelect1 = true;
+        }
+        break;
+      case 2:
+        {
+          $scope.showSelect2 = true;
+        }
+        break;
+      case 3:
+        {
+          $scope.showSelect3 = true;
+        }
+        break;
+      default:
+
+    }
+
   };
-  $scope.fontSelect = function(val) {
-    $scope.selectedFont = val;
-    $scope.filter.font = val;
-    $scope.showSelect = false;
-    $scope.filter.css = {
-      'font-family': val
-    };
+  $scope.fontSelect = function(val, num) {
+    switch (num) {
+      case 0:
+        {
+          $scope.selectedFont = val;
+          $scope.showSelect = false;
+          $scope.filter.custom[0].css = {
+            'font-family': val
+          };
+        }
+        break;
+        case 1:
+          {
+            $scope.selectedFont1 = val;
+            $scope.showSelect1 = false;
+            $scope.filter.custom[1].css = {
+              'font-family': val
+            };
+          }
+          break;
+          case 2:
+            {
+              $scope.selectedFont2 = val;
+              $scope.showSelect2 = false;
+              $scope.filter.custom[2].css = {
+                'font-family': val
+              };
+            }
+            break;
+            case 3:
+              {
+                $scope.selectedFont3 = val;
+                $scope.showSelect3 = false;
+                $scope.filter.custom[3].css = {
+                  'font-family': val
+                };
+              }
+              break;
+      default:
+
+    }
+
   };
 
   $scope.changeColor = function(index, val) {
     $scope.showSize = false;
     $scope.showSize1 = false;
-    $scope.isfront = false;
+    // $scope.isfront = false;
     console.log(index);
     if (val == 0) {
       switch (index) {
@@ -2112,6 +2311,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     color: "grey",
     name: "SHADOW"
   }];
+  $scope.colors2 = [{
+    color: "red",
+    name: "COLOR",
+  }, {
+    color: "black",
+    name: "STROKE"
+  }, {
+    color: "grey",
+    name: "SHADOW"
+  }];
+  $scope.colors3 = [{
+    color: "red",
+    name: "COLOR",
+  }, {
+    color: "black",
+    name: "STROKE"
+  }, {
+    color: "grey",
+    name: "SHADOW"
+  }];
 
   $scope.design.design = [{
     name: 'Size',
@@ -2261,49 +2480,53 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     name: 'fifth Item',
     value: 10
   }];
-
-  $scope.item = [{
+  $scope.items1 = [{
     name: 'First Item',
-    value: 500
+    value: 20
   }, {
     name: 'Second Item',
-    value: 200
+    value: 1
   }, {
     name: 'Third Item',
     value: 700
+  }, {
+    name: 'fourth Item',
+    value: 1
+  }, {
+    name: 'fifth Item',
+    value: 10
   }];
-
-  $scope.item1 = [{
+  $scope.items2 = [{
     name: 'First Item',
-    value: 500
+    value: 20
   }, {
     name: 'Second Item',
-    value: 200
+    value: 1
   }, {
     name: 'Third Item',
     value: 700
+  }, {
+    name: 'fourth Item',
+    value: 1
+  }, {
+    name: 'fifth Item',
+    value: 10
   }];
-
-  $scope.item2 = [{
+  $scope.items3 = [{
     name: 'First Item',
-    value: 500
+    value: 20
   }, {
     name: 'Second Item',
-    value: 200
+    value: 1
   }, {
     name: 'Third Item',
     value: 700
-  }];
-
-  $scope.item3 = [{
-    name: 'First Item',
-    value: 500
   }, {
-    name: 'Second Item',
-    value: 200
+    name: 'fourth Item',
+    value: 1
   }, {
-    name: 'Third Item',
-    value: 700
+    name: 'fifth Item',
+    value: 10
   }];
 
   $scope.makeactive = function(color) {

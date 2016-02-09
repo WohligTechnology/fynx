@@ -20,18 +20,25 @@
 
 						<div ng-show="isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
-							<div class="on-img" style="top:309px;width:30%" ng-if="filter.image.image!=''">
-								<img class="img-responsive m-center" ng-src="{{filter.image.image | serverimage}}">
+							<div class="on-img shirtcanvas" style="top:309px;width:30%" ng-if="filter.image.image!=''">
+								<img class="img-responsive m-center canvasitem" dragcanvasitem ng-src="{{filter.image.image | serverimage}}">
+								<div class="canvasitem" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
+									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1"></span>
+									<span class="badge red ab" ng-if="txt.text!=''&&($index==0 || $index==1)" ng-click="txt.text = ''">X</span>
+								</div>
 							</div>
 						</div>
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
-							<div class="on-img shirtcanvas">
+							<div class="on-img shirtcanvas" style="top:309px;width:30%">
+								<img class="img-responsive m-center" dragcanvasitem ng-src="{{filter.image.image | serverimage}}">
 								<div class="canvasitem" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
-								<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text"></span>
+									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
+										<span class="badge red ab"  ng-if="txt.text!=''&&($index==2 || $index==3)" ng-click="txt.text = ''">X</span>
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 
@@ -85,10 +92,21 @@
 							<div class="edit_content">
 								<p>{{images.name}}</p>
 								<!-- <span ng-if="size[0]">: {{size[0].name}}</span> <span ng-if="sizelength"> to </span>  <span ng-if="sizelength">{{sizelength.name}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b> -->
-								<p>SIZES: <span>S,M,L,XL,XXL,XXXL</span> <span class="size-chart"><a href="" class="danger bold" ng-click="sizeChart();">Size Chart</a></span></p>
-								<p>FABRIC: <span>100% Pre-Shrunk Cotton</span></p>
-								<p class="b-color" ng-init="showMore = false;" ng-click="showMore = !showMore;"> <span ng-show="showMore" class="bold">-</span><span ng-show="!showMore" class="bold">+</span> SHOW <span ng-show="showMore" class="bold">LESS</span> <span ng-show="!showMore" class="bold">MORE</span> INFORMATION</p>
-								<p ng-show="showMore" class="no-transform"><span ng-bind-html="images.description"></span></p>
+								<p>SIZES:
+									<span>S,M,L,XL,XXL,XXXL</span>
+									<span class="size-chart"><a href="" class="danger bold" ng-click="sizeChart();">Size Chart</a></span>
+								</p>
+								<p>FABRIC:
+									<span>100% Pre-Shrunk Cotton</span>
+								</p>
+								<p class="b-color" ng-init="showMore = false;" ng-click="showMore = !showMore;">
+									<span ng-show="showMore" class="bold">-</span>
+									<span ng-show="!showMore" class="bold">+</span> SHOW
+									<span ng-show="showMore" class="bold">LESS</span>
+									<span ng-show="!showMore" class="bold">MORE</span> INFORMATION</p>
+								<p ng-show="showMore" class="no-transform">
+									<span ng-bind-html="images.description"></span>
+								</p>
 
 
 								<div class="color-pick">
@@ -121,7 +139,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-focus="firstTextSetting=true;secondTextSetting=false" ng-model="filter.custom[0].text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-click="firstTextSetting=true;secondTextSetting=false" ng-model="filter.custom[0].text" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -130,12 +148,12 @@
 												<p>Font</p>
 											</div>
 											<div class="fynx-select">
-												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
+												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter(0);">
 													{{selectedFont}}
 												</div>
 
 												<ul class="options list-unstyled" ng-show="showSelect">
-													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family);" style="font-family: '{{font.family}}'; font-weight: 700;">
+													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family,0);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
 												</ul>
@@ -174,7 +192,8 @@
 
 															</div>
 															<div class="text-line p70">
-																<p ng-click="colorText(col.color='black',1)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="colorText(col.color='black',1)">
+																	<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
 
 														</div>
@@ -184,7 +203,6 @@
 
 
 											<!--//strok-->
-
 
 											<div class="color-show" ng-show="second">
 												<div class="row">
@@ -196,7 +214,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="strokeText(col,0);colors[1].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 
@@ -205,7 +223,8 @@
 
 															</div>
 															<div class="text-line ">
-																<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="strokeRemoveText()">
+																	<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
 															<div class="text-line">
 
@@ -254,7 +273,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="shadowText(col,0);colors[2].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 
@@ -263,7 +282,8 @@
 
 															</div>
 															<div class="text-line ">
-																<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="shadowRemoveText()">
+																	<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
 															<div class="text-line" ng-if="shadowColor!=''">
 																<div class="row ">
@@ -304,7 +324,7 @@
 
 									<div class="row" ng-show="firstTextSetting">
 										<div class="col-md-12">
-											<div class="slider-show" ng-show="showSize1">
+											<div class="slider-show">
 												<div class="rang-slider">
 													<div class="ul-class">
 														<div class="row" ng-repeat="des in design.design">
@@ -339,8 +359,8 @@
 																	<p class="text-uppercase ml-30">Layer Order</p>
 																</div>
 																<div class="layer-buttons">
-																	<button class="btn bring-front bod-x ml-30"><i class="fa fa-angle-up"></i> Bring Forward</button>
-																	<button class="btn bring-back bod-x"><i class="fa fa-angle-down"></i> Send Backward</button>
+																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[0])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0])"><i class="fa fa-angle-down"></i> Send Backward</button>
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -367,7 +387,7 @@
 													<p>ENTER YOUR TEXT BELOW</p>
 												</div>
 												<div class="form-group">
-													<textarea type="text" class="form-control" rows="5" ng-focus="secondTextSetting=true;firstTextSetting=false" ng-model="filter.custom[1].text" ng-change="textchange()"></textarea>
+													<textarea type="text" class="form-control" rows="5" ng-click="secondTextSetting=true;firstTextSetting=false" ng-model="filter.custom[1].text" ng-change="textchange()"></textarea>
 												</div>
 											</div>
 										</div>
@@ -376,11 +396,11 @@
 												<p>Font</p>
 											</div>
 											<div class="fynx-select">
-												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
-													{{selectedFont}}
+												<div class="selected-text" style="font-family: '{{selectedFont1}}'; font-weight: 700;" ng-click="showSelecter(1);">
+													{{selectedFont1}}
 												</div>
 
-												<ul class="options list-unstyled" ng-show="showSelect">
+												<ul class="options list-unstyled" ng-show="showSelect1">
 													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family,1);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
@@ -420,7 +440,8 @@
 
 															</div>
 															<div class="text-line p70">
-																<p ng-click="colorText(col.color='black',2)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="colorText(col.color='black',2)">
+																	<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
 
 														</div>
@@ -430,7 +451,6 @@
 
 
 											<!--//strok-->
-
 
 											<div class="color-show" ng-show="second1">
 												<div class="row">
@@ -442,7 +462,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="strokeText(col,1);colors1[1].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 
@@ -451,7 +471,8 @@
 
 															</div>
 															<div class="text-line ">
-																<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="strokeRemoveText()">
+																	<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
 															<div class="text-line">
 
@@ -462,15 +483,15 @@
 																	</div>
 																	<div class="col-xs-8">
 
-																		<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items[3].value"></div>
+																		<div id="demo" data-range-slider data-floor="0.00" data-ceiling="5.00" data-step="0.1" data-precision="2" data-highlight="left" data-ng-model="items1[3].value"></div>
 
 																	</div>
 																	<div class="col-xs-2">
-																		<p class="range-value">{{items[3].value}}</p>
+																		<p class="range-value">{{items1[3].value}}</p>
 																	</div>
 																</div>
 
-																<div class="row ">
+																<div class="row">
 																	<div class="col-xs-2">
 																		<p class="mar0 f-size">Offset</p>
 																	</div>
@@ -500,7 +521,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="shadowText(col,1);colors1[2].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 
@@ -509,19 +530,20 @@
 
 															</div>
 															<div class="text-line ">
-																<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																<p ng-click="shadowRemoveText()">
+																	<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 															</div>
-															<div class="text-line" ng-if="shadowColor!=''">
+															<div class="text-line" ng-if="shadowColor1!=''">
 																<div class="row ">
 																	<div class="col-xs-2">
 																		<p class="mar0 f-size">Distance</p>
 																	</div>
 																	<div class="col-xs-8">
-																		<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+																		<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items1[0].value"></div>
 
 																	</div>
 																	<div class="col-xs-2">
-																		<p class="range-value">{{items[0].value}}</p>
+																		<p class="range-value">{{items1[0].value}}</p>
 																	</div>
 																</div>
 
@@ -530,11 +552,11 @@
 																		<p class="mar0 f-size">Angle</p>
 																	</div>
 																	<div class="col-xs-8 text-center">
-																		<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																		<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items1[1].value"></div>
 																		<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
 																	</div>
 																	<div class="col-xs-2">
-																		<p class="range-value">{{items[1].value}}</p>
+																		<p class="range-value">{{items1[1].value}}</p>
 																	</div>
 																</div>
 															</div>
@@ -550,7 +572,7 @@
 
 									<div class="row" ng-show="secondTextSetting">
 										<div class="col-md-12">
-											<div class="slider-show" ng-show="showSize">
+											<div class="slider-show">
 												<div class="rang-slider">
 													<div class="ul-class">
 														<div class="row" ng-repeat="des in design.design1">
@@ -585,8 +607,8 @@
 																	<p class="text-uppercase ml-30">Layer Order</p>
 																</div>
 																<div class="layer-buttons">
-																	<button class="btn bring-front bod-x ml-30"><i class="fa fa-angle-up"></i> Bring Forward</button>
-																	<button class="btn bring-back bod-x"><i class="fa fa-angle-down"></i> Send Backward</button>
+																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -639,11 +661,11 @@
 												<p>Font</p>
 											</div>
 											<div class="fynx-select">
-												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
-													{{selectedFont}}
+												<div class="selected-text" style="font-family: '{{selectedFont2}}'; font-weight: 700;" ng-click="showSelecter(2);">
+													{{selectedFont2}}
 												</div>
 
-												<ul class="options list-unstyled" ng-show="showSelect">
+												<ul class="options list-unstyled" ng-show="showSelect2">
 													<li ng-repeat="font in fonts" ng-click="fontSelect(font.family,2);" style="font-family: '{{font.family}}'; font-weight: 700;">
 														{{font.family}}
 													</li>
@@ -682,7 +704,8 @@
 
 																</div>
 																<div class="text-line p70">
-																	<p ng-click="colorText(col.color='black',3)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="colorText(col.color='black',3)">
+																		<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
 
 															</div>
@@ -704,7 +727,7 @@
 																<div class="color-pick mar">
 
 																	<ul>
-																		<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																		<li ng-repeat="col in colour" ng-click="strokeText(col,2);colors2[1].color=col.color;" class="{{col.class}}">
 																			<div class="color-bx" ng-style="{'background':col.color}"></div>
 																		</li>
 
@@ -713,7 +736,8 @@
 
 																</div>
 																<div class="text-line ">
-																	<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="strokeRemoveText()">
+																		<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
 																<div class="text-line">
 
@@ -762,7 +786,7 @@
 																<div class="color-pick mar">
 
 																	<ul>
-																		<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																		<li ng-repeat="col in colour" ng-click="shadowText(col,2);colors2[2].color=col.color;" class="{{col.class}}">
 																			<div class="color-bx" ng-style="{'background':col.color}"></div>
 																		</li>
 
@@ -771,19 +795,20 @@
 
 																</div>
 																<div class="text-line ">
-																	<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="shadowRemoveText()">
+																		<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
-																<div class="text-line" ng-if="shadowColor!=''">
+																<div class="text-line" ng-if="shadowColor2!=''">
 																	<div class="row ">
 																		<div class="col-xs-2">
 																			<p class="mar0 f-size">Distance</p>
 																		</div>
 																		<div class="col-xs-8">
-																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items2[0].value"></div>
 
 																		</div>
 																		<div class="col-xs-2">
-																			<p class="range-value">{{items[0].value}}</p>
+																			<p class="range-value">{{items2[0].value}}</p>
 																		</div>
 																	</div>
 
@@ -792,11 +817,11 @@
 																			<p class="mar0 f-size">Angle</p>
 																		</div>
 																		<div class="col-xs-8 text-center">
-																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items2[1].value"></div>
 																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
 																		</div>
 																		<div class="col-xs-2">
-																			<p class="range-value">{{items[1].value}}</p>
+																			<p class="range-value">{{items2[1].value}}</p>
 																		</div>
 																	</div>
 																</div>
@@ -810,9 +835,9 @@
 										</div>
 									</div>
 
-									<div class="row" ng-show="text-properties">
+									<div class="row" ng-show="firstTextSetting">
 										<div class="col-md-12">
-											<div class="slider-show" ng-show="showSize">
+											<div class="slider-show">
 												<div class="rang-slider">
 													<div class="ul-class">
 														<div class="row" ng-repeat="des in design.design2">
@@ -884,7 +909,7 @@
 												<p>Font</p>
 											</div>
 											<div class="fynx-select">
-												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter();">
+												<div class="selected-text" style="font-family: '{{selectedFont}}'; font-weight: 700;" ng-click="showSelecter(3);">
 													{{selectedFont}}
 												</div>
 
@@ -927,7 +952,8 @@
 
 																</div>
 																<div class="text-line p70">
-																	<p ng-click="colorText(col.color='black',4)"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="colorText(col.color='black',4)">
+																		<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
 
 															</div>
@@ -949,7 +975,7 @@
 																<div class="color-pick mar">
 
 																	<ul>
-																		<li ng-repeat="col in colour" ng-click="strokeText(col);colors[1].color=col.color;" class="{{col.class}}">
+																		<li ng-repeat="col in colour" ng-click="strokeText(col,3);colors3[1].color=col.color;" class="{{col.class}}">
 																			<div class="color-bx" ng-style="{'background':col.color}"></div>
 																		</li>
 
@@ -958,7 +984,8 @@
 
 																</div>
 																<div class="text-line ">
-																	<p ng-click="strokeRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="strokeRemoveText()">
+																		<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
 																<div class="text-line">
 
@@ -1007,7 +1034,7 @@
 																<div class="color-pick mar">
 
 																	<ul>
-																		<li ng-repeat="col in colour" ng-click="shadowText(col);colors[2].color=col.color;" class="{{col.class}}">
+																		<li ng-repeat="col in colour" ng-click="shadowText(col,3);colors3[2].color=col.color;" class="{{col.class}}">
 																			<div class="color-bx" ng-style="{'background':col.color}"></div>
 																		</li>
 
@@ -1016,19 +1043,20 @@
 
 																</div>
 																<div class="text-line ">
-																	<p ng-click="shadowRemoveText()"><img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
+																	<p ng-click="shadowRemoveText()">
+																		<img src="img/link.jpg" class="padr">No Ink (shirt fabric will show through)</p>
 																</div>
-																<div class="text-line" ng-if="shadowColor!=''">
+																<div class="text-line" ng-if="shadowColor3!=''">
 																	<div class="row ">
 																		<div class="col-xs-2">
 																			<p class="mar0 f-size">Distance</p>
 																		</div>
 																		<div class="col-xs-8">
-																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[0].value"></div>
+																			<div data-range-slider data-floor="-75" data-ceiling="75" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items3[0].value"></div>
 
 																		</div>
 																		<div class="col-xs-2">
-																			<p class="range-value">{{items[0].value}}</p>
+																			<p class="range-value">{{items3[0].value}}</p>
 																		</div>
 																	</div>
 
@@ -1037,11 +1065,11 @@
 																			<p class="mar0 f-size">Angle</p>
 																		</div>
 																		<div class="col-xs-8 text-center">
-																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items[1].value"></div>
+																			<div data-range-slider data-floor="1" data-ceiling="360" data-step="1" data-precision="2" data-highlight="left" data-ng-model="items3[1].value"></div>
 																			<!-- <button class="text-center btn btn-danger m-30 con-btn">REMOVE STROKE</button> -->
 																		</div>
 																		<div class="col-xs-2">
-																			<p class="range-value">{{items[1].value}}</p>
+																			<p class="range-value">{{items3[1].value}}</p>
 																		</div>
 																	</div>
 																</div>
@@ -1055,7 +1083,7 @@
 										</div>
 									</div>
 
-									<div class="row" ng-show="text-properties">
+									<div class="row" ng-show="secondTextSetting">
 										<div class="col-md-12">
 											<div class="slider-show" ng-show="showSize">
 												<div class="rang-slider">
@@ -1117,8 +1145,8 @@
 									<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
 								</div>
 							</div>
-								<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
-								<button class="btn btn-danger con-btn" ng-click="tabchange(4)">ADD TO DESIGN</button>
+							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
+							<button class="btn btn-danger con-btn" ng-click="tabchange(4)">ADD TO DESIGN</button>
 
 						</uib-tab>
 
@@ -1164,7 +1192,9 @@
 								<div class="col-md-9">
 									<div class="fix-prize mt-10">
 
-										<h3>Rs. {{amount}}/- <span class="pull-right" ng-click="showor()">Edit Quantities</span></h3>
+										<h3>Rs. {{amount}}/-
+											<span class="pull-right" ng-click="showor()">Edit Quantities</span>
+										</h3>
 									</div>
 									<div class="front content-view m-30 ">
 										<div class="edit_content">
