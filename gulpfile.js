@@ -2,11 +2,11 @@ var jsArray = [
     './bower_components/jquery/dist/jquery.min.js',
     './bower_components/Arctext.js/js/jquery.arctext.js',
     './bower_components/bootstrap/dist/js/bootstrap.min.js',
+    // './bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
     './bower_components/flexslider/jquery.flexslider-min.js',
-
     './bower_components/angular/angular.min.js',
     './bower_components/angular-sanitize/angular-sanitize.min.js',
-    './bower_components/angular-loading-bar/src/angular-bar.js',
+    './bower_components/angular-loading-bar/src/loading-bar.js',
     './bower_components/angular-animate/angular-animate.min.js',
     './bower_components/angular-bootstrap/ui-bootstrap.min.js',
     './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -20,7 +20,6 @@ var jsArray = [
     './lib/fileupload/angular-file-upload.js',
     './lib/fileupload/FileAPI.js',
     './lib/fileupload/upload.js',
-
     './js/app.js',
     './js/controllers.js',
     './js/templateservice.js',
