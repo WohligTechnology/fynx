@@ -26,7 +26,7 @@
             <tr class="text-center text-bold" ng-repeat="cart in allCart">
               <td>
                 <figure>
-                  <img ng-src="{{cart.image | serverimage}}">
+                  <img ng-src="{{cart.options.designimage | serverimage}}">
                   <span ng-if="cart.json!=false && cart.json">+</span>
                   <img ng-src="{{cart.json.image.image | serverimage}}" ng-if="cart.json!=false && cart.json">
                   <figcaption>{{cart.options.realname}}</figcaption>

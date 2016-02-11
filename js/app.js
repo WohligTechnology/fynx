@@ -321,7 +321,9 @@ firstapp.directive('dragcanvasitem', function() {
 
       function bindMouse(e) {
         console.log("mouse move");
+
         if (drag.state) {
+          $(".shirtcanvas").css("border","1px solid #0d9dff");
           delta.x = e.pageX - drag.x;
           delta.y = e.pageY - drag.y;
 
@@ -334,6 +336,8 @@ firstapp.directive('dragcanvasitem', function() {
 
           drag.x = e.pageX;
           drag.y = e.pageY;
+        }else {
+          $(".shirtcanvas").css("border","");
         }
       }
 

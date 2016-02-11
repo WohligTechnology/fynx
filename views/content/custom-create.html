@@ -18,12 +18,12 @@
 			<div class="col-md-5">
 				<div class="custom-img">
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
-
 						<div ng-show="isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
-							<div class="on-img shirtcanvas" style="top:309px;width:30%" ng-if="filter.image.image!=''">
-								<div class="canvasitem" dragcanvasitem>
-									<img class="img-responsive m-center" ng-src="{{filter.image.image | serverimage}}">
+							<div class="on-img shirtcanvas" style="top:250px;width:45%">
+								<div class="canvasitem" dragcanvasitem ng-if="filter.image.image!=''">
+									<img class="auto-dim m-center" ng-src="{{filter.image.image | serverimage}}">
+									<span class="badge red ab" ng-click="filter.image.image = ''">X</span>
 								</div>
 								<div class="canvasitem" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
 									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1"></span>
@@ -33,9 +33,10 @@
 						</div>
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
-							<div class="on-img shirtcanvas" style="top:309px;width:30%">
-								<div class="canvasitem" dragcanvasitem>
-									<img class="img-responsive m-center" ng-src="{{filter.image.image1 | serverimage}}">
+							<div class="on-img shirtcanvas" style="top:250px;width:45%">
+								<div class="canvasitem" dragcanvasitem  ng-if="filter.image.image1!=''">
+									<img class="auto-dim m-center" ng-src="{{filter.image.image1 | serverimage}}">
+									<span class="badge red ab" ng-click="filter.image.image1 = ''">X</span>
 								</div>
 								<div class="canvasitem" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
 									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
@@ -364,8 +365,8 @@
 																	<p class="text-uppercase ml-30">Layer Order</p>
 																</div>
 																<div class="layer-buttons">
-																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[0])"><i class="fa fa-angle-up"></i> Bring Forward</button>
-																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0])"><i class="fa fa-angle-down"></i> Send Backward</button>
+																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -612,8 +613,8 @@
 																	<p class="text-uppercase ml-30">Layer Order</p>
 																</div>
 																<div class="layer-buttons">
-																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
-																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
+																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[1],filter.custom[0])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[1],filter.custom[0])"><i class="fa fa-angle-down"></i> Send Backward</button>
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -634,7 +635,7 @@
 
 								<div class="add-image">
 									<p>ADD IMAGE TO YOUR TSHIRT</p>
-									<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
+									<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload(isfront);">UPLOAD IMAGE</button>
 								</div>
 							</div>
 							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
@@ -878,8 +879,8 @@
 																	<p class="text-uppercase ml-30">Layer Order</p>
 																</div>
 																<div class="layer-buttons">
-																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[2])"><i class="fa fa-angle-up"></i> Bring Forward</button>
-																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[2])"><i class="fa fa-angle-down"></i> Send Backward</button>
+																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[2],filter.custom[3])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[2],filter.custom[3])"><i class="fa fa-angle-down"></i> Send Backward</button>
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -1127,8 +1128,8 @@
 																	<p class="text-uppercase ml-30">Layer Orderds</p>
 																</div>
 																<div class="layer-buttons">
-																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[3])"><i class="fa fa-angle-up"></i> Bring Forward</button>
-																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[3])"><i class="fa fa-angle-down"></i> Send Backward</button>
+																	<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[3],filter.custom[2])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																	<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[3],filter.custom[2])"><i class="fa fa-angle-down"></i> Send Backward</button>
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -1149,7 +1150,7 @@
 
 								<div class="add-image">
 									<p>ADD IMAGE TO YOUR TSHIRT</p>
-									<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload();">UPLOAD IMAGE</button>
+									<button class="btn btn-danger mar0 con-btn" ng-click="imgUploadModal(isfront);">UPLOAD IMAGE</button>
 								</div>
 							</div>
 							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>

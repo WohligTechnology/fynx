@@ -12,10 +12,13 @@
 	</div>
 	<hr>
 </div>
-<div class="container min-hght">
+<div class="container min-hght" infinite-scroll='loadProducts()' infinite-scroll-distance="0" infinite-scroll-disabled="fasle">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="order-table">
+			<div class="order-table" ng-if="msg!=''">
+				{{msg}}
+			</div>
+			<div class="order-table" ng-if="msg==''">
 				<table class="table">
 					<thead>
 						<tr class="text-center desktop">
@@ -28,21 +31,13 @@
 					</thead>
 					<tbody>
 						<tr class="text-center" ng-repeat="order in orders">
-							<td class="mobile"><span class="mobile">TRANSITION ID</span> 1586972348 </td>
-							<td class="mobile"><span class="mobile">DATE </span>5.6.12 </td>
-							<td class="mobile"> <span class="mobile">AMOUNT</span>5.6.12 </td>
-							<td class="mobile"><span class="mobile">STATUS</span>DISPATCHED</td>
+							<td class="mobile" ng-if="order.transactionid!=''"><span class="mobile">TRANSITION ID</span> {{order.transactionid}} </td>
+							<td class="mobile" ng-if="order.transactionid==''"><span class="mobile">TRANSITION ID</span> - </td>
+							<td class="mobile"><span class="mobile">DATE </span>{{order.date}} </td>
+							<td class="mobile"> <span class="mobile">AMOUNT</span>{{order.totalamt.totalsum}} </td>
+							<td class="mobile"><span class="mobile">STATUS</span>{{order.orderstatusname}}</td>
 							<td class="mobile">
 								<button type="submit" class="btn-blue btn-primary btn">PRINT INVOICE</button>
-							</td>
-						</tr>
-						<tr class="text-center">
-							<td class="mobile"><span class="mobile">TRANSITION ID</span> 1586972348 </td>
-							<td class="mobile"><span class="mobile">DATE </span>5.6.12 </td>
-							<td class="mobile"><span class="mobile">AMOUNT</span>5.6.12 </td>
-							<td class="mobile"><span class="mobile">STATUS</span>DISPATCHED</td>
-							<td class="mobile">
-								<button type="submit" class="btn-blue btn btn-primary">PRINT INVOICE</button>
 							</td>
 						</tr>
 					</tbody>

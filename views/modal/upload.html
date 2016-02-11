@@ -1,8 +1,8 @@
-<div class="modal-heights bg-imgupload login-tab" ng- controller="CustomCreateCtrl">
+<div class="modal-heights bg-imgupload login-tab" ng-controller="CustomCreateCtrl">
     <div class="row">
         <div class="col-md-4">
             <div class="img-box">
-                <img src="img/img-upload.jpg" class="img-responsive">
+                <img ng-src="{{filter.image.image1 | serverimage}}" class="img-responsive">
             </div>
         </div>
         <div class="col-md-8">
@@ -10,13 +10,31 @@
                 <h3>FILE UPLOAD</h3>
                 <div class="txt-img">
                     <h4>We accept the following file type</h4>
-                    <p>JPG, GIF, PNG, BMP, TIF, AI, EPS, PDF, PSD</p>
+                    <p>JPG, GIF, PNG</p>
 
-                    <h4>5.0 Maximum file size</h4>
+                    <h4>5.0Mb maximum file size &amp; 300DPI</h4>
                     <p>Files may take anywhere from a few seconds to a few minutes to upload.</p>
+                    <div class="checkbox bordered">
+                        <label>
+                            <input type="checkbox" ng-model="accept">
+                            I Accept the Terms and Conditions and Privacy Policy of the website
+                        </label>
+                    </div>
                 </div>
 
-                <button class="btn btn-danger con-btn" ng-click="imgUploadModel()">CONTINUE</button>
+                <div class="choose-image" ng-if="accept">
+                    <!-- <i class="fa fa-user" ng-if="!user.personal.image"></i> -->
+                    <!-- <div class="image-uploaded" ng-if="filter.image">
+                        <img class="img-responsive" ng-src="{{filter.image | serverimage}}">
+                    </div> -->
+                    <div class="choose-btn">
+                        <div ng-init="httpMethod = 'POST';howToSend = 1;"></div>
+                        <input type="file" class="form-control" name="image" ng-file-select="onFileSelect($files)" onclick="this.value=null">
+                        <!-- <div class="response" ng-show="uploadResult.length > 0">
+                            <span ng-repeat="result in uploadResult"></span>
+                        </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>

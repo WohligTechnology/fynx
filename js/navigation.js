@@ -650,6 +650,11 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
+		getorders: function (pageno,callback) {
+			return $http.get(adminurl + 'getuserorders?user='+$.jStorage.get('user').id+'&pageno='+pageno, {}, {
+				withCredentials: true
+			}).success(callback);
+		},
 		removeFromWishlist: function (product, design, callback) {
 			$http({
 				url: adminurl + 'removeFromWishlist',
@@ -690,8 +695,8 @@ var navigationservice = angular.module('navigationservice', [])
 				data: checkout
 			}).success(callback);
 		},
-		showWishlist: function (callback) {
-			return $http.get(adminurl + 'showwishlist?user=' + $.jStorage.get("user").id, {}, {
+		showWishlist: function (pageno,callback) {
+			return $http.get(adminurl + 'showwishlist?pageno='+pageno+'&user=' + $.jStorage.get("user").id, {}, {
 				withCredentials: true
 			}).success(callback);
 		},

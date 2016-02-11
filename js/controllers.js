@@ -3,6 +3,7 @@ var myImage = {
   image: "",
   image1: ""
 };
+var isf = 1;
 var uploadres = [];
 var myfunc = {};
 window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
@@ -596,6 +597,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.updateuser = {};
   $scope.updateuser.user = {};
 
+  if (!NavigationService.getUser()) {
+    $state.go("home");
+  }
+
   $scope.addAlert = function(type, msg) {
     $scope.alerts.push({
       type: type,
@@ -763,11 +768,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
   $scope.orders = [];
+  $scope.lastpage = 0;
+  $scope.pageno = 0;
+  $scope.msg = "Loading...";
 
-  // NavigationService.getorders(function(data){
-  // 	console.log(data);
-  // 	$scope.orders = data;
-  // });
+  if (!NavigationService.getUser()) {
+    $state.go("home");
+  }
+  $scope.loadOrders = function() {
+    if ($scope.lastpage >= $scope.pageno) {
+      ++$scope.pageno;
+      NavigationService.getorders($scope.pageno, function(data) {
+        _.each(data.queryresult, function(n) {
+          $scope.orders.push(n);
+        })
+        $scope.lastpage = data.lastpage;
+      });
+      if ($scope.orders=='') {
+        $scope.msg = "No Orders.";
+      }else {
+        $scope.msg = "";
+      }
+    }
+
+  }
+  $scope.loadOrders();
+  $scope.loadProducts = function() {
+    $scope.loadOrders();
+  }
 
 })
 
@@ -1253,7 +1281,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('WishlistCtrl', function($scope, TemplateService, NavigationService) {
+.controller('WishlistCtrl', function($scope, TemplateService, NavigationService, $state) {
 
   $scope.template = TemplateService.changecontent("wishlist");
   $scope.menutitle = NavigationService.makeactive("Wishlist");
@@ -1261,6 +1289,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
   $scope.alerts = [];
+  $scope.pageno = 0;
+  $scope.lastpage = 0;
+  $scope.msg = "Loading...";
+  $scope.wishlistProduct = [];
+
+  if (!NavigationService.getUser()) {
+    $state.go("home");
+  }
 
   $scope.addAlert = function(type, msg) {
     $scope.alerts.push({
@@ -1273,14 +1309,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.alerts.splice(index, 1);
   };
 
-  // GET WISHLIST
+  // GET WISHLISTw
   $scope.loadWishlist = function() {
-    NavigationService.showWishlist(function(data, status) {
-      console.log(data);
-      $scope.wishlistProduct = data.queryresult;
-    })
+    if ($scope.lastpage >= $scope.pageno) {
+      ++$scope.pageno;
+      NavigationService.showWishlist($scope.pageno, function(data, status) {
+        _.each(data.queryresult, function(n){
+          $scope.wishlistProduct.push(n);
+        });
+        $scope.lastpage = data.lastpage;
+        if ($scope.wishlistProduct=='') {
+          $scope.msg = "Your wishlist is currently empty.";
+        }else {
+          $scope.msg = "";
+        }
+      });
+
+    }
   }
   $scope.loadWishlist();
+
+  $scope.loadProducts = function(){
+    $scope.loadWishlist();
+  }
 
   $scope.removeFromWishlist = function(mywish) {
     NavigationService.removeFromWishlist(mywish.id, mywish.designId, function(data) {
@@ -1293,6 +1344,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     console.log(mywish);
     if (mywish.size != "") {
       mywish.product = mywish.id;
+      mywish.design = mywish.designId;
+      mywish.quantity = 1;
       NavigationService.addToCart(mywish, function(data, status) {
         if (data == "true") {
           $scope.addAlert("success", "Added to cart");
@@ -1379,18 +1432,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   myfunc = $scope;
 
-  $scope.bringForward = function(data) {
-    console.log(data);
-    _.merge(data.css, {
+  $scope.bringForward = function(maindata, data) {
+    _.merge(maindata.css, {
       "position": "relative",
       "z-index": 2
     });
-  }
-  $scope.sendBackward = function(data) {
-    console.log(data);
     _.merge(data.css, {
       "position": "relative",
       "z-index": 1
+    });
+  }
+  $scope.sendBackward = function(maindata, data) {
+
+    _.merge(maindata.css, {
+      "position": "relative",
+      "z-index": 1
+    });
+    _.merge(data.css, {
+      "position": "relative",
+      "z-index": 2
     });
   }
 
@@ -2014,36 +2074,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         {
           $scope.selectedFont = val;
           $scope.showSelect = false;
-          $scope.filter.custom[0].css = {
-            'font-family': val
-          };
+          _.merge($scope.filter.custom[0].css, {
+            "font-family": val
+          });
         }
         break;
       case 1:
         {
           $scope.selectedFont1 = val;
           $scope.showSelect1 = false;
-          $scope.filter.custom[1].css = {
-            'font-family': val
-          };
+          _.merge($scope.filter.custom[1].css, {
+            "font-family": val
+          });
         }
         break;
       case 2:
         {
           $scope.selectedFont2 = val;
           $scope.showSelect2 = false;
-          $scope.filter.custom[2].css = {
-            'font-family': val
-          };
+          _.merge($scope.filter.custom[2].css, {
+            "font-family": val
+          });
         }
         break;
       case 3:
         {
           $scope.selectedFont3 = val;
           $scope.showSelect3 = false;
-          $scope.filter.custom[3].css = {
-            'font-family': val
-          };
+          _.merge($scope.filter.custom[3].css, {
+            "font-family": val
+          });
         }
         break;
       default:
@@ -2060,36 +2120,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // $scope.isfront = false;
     console.log(index);
     switch (val) {
-      case 0:{
-      switch (index) {
-        case 0:
-          {
-            $scope.first = true;
-            $scope.second = false;
-            $scope.third = false;
-          }
-          break;
-        case 1:
-          {
-            $scope.first = false;
-            $scope.second = true;
-            $scope.third = false;
-          }
-          break;
-        case 2:
-          {
-            $scope.first = false;
-            $scope.second = false;
-            $scope.third = true;
-          }
-          break;
+      case 0:
+        {
+          switch (index) {
+            case 0:
+              {
+                $scope.first = true;
+                $scope.second = false;
+                $scope.third = false;
+              }
+              break;
+            case 1:
+              {
+                $scope.first = false;
+                $scope.second = true;
+                $scope.third = false;
+              }
+              break;
+            case 2:
+              {
+                $scope.first = false;
+                $scope.second = false;
+                $scope.third = true;
+              }
+              break;
 
-        default:
+            default:
 
-      }
-    }
+          }
+        }
         break;
-        case 1 :
+      case 1:
         {
           switch (index) {
             case 0:
@@ -2119,7 +2180,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           }
         }
         break;
-        case 2 :
+      case 2:
         {
           switch (index) {
             case 0:
@@ -2149,7 +2210,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           }
         }
         break;
-        case 3 :
+      case 3:
         {
           switch (index) {
             case 0:
@@ -2199,19 +2260,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.third1 = false;
   }
 
-    $scope.closeandshowsize2 = function() {
-      $scope.showSize2 = !$scope.showSize2;
-      $scope.first2 = false;
-      $scope.second2 = false;
-      $scope.third2 = false;
-    }
+  $scope.closeandshowsize2 = function() {
+    $scope.showSize2 = !$scope.showSize2;
+    $scope.first2 = false;
+    $scope.second2 = false;
+    $scope.third2 = false;
+  }
 
-      $scope.closeandshowsize3 = function() {
-        $scope.showSize3 = !$scope.showSize3;
-        $scope.first3 = false;
-        $scope.second3 = false;
-        $scope.third3 = false;
-      }
+  $scope.closeandshowsize3 = function() {
+    $scope.showSize3 = !$scope.showSize3;
+    $scope.first3 = false;
+    $scope.second3 = false;
+    $scope.third3 = false;
+  }
 
   $scope.showorfirst = function() {
 
@@ -2646,7 +2707,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   // image upload popup
   $scope.width = "720px";
   var imagempdel = '';
-  $scope.imgUploadModal = function() {
+  $scope.imgUploadModal = function(isf) {
+    $scope.isf = isf;
     imagempdel = $uibModal.open({
       animation: true,
       windowClass: 'large-Modal',
@@ -2655,7 +2717,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
-  $scope.imgUpload = function() {
+  $scope.imgUpload = function(isf) {
+    $scope.isf = isf;
     $uibModal.open({
       animation: true,
       windowClass: 'large-Modal',
@@ -2761,12 +2824,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         fileFormDataName: 'image'
       });
       $scope.upload[index].then(function(response) {
-        console.log(response)
         $timeout(function() {
           // cfpLoadingBar.complete();
           $scope.uploadResult.push(response.data);
           if (response.data.value != "") {
-            $scope.filter.image.image = response.data.value;
+            console.log($scope.isf);
+            if ($scope.isf) {
+              $scope.filter.image.image = response.data.value;
+            } else {
+              $scope.filter.image.image1 = response.data.value;
+            }
+
           }
         });
       }, function(response) {
