@@ -1954,7 +1954,15 @@ h4.strong.font-smart {
 .layer-buttons {
   button + button { margin-left: 15px; }
 }
+.color-show { margin-top: 10px; }
+.clor-show {
+  .strok:before {
+    left: 30px;
+  }
+}
+.text-iline { margin: 20px 25px 0; }
 .ml-30 { margin-left: 30px !important; }
+.ml-15 { margin-left: 15px !important; }
 .bod-x {
   padding: 7px;
   background-color: white;

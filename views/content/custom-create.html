@@ -638,18 +638,12 @@
 									<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload(isfront);">UPLOAD IMAGE</button>
 									<!--//imagesetting-->
 
-									<div class="color-show" ng-show="filter.image.image!=''">
+									<div class="color-show clor-show" ng-show="filter.image.image!=''">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="strok ">
-													<div class="text-line">
-
-
-														<div class="row ">
-															<div class="layer-buttons">
-																<button class="btn bring-front bod-x ml-30" ng-click="bringForward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
-																<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
-															</div>
+													<div class="text-line text-iline">
+														<div class="row">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">Size</p>
 															</div>
@@ -663,7 +657,7 @@
 															</div>
 														</div>
 
-														<div class="row ">
+														<div class="row">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">Rotate</p>
 															</div>
@@ -673,6 +667,13 @@
 															</div>
 															<div class="col-xs-2">
 																<p class="range-value">{{imageSetting[1].value}}</p>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="layer-buttons">
+																<button class="btn bring-front bod-x ml-15" ng-click="bringForward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
 															</div>
 														</div>
 													</div>
@@ -1198,14 +1199,12 @@
 									<button class="btn btn-danger mar0 con-btn" ng-click="imgUploadModal(isfront);">UPLOAD IMAGE</button>
 									<!--//imagesetting-->
 
-									<div class="color-show" ng-show="filter.image.image1!=''">
+									<div class="color-show clor-show" ng-show="filter.image.image1!=''">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="strok ">
-													<div class="text-line">
-
-
-														<div class="row ">
+												<div class="strok">
+													<div class="text-line text-iline">
+														<div class="row">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">Size</p>
 															</div>
@@ -1219,7 +1218,7 @@
 															</div>
 														</div>
 
-														<div class="row ">
+														<div class="row">
 															<div class="col-xs-2">
 																<p class="mar0 f-size">Rotate</p>
 															</div>
@@ -1229,6 +1228,13 @@
 															</div>
 															<div class="col-xs-2">
 																<p class="range-value">{{imageSetting1[1].value}}</p>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="layer-buttons">
+																<button class="btn bring-front bod-x ml-15" ng-click="bringForward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
+																<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
 															</div>
 														</div>
 													</div>
