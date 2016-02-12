@@ -287,30 +287,76 @@
 					<div class="form-group i-check">
 						<input type="checkbox" class="iagree" ng-model="sameasbilling" ng-change="sameAsBilling(sameasbilling)">Same as billing address
 					</div>
-					<div class="form-group">
-						<label>LINE 1*</label>
-						<input type="text" ng-model="checkout.shippingline1" ng-change="shippingchange(checkout.shippingline1,1)" class="form-control">
+					<div ng-if="sameasbilling">
+						<div class="form-group">
+							<label>LINE 1*</label>
+							<input type="text" ng-model="checkout.billingline1" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>LINE 2*</label>
+							<input type="text" ng-model="checkout.billingline2" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>LINE 3*</label>
+							<input type="text" ng-model="checkout.billingline3" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>CITY *</label>
+							<input type="text" ng-model="checkout.billingcity" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>PINCODE *</label>
+							<input type="text" ng-model="checkout.billingpincode" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>STATE*</label>
+							<input type="text" class="form-control" ng-model="checkout.billingstate">
+							<!--
+							<div class="fynx-select">
+								<select>
+									<option value=""></option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+								<span class="only-border"></span>
+							</div>
+	-->
+						</div>
+						<div class="form-group">
+							<label>COUNTRY*</label>
+							<select name="country" ng-model="checkout.billingcountry" class="form-control">
+								<option value="IND">India</option>
+								<option value="JPN">Japan</option>
+								<option value="ITA">Italy</option>
+							</select>
+						</div>
 					</div>
-					<div class="form-group">
-						<label>LINE 2*</label>
-						<input type="text" ng-model="checkout.shippingline2" ng-change="shippingchange(checkout.shippingline2,2)" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>LINE 3*</label>
-						<input type="text" ng-model="checkout.shippingline3" ng-change="shippingchange(checkout.shippingline3,3)" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>CITY *</label>
-						<input type="text" ng-model="checkout.shippingcity" ng-change="shippingchange(checkout.shippingcity,4)" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>PINCODE *</label>
-						<input type="text" ng-model="checkout.shippingpincode" ng-change="shippingchange(checkout.shippingpincode,5)" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>STATE*</label>
-						<input type="text" ng-model="checkout.shippingstate" ng-change="shippingchange(checkout.shippingstate,6)" class="form-control">
-						<!--
+					<div ng-if="!sameasbilling">
+						<div class="form-group">
+							<label>LINE 1*</label>
+							<input type="text" ng-model="checkout.shippingline1" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>LINE 2*</label>
+							<input type="text" ng-model="checkout.shippingline2" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>LINE 3*</label>
+							<input type="text" ng-model="checkout.shippingline3" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>CITY *</label>
+							<input type="text" ng-model="checkout.shippingcity" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>PINCODE *</label>
+							<input type="text" ng-model="checkout.shippingpincode" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>STATE*</label>
+							<input type="text" ng-model="checkout.shippingstate" class="form-control">
+							<!--
 						<div class="fynx-select">
 							<select>
 								<option value=""></option>
@@ -321,14 +367,15 @@
 							<span class="only-border"></span>
 						</div>
 -->
-					</div>
-					<div class="form-group">
-						<label>COUNTRY*</label>
-						<select name="country" ng-model="checkout.shippingcountry" ng-change="shippingchange(checkout.shippingcountry,7)" class="form-control">
-							<option value="IND">India</option>
-							<option value="JPN">Japan</option>
-							<option value="ITA">Italy</option>
-						</select>
+						</div>
+						<div class="form-group">
+							<label>COUNTRY*</label>
+							<select name="country" ng-model="checkout.shippingcountry" class="form-control">
+								<option value="IND">India</option>
+								<option value="JPN">Japan</option>
+								<option value="ITA">Italy</option>
+							</select>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -413,111 +460,207 @@
 				<h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
 				<div class="order-table" ng-if="checkout.paymentmode!=4">
 					<form method="post" name="customerData" action="http://www.myfynx.com/newfynx/paymentgateway/ccavRequestHandler.php">
-							<table width="40%" height="100">
-								<tr style="display:none">
-									<td>TID	:</td><td><input type="text" name="tid" ng-model="order" readonly /></td>
-								</tr>
-								<tr style="display:none">
-									<td>Merchant Id	:</td><td><input type="text" name="merchant_id" value="88679"/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Order Id	:</td><td><input type="text" name="order_id" ng-model="order"/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Amount	:</td><td><input type="text" name="amount" ng-model="amount"/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Currency	:</td><td><input type="text" name="currency" value="INR"/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Redirect URL	:</td><td><input type="text" name="redirect_url" value="http://www.myfynx.com/newfynx/index.php/json/payumoneysuccess"/></td>
-								</tr>
-							 	<tr style="display:none">
-							 		<td>Cancel URL	:</td><td><input type="text" name="cancel_url" value="http://www.myfynx.com/testing"/></td>
-							 	</tr>
-							 	<tr style="display:none">
-									<td>Language	:</td><td><input type="text" name="language" value="EN"/></td>
-								</tr>
-						     	<tr>
-						     		<td colspan="2">Billing information:</td>
-						     	</tr>
-						        <tr>
-						        	<td>Billing Name	:</td><td><input type="text" name="billing_name" style="border: none; width: 100%;" ng-model="checkout.firstname"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Billing Address	:</td><td><input type="text" name="billing_address" style="border: none; width: 100%;"  ng-model="checkout.billingaddress"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Billing City	:</td><td><input type="text" name="billing_city" style="border: none; width: 100%;" ng-model="checkout.billingcity"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Billing State	:</td><td><input type="text" name="billing_state" style="border: none; width: 100%;" ng-model="checkout.billingstate"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Billing Zip	:</td><td><input type="text" name="billing_zip" style="border: none; width: 100%;" ng-model="checkout.billingpincode"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Billing Country	:</td><td><input type="text" name="billing_country" style="border: none; width: 100%;" ng-model="checkout.billingcountry"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Billing Tel	:</td><td><input type="text" name="billing_tel" style="border: none; width: 100%;" ng-model="checkout.phone"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Billing Email	:</td><td><input type="text" name="billing_email" style="border: none; width: 100%;" ng-model="checkout.email"/></td>
-						        </tr>
-						        <tr>
-						        	<td colspan="2">Shipping information</td>
-						        </tr>
-						        <tr>
-						        	<td>Shipping Name	:</td><td><input type="text" name="delivery_name" style="border: none; width: 100%;" ng-model="checkout.firstname"/></td>
-						        </tr>
-						        <tr>
-						        	<td>Shipping Address	:</td><td><input type="text" name="delivery_address" style="border: none; width: 100%;" ng-model="checkout.shippingaddress"/></td>
-						        </tr>
-						        <tr>
-						        	<td>shipping City	:</td><td><input type="text" name="delivery_city" style="border: none; width: 100%;" ng-model="checkout.shippingcity"/></td>
-						        </tr>
-						        <tr>
-						        	<td>shipping State	:</td><td><input type="text" name="delivery_state" style="border: none; width: 100%;" ng-model="checkout.shippingstate"/></td>
-						        </tr>
-						        <tr>
-						        	<td>shipping Zip	:</td><td><input type="text" name="delivery_zip" style="border: none; width: 100%;" ng-model="checkout.shippingpincode"/></td>
-						        </tr>
-						        <tr>
-						        	<td>shipping Country	:</td><td><input type="text" name="delivery_country" style="border: none; width: 100%;" ng-model="checkout.shippingcountry" /></td>
-						        </tr>
-						        <tr>
-						        	<td>Shipping Tel	:</td><td><input type="text" name="delivery_tel" style="border: none; width: 100%;" ng-model="checkout.phone"/></td>
-						        </tr>
-						        <tr style="display:none">
-						        	<td>Merchant Param1	:</td><td><input type="text" name="merchant_param1" value="additional Info."/></td>
-						        </tr>
-						        <tr style="display:none">
-						        	<td>Merchant Param2	:</td><td><input type="text" name="merchant_param2" value="additional Info."/></td>
-						        </tr>
-								<tr style="display:none">
-									<td>Merchant Param3	:</td><td><input type="text" name="merchant_param3" value="additional Info."/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Merchant Param4	:</td><td><input type="text" name="merchant_param4" value="additional Info."/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Merchant Param5	:</td><td><input type="text" name="merchant_param5" value="additional Info."/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Promo Code	:</td><td><input type="text" name="promo_code" value=""/></td>
-								</tr>
-								<tr style="display:none">
-									<td>Vault Info.	:</td><td><input type="text" name="customer_identifier" value=""/></td>
-								</tr>
-						        <tr style="display:none">
-						        	<td>Integration Type	:</td><td><input type="text" name="integration_type" value="iframe_normal"/></td>
-						        </tr>
-						        <tr>
-						        	<td></td><td><button class="btn btn-danger m-30 con-btn" type="submit">Place order</button></td>
-						        </tr>
-					      	</table>
-					      </form>
+						<table width="40%" height="100">
+							<tr style="display:none">
+								<td>TID :</td>
+								<td>
+									<input type="text" name="tid" ng-model="order" readonly />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Merchant Id :</td>
+								<td>
+									<input type="text" name="merchant_id" value="88679" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Order Id :</td>
+								<td>
+									<input type="text" name="order_id" ng-model="order" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Amount :</td>
+								<td>
+									<input type="text" name="amount" ng-model="amount" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Currency :</td>
+								<td>
+									<input type="text" name="currency" value="INR" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Redirect URL :</td>
+								<td>
+									<input type="text" name="redirect_url" value="http://www.myfynx.com/newfynx/index.php/json/payumoneysuccess" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Cancel URL :</td>
+								<td>
+									<input type="text" name="cancel_url" value="http://www.myfynx.com/testing" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Language :</td>
+								<td>
+									<input type="text" name="language" value="EN" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">Billing information:</td>
+							</tr>
+							<tr>
+								<td>Billing Name :</td>
+								<td>
+									<input type="text" name="billing_name" style="border: none; width: 100%;" ng-model="checkout.firstname" />
+								</td>
+							</tr>
+							<tr>
+								<td>Billing Address :</td>
+								<td>
+									<input type="text" name="billing_address" style="border: none; width: 100%;" ng-model="checkout.billingaddress" />
+								</td>
+							</tr>
+							<tr>
+								<td>Billing City :</td>
+								<td>
+									<input type="text" name="billing_city" style="border: none; width: 100%;" ng-model="checkout.billingcity" />
+								</td>
+							</tr>
+							<tr>
+								<td>Billing State :</td>
+								<td>
+									<input type="text" name="billing_state" style="border: none; width: 100%;" ng-model="checkout.billingstate" />
+								</td>
+							</tr>
+							<tr>
+								<td>Billing Zip :</td>
+								<td>
+									<input type="text" name="billing_zip" style="border: none; width: 100%;" ng-model="checkout.billingpincode" />
+								</td>
+							</tr>
+							<tr>
+								<td>Billing Country :</td>
+								<td>
+									<input type="text" name="billing_country" style="border: none; width: 100%;" ng-model="checkout.billingcountry" />
+								</td>
+							</tr>
+							<tr>
+								<td>Billing Tel :</td>
+								<td>
+									<input type="text" name="billing_tel" style="border: none; width: 100%;" ng-model="checkout.phone" />
+								</td>
+							</tr>
+							<tr>
+								<td>Billing Email :</td>
+								<td>
+									<input type="text" name="billing_email" style="border: none; width: 100%;" ng-model="checkout.email" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">Shipping information</td>
+							</tr>
+							<tr>
+								<td>Shipping Name :</td>
+								<td>
+									<input type="text" name="delivery_name" style="border: none; width: 100%;" ng-model="checkout.firstname" />
+								</td>
+							</tr>
+							<tr>
+								<td>Shipping Address :</td>
+								<td>
+									<input type="text" name="delivery_address" style="border: none; width: 100%;" ng-model="checkout.shippingaddress" />
+								</td>
+							</tr>
+							<tr>
+								<td>shipping City :</td>
+								<td>
+									<input type="text" name="delivery_city" style="border: none; width: 100%;" ng-model="checkout.shippingcity" />
+								</td>
+							</tr>
+							<tr>
+								<td>shipping State :</td>
+								<td>
+									<input type="text" name="delivery_state" style="border: none; width: 100%;" ng-model="checkout.shippingstate" />
+								</td>
+							</tr>
+							<tr>
+								<td>shipping Zip :</td>
+								<td>
+									<input type="text" name="delivery_zip" style="border: none; width: 100%;" ng-model="checkout.shippingpincode" />
+								</td>
+							</tr>
+							<tr>
+								<td>shipping Country :</td>
+								<td>
+									<input type="text" name="delivery_country" style="border: none; width: 100%;" ng-model="checkout.shippingcountry" />
+								</td>
+							</tr>
+							<tr>
+								<td>Shipping Tel :</td>
+								<td>
+									<input type="text" name="delivery_tel" style="border: none; width: 100%;" ng-model="checkout.phone" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Merchant Param1 :</td>
+								<td>
+									<input type="text" name="merchant_param1" value="additional Info." />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Merchant Param2 :</td>
+								<td>
+									<input type="text" name="merchant_param2" value="additional Info." />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Merchant Param3 :</td>
+								<td>
+									<input type="text" name="merchant_param3" value="additional Info." />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Merchant Param4 :</td>
+								<td>
+									<input type="text" name="merchant_param4" value="additional Info." />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Merchant Param5 :</td>
+								<td>
+									<input type="text" name="merchant_param5" value="additional Info." />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Promo Code :</td>
+								<td>
+									<input type="text" name="promo_code" value="" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Vault Info. :</td>
+								<td>
+									<input type="text" name="customer_identifier" value="" />
+								</td>
+							</tr>
+							<tr style="display:none">
+								<td>Integration Type :</td>
+								<td>
+									<input type="text" name="integration_type" value="iframe_normal" />
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<button class="btn btn-danger m-30 con-btn" type="submit">Place order</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>

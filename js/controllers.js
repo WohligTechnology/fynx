@@ -310,10 +310,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   cfpLoadingBar.start();
 
   $scope.addAlert = function(type, msg) {
-    $scope.alerts.push({
+    $scope.alerts[0] = {
       type: type,
       msg: msg
-    });
+    };
   };
 
   $scope.myfunc = function(n) {
@@ -501,10 +501,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.alerts = [];
 
   $scope.addAlert = function(type, msg) {
-    $scope.alerts.push({
+    $scope.alerts[0] = {
       type: type,
       msg: msg
-    });
+    };
   };
 
   $scope.closeAlert = function(index) {
@@ -602,10 +602,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.addAlert = function(type, msg) {
-    $scope.alerts.push({
+    $scope.alerts[0] = {
       type: type,
       msg: msg
-    });
+    };
   };
 
   $scope.closeAlert = function(index) {
@@ -644,21 +644,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           if ($scope.profile.changepasswordedit == 'edit') {
             $scope.profile.changepasswordedit = 'save';
           } else {
-            if ($scope.password.newpassword === $scope.password.confirmpassword) {
-              NavigationService.changePassword($scope.password, function(data) {
-                console.log(data);
-                if (data == 1) {
-                  $scope.addAlert("success", "Password changed successfully. ");
-                  $scope.profile.changepasswordedit = 'edit';
-                } else {
-                  $scope.addAlert("danger", "Wrong password");
-                }
-              });
+            $scope.allvalidation = [{
+              field: $scope.password.oldpassword,
+              validation: ""
+            }, {
+              field: $scope.password.newpassword,
+              validation: ""
+            }, {
+              field: $scope.password.confirmpassword,
+              validation: ""
+            }];
 
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
+            if ($scope.password.newpassword === $scope.password.confirmpassword) {
+              if ($scope.password.newpassword === $scope.password.confirmpassword === $scope.password.oldpassword) {
+                $scope.addAlert("danger", "No change in password.");
+              }else {
+                NavigationService.changePassword($scope.password, function(data) {
+                  console.log(data);
+                  if (data == 1) {
+                    $scope.addAlert("success", "Password changed successfully. ");
+                    $scope.profile.changepasswordedit = 'edit';
+                    $scope.password = {};
+                  } else {
+                    $scope.addAlert("danger", "Wrong password");
+                  }
+                });
+              }
             } else {
               $scope.addAlert("danger", "Re-entered password should be same as new password.");
             }
-
+          }else {
+            $scope.addAlert("danger", "Please Fill All Fields.");
+          }
           }
         }
         break;
@@ -812,10 +831,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.msg = "Loading...";
 
   $scope.addAlert = function(type, msg) {
-    $scope.alerts.push({
+    $scope.alerts[0] = {
       type: type,
       msg: msg
-    });
+    };
   };
 
   $scope.closeAlert = function(index) {
@@ -922,10 +941,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.addAlert = function(type, msg) {
-    $scope.alerts.push({
+    $scope.alerts[0] = {
       type: type,
       msg: msg
-    });
+    };
   };
   $scope.validateQuantity = function(cart) {
     if (parseInt(cart.qty) > parseInt(cart.maxQuantity)) {
@@ -1299,10 +1318,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.addAlert = function(type, msg) {
-    $scope.alerts.push({
+    $scope.alerts[0] = {
       type: type,
       msg: msg
-    });
+    };
   };
 
   $scope.closeAlert = function(index) {
@@ -1401,6 +1420,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     "text": "",
     "css": {
       "z-index": 2
+    }
+  },{
+    "id": 5,
+    "text": "",
+    "css": {
+      "z-index": 3
+    }
+  },{
+    "id": 6,
+    "text": "",
+    "css": {
+      "z-index": 3
     }
   }];
   $scope.filter.type = $stateParams.id;
@@ -1537,10 +1568,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.addAlert = function(type, msg) {
-    $scope.alerts.push({
+    $scope.alerts[0] = {
       type: type,
       msg: msg
-    });
+    };
   };
 
   $scope.closeAlert = function(index) {
@@ -1778,7 +1809,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.isArcChange = false;
   $scope.$watch('filter.custom[0].text', function(newValue, oldValue) {
     $scope.filter.custom[0].text = newValue;
-    console.log($scope.isArcChange);
     if ($scope.isArcChange == true) {
       $('#example1').show().arctext({
         radius: newValue
@@ -1846,9 +1876,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   });
   $scope.$watch('design.design[1].value', function(newValue, oldValue) {
+    if (oldValue != newValue) {
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design[1].value, 1);
+    }
 
-    $scope.isArcChange = true;
-    $scope.changeArc($scope.design.design[1].value, 1);
   });
 
   $scope.$watch('design.design[3].value', function(newValue, oldValue) {
@@ -1885,9 +1917,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   });
   $scope.$watch('design.design1[1].value', function(newValue, oldValue) {
-
+    if (oldValue != newValue) {
     $scope.isArcChange = true;
     $scope.changeArc($scope.design.design1[1].value, 2);
+  }
   });
 
   $scope.$watch('design.design1[3].value', function(newValue, oldValue) {
@@ -1924,9 +1957,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   });
   $scope.$watch('design.design2[1].value', function(newValue, oldValue) {
-
+    if (oldValue != newValue) {
     $scope.isArcChange = true;
     $scope.changeArc($scope.design.design2[1].value, 3);
+  }
   });
 
   $scope.$watch('design.design2[3].value', function(newValue, oldValue) {
@@ -1963,9 +1997,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   });
   $scope.$watch('design.design3[1].value', function(newValue, oldValue) {
-
+    if (oldValue != newValue) {
     $scope.isArcChange = true;
     $scope.changeArc($scope.design.design3[1].value, 4);
+  }
   });
 
   $scope.$watch('design.design3[3].value', function(newValue, oldValue) {
@@ -1995,6 +2030,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   });
   // End For Fourth Text
+  // Start image setting
+  $scope.$watch('imageSetting[1].value', function(newValue, oldValue) {
+    var rotate = $scope.imageSetting[1].value;
+    _.merge($scope.filter.custom[4].css, {
+      "-webkit-transform": "rotate(" + rotate + "deg)"
+    });
+  });
+  $scope.$watch('imageSetting[0].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[4].css, {
+      "height": newValue + "px"
+    });
+    console.log($scope.filter.custom[4].css);
+  });
+  $scope.$watch('imageSetting1[1].value', function(newValue, oldValue) {
+    var rotate = $scope.imageSetting1[1].value;
+    _.merge($scope.filter.custom[5].css, {
+      "-webkit-transform": "rotate(" + rotate + "deg)"
+    });
+  });
+  $scope.$watch('imageSetting1[0].value', function(newValue, oldValue) {
+    _.merge($scope.filter.custom[5].css, {
+      "height": newValue + "px"
+    });
+    console.log($scope.filter.custom[4].css);
+  });
+  // End image setting
+
 
   $scope.changeJustify = function(val) {
     console.log(val);
@@ -2674,6 +2736,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }, {
     name: 'fifth Item',
     value: 10
+  }];
+
+  $scope.imageSetting = [{
+    name: 'First Item',
+    value: 20
+  }, {
+    name: 'Second Item',
+    value: 1
+  }];
+
+  $scope.imageSetting1 = [{
+    name: 'First Item',
+    value: 20
+  }, {
+    name: 'Second Item',
+    value: 1
   }];
 
   $scope.makeactive = function(color) {

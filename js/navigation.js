@@ -606,7 +606,8 @@ var navigationservice = angular.module('navigationservice', [])
 				data: {
 					"product": filter.product,
 					"quantity": filter.quantity,
-					"design":filter.design
+					"design":filter.design,
+          "user":$.jStorage.get('user').id
 				}
 			}).success(callback);
 		},

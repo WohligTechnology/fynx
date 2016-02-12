@@ -1992,7 +1992,8 @@ span.badge.red {
     font-weight: 100;
 }
 .auto-dim {
-  height: auto !important;
+  height: auto;
   width: auto !important;
+  @include transition(0ms ease);
 }
 @import "main/mobile";
