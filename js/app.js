@@ -283,6 +283,28 @@ firstapp.directive('fancyboxBox', function($document) {
   };
 });
 
+firstapp.directive('fixScroller', function($document) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function(scope, element, attr) {
+      var $element = $(element);
+      var divScroll = $(element).offset().top;
+
+      $(window).scroll(function() {
+        var windowScroll = $(window).scrollTop();
+        if (windowScroll >= divScroll-40) {
+          $(element).addClass("scroll-fixed");
+        }
+        else {
+          $(element).removeClass("scroll-fixed");
+        }
+      });
+
+    }
+  };
+});
+
 firstapp.directive('dragcanvasitem', function() {
   return {
     link: function(scope, element, attr) {
@@ -323,7 +345,7 @@ firstapp.directive('dragcanvasitem', function() {
         console.log("mouse move");
 
         if (drag.state) {
-          $(".shirtcanvas").css("border","1px solid #0d9dff");
+          $(".shirtcanvas").css("border", "1px solid #0d9dff");
           delta.x = e.pageX - drag.x;
           delta.y = e.pageY - drag.y;
 
@@ -336,8 +358,8 @@ firstapp.directive('dragcanvasitem', function() {
 
           drag.x = e.pageX;
           drag.y = e.pageY;
-        }else {
-          $(".shirtcanvas").css("border","");
+        } else {
+          $(".shirtcanvas").css("border", "");
         }
       }
 
