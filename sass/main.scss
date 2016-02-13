@@ -1484,7 +1484,7 @@ h4.bold,
     color: #f00;
     content: "";
     pointer-events: none;
-    z-index: 999999;
+    z-index: 9;
   }
 }
 .m5 {
@@ -1843,21 +1843,22 @@ h4.bold,
 
     .on-img {
       position: absolute;
-    top: 50%;
-    width: 186px;
-    left: 50%;
-    font-weight: 700;
-    text-align: center;
-    font-size: 80px;
-    display: block;
-    transform: translate(-50%,-50%);
-    -webkit-user-select: none;
-    user-select: none;
-    min-height: 308px;
-    overflow: hidden;
+      top: 50%;
+      width: 186px;
+      left: 50%;
+      font-weight: 700;
+      text-align: center;
+      font-size: 80px;
+      display: block;
+      -webkit-user-select: none;
+      user-select: none;
+      min-height: 308px;
+      overflow: hidden;
       @include transform(translate(-50%, -50%));
       @include user-select(none);
-      span{
+      border: 1px solid transparent;
+
+      span {
         display: block;
         line-height: 1;
       }
@@ -2019,6 +2020,6 @@ span.badge.red {
 .scroll-fixed {
     position: fixed;
     z-index: 9;
-    top: 100px;
+    top: 70px;
 }
 @import "main/mobile";
