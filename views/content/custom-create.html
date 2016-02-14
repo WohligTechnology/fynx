@@ -11,9 +11,9 @@
 	</div>
 	<hr>
 	<div class="product-detail">
-		<div class="text-center" ng-show="outofstock">
+		<!-- <div class="text-center" ng-show="outofstock">
 			Item is out of stock
-		</div>
+		</div> -->
 		<div class="row">
 			<div class="col-md-5 some-height">
 				<div class="custom-img" fix-scroller>
@@ -1301,7 +1301,8 @@
 											<p>ENTER YOUR DESIGN NAME</p>
 										</div>
 										<input type="text" class="form-control" ng-model="filter.designname"> </input>
-										<button class="btn btn-danger m-30 con-btns" ng-click="addToCart()">ADD TO CART</button>
+										<button class="btn btn-danger m-30 con-btns" ng-click="addToCart()" ng-show="!outofstock">ADD TO CART</button>
+										<h5 style="color:red" ng-show="outofstock">Item is out of stock</h5>
 									</div>
 								</div>
 							</div>

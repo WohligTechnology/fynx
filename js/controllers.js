@@ -469,7 +469,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $uibModal.open({
       animation: true,
       templateUrl: 'views/modal/sizechart.html',
-      controller: 'CustomCreateCtrl'
+      controller: 'ProductViewCtrl'
     })
   }
 
@@ -1354,8 +1354,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.removeFromWishlist = function(mywish) {
     NavigationService.removeFromWishlist(mywish.id, mywish.designId, function(data) {
-      console.log(data);
       $scope.loadWishlist();
+      $scope.wishlistProduct = [];
+      $scope.pageno = 0;
+      $scope.lastpage = 0;
     })
   }
 
@@ -1486,13 +1488,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.changeDesign = function() {
-
+    _.each($scope.imageSetting, function(n){
+      n.value++;
+    })
+    _.each($scope.imageSetting, function(n){
+      n.value--;
+    })
+    _.each($scope.imageSetting1, function(n){
+      n.value++;
+    })
+    _.each($scope.imageSetting1, function(n){
+      n.value--;
+    })
     _.each($scope.design.design, function(n) {
       if (n.name != 'Arc') {
         n.value++;
       }
-
-
     });
     $scope.$apply();
     _.each($scope.design.design, function(n) {
@@ -2343,6 +2354,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }, 100);
     $scope.showFirst = false;
   }
+  $scope.showorfirst();
 
   $scope.closeorfirst = function() {
     $scope.showFirst = true;
@@ -2740,7 +2752,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.imageSetting = [{
     name: 'First Item',
-    value: 20
+    value: 100
   }, {
     name: 'Second Item',
     value: 1
@@ -2748,7 +2760,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.imageSetting1 = [{
     name: 'First Item',
-    value: 20
+    value: 100
   }, {
     name: 'Second Item',
     value: 1
@@ -2850,6 +2862,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     window.location.hash.substring(2) : window.location.hash.substring(1)) : '1.2.20';
 
   $scope.onFileSelect = function($files) {
+    $scope.isloading = true;
     $scope.selectedFiles = [];
     $scope.progress = [];
     console.log($files);
@@ -2906,7 +2919,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           // cfpLoadingBar.complete();
           $scope.uploadResult.push(response.data);
           if (response.data.value != "") {
-            console.log($scope.isf);
+            $scope.isloading = false;
+            console.log($scope.isloading);
+            
+            // console.log($scope.isf);
             if ($scope.isf) {
               $scope.filter.image.image = response.data.value;
             } else {

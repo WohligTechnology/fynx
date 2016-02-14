@@ -30,6 +30,7 @@
                     <div class="choose-btn">
                         <div ng-init="httpMethod = 'POST';howToSend = 1;"></div>
                         <input type="file" class="form-control" name="image" ng-file-select="onFileSelect($files)" onclick="this.value=null">
+                        <h4 ng-if="isloading">Loading...</h4>
                         <!-- <div class="response" ng-show="uploadResult.length > 0">
                             <span ng-repeat="result in uploadResult"></span>
                         </div> -->
