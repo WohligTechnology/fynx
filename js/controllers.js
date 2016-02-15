@@ -4,6 +4,9 @@ var myImage = {
   image1: ""
 };
 var isf = 1;
+var img = '';
+var filter = {};
+var custom = {};
 var uploadres = [];
 var myfunc = {};
 window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
@@ -866,10 +869,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.loadcart = function() {
     NavigationService.showCart(function(data, status) {
       $scope.allCart = data;
+      console.log("afsdfasdf");
       _.each($scope.allCart, function(n) {
         n.exceeds = $scope.validateQuantity(n);
-        if (n.json) {
-          n.json = JSON.parse(n.json);
+        if (n.options.json) {
+          n.json = JSON.parse(n.options.json);
+          console.log(n.json);
         }
       })
       console.log($scope.allCart);
@@ -2817,7 +2822,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
-  $scope.previewDesign = function() {
+  $scope.previewDesign = function(filter,custom) {
+    $scope.filter1 = filter;
+    $scope.custom1 = custom;
     $uibModal.open({
       animation: true,
       windowClass: 'large-Modal',
@@ -2921,7 +2928,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           if (response.data.value != "") {
             $scope.isloading = false;
             console.log($scope.isloading);
-            
+
             // console.log($scope.isf);
             if ($scope.isf) {
               $scope.filter.image.image = response.data.value;

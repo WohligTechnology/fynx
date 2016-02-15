@@ -8,7 +8,7 @@
 <div class="container">
   <div class="alert-postion">
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
-    </div>
+  </div>
   <div class="row" ng-show="msg==''">
     <div class="col-md-12">
       <div class="order-table">
@@ -26,16 +26,20 @@
             <tr class="text-center text-bold" ng-repeat="cart in allCart">
               <td>
                 <figure>
-                  <img ng-src="{{cart.options.designimage | serverimage}}">
-                  <span ng-if="cart.json!=false && cart.json">+</span>
-                  <img ng-src="{{cart.json.image.image | serverimage}}" ng-if="cart.json!=false && cart.json">
-                  <figcaption>{{cart.options.realname}}</figcaption>
+                  <img ng-src="{{cart.image | serverimage}}">
+                  <span ng-if="cart.json!=false && cart.json && cart.json.image.image!=''">+</span>
+                  <img ng-src="{{cart.json.image.image | serverimage}}" ng-if="cart.json!=false && cart.json&& cart.json.image.image!=''">
+                  <span ng-if="cart.json!=false && cart.json&& cart.json.image.image1!=''">+</span>
+                  <img ng-src="{{cart.json.image.image1 | serverimage}}" ng-if="cart.json!=false && cart.json&& cart.json.image.image1!=''">
+                  <figcaption ng-if="!cart.json || cart.json==''">{{cart.options.realname}}</figcaption>
+                  <figcaption ng-if="cart.json!=''">{{cart.json.designname}}</figcaption>
                 </figure>
               </td>
               <td>{{cart.options.colorname}}</td>
               <td>{{cart.options.sizename}}</td>
               <td>{{cart.qty}}
-              <p class="text-center danger quantity-text" ng-show="cart.exceeds">Item went out of stock. Please remove item.</p></td>
+                <p class="text-center danger quantity-text" ng-show="cart.exceeds">Item went out of stock. Please remove item.</p>
+              </td>
               <td>
                 <p>{{cart.subtotal}}</p>
                 <button class="btn btn-blue btn-primary" ng-click="deleteCart(cart);" type="submit">remove</button>

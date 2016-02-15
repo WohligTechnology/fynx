@@ -6,8 +6,8 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="front">
-        <img ng-src="{{filter.image.image | serverimage}}" class="img-responsive">
+      <div ng-show="isfront" id="demo">
+        <img ng-src="{{img}}" alt="" />
       </div>
     </div>
     <div class="col-md-6">

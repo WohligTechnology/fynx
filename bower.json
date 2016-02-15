@@ -36,7 +36,8 @@
     "fancyBox": "~2.1.5",
     "ngInfiniteScroll": "~1.2.1",
     "angular-loading-bar": "~0.8.0",
-    "Arctext.js": "arctext-js#*"
+    "Arctext.js": "arctext-js#*",
+    "html2canvas": "~0.4.1"
   },
   "resolutions": {
     "angular": "1.4.8"
