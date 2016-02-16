@@ -1407,36 +1407,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.custom = [{
     "id": 1,
     "text": "",
+    "state":false,
     "css": {
       "z-index": 1
     }
   }, {
     "id": 2,
     "text": "",
+    "state":false,
     "css": {
       "z-index": 2
     }
   }, {
     "id": 3,
     "text": "",
+    "state":false,
     "css": {
       "z-index": 1
     }
   }, {
     "id": 4,
     "text": "",
+    "state":false,
     "css": {
       "z-index": 2
     }
   },{
     "id": 5,
     "text": "",
+    "state":false,
     "css": {
       "z-index": 3
     }
   },{
     "id": 6,
     "text": "",
+    "state":false,
     "css": {
       "z-index": 3
     }
@@ -1469,6 +1475,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   cfpLoadingBar.start();
 
   myfunc = $scope;
+
+  $scope.deleteElement = function(elm,num,reset){
+    switch (num) {
+      case 0:
+        {
+          elm.text = "";
+          elm.css = {
+            "font-size": "100px",
+            "z-index": 2
+          }
+        }
+        break;
+        case 1:
+          {
+            if (reset==1) {
+              var img = $('.movefirstimage');
+              img.eq(0).css("top","0px")
+              img.eq(0).css("left","0px")
+            }else {
+              $scope.filter.image.image = "";
+              elm.css = {
+                "height": "100px",
+                "z-index": 3
+              }
+            }
+
+          }
+          break;
+          case 2:
+            {
+              if (reset==1) {
+                var img = $('.movesecondimage');
+                img.eq(0).css("top","0px")
+                img.eq(0).css("left","0px")
+              }else {
+                $scope.filter.image.image1 = "";
+                elm.css = {
+                  "height": "100px",
+                  "z-index": 3
+                }
+              }
+            }
+            break;
+      default:
+
+    }
+  }
+
+  $scope.deselectAll = function(){
+    _.each($scope.filter.custom, function(n){
+      n.state = false;
+    });
+  }
+
+  $scope.showDelete = function(cust){
+    console.log("trudkfjhaldjskfhlkj");
+    _.each($scope.filter.custom, function(n){
+      n.state = false;
+    });
+    cust.state = true;
+  }
+
 
   $scope.bringForward = function(maindata, data) {
     _.merge(maindata.css, {
@@ -1505,6 +1573,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.each($scope.imageSetting1, function(n){
       n.value--;
     })
+
+
+    _.each($scope.items, function(n) {
+      if (n.name != 'Arc') {
+        n.value++;
+      }
+    });
+    _.each($scope.items, function(n) {
+      if (n.name != 'Arc') {
+        n.value--;
+      }
+    });
+    _.each($scope.items1, function(n) {
+      if (n.name != 'Arc') {
+        n.value++;
+      }
+    });
+    _.each($scope.items1, function(n) {
+      if (n.name != 'Arc') {
+        n.value--;
+      }
+    });
+    _.each($scope.items2, function(n) {
+      if (n.name != 'Arc') {
+        n.value++;
+      }
+    });
+    _.each($scope.items2, function(n) {
+      if (n.name != 'Arc') {
+        n.value--;
+      }
+    });
+    _.each($scope.items3, function(n) {
+      if (n.name != 'Arc') {
+        n.value++;
+      }
+    });
+    _.each($scope.items3, function(n) {
+      if (n.name != 'Arc') {
+        n.value--;
+      }
+    });
+
     _.each($scope.design.design, function(n) {
       if (n.name != 'Arc') {
         n.value++;
@@ -1512,6 +1623,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
     $scope.$apply();
     _.each($scope.design.design, function(n) {
+      if (n.name != 'Arc') {
+        n.value--;
+      }
+
+    });
+    _.each($scope.design.design1, function(n) {
+      if (n.name != 'Arc') {
+        n.value++;
+      }
+    });
+    $scope.$apply();
+    _.each($scope.design.design1, function(n) {
+      if (n.name != 'Arc') {
+        n.value--;
+      }
+
+    });
+    _.each($scope.design.design2, function(n) {
+      if (n.name != 'Arc') {
+        n.value++;
+      }
+    });
+    $scope.$apply();
+    _.each($scope.design.design2, function(n) {
+      if (n.name != 'Arc') {
+        n.value--;
+      }
+
+    });
+    _.each($scope.design.design3, function(n) {
+      if (n.name != 'Arc') {
+        n.value++;
+      }
+    });
+    $scope.$apply();
+    _.each($scope.design.design3, function(n) {
       if (n.name != 'Arc') {
         n.value--;
       }
@@ -2836,6 +2983,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.addToCart = function() {
     console.log($scope.filter);
+    // $movefirstimage = $(".movefirstimage");
+    // $movefirstimageimg = $(".movefirstimage img");
+    // $scope.filter.custom[4].top = $movefirstimage.eq(0).css("top").split("px")[0];
+    // $scope.filter.custom[4].left = $movefirstimage.eq(0).css("left").split("px")[0];
+    // $scope.fil
     NavigationService.addToCartCustom($scope.filter, function(data) {
       if (data == "true") {
         $scope.addAlert("success", "Added to cart");

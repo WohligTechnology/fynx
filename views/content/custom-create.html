@@ -18,31 +18,31 @@
 		</div>
 		<div class="row">
 			<div class="col-md-5 some-height">
-				<div class="custom-img">
+				<div class="custom-img" fix-scroller>
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
-						<div ng-show="isfront">
+						<div ng-show="isfront" ng-click="deselectAll()">
 							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
 							<div class="on-img shirtcanvas" style="top:250px;width:45%">
-								<div class="canvasitem" dragcanvasitem ng-if="filter.image.image!=''">
-									<img class="auto-dim m-center" ng-style="filter.custom[4].css" ng-src="{{filter.image.image | serverimage}}">
-									<span class="badge red ab" ng-click="filter.image.image = ''">X</span>
+								<div class="canvasitem movefirstimage" dragcanvasitem ng-if="filter.image.image!=''">
+									<img class="auto-dim m-center" ng-style="filter.custom[4].css" ng-click="showDelete(filter.custom[4]); $event.stopPropagation();" ng-src="{{filter.image.image | serverimage}}">
+									<span class="badge red ab" ng-click="deleteElement(filter.custom[4],1,0); $event.stopPropagation();" ng-show="filter.custom[4].state">X</span>
 								</div>
-								<div class="canvasitem" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
-									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1"></span>
-									<span class="badge red ab" ng-if="txt.text!=''&&($index==0 || $index==1)" ng-click="txt.text = ''">X</span>
+								<div class="canvasitem movetext" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
+									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></span>
+									<span class="badge red ab" ng-if="txt.text!=''&&($index==0 || $index==1)" ng-click="deleteElement(txt,0,0); $event.stopPropagation();" ng-show="txt.state">X</span>
 								</div>
 							</div>
 						</div>
 						<div ng-show="!isfront">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
 							<div class="on-img shirtcanvas" style="top:250px;width:45%">
-								<div class="canvasitem" dragcanvasitem  ng-if="filter.image.image1!=''">
-									<img class="auto-dim m-center" ng-style="filter.custom[5].css" ng-src="{{filter.image.image1 | serverimage}}">
-									<span class="badge red ab" ng-click="filter.image.image1 = ''">X</span>
+								<div class="canvasitem movesecondimage" dragcanvasitem  ng-if="filter.image.image1!=''">
+									<img class="auto-dim m-center" ng-style="filter.custom[5].css" ng-click="showDelete(filter.custom[5]); $event.stopPropagation();" ng-src="{{filter.image.image1 | serverimage}}">
+									<span class="badge red ab" ng-click="deleteElement(filter.custom[4],2,0); $event.stopPropagation();" ng-show="filter.custom[5].state">X</span>
 								</div>
-								<div class="canvasitem" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
-									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
-									<span class="badge red ab" ng-if="txt.text!=''&&($index==2 || $index==3)" ng-click="txt.text = ''">X</span>
+								<div class="canvasitem movetext" dragcanvasitem ng-repeat="txt in filter.custom track by $index">
+									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-click="showDelete(txt); $event.stopPropagation();" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
+									<span class="badge red ab" ng-if="txt.text!=''&&($index==2 || $index==3)" ng-click="deleteElement(txt,0,0); $event.stopPropagation();" ng-show="txt.state">X</span>
 								</div>
 							</div>
 						</div>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 
-				<div class="vertical icon">
+				<div class="vertical icon" fix-scroller>
 
 					<!-- <div class="icon-inner text-center reset-zoom" ng-click="isfront = !isfront;">
 						<i class="flaticon flaticon-t-shirt-o"></i>
@@ -672,12 +672,12 @@
 															</div>
 														</div>
 
-														<div class="row">
+														<!-- <div class="row">
 															<div class="layer-buttons">
 																<button class="btn bring-front bod-x ml-15" ng-click="bringForward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
 																<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
 															</div>
-														</div>
+														</div> -->
 													</div>
 
 												</div>
@@ -1233,12 +1233,12 @@
 															</div>
 														</div>
 
-														<div class="row">
+														<!-- <div class="row">
 															<div class="layer-buttons">
 																<button class="btn bring-front bod-x ml-15" ng-click="bringForward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-up"></i> Bring Forward</button>
 																<button class="btn bring-back bod-x" ng-click="sendBackward(filter.custom[0],filter.custom[1])"><i class="fa fa-angle-down"></i> Send Backward</button>
 															</div>
-														</div>
+														</div> -->
 													</div>
 
 												</div>

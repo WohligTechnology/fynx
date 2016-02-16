@@ -41,12 +41,12 @@
 						</div>
 						<div class="form-group">
 							<label>Phone</label>
-							<input class="form-control" ng-model="updateuser.user.phone" type="tel">
+							<input class="form-control" ng-model="updateuser.user.phone" type="tel" maxlength="15" only-digits>
 						</div>
 					</div>
 				</form>
 
-				<form ng-submit="">
+				<form ng-submit="" ng-if="user.socialid==''">
 					<button class="pull-right edit" ng-click="editProfile(2)" type="submit">{{profile.changepasswordedit}}</button>
 					<h5 class="h5-class">CHANGE PASSWORD</h5>
 					<div ng-if="profile.changepasswordedit=='save'">
@@ -103,7 +103,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pincode*</label>
-									<input class="form-control" ng-model="updateuser.user.billingpincode" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingpincode" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" maxlength="6" only-digits>
 								</div>
 							</div>
 						</div>
@@ -120,7 +120,9 @@
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
 										<select ng-model="updateuser.user.billingcountry" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)">
-											<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
+											<option value="IND">India</option>
+											<option value="JPN">Japan</option>
+											<option value="ITA">Italy</option>
 										</select>
 										<span class="only-border"></span>
 									</div>
@@ -168,7 +170,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pincode*</label>
-									<input class="form-control" ng-model="updateuser.user.shippingpincode" type="text">
+									<input class="form-control" ng-model="updateuser.user.shippingpincode" type="text" maxlength="6" only-digits>
 								</div>
 							</div>
 						</div>
@@ -185,7 +187,9 @@
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
 										<select ng-model="updateuser.user.shippingcountry">
-											<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
+											<option value="IND">India</option>
+											<option value="JPN">Japan</option>
+											<option value="ITA">Italy</option>
 										</select>
 										<span class="only-border"></span>
 									</div>
