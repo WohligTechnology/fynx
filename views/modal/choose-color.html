@@ -1,15 +1,18 @@
-<div class="bg-white">
-  <div class="font-smart danger">
+<div class="bg-white paded-modal relative">
+  <h3 class="font-smart danger text-upper text-center no-margin">
     Colour me cool
-  </div>
+  </h3>
 
   <div class="color-bar">
     <ul>
-      <li></li>
+      <li style="background-color: {{color.style}}" ng-repeat="color in barColors" ng-click="clickColor(color.color);" ng-class="{active : color.color == selectedColor}"> </li>
     </ul>
   </div>
 
   <div class="text-center">
     <button type="button" class="btn btn-danger">DONE</button>
   </div>
+
+  <div class="smart-guy"></div>
+
 </div>

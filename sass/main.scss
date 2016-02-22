@@ -135,6 +135,9 @@ $screen-lg-max: 1200px !default;
 .bg-imgupload {
   background-color: $body-bg;
 }
+.bg-white {
+  background-color: white;
+}
 .btn-dark {
   @include button-variant(white, black, black);
 }
@@ -2034,7 +2037,51 @@ span.badge.red {
 .mgin-auto {
   margin: 0 auto;
 }
+.paded-modal {
+    padding: 20px;
+    margin-top: 25vh;
+}
+.no-margin {
+  margin: 0;
+}
+.smart-guy {
+  position: absolute;
+  width: 150px;
+  height: 116px;
+  right: -75px;
+  bottom: -50px;
+  background-image: url("../img/mrfynx.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+.color-bar {
+  padding: 20px 0;
+  ul {
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    height: 70px;
+    width: 35px;
+    outline: 1px solid #ECECEC;
+    display: inline-block;
+    cursor: pointer;
+    @include transition(all 300ms ease);
 
+    + li {
+      margin-left: 5px;
+    }
 
-
+    &.active {
+      outline-color: black;
+    }
+  }
+}
+.modal-backdrop.in {
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
 @import "main/mobile";

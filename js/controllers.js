@@ -581,13 +581,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService) {
+.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService, $uibModal) {
 
   $scope.template = TemplateService.changecontent("custom-choose");
   $scope.menutitle = NavigationService.makeactive("Custom");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+
+  $scope.selectColor = function() {
+    $uibModal.open({
+      animation: true,
+      templateUrl: 'views/modal/choose-color.html',
+      controller: 'CustomChooseCtrl'
+    })
+  };
+
+  $scope.barColors = [{
+    color: "white",
+    style: "#ffffff"
+  }, {
+    color: "grey",
+    style: "#e4e4e4"
+  }, {
+    color: "blue",
+    style: "#00bff6"
+  }, {
+    color: "yellow",
+    style: "#feeb82"
+  }, {
+    color: "peach",
+    style: "#f5e6c9"
+  }, {
+    color: "green",
+    style: "#68b8ab"
+  }, {
+    color: "black",
+    style: "#160e0b"
+  }, {
+    color: "red",
+    style: "#f05e45"
+  }, {
+    color: "lightgreen",
+    style: "#9eab42"
+  }, {
+    color: "skin",
+    style: "#fdc081"
+  }, {
+    color: "darkgray",
+    style: "#686868"
+  }];
+
+  $scope.clickColor = function (data) {
+    $scope.selectedColor = data;
+    console.log(data);
+  };
+
 })
 
 
@@ -669,27 +718,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             var check = formvalidation($scope.allvalidation);
             if (check) {
-            if ($scope.password.newpassword === $scope.password.confirmpassword) {
-              if ($scope.password.newpassword === $scope.password.confirmpassword === $scope.password.oldpassword) {
-                $scope.addAlert("danger", "No change in password.");
-              }else {
-                NavigationService.changePassword($scope.password, function(data) {
-                  console.log(data);
-                  if (data == 1) {
-                    $scope.addAlert("success", "Password changed successfully. ");
-                    $scope.profile.changepasswordedit = 'edit';
-                    $scope.password = {};
-                  } else {
-                    $scope.addAlert("danger", "Wrong password");
-                  }
-                });
+              if ($scope.password.newpassword === $scope.password.confirmpassword) {
+                if ($scope.password.newpassword === $scope.password.confirmpassword === $scope.password.oldpassword) {
+                  $scope.addAlert("danger", "No change in password.");
+                } else {
+                  NavigationService.changePassword($scope.password, function(data) {
+                    console.log(data);
+                    if (data == 1) {
+                      $scope.addAlert("success", "Password changed successfully. ");
+                      $scope.profile.changepasswordedit = 'edit';
+                      $scope.password = {};
+                    } else {
+                      $scope.addAlert("danger", "Wrong password");
+                    }
+                  });
+                }
+              } else {
+                $scope.addAlert("danger", "Re-entered password should be same as new password.");
               }
             } else {
-              $scope.addAlert("danger", "Re-entered password should be same as new password.");
+              $scope.addAlert("danger", "Please Fill All Fields.");
             }
-          }else {
-            $scope.addAlert("danger", "Please Fill All Fields.");
-          }
           }
         }
         break;
@@ -806,7 +855,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   if (!NavigationService.getUser()) {
     $state.go("home");
   }
-  NavigationService.fedexTrack('',function(data){
+  NavigationService.fedexTrack('', function(data) {
     console.log(data.TrackPackagesResponse.packageList[0]);
   })
   $scope.loadOrders = function() {
@@ -818,9 +867,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         })
         $scope.lastpage = data.lastpage;
       });
-      if ($scope.orders=='') {
+      if ($scope.orders == '') {
         $scope.msg = "No Orders.";
-      }else {
+      } else {
         $scope.msg = "";
       }
     }
@@ -1350,13 +1399,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     if ($scope.lastpage >= $scope.pageno) {
       ++$scope.pageno;
       NavigationService.showWishlist($scope.pageno, function(data, status) {
-        _.each(data.queryresult, function(n){
+        _.each(data.queryresult, function(n) {
           $scope.wishlistProduct.push(n);
         });
         $scope.lastpage = data.lastpage;
-        if ($scope.wishlistProduct=='') {
+        if ($scope.wishlistProduct == '') {
           $scope.msg = "Your wishlist is currently empty.";
-        }else {
+        } else {
           $scope.msg = "";
         }
       });
@@ -1365,7 +1414,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
   $scope.loadWishlist();
 
-  $scope.loadProducts = function(){
+  $scope.loadProducts = function() {
     $scope.loadWishlist();
   }
 
@@ -1419,42 +1468,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.custom = [{
     "id": 1,
     "text": "",
-    "state":false,
+    "state": false,
     "css": {
       "z-index": 1
     }
   }, {
     "id": 2,
     "text": "",
-    "state":false,
+    "state": false,
     "css": {
       "z-index": 2
     }
   }, {
     "id": 3,
     "text": "",
-    "state":false,
+    "state": false,
     "css": {
       "z-index": 1
     }
   }, {
     "id": 4,
     "text": "",
-    "state":false,
+    "state": false,
     "css": {
       "z-index": 2
     }
-  },{
+  }, {
     "id": 5,
     "text": "",
-    "state":false,
+    "state": false,
     "css": {
       "z-index": 3
     }
-  },{
+  }, {
     "id": 6,
     "text": "",
-    "state":false,
+    "state": false,
     "css": {
       "z-index": 3
     }
@@ -1488,68 +1537,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   myfunc = $scope;
 
-  $scope.deleteElement = function(elm,num,reset){
+  $scope.deleteElement = function(elm, num, reset) {
     switch (num) {
       case 0:
         {
-          if (reset==="") {
+          if (reset === "") {
             elm.text = "";
             elm.css = {
               "font-size": "100px",
               "z-index": 2
             }
-          }else {
+          } else {
             $texts = $('.movetext');
-            $texts.eq(reset).css("top","0px");
-            $texts.eq(reset).css("left","0px");
+            $texts.eq(reset).css("top", "0px");
+            $texts.eq(reset).css("left", "0px");
           }
         }
         break;
-        case 1:
-          {
-            if (reset==1) {
-              var img = $('.movefirstimage');
-              img.eq(0).css("top","0px")
-              img.eq(0).css("left","0px")
-            }else {
-              $scope.filter.image.image = "";
-              elm.css = {
-                "height": "100px",
-                "z-index": 3
-              }
+      case 1:
+        {
+          if (reset == 1) {
+            var img = $('.movefirstimage');
+            img.eq(0).css("top", "0px")
+            img.eq(0).css("left", "0px")
+          } else {
+            $scope.filter.image.image = "";
+            elm.css = {
+              "height": "100px",
+              "z-index": 3
             }
-
           }
-          break;
-          case 2:
-            {
-              if (reset==1) {
-                var img = $('.movesecondimage');
-                img.eq(0).css("top","0px")
-                img.eq(0).css("left","0px")
-              }else {
-                $scope.filter.image.image1 = "";
-                elm.css = {
-                  "height": "100px",
-                  "z-index": 3
-                }
-              }
+
+        }
+        break;
+      case 2:
+        {
+          if (reset == 1) {
+            var img = $('.movesecondimage');
+            img.eq(0).css("top", "0px")
+            img.eq(0).css("left", "0px")
+          } else {
+            $scope.filter.image.image1 = "";
+            elm.css = {
+              "height": "100px",
+              "z-index": 3
             }
-            break;
+          }
+        }
+        break;
       default:
 
     }
   }
 
-  $scope.deselectAll = function(){
-    _.each($scope.filter.custom, function(n){
+  $scope.deselectAll = function() {
+    _.each($scope.filter.custom, function(n) {
       n.state = false;
     });
   }
 
-  $scope.showDelete = function(cust){
+  $scope.showDelete = function(cust) {
     console.log("trudkfjhaldjskfhlkj");
-    _.each($scope.filter.custom, function(n){
+    _.each($scope.filter.custom, function(n) {
       n.state = false;
     });
     cust.state = true;
@@ -1579,16 +1628,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.changeDesign = function() {
-    _.each($scope.imageSetting, function(n){
+    _.each($scope.imageSetting, function(n) {
       n.value++;
     })
-    _.each($scope.imageSetting, function(n){
+    _.each($scope.imageSetting, function(n) {
       n.value--;
     })
-    _.each($scope.imageSetting1, function(n){
+    _.each($scope.imageSetting1, function(n) {
       n.value++;
     })
-    _.each($scope.imageSetting1, function(n){
+    _.each($scope.imageSetting1, function(n) {
       n.value--;
     })
 
@@ -1800,11 +1849,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
   }
 
-  $scope.saveDesign = function(){
+  $scope.saveDesign = function() {
     var design = $('#tango').html();
     console.log(design);
-    design = "<html><head><base href='http://192.168.0.122/images/' target ='_blank'><link rel='stylesheet' href='main.scss'></head><body style='background-color: red;'>"+design+"</body></html>";
-    NavigationService.createImage(design,function(data){
+    design = "<html><head><base href='http://192.168.0.122/images/' target ='_blank'><link rel='stylesheet' href='main.scss'></head><body style='background-color: red;'>" + design + "</body></html>";
+    NavigationService.createImage(design, function(data) {
       console.log(data);
     })
   }
@@ -2124,9 +2173,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.$watch('design.design1[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
       $scope.filter.custom[1].arc = newValue;
-    $scope.isArcChange = true;
-    $scope.changeArc($scope.design.design1[1].value, 2);
-  }
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design1[1].value, 2);
+    }
   });
 
   $scope.$watch('design.design1[3].value', function(newValue, oldValue) {
@@ -2169,9 +2218,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.$watch('design.design2[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
       $scope.filter.custom[2].arc = newValue;
-    $scope.isArcChange = true;
-    $scope.changeArc($scope.design.design2[1].value, 3);
-  }
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design2[1].value, 3);
+    }
   });
 
   $scope.$watch('design.design2[3].value', function(newValue, oldValue) {
@@ -2214,9 +2263,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.$watch('design.design3[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
       $scope.filter.custom[3].arc = newValue;
-    $scope.isArcChange = true;
-    $scope.changeArc($scope.design.design3[1].value, 4);
-  }
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design3[1].value, 4);
+    }
   });
 
   $scope.$watch('design.design3[3].value', function(newValue, oldValue) {
@@ -2575,10 +2624,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     console.log($scope.filter.size);
     if ($scope.filter.quantity && $scope.filter.size != '') {
       if ($scope.showSecond == true) {
-        if ($scope.filter.custom[2].text!='' || $scope.filter.custom[3].text!='' || $scope.filter.image.image1!='') {
+        if ($scope.filter.custom[2].text != '' || $scope.filter.custom[3].text != '' || $scope.filter.image.image1 != '') {
           console.log("in back");
           $scope.amount = (parseInt($scope.images.price) + parseInt(200)) * $scope.filter.quantity;
-        }else {
+        } else {
           $scope.amount = $scope.images.price * $scope.filter.quantity;
         }
       }
@@ -3034,7 +3083,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
-  $scope.previewDesign = function(filter,custom) {
+  $scope.previewDesign = function(filter, custom) {
     $scope.filter1 = filter;
     $scope.custom1 = custom;
     $uibModal.open({
@@ -3051,13 +3100,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $movefirstimageimg = $(".movefirstimage img");
     $movesecondimage = $(".movesecondimage");
     $movesecondimageimg = $(".movesecondimage img");
-    if($movefirstimage=="") {
+    if ($movefirstimage == "") {
       $scope.filter.custom[4].top = $movefirstimage.eq(0).css("top").split("px")[0];
       $scope.filter.custom[4].left = $movefirstimage.eq(0).css("left").split("px")[0];
       $scope.filter.custom[4].height = $movefirstimageimg.eq(0).css("height").split("px")[0];
       $scope.filter.custom[4].width = $movefirstimageimg.eq(0).css("width").split("px")[0];
     }
-    if($movesecondimage=="") {
+    if ($movesecondimage == "") {
       $scope.filter.custom[4].top = $movesecondimage.eq(0).css("top").split("px")[0];
       $scope.filter.custom[4].left = $movesecondimage.eq(0).css("left").split("px")[0];
       $scope.filter.custom[4].height = $movesecondimageimg.eq(0).css("height").split("px")[0];
@@ -3065,36 +3114,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
 
     $texts = $(".movetext");
-    var getVal = function(cust, key){
-        var topt = $texts.eq(key).css("top");
-        if ($texts.eq(key).css("top")!="auto") {
-          cust.top = $texts.eq(key).css("top").split("px")[0];
-        }
-        if ($texts.eq(key).css("left")!="auto") {
-          cust.left = $texts.eq(key).css("left").split("px")[0];
-        }
+    var getVal = function(cust, key) {
+      var topt = $texts.eq(key).css("top");
+      if ($texts.eq(key).css("top") != "auto") {
+        cust.top = $texts.eq(key).css("top").split("px")[0];
+      }
+      if ($texts.eq(key).css("left") != "auto") {
+        cust.left = $texts.eq(key).css("left").split("px")[0];
+      }
     }
-    _.each($texts , function(n,key){
+    _.each($texts, function(n, key) {
       switch (key) {
         case 0:
-            {
-              getVal($scope.filter.custom[0],key);
-            }
+          {
+            getVal($scope.filter.custom[0], key);
+          }
           break;
         case 1:
-            {
-              getVal($scope.filter.custom[1],key);
-            }
+          {
+            getVal($scope.filter.custom[1], key);
+          }
           break;
         case 8:
-            {
-              getVal($scope.filter.custom[3],key);
-            }
+          {
+            getVal($scope.filter.custom[3], key);
+          }
           break;
         case 9:
-            {
-              getVal($scope.filter.custom[4],key);
-            }
+          {
+            getVal($scope.filter.custom[4], key);
+          }
           break;
         default:
 
