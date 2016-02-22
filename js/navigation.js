@@ -696,10 +696,28 @@ var navigationservice = angular.module('navigationservice', [])
 				data: checkout
 			}).success(callback);
 		},
+		createImage: function (tango, callback) {
+      console.log(tango);
+			$http({
+				url:  'http://192.168.0.122:1337/dollar/htmlToImage',
+				method: 'POST',
+				withCredentials: true,
+				data: {"image":tango}
+			}).success(callback);
+		},
 		showWishlist: function (pageno,callback) {
 			return $http.get(adminurl + 'showwishlist?pageno='+pageno+'&user=' + $.jStorage.get("user").id, {}, {
 				withCredentials: true
 			}).success(callback);
+		},
+		fedexTrack: function (tracking_number,callback) {
+      tracking_number = 123456789012;
+		    $http({
+				url: 'https://www.fedex.com/trackingCal/track?data={"TrackPackagesRequest":{"appType":"WTRK","uniqueKey":"","processingParameters":{},"trackingInfoList":[{"trackNumberInfo":{"trackingNumber":'+tracking_number+',"trackingQualifier":"","trackingCarrier":""}}]}}&action=trackpackages&locale=en_CA&version=1&formate=json',
+				method: 'GET',
+				withCredentials: false
+			}).success(callback);
+
 		},
 		getproductbycategory: function (filter, callback) {
 			return $http.get(adminurl + 'getproductbycategory?type=' + filter.type + '&color='+filter.color+ '&size='+filter.size+'&price='+filter.price, {}, {

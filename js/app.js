@@ -365,17 +365,28 @@ firstapp.directive('ngDraggable', function($document) {
 
       // Handle drag event
       function mousemove(e) {
+        $(".shirtcanvas").css("border", "1px solid #0d9dff");
+        $(".shirtcanvas").addClass("median")
         y = e.clientY - startY;
         x = e.clientX - startX;
         setPosition();
-        if (drag) drag(e);
+        if (drag){
+          console.log("drag");
+
+          drag(e);
+        }
       }
 
       // Unbind drag events
       function mouseup(e) {
+        $(".shirtcanvas").css("border", "");
+        $(".shirtcanvas").removeClass("median")
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
-        if (stop) stop(e);
+        if (stop) {
+
+          stop(e);
+        }
       }
 
       // Move element, within container if provided

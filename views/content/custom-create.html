@@ -17,10 +17,11 @@
 		<div id="newsrn">
 		</div>
 		<div class="row">
+
 			<div class="col-md-5 some-height">
 				<div class="custom-img" fix-scroller>
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
-						<div ng-show="isfront" ng-click="deselectAll()">
+						<div id="tango" ng-show="isfront" ng-click="deselectAll()">
 							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
 							<div class="on-img shirtcanvas" style="top:250px;width:45%">
 								<div class="canvasitem movefirstimage" ng-draggable='dragOptions' ng-if="filter.image.image!=''">
@@ -29,7 +30,7 @@
 								</div>
 								<div class="canvasitem movetext" ng-draggable='dragOptions' ng-repeat="txt in filter.custom track by $index">
 									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></span>
-									<span class="badge red ab" ng-if="txt.text!=''&&($index==0 || $index==1)" ng-click="deleteElement(txt,0,0); $event.stopPropagation();" ng-show="txt.state">X</span>
+									<span class="badge red ab" ng-if="txt.text!=''&&($index==0 || $index==1)" ng-click="deleteElement(txt,0,''); $event.stopPropagation();" ng-show="txt.state">X</span>
 								</div>
 							</div>
 						</div>
@@ -42,7 +43,7 @@
 								</div>
 								<div class="canvasitem movetext" ng-draggable='dragOptions' ng-repeat="txt in filter.custom track by $index">
 									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-click="showDelete(txt); $event.stopPropagation();" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
-									<span class="badge red ab" ng-if="txt.text!=''&&($index==2 || $index==3)" ng-click="deleteElement(txt,0,0); $event.stopPropagation();" ng-show="txt.state">X</span>
+									<span class="badge red ab" ng-if="txt.text!=''&&($index==2 || $index==3)" ng-click="deleteElement(txt,0,''); $event.stopPropagation();" ng-show="txt.state">X</span>
 								</div>
 							</div>
 						</div>
@@ -144,7 +145,7 @@
 										<div class="col-md-7">
 											<div class="front">
 												<div class="edit_content">
-													<p>ENTER YOUR TEXT BELOW</p>
+													<p>ENTER YOUR TEXT BELOW <span style="padding-left:5px;color:green" ng-click="deleteElement('',0,0)"><i class="fa fa-refresh"></i></span></p>
 												</div>
 												<div class="form-group">
 													<textarea type="text" class="form-control" rows="5" ng-click="firstTextSetting=true;secondTextSetting=false;thirdTextSetting=false;fourthTextSetting=false" ng-model="filter.custom[0].text" ng-change="textchange()"></textarea>
@@ -392,7 +393,7 @@
 										<div class="col-md-7">
 											<div class="front">
 												<div class="edit_content">
-													<p>ENTER YOUR TEXT BELOW</p>
+													<p>ENTER YOUR TEXT BELOW <span style="padding-left:5px;color:green" ng-click="deleteElement('',0,1)"><i class="fa fa-refresh"></i></span></p>
 												</div>
 												<div class="form-group">
 													<textarea type="text" class="form-control" rows="5" ng-click="secondTextSetting=true;firstTextSetting=false;thirdTextSetting=false;fourthTextSetting=false" ng-model="filter.custom[1].text" ng-change="textchange()"></textarea>
@@ -637,7 +638,7 @@
 
 								<div class="add-image">
 									<p>ADD IMAGE TO YOUR TSHIRT</p>
-									<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload(isfront);">UPLOAD IMAGE</button>
+									<button class="btn btn-danger mar0 con-btn" ng-click="imgUpload(isfront);">UPLOAD IMAGE</button><span style="padding-left:5px;color:green" ng-click="deleteElement('',1,1)" ng-show="filter.image.image!=''"><i class="fa fa-refresh"></i></span>
 									<!--//imagesetting-->
 
 									<div class="color-show clor-show" ng-show="filter.image.image!=''">
@@ -687,23 +688,28 @@
 								</div>
 							</div>
 							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
-							<button class="btn btn-danger con-btn" ng-click="tabchange(3)">ADD TO DESIGN</button>
+							<button class="btn btn-danger con-btn" ng-click="saveDesign()">Save DESIGN</button>
 						</uib-tab>
 						<uib-tab active="tab.addtext">
-							<uib-tab-heading ng-click="tabchange(3)">
+							<uib-tab-heading ng-click="tabchange(3);">
 								<div class="icon-font">
 									<i class="flaticon flaticon-t-shirt"></i>
 								</div>
 								<div class="tab-title">Back</div>
 							</uib-tab-heading>
-							<div class="add-input edit_content">
+							<div class="add-input edit_content" ng-hide="isBackPay">
+								<h3>Back  design will add 200 Rs. per Item</h3>
+								<button class="btn btn-primary con-btn" ng-click="isBackPay=true">OK</button>
+							</div>
+
+							<div class="add-input edit_content" ng-show="isBackPay">
 
 								<div class="front-text">
 									<div class="row">
 										<div class="col-md-7">
 											<div class="front">
 												<div class="edit_content">
-													<p>ENTER YOUR TEXT BELOW</p>
+													<p>ENTER YOUR TEXT BELOW <span style="padding-left:5px;color:green" ng-click="deleteElement('',0,8)"><i class="fa fa-refresh"></i></span></p>
 												</div>
 												<div class="form-group">
 													<textarea type="text" class="form-control" rows="5" ng-click="firstTextSetting=false;secondTextSetting=false;thirdTextSetting=true;fourthTextSetting=false" ng-model="filter.custom[2].text" ng-change="textchange1()"></textarea>
@@ -952,7 +958,7 @@
 										<div class="col-md-7">
 											<div class="front">
 												<div class="edit_content">
-													<p>ENTER YOUR TEXT BELOW</p>
+													<p>ENTER YOUR TEXT BELOW <span style="padding-left:5px;color:green" ng-click="deleteElement('',0,9)"><i class="fa fa-refresh"></i></span></p>
 												</div>
 												<div class="form-group">
 													<textarea type="text" class="form-control" rows="5" ng-click="firstTextSetting=false;secondTextSetting=false;thirdTextSetting=false;fourthTextSetting=true" ng-model="filter.custom[3].text" ng-change="textchange1()"></textarea>
@@ -1198,7 +1204,7 @@
 
 								<div class="add-image">
 									<p>ADD IMAGE TO YOUR TSHIRT</p>
-									<button class="btn btn-danger mar0 con-btn" ng-click="imgUploadModal(isfront);">UPLOAD IMAGE</button>
+									<button class="btn btn-danger mar0 con-btn" ng-click="imgUploadModal(isfront);">UPLOAD IMAGE</button><span style="padding-left:5px;color:green" ng-click="deleteElement('',2,1)" ng-show="filter.image.image1!=''"><i class="fa fa-refresh"></i></span>
 									<!--//imagesetting-->
 
 									<div class="color-show clor-show" ng-show="filter.image.image1!=''">
@@ -1247,13 +1253,13 @@
 									</div>
 								</div>
 							</div>
+							<div ng-show="isBackPay">
 							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
-							<button class="btn btn-danger con-btn" ng-click="tabchange(4)">ADD TO DESIGN</button>
-
+							<button class="btn btn-danger con-btn" ng-click="tabchange(4)">Save DESIGN</button>
+						</div>
 						</uib-tab>
-
 						<uib-tab active="tab.buy">
-							<uib-tab-heading>
+							<uib-tab-heading ng-click="tabchange('')">
 								<div class="icon-font">
 									<i class="fa fa-rupee"></i>
 								</div>
@@ -1279,7 +1285,7 @@
 											<form class="form-inline" role="form">
 												<div class="form-group">
 													<label for="">QUANTITY:</label>
-													<input type="text" class="form-control" ng-change="validateQuantity(images)" ng-model="filter.quantity">
+													<input type="text" class="form-control" ng-change="validateQuantity(images)" ng-model="filter.quantity" maxlength="6" only-digits>
 												</div>
 											</form>
 										</div>
@@ -1308,7 +1314,6 @@
 									</div>
 								</div>
 							</div>
-
 						</uib-tab>
 					</uib-tabset>
 				</div>

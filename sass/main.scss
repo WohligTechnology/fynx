@@ -2022,4 +2022,13 @@ span.badge.red {
     z-index: 9;
     top: 70px;
 }
+.median:after {
+    content:"";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 2px dotted #0d9dff;
+}
 @import "main/mobile";
