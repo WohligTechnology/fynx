@@ -1866,6 +1866,7 @@ h4.bold,
       span {
         display: block;
         line-height: 1;
+        float: left;
       }
     }
 }
@@ -1995,6 +1996,7 @@ h4.strong.font-smart {
   .canvasitem {
     position: absolute;
     height: auto;
+    width: 10000px;
   }
 }
 .canvasitem.movetext.ng-scope.ng-isolate-scope {
