@@ -10,6 +10,7 @@ var filter = {};
 var custom = {};
 var uploadres = [];
 var myfunc = {};
+var arcText = {};
 window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload', 'angular-loading-bar'])
 
@@ -2092,11 +2093,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.changeArc = function(value, num) {
       var newValue = value;
       var pos;
-      if (newValue > 0)
+      if (newValue < 500)
         pos = 1;
       else {
         pos = -1;
+        newValue = 1000 - newValue;
       }
+
       switch (num) {
         case 1:
           {
@@ -2123,10 +2126,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
 
       $example1.show().arctext({
-        radius: newValue
+        radius: Math.abs(newValue),
+        dir: pos
       });
+      console.log(Math.abs(newValue));
+      arcText =   $example1;
       $example1.arctext('set', {
-        radius: newValue,
+        radius: Math.abs( newValue),
         dir: pos,
         animation: {
           speed: 300,
@@ -2845,9 +2851,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     step: 1,
   }, {
     name: 'Arc',
-    value: -1000,
-    from: -1000,
-    to: 1000,
+    value: 500,
+    from: 900,
+    to: 100,
     step: 1
   }, {
     name: 'Rotation',
