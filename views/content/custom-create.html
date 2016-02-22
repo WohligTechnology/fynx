@@ -114,9 +114,20 @@
 									<span ng-show="!showMore" class="bold">+</span> SHOW
 									<span ng-show="showMore" class="bold">LESS</span>
 									<span ng-show="!showMore" class="bold">MORE</span> INFORMATION</p>
-								<p ng-show="showMore" class="no-transform">
-									<span ng-bind-html="images.description"></span>
-								</p>
+
+									<div ng-show="showMore" class="no-transform">
+										<p>
+											DESCRIPTION: <span>Our best-selling and most. The My Fynx Ultra Soft, Super Combed is a standard crew-neck-T-shirt, made super premium 100% pre-shrunk cotton. It is available in a wide variety of colors so  you are able to play around to find the suitable creativity.</span>
+										</p>
+										<p>
+											<span>
+												* 100% Cotton Blend.
+											</span>
+										</p>
+																		<p>
+										<span ng-bind-html="images.description"></span>
+																		</p>
+									</div>
 
 
 								<div class="color-pick">
