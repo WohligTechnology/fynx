@@ -2022,6 +2022,7 @@ span.badge.red {
     z-index: 9;
     top: 70px;
 }
+<<<<<<< HEAD
 .median:after {
     content:"";
     position: absolute;
@@ -2030,5 +2031,9 @@ span.badge.red {
     bottom: 0;
     left: 50%;
     border-left: 2px dotted #0d9dff;
+=======
+.mgin-auto {
+  margin: 0 auto;
+>>>>>>> origin/master
 }
 @import "main/mobile";
