@@ -5,11 +5,10 @@
 
   <div class="color-bar">
     <ul>
-      <li style="background-color: {{color.style}}" ng-repeat="color in barColors" ng-click="clickColor(color.color);" ng-class="{active : color.color == selectedColor}"> </li>
+      <li style="background-color: {{coloro.name}}" ng-repeat="coloro in color" ng-click="clickColor(coloro);" ng-class="{active : coloro.name == selectedColor}"> </li>
     </ul>
   </div>
-
-  <div class="text-center">
+  <div class="text-center" ng-click="$close()">
     <button type="button" class="btn btn-danger">DONE</button>
   </div>
 

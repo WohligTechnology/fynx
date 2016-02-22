@@ -5,6 +5,7 @@ var myImage = {
 };
 var isf = 1;
 var img = '';
+var color = '';
 var filter = {};
 var custom = {};
 var uploadres = [];
@@ -581,13 +582,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService, $uibModal) {
+.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService, $uibModal, $state) {
 
   $scope.template = TemplateService.changecontent("custom-choose");
   $scope.menutitle = NavigationService.makeactive("Custom");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+
+  $scope.toCreatePage = function(id){
+    NavigationService.getImageForCustomize(id,'',function(data){
+      $scope.typeid = id;
+      $scope.color = data.color;
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'views/modal/choose-color.html',
+        controller: 'CustomChooseCtrl',
+        scope: $scope
+      })
+    });
+
+  }
 
   $scope.selectColor = function() {
     $uibModal.open({
@@ -633,8 +648,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }];
 
   $scope.clickColor = function (data) {
-    $scope.selectedColor = data;
+    $scope.selectedColor = data.name;
     console.log(data);
+    $state.go("customCreate",{id:$scope.typeid,color:data.id});
   };
 
 })
@@ -1509,7 +1525,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
   }];
   $scope.filter.type = $stateParams.id;
-  $scope.filter.color = "";
+  $scope.filter.color = $stateParams.color;
+  // $scope.filter.color = "";
   $scope.filter.size = "";
   $scope.filter.price = "";
   $scope.filter.image1 = myImage;
@@ -2123,6 +2140,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[0].css, {
       "font-size": newValue
     });
+    // $scope.changeArc($scope.design.design[1].value, 1);
   });
   $scope.$watch('design.design[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {

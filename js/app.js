@@ -116,7 +116,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   })
 
   .state('customCreate', {
-    url: "/custom/create/:id",
+    url: "/custom/create/:id/:color",
     templateUrl: "views/template.html",
     controller: 'CustomCreateCtrl'
   })

@@ -29,7 +29,8 @@
 									<span class="badge red ab" ng-click="deleteElement(filter.custom[4],1,0); $event.stopPropagation();" ng-show="filter.custom[4].state">X</span>
 								</div>
 								<div class="canvasitem movetext" ng-draggable='dragOptions' ng-repeat="txt in filter.custom track by $index">
-									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></span>
+									<span id="example{{txt.id}}" class="textspan"
+									 name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></span>
 									<span class="badge red ab" ng-if="txt.text!=''&&($index==0 || $index==1)" ng-click="deleteElement(txt,0,''); $event.stopPropagation();" ng-show="txt.state">X</span>
 								</div>
 							</div>
@@ -349,7 +350,7 @@
 																<p class="range-value">{{des.value}}</p>
 															</div>
 														</div>
-														<div class="row">
+														<!-- <div class="row">
 															<div class="col-md-3 col-xs-12">
 																<div class="edit_content mt-10 front">
 																	<p>JUSTIFY</p>
@@ -380,7 +381,7 @@
 																	<button class="btn bod-x">Align to center</button>
 																</div>
 															</div>
-														</div>
+														</div> -->
 													</div>
 												</div>
 											</div>
@@ -597,7 +598,7 @@
 																<p class="range-value">{{des.value}}</p>
 															</div>
 														</div>
-														<div class="row">
+														<!-- <div class="row">
 															<div class="col-md-3 col-xs-12">
 																<div class="edit_content mt-10 front">
 																	<p>JUSTIFY</p>
@@ -628,7 +629,7 @@
 																	<button class="btn bod-x">Align to center</button>
 																</div>
 															</div>
-														</div>
+														</div> -->
 													</div>
 												</div>
 											</div>
@@ -914,7 +915,7 @@
 																<p class="range-value">{{des.value}}</p>
 															</div>
 														</div>
-														<div class="row">
+														<!-- <div class="row">
 															<div class="col-md-3 col-xs-12">
 																<div class="edit_content mt-10 front">
 																	<p>JUSTIFY</p>
@@ -945,7 +946,7 @@
 																	<button class="btn bod-x">Align to center</button>
 																</div>
 															</div>
-														</div>
+														</div> -->
 													</div>
 												</div>
 											</div>
@@ -1163,7 +1164,7 @@
 																<p class="range-value">{{des.value}}</p>
 															</div>
 														</div>
-														<div class="row">
+														<!-- <div class="row">
 															<div class="col-md-3 col-xs-12">
 																<div class="edit_content mt-10 front">
 																	<p>JUSTIFY</p>
@@ -1194,7 +1195,7 @@
 																	<button class="btn bod-x">Align to center</button>
 																</div>
 															</div>
-														</div>
+														</div> -->
 													</div>
 												</div>
 											</div>
