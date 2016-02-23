@@ -60,6 +60,7 @@ $twitter: #49c8f5 !default;
 $popup: #515151 !default;
 $DarkBrown: #292321;
 $Orange: #c30;
+$bread-crumb: #84ce3c;
 
 $body-bg: #fff !default;
 $text-color: $gray-base !default;
@@ -2092,5 +2093,97 @@ span.badge.red {
 .modal-backdrop.in {
     opacity: 0.8;
     filter: alpha(opacity=80);
+}
+.step {
+  ul {
+    display: block;
+    list-style: none;
+    li {
+      display: inline-block;
+      position: relative;
+      margin-right: 15px;
+      // @include transition (all ease 300ms );
+      p {
+        @extend .margin0;
+        border: 1px solid $bread-crumb;
+        padding: 4px 4px 0px 25px;
+    cursor: pointer;
+    height: 30px;
+    i{
+      font-size: 20px;
+    }
+      }
+      &:hover p,
+      &.active p {
+        background: $bread-crumb;
+        color: #fff;
+      }
+      &.breadcrums {
+        p {
+          // @include transition (all ease 300ms );
+          &:before {
+            content: "";
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 14px solid $bread-crumb;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -2;
+          }
+          &::after {
+            content: "";
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid $bread-crumb;
+            position: absolute;
+            right: -14px;
+            top: 0;
+            z-index: -2;
+          }
+        }
+        span.bread-frnt {
+          border-top: 14px solid transparent;
+          border-bottom: 14px solid transparent;
+          border-left: 13px solid #FFFFFF;
+          position: absolute;
+          left: 0;
+          top: 1px;
+          z-index: 9;
+        }
+        span.bread-back {
+          border-top: 14px solid transparent;
+          border-bottom: 14px solid transparent;
+          border-left: 14px solid #FFFFFF;
+          position: absolute;
+          right: -13px;
+          top: 1px;
+          z-index: 9;
+          // @include transition (all ease 300ms );
+        }
+        &:hover span.bread-back,
+        &.active span.bread-back {
+          border-top: 15px solid transparent;
+          border-bottom: 15px solid transparent;
+          border-left: 15px solid $bread-crumb;
+          right: -14px;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+.stepbg {
+  ul {
+    li {
+      &:hover p,
+      &.active p {
+        background: #C0C0C0;
+      }
+      p {
+        border: 1px solid #C0C0C0;
+      }
+    }
+  }
 }
 @import "main/mobile";
