@@ -1482,6 +1482,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.second = false;
   $scope.third = false;
   $scope.filter = {};
+  $scope.frontback = '';
   $scope.filter.custom = [{
     "id": 1,
     "text": "",
@@ -1830,6 +1831,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     switch (tab) {
       case 2:
         {
+          $scope.frontback = "Back";
           $scope.isfront = true;
           $scope.tab.editpro = false;
           $scope.tab.addimage = true;
@@ -1840,6 +1842,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       case 3:
         {
           console.log("text text");
+          $scope.frontback = "Front";
           $scope.isfront = false;
           $scope.tab.editpro = false;
           $scope.tab.addimage = false;
@@ -2129,7 +2132,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         radius: Math.abs(newValue),
         dir: pos
       });
-      console.log(Math.abs(newValue));
       arcText =   $example1;
       $example1.arctext('set', {
         radius: Math.abs( newValue),
@@ -2373,8 +2375,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     family: "Roboto"
   }, {
     family: "Slabo 27px"
-  }, {
-    family: "Roboto Condensed"
   }, {
     family: "Oswald"
   }, {
@@ -2883,9 +2883,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     step: 1,
   }, {
     name: 'Arc',
-    value: -1000,
-    from: -1000,
-    to: 1000,
+    value: 500,
+    from: 900,
+    to: 100,
     step: 1
   }, {
     name: 'Rotation',
@@ -2915,9 +2915,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     step: 1,
   }, {
     name: 'Arc',
-    value: -1000,
-    from: -1000,
-    to: 1000,
+    value: 500,
+    from: 900,
+    to: 100,
     step: 1
   }, {
     name: 'Rotation',
@@ -2947,9 +2947,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     step: 1,
   }, {
     name: 'Arc',
-    value: -1000,
-    from: -1000,
-    to: 1000,
+    value: 500,
+    from: 900,
+    to: 100,
     step: 1
   }, {
     name: 'Rotation',
@@ -3107,9 +3107,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
+  // $scope.filter1.custom[0].arc
+  $scope.$watch('filter1.custom[0].arc', function(newValue, oldValue) {
+    console.log("change filter1");
+    // if (oldValue != newValue) {
+      // $scope.filter.custom[2].arc = newValue;
+      $scope.isArcChange = true;
+      $scope.changeArc(newValue, 1);
+    // }
+  });
+
+  $scope.changeFrontBack = function(frontback){
+    console.log($scope.isfront1);
+    if ($scope.isfront1) {
+      $scope.isfront1 = false;
+    }else {
+      $scope.isfront1 = true;
+    }
+  }
+
   $scope.previewDesign = function(filter, custom) {
-    $scope.filter1 = filter;
-    $scope.custom1 = custom;
+    $scope.addToCart(0);
+    console.log($scope.filter);
+    $scope.isfront1 = $scope.isfront;
+    $scope.filter1 = $scope.filter;
+    _.each($scope.filter1.custom, function(n){
+      if ($scope.isArcChange == true) {
+        $('#example1').show().arctext({
+          radius: n.arc
+        });
+        $('#example1').arctext('destroy');
+        // $('#example1').html($(this).val().replace(newValue));
+      }
+      n.stylo = {
+        "top":n.top+"px",
+        "left":n.left+"px"
+      };
+    })
+    $scope.custom1 = $scope.custom;
     $uibModal.open({
       animation: true,
       windowClass: 'large-Modal',
@@ -3119,22 +3154,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
 
-  $scope.addToCart = function() {
+  $scope.addToCart = function(val) {
     $movefirstimage = $(".movefirstimage");
     $movefirstimageimg = $(".movefirstimage img");
     $movesecondimage = $(".movesecondimage");
     $movesecondimageimg = $(".movesecondimage img");
-    if ($movefirstimage == "") {
+    if ($movefirstimage.eq(0).css("top")) {
+      console.log("first image");
       $scope.filter.custom[4].top = $movefirstimage.eq(0).css("top").split("px")[0];
       $scope.filter.custom[4].left = $movefirstimage.eq(0).css("left").split("px")[0];
       $scope.filter.custom[4].height = $movefirstimageimg.eq(0).css("height").split("px")[0];
       $scope.filter.custom[4].width = $movefirstimageimg.eq(0).css("width").split("px")[0];
     }
-    if ($movesecondimage == "") {
-      $scope.filter.custom[4].top = $movesecondimage.eq(0).css("top").split("px")[0];
-      $scope.filter.custom[4].left = $movesecondimage.eq(0).css("left").split("px")[0];
-      $scope.filter.custom[4].height = $movesecondimageimg.eq(0).css("height").split("px")[0];
-      $scope.filter.custom[4].width = $movesecondimageimg.eq(0).css("width").split("px")[0];
+    if ($movesecondimage.eq(0).css("top")) {
+      $scope.filter.custom[5].top = $movesecondimage.eq(0).css("top").split("px")[0];
+      $scope.filter.custom[5].left = $movesecondimage.eq(0).css("left").split("px")[0];
+      $scope.filter.custom[5].height = $movesecondimageimg.eq(0).css("height").split("px")[0];
+      $scope.filter.custom[5].width = $movesecondimageimg.eq(0).css("width").split("px")[0];
     }
 
     $texts = $(".movetext");
@@ -3146,6 +3182,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       if ($texts.eq(key).css("left") != "auto") {
         cust.left = $texts.eq(key).css("left").split("px")[0];
       }
+      console.log(cust);
     }
     _.each($texts, function(n, key) {
       switch (key) {
@@ -3161,18 +3198,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           break;
         case 8:
           {
-            getVal($scope.filter.custom[3], key);
+            getVal($scope.filter.custom[2], 8);
           }
           break;
         case 9:
           {
-            getVal($scope.filter.custom[4], key);
+            getVal($scope.filter.custom[3], key);
           }
           break;
         default:
 
       }
     })
+if (val===1) {
 
     NavigationService.addToCartCustom($scope.filter, function(data) {
       if (data == "true") {
@@ -3185,6 +3223,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
       myfunction();
     });
+  }
 
   }
 

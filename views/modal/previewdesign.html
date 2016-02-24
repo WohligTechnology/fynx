@@ -1,19 +1,56 @@
 <div class="modal-heights bg-imgupload login-tab" ng-controller="CustomCreateCtrl">
+
   <div class="row">
+    <div class="col-md-offset-2 col-md-4">
+      <div class="pull-right" ng-click="changeFrontBack()">
+        <h4 class="prev" ng-show="!isfront1">Front</h4>
+        <h4 class="prev" ng-show="isfront1">Back</h4>
+      </div>
+    </div>
+  <div class="col-md-5">
     <div class="close-btn pull-right" ng-click="$close()">
       <img src="img/close.jpg">
     </div>
   </div>
+
+
+  </div>
   <div class="row">
-    <div class="col-md-6">
-      <div ng-show="isfront" id="demo">
-        <img ng-src="{{img}}" alt="" />
+    <div class="col-md-12">
+      <div id="printdiv" class="custom-img" fix-scroller>
+        <div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
+          <div id="tango" ng-show="isfront1" ng-click="deselectAll()">
+            <img class="img-responsive m-center" ng-src="{{custom1.frontSrc}}">
+            <div class="on-img shirtcanvas" style="top:280px;width:45%">
+              <div class="canvasitem movefirstimage" ng-if="filter1.image.image!=''" ng-style="filter1.custom[4].stylo">
+                <img class="auto-dim m-center" ng-style="filter1.custom[4].css" ng-click="showDelete(filter1.custom[4]); $event.stopPropagation();" ng-src="{{filter1.image.image | serverimage}}">
+
+              </div>
+              <div class="canvasitem movetext" ng-repeat="txt in filter1.custom track by $index" ng-style="txt.stylo">
+                <span id="example{{txt.id}}" class="textspan"
+                 name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></span>
+              </div>
+            </div>
+          </div>
+          <div ng-show="!isfront1" ng-click="deselectAll()">
+            <img class="img-responsive m-center" ng-src="{{custom1.backSrc}}">
+            <div class="on-img shirtcanvas" style="top:280px;width:45%">
+              <div class="canvasitem movesecondimage" ng-if="filter1.image.image1!=''"ng-style="filter1.custom[5].stylo">
+                <img class="auto-dim m-center" ng-style="filter1.custom[5].css" ng-click="showDelete(filter1.custom[5]); $event.stopPropagation();" ng-src="{{filter1.image.image1 | serverimage}}">
+              </div>
+              <div class="canvasitem movetext" ng-repeat="txt in filter1.custom track by $index" ng-style="txt.stylo">
+                <span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-click="showDelete(txt); $event.stopPropagation();" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
       <div class="back">
-        <img ng-src="{{filter.image.image | serverimage}}" class="img-responsive">
+        <img ng-src="{{filter1.image.image | serverimage}}" class="img-responsive">
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

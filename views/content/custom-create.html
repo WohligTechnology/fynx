@@ -699,8 +699,8 @@
 									</div>
 								</div>
 							</div>
-							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
-							<button class="btn btn-danger con-btn" ng-click="saveDesign()">Save DESIGN</button>
+							<button class="btn btn-primary con-btn" ng-click="previewDesign(filter,custom);">PREVIEW DESIGN</button>
+							<!-- <button class="btn btn-danger con-btn" ng-click="saveDesign()">Save DESIGN</button> -->
 						</uib-tab>
 						<uib-tab active="tab.addtext">
 							<uib-tab-heading ng-click="tabchange(3);">
@@ -748,7 +748,7 @@
 
 											<div class="color-pick">
 												<ul class="m-minus">
-													<li ng-repeat="col in colors1 track by $index" class="m-17" ng-click="changeColor($index, 2);">
+													<li ng-repeat="col in colors2 track by $index" class="m-17" ng-click="changeColor($index, 2);">
 														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>
@@ -770,7 +770,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color,3);colors[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col.color,3);colors2[0].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
@@ -997,7 +997,7 @@
 
 											<div class="color-pick">
 												<ul class="m-minus">
-													<li ng-repeat="col in colors track by $index" class="m-17" ng-click="changeColor($index,3);">
+													<li ng-repeat="col in colors3 track by $index" class="m-17" ng-click="changeColor($index,3);">
 														<p class="class-p">{{col.name}}</p>
 														<div class="color-bx text-center m-auto" ng-style="{'background':col.color}"></div>
 													</li>
@@ -1019,7 +1019,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color,4);colors[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col.color,4);colors3[0].color=col.color;" class="{{col.class}}">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
@@ -1266,8 +1266,8 @@
 								</div>
 							</div>
 							<div ng-show="isBackPay">
-							<button class="btn btn-primary con-btn" ng-click="previewDesign();">PREVIEW DESIGN</button>
-							<button class="btn btn-danger con-btn" ng-click="tabchange(4)">Save DESIGN</button>
+							<button class="btn btn-primary con-btn" ng-click="previewDesign(filter,custom);">PREVIEW DESIGN</button>
+							<!-- <button class="btn btn-danger con-btn" ng-click="tabchange(4)">Save DESIGN</button> -->
 						</div>
 						</uib-tab>
 						<uib-tab active="tab.buy">
@@ -1321,7 +1321,7 @@
 											<p>ENTER YOUR DESIGN NAME</p>
 										</div>
 										<input type="text" class="form-control" ng-model="filter.designname"> </input>
-										<button class="btn btn-danger m-30 con-btns" ng-click="addToCart()" ng-show="!outofstock">ADD TO CART</button>
+										<button class="btn btn-danger m-30 con-btns" ng-click="addToCart(1)" ng-show="!outofstock">ADD TO CART</button>
 										<h5 style="color:red" ng-show="outofstock">Item is out of stock</h5>
 									</div>
 								</div>
