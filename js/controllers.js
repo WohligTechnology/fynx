@@ -872,9 +872,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   if (!NavigationService.getUser()) {
     $state.go("home");
   }
-  NavigationService.fedexTrack('', function(data) {
-    console.log(data.TrackPackagesResponse.packageList[0]);
-  })
+  $scope.trackFedex= function(order){
+    NavigationService.fedexTrack('', function(data) {
+      console.log(data.TrackPackagesResponse.packageList[0]);
+      order.fedex = data.TrackPackagesResponse.packageList[0];
+    })
+  }
+
   $scope.loadOrders = function() {
     if ($scope.lastpage >= $scope.pageno) {
       ++$scope.pageno;
@@ -885,7 +889,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.lastpage = data.lastpage;
       });
       if ($scope.orders == '') {
-        $scope.msg = "No Orders.";
+        $scope.msg = "";
       } else {
         $scope.msg = "";
       }

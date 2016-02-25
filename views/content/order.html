@@ -35,16 +35,119 @@
 							<td class="mobile" ng-if="order.transactionid==''"><span class="mobile">TRANSITION ID</span> - </td>
 							<td class="mobile"><span class="mobile">DATE </span>{{order.date}} </td>
 							<td class="mobile"> <span class="mobile">AMOUNT</span>{{order.totalamt.totalsum}} </td>
-							<td class="mobile"><span class="mobile">STATUS</span>{{order.orderstatusname}}</td>
 							<td class="mobile">
-								<button type="submit" class="btn-blue btn-primary btn">PRINT INVOICE</button>
+								<span class="mobile">STATUS</span>{{order.orderstatusname}}
+								<!-- <div class="step">
+									<ul>
+										<li class="tab-item breadcrums active" ng-click="tabchange('design',1)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+										<li class="tab-item breadcrums" ng-click="tabchange('trim',2)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+										<li class="tab-item breadcrums" ng-click="tabchange('team',3)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+										<li class="tab-item breadcrums" ng-click="tabchange('logo',4)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+
+									</ul>
+					      </div> -->
+								<div class="step" ng-if="order.fedex.isDelException">
+									<ul>
+										<li class="tab-item breadcrums active" ng-click="tabchange('design',1)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+										<li class="tab-item breadcrums active" ng-click="tabchange('trim',2)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+										<li class="tab-item breadcrums" ng-click="tabchange('team',3)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+										<li class="tab-item breadcrums" ng-click="tabchange('logo',4)">
+											<span class="bread-frnt"></span>
+											<p style="margin: 0 0 -7px;"></p>
+											<span class="bread-back"></span>
+										</li>
+
+									</ul>
+					      </div>
+								<div class="step" ng-if="order.fedex.isInTransit">
+									<ul>
+					          <li class="tab-item breadcrums active" ng-click="tabchange('design',1)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"></p>
+					            <span class="bread-back"></span>
+					          </li>
+					          <li class="tab-item breadcrums active" ng-click="tabchange('trim',2)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"></p>
+					            <span class="bread-back"></span>
+					          </li>
+					          <li class="tab-item breadcrums active" ng-click="tabchange('team',3)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"></p>
+					            <span class="bread-back"></span>
+					          </li>
+					          <li class="tab-item breadcrums" ng-click="tabchange('logo',4)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"></p>
+					            <span class="bread-back"></span>
+					          </li>
+
+					        </ul>
+					      </div>
+								<!-- <div class="step">
+					        <ul>
+					          <li class="tab-item breadcrums active" ng-click="tabchange('design',1)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"></p>
+					            <span class="bread-back"></span>
+					          </li>
+					          <li class="tab-item breadcrums active" ng-click="tabchange('trim',2)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"></p>
+					            <span class="bread-back"></span>
+					          </li>
+					          <li class="tab-item breadcrums active" ng-click="tabchange('team',3)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"></p>
+					            <span class="bread-back"></span>
+					          </li>
+					          <li class="tab-item breadcrums active" ng-click="tabchange('logo',4)">
+					            <span class="bread-frnt"></span>
+					            <p style="margin: 0 0 -7px;"><i class="fa fa-check-circle"></i></p>
+					            <span class="bread-back"></span>
+					          </li>
+
+					        </ul>
+					      </div> -->
 							</td>
-							
+							<td class="mobile">
+								<button type="submit" class="btn-blue btn-primary btn" ng-click="trackFedex(order)">Track Fedex</button>
+							</td>
+
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<div class="order-table">
+
+			<!-- <div class="order-table">
 				<table class="table">
 					<thead>
 						<tr class="text-center desktop">
@@ -54,6 +157,7 @@
 							<th>ACTUAL DELIVERY</th>
 
 						</tr>
+
 					</thead>
 				<tbody>
 					<tr>
@@ -166,8 +270,7 @@
 					</tr>
 				</tbody>
 				</table>
-			</div>
-			<hr>
+			</div> -->
 		</div>
 
 	</div>
