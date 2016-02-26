@@ -2102,6 +2102,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   });
   $scope.changeArcPreview = function() {
     _.each($scope.filter1.custom, function(n,key) {
+
+      if (n.arc) {
       var pos;
       var newarc = n.arc;
       if (n.arc < 500)
@@ -2135,7 +2137,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         default:
 
       }
-      if (n.arc) {
         $example1.show().arctext({
           radius: Math.abs(newarc),
           dir: pos
@@ -2150,7 +2151,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           }
         });
       }
-
     });
   }
   $scope.changeArc = function(value, num) {
@@ -3203,6 +3203,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
     $timeout(function() {
       $scope.changeArcPreview();
+      // $scope.addToCart (0);
       cfpLoadingBar.complete();
     }, 1000);
 
