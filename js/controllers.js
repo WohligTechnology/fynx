@@ -175,7 +175,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filters.pageno = 0;
   $scope.price = [{
     id: "",
-    name: "Price"
+    name: "Default Price"
   }, {
     id: "1",
     name: "Low - High"
@@ -196,14 +196,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.colors = data.filter.color;
             $scope.colors.unshift({
               id: "",
-              name: "Color"
+              name: "All Color"
             });
           }
           if ($scope.freeze.freezeSize == "") {
             $scope.sizes = data.filter.size;
             $scope.sizes.unshift({
               id: "",
-              name: "size"
+              name: "All size"
             });
           }
           if ($scope.freeze.freezeType == "") {
@@ -573,7 +573,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 
-.controller('CustomCtrl', function($scope, TemplateService, NavigationService) {
+.controller('CustomCtrl', function($scope, TemplateService, NavigationService, $state) {
 
   $scope.template = TemplateService.changecontent("custom");
   $scope.menutitle = NavigationService.makeactive("Custom");
@@ -583,16 +583,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService, $uibModal, $state) {
+.controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService, $uibModal, $state, $stateParams) {
 
   $scope.template = TemplateService.changecontent("custom-choose");
   $scope.menutitle = NavigationService.makeactive("Custom");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+  $scope.gender = $stateParams.cat;
 
-  $scope.toCreatePage = function(id){
-    NavigationService.getImageForCustomize(id,'',function(data){
+  $scope.toCreatePage = function(id) {
+    NavigationService.getImageForCustomize(id, '', function(data) {
       $scope.typeid = id;
       $scope.color = data.color;
       $uibModal.open({
@@ -604,6 +605,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
 
   }
+
+
 
   $scope.selectColor = function() {
     $uibModal.open({
@@ -648,10 +651,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     style: "#686868"
   }];
 
-  $scope.clickColor = function (data) {
+  $scope.clickColor = function(data) {
     $scope.selectedColor = data.name;
     console.log(data);
-    $state.go("customCreate",{id:$scope.typeid,color:data.id});
+    $state.go("customCreate", {
+      id: $scope.typeid,
+      color: data.id
+    });
   };
 
 })
@@ -872,7 +878,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   if (!NavigationService.getUser()) {
     $state.go("home");
   }
-  $scope.trackFedex= function(order){
+  $scope.trackFedex = function(order) {
     NavigationService.fedexTrack('', function(data) {
       console.log(data.TrackPackagesResponse.packageList[0]);
       order.fedex = data.TrackPackagesResponse.packageList[0];
@@ -894,7 +900,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.msg = "";
       }
     }
-
   }
   $scope.loadOrders();
   $scope.loadProducts = function() {
@@ -1886,7 +1891,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.loadProduct = function() {
     NavigationService.getImageForCustomize($scope.filter.type, $scope.filter.color, function(data) {
       $scope.outofstock = false;
-      console.log(data);
       cfpLoadingBar.complete();
       $scope.color = data.color;
       _.each($scope.color, function(n) {
@@ -2096,8 +2100,61 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // });
 
   });
+  $scope.changeArcPreview = function() {
+    _.each($scope.filter1.custom, function(n,key) {
+      var pos;
+      var newarc = n.arc;
+      if (n.arc < 500)
+        pos = 1;
+      else {
+        pos = -1;
+        newarc = 1000 - n.arc;
+      }
 
+      switch (key) {
+        case 0:
+          {
+            var $example1 = $('#exp1').hide();
+          }
+          break;
+        case 1:
+          {
+            var $example1 = $('#exp2').hide();
+          }
+          break;
+        case 2:
+          {
+            var $example1 = $('#exp3').hide();
+          }
+          break;
+        case 3:
+          {
+            var $example1 = $('#exp4').hide();
+          }
+          break;
+        default:
+
+      }
+      if (n.arc) {
+        $example1.show().arctext({
+          radius: Math.abs(newarc),
+          dir: pos
+        });
+        arcText = $example1;
+        $example1.arctext('set', {
+          radius: Math.abs(newarc),
+          dir: pos,
+          animation: {
+            speed: 300,
+            easing: 'ease-out'
+          }
+        });
+      }
+
+    });
+  }
   $scope.changeArc = function(value, num) {
+      console.log(value);
       var newValue = value;
       var pos;
       if (newValue < 500)
@@ -2132,13 +2189,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
       }
 
+
       $example1.show().arctext({
         radius: Math.abs(newValue),
         dir: pos
       });
-      arcText =   $example1;
+      arcText = $example1;
       $example1.arctext('set', {
-        radius: Math.abs( newValue),
+        radius: Math.abs(newValue),
         dir: pos,
         animation: {
           speed: 300,
@@ -2152,7 +2210,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[0].css, {
       "font-size": newValue
     });
-    // $scope.changeArc($scope.design.design[1].value, 1);
+    // $scope.changeArc($scope.filter.custom[0].arc, 1);
   });
   $scope.$watch('design.design[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -3111,43 +3169,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
-  // $scope.filter1.custom[0].arc
-  $scope.$watch('filter1.custom[0].arc', function(newValue, oldValue) {
-    console.log("change filter1");
-    // if (oldValue != newValue) {
-      // $scope.filter.custom[2].arc = newValue;
-      $scope.isArcChange = true;
-      $scope.changeArc(newValue, 1);
-    // }
-  });
-
-  $scope.changeFrontBack = function(frontback){
+  $scope.changeFrontBack = function(frontback) {
     console.log($scope.isfront1);
+    $timeout(function() {
+      $scope.changeArcPreview();
+    }, 500);
     if ($scope.isfront1) {
       $scope.isfront1 = false;
-    }else {
+    } else {
       $scope.isfront1 = true;
     }
   }
 
   $scope.previewDesign = function(filter, custom) {
-    $scope.addToCart(0);
-    console.log($scope.filter);
+    cfpLoadingBar.start();
+    $scope.addToCart (0);
     $scope.isfront1 = $scope.isfront;
     $scope.filter1 = $scope.filter;
-    _.each($scope.filter1.custom, function(n){
-      if ($scope.isArcChange == true) {
-        $('#example1').show().arctext({
-          radius: n.arc
-        });
-        $('#example1').arctext('destroy');
-        // $('#example1').html($(this).val().replace(newValue));
-      }
+    console.log($scope.filter.custom[0].arc);
+    console.log($scope.filter1.custom[0]);
+    _.each($scope.filter1.custom, function(n, key) {
       n.stylo = {
-        "top":n.top+"px",
-        "left":n.left+"px"
+        "top": n.top + "px",
+        "left": n.left + "px"
       };
-    })
+    });
     $scope.custom1 = $scope.custom;
     $uibModal.open({
       animation: true,
@@ -3155,6 +3201,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       templateUrl: 'views/modal/previewdesign.html',
       scope: $scope
     })
+    $timeout(function() {
+      $scope.changeArcPreview();
+      cfpLoadingBar.complete();
+    }, 1000);
+
   }
 
 
@@ -3186,7 +3237,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       if ($texts.eq(key).css("left") != "auto") {
         cust.left = $texts.eq(key).css("left").split("px")[0];
       }
-      console.log(cust);
     }
     _.each($texts, function(n, key) {
       switch (key) {
@@ -3214,20 +3264,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
       }
     })
-if (val===1) {
+    if (val === 1) {
 
-    NavigationService.addToCartCustom($scope.filter, function(data) {
-      if (data == "true") {
-        $scope.addAlert("success", "Added to cart");
-        myImage = {
-          image: ""
-        };
-      } else {
-        $scope.addAlert("danger", "Something has gone wrong");
-      }
-      myfunction();
-    });
-  }
+      NavigationService.addToCartCustom($scope.filter, function(data) {
+        if (data == "true") {
+          $scope.addAlert("success", "Added to cart");
+          myImage = {
+            image: ""
+          };
+        } else {
+          $scope.addAlert("danger", "Something has gone wrong");
+        }
+        myfunction();
+      });
+    }
 
   }
 

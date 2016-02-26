@@ -6,10 +6,11 @@ var firstapp = angular.module('firstapp', [
   'navigationservice'
 ]);
 
-firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, cfpLoadingBarProvider) {
 
   // for http request with session
   $httpProvider.defaults.withCredentials = true;
+  cfpLoadingBarProvider.includeSpinner = false;
 
   $stateProvider
 
@@ -110,7 +111,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   })
 
   .state('chooseAttire', {
-    url: "/custom/choose",
+    url: "/custom/choose/:cat",
     templateUrl: "views/template.html",
     controller: 'CustomChooseCtrl'
   })
