@@ -23,7 +23,7 @@
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
 						<div id="tango" ng-show="isfront" ng-click="deselectAll()">
 							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
-							<div class="on-img shirtcanvas" style="top:280px;width:195px">
+							<div class="on-img shirtcanvas" style="top:300px;width:195px">
 								<div class="canvasitem movefirstimage" ng-draggable='dragOptions' ng-if="filter.image.image!=''" style="width:auto;">
 									<img class="auto-dim m-center" ng-style="filter.custom[4].css" ng-click="showDelete(filter.custom[4]); $event.stopPropagation();" ng-src="{{filter.image.image | serverimage}}">
 									<span class="badge red ab" ng-click="deleteElement(filter.custom[4],1,0); $event.stopPropagation();" ng-show="filter.custom[4].state">X</span>
@@ -37,7 +37,7 @@
 						</div>
 						<div ng-show="!isfront" ng-click="deselectAll()">
 							<img class="img-responsive m-center" ng-src="{{custom.backSrc}}">
-							<div class="on-img shirtcanvas" style="top:280px;width:195px">
+							<div class="on-img shirtcanvas" style="top:300px;width:195px">
 								<div class="canvasitem movesecondimage" ng-draggable='dragOptions' ng-if="filter.image.image1!=''" style="width:auto;">
 									<img class="auto-dim m-center" ng-style="filter.custom[5].css" ng-click="showDelete(filter.custom[5]); $event.stopPropagation();" ng-src="{{filter.image.image1 | serverimage}}">
 									<span class="badge red ab" ng-click="deleteElement(filter.custom[4],2,0); $event.stopPropagation();" ng-show="filter.custom[5].state">X</span>

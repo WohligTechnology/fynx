@@ -11,20 +11,38 @@
   <!-- <button class="btn btn-danger" ng-click="selectColor();">TEST</button> -->
 </div>
 
-<div class="row-flex">
-  <div class="col-flex" ng-if="gender=='men' || gender=='women'">
+<!-- <div class="row-flex" ng-if="gender=='men'">
+  <div class="col-flex">
     <img alt="Tshits" class="img-responsive full-image" src="img/custom-tshirt.jpg">
     <button class="btn btn-danger btn-middle-big" ng-click="toCreatePage(1)">Tshirts</button>
   </div>
-  <div class="col-flex" ng-if="gender=='women'">
+  <div class="col-flex">
     <img alt="Hoodies" class="img-responsive full-image" src="img/custom-hoodie.jpg">
     <button class="btn btn-primary btn-middle-big" ng-click="toCreatePage(2)">Hoodies</button>
+  </div>
+</div> -->
+
+<div class="row-flex" ng-if="gender=='women'">
+  <div class="col-flex">
+    <img alt="Tshits" class="img-responsive full-image" src="img/custom-tshirt.jpg">
+    <button class="btn btn-danger btn-middle-big" ng-click="toCreatePage(8)">Top</button>
+  </div>
+  <div class="col-flex">
+    <img alt="Hoodies" class="img-responsive full-image" src="img/custom-hoodie.jpg">
+    <button class="btn btn-primary btn-middle-big" ng-click="toCreatePage(6)">Crop top</button>
   </div>
 </div>
 
 <div class="row-flex" ng-if="gender=='women'">
   <div class="col-flex">
     <img alt="Tanks" class="img-responsive full-image" src="img/custom-tanks.jpg">
-    <button class="btn btn-warning btn-middle-big" ng-click="toCreatePage(3)">Tanks</button>
+    <button class="btn btn-warning btn-middle-big" ng-click="toCreatePage(5)">Tanks</button>
+  </div>
+</div>
+
+<div class="row-flex" ng-if="gender=='men'">
+  <div class="col-flex">
+    <img alt="Tanks" class="img-responsive full-image" src="img/custom-tshirt.jpg">
+    <button class="btn btn-warning btn-middle-big" ng-click="toCreatePage(1)">T-shirts</button>
   </div>
 </div>
