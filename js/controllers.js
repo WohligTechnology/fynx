@@ -436,6 +436,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           //					})
           //	set color selected
           _.each(data.color, function(n, key) {
+            var cls = n.name.split(' ');
+            n.name = cls[0]+ '-' + cls[1];
             if (n.id == data.product.color) {
               n.selected = "selected";
               $scope.filter.color = n.id;
@@ -444,8 +446,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
           })
           $scope.sizes = data1;
-
-
           $scope.product = data;
         });
         $scope.filter.product = data.product.id;
@@ -455,7 +455,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   }
   $scope.loadProduct($scope.filter);
-
   $scope.otherImage = function(image) {
     $scope.viewImage = image.image;
   }
