@@ -437,7 +437,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           //	set color selected
           _.each(data.color, function(n, key) {
             var cls = n.name.split(' ');
-            n.name = cls[0]+ '-' + cls[1];
+            console.log(cls);
+            if(cls[1]){
+              n.name = cls[0]+ '-' + cls[1];
+            }else {
+              n.name = cls[0];
+            }
+
             if (n.id == data.product.color) {
               n.selected = "selected";
               $scope.filter.color = n.id;
@@ -596,7 +602,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.typeid = id;
       _.each(data.color, function(n, key) {
         var cls = n.name.split(' ');
-        n.name = cls[0]+ '-' + cls[1];
+        console.log(cls[1]);
+        if(cls[1]){
+          n.name = cls[0]+ '-' + cls[1];
+        }else {
+          n.name = cls[0];
+        }
+
       })
       $scope.color = data.color;
       $uibModal.open({
@@ -1186,21 +1198,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       if (check) {
         $scope.tab = tab;
         $scope.checkout.cart = $scope.allCart;
-        // NavigationService.placeOrder($scope.checkout, function(data) {
-        //   if (data != 0) {
-        //     $scope.order = data;
-        //     $scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
-        //     $scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
-        //     NavigationService.setOrder(data);
-        //     $scope.classa = '';
-        //     $scope.classb = '';
-        //     $scope.classc = '';
-        //     $scope.classd = "yellow-btn";
-        //   } else {
-        //     $scope.tab = "step3";
-        //   }
-        //
-        // })
+        NavigationService.placeOrder($scope.checkout, function(data) {
+          if (data != 0) {
+            $scope.order = data;
+            $scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
+            $scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
+            NavigationService.setOrder(data);
+            $scope.classa = '';
+            $scope.classb = '';
+            $scope.classc = '';
+            $scope.classd = "yellow-btn";
+          } else {
+            $scope.tab = "step3";
+          }
+
+        })
       } else {
         $scope.addAlert("danger", "Please enter all Information");
       }
@@ -1911,9 +1923,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.outofstock = false;
       cfpLoadingBar.complete();
       $scope.price = data.backprice.price;
+
       $scope.color = data.color;
       _.each($scope.color, function(n) {
-        n.class = "";
+        var cls = n.name.split(' ');
+        if(cls[1]){
+          n.name = cls[0]+ '-' + cls[1];
+        }else {
+          n.name = cls[0];
+        }
       });
       if (parseInt(data.image.quantity) <= 0) {
         $scope.outofstock = true;
