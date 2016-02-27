@@ -78,9 +78,9 @@ $border-radius-small: 0 !default;
 $menu-height: 74px !default;
 $select-height: 34px !default;
 
-// $screen-xs-max: 480px !default;
-// $screen-sm-max: 768px !default;
-// $screen-md-max: 992px !default;
+$screen-xs-max: 480px !default;
+$screen-sm-max: 768px !default;
+$screen-md-max: 992px !default;
 $screen-lg-max: 1200px !default;
 
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -2042,7 +2042,6 @@ span.badge.red {
     z-index: 9;
     top: 70px;
 }
-
 .median:after {
     content:"";
     position: absolute;
