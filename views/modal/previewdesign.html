@@ -1,20 +1,15 @@
-<div class="modal-heights bg-imgupload login-tab" ng-controller="CustomCreateCtrl">
+<div class="bg-imgupload login-tab" ng-controller="CustomCreateCtrl">
+  <div class="close-btn pull-right" ng-click="$close()">
+    <img src="img/close.jpg">
+  </div>
 
-  <div class="row">
-    <div class="col-md-offset-2 col-md-4">
-      <div class="pull-right" ng-click="changeFrontBack()">
-        <h4 class="prev" ng-show="!isfront1">Front</h4>
-        <h4 class="prev" ng-show="isfront1">Back</h4>
+
+      <div class="text-center" ng-click="changeFrontBack()">
+        <h3 class="font-smart" ng-show="!isfront1">Front</h3>
+        <h3 class="font-smart" ng-show="isfront1">Back</h3>
       </div>
-    </div>
-  <div class="col-md-5">
-    <div class="close-btn pull-right" ng-click="$close()">
-      <img src="img/close.jpg">
-    </div>
-  </div>
 
 
-  </div>
   <div class="row">
     <div class="col-md-12">
       <div id="printdiv" class="custom-img" fix-scroller>{{filter1.custom[0].arc}}
