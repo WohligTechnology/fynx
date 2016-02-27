@@ -272,9 +272,7 @@
 					<div class="form-group">
 						<label>COUNTRY*</label>
 						<select name="country" ng-model="checkout.billingcountry" class="form-control">
-							<option value="IND">India</option>
-							<option value="JPN">Japan</option>
-							<option value="ITA">Italy</option>
+							<option value="country.value" ng-repeat="country in countries">{{country.value}}</option>
 						</select>
 					</div>
 
@@ -326,9 +324,7 @@
 						<div class="form-group">
 							<label>COUNTRY*</label>
 							<select name="country" ng-model="checkout.billingcountry" class="form-control">
-								<option value="IND">India</option>
-								<option value="JPN">Japan</option>
-								<option value="ITA">Italy</option>
+								<option value="country.value" ng-repeat="country in countries">{{country.value}}</option>
 							</select>
 						</div>
 					</div>
@@ -371,9 +367,7 @@
 						<div class="form-group">
 							<label>COUNTRY*</label>
 							<select name="country" ng-model="checkout.shippingcountry" class="form-control">
-								<option value="IND">India</option>
-								<option value="JPN">Japan</option>
-								<option value="ITA">Italy</option>
+								<option value="country.value" ng-repeat="country in countries">{{country.value}}</option>
 							</select>
 						</div>
 					</div>
@@ -423,13 +417,13 @@
 
 		<div class="row" ng-if="checkout.paymentmode!=4">
 			<div class="text-center">
-				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4)">CONTINUE</button>
+				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4,sameasbilling)">CONTINUE</button>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="text-center" ng-if="checkout.paymentmode==4">
-				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4)">Place Order</button>
+				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4,false)">Place Order</button>
 			</div>
 		</div>
 

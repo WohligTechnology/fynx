@@ -1032,6 +1032,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   }
 
+  $scope.countries = countries;
+
   $scope.addAlert = function(type, msg) {
     $scope.alerts[0] = {
       type: type,
@@ -1088,7 +1090,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     });
   };
-  $scope.tabchange = function(tab, a) {
+  $scope.tabchange = function(tab, a, sameasbilling) {
     //        console.log(tab);
 
     if (a == 1) {
@@ -1115,6 +1117,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.classc = "yellow-btn";
       $scope.classd = '';
     } else {
+      console.log($scope.checkout);
+      console.log(sameasbilling);
+      if (sameasbilling == true) {
+        $scope.assign($scope.checkout.billingline1, $scope.checkout.billingline2, $scope.checkout.billingline3, $scope.checkout.billingcity, $scope.checkout.billingpincode, $scope.checkout.billingstate, $scope.checkout.billingcountry);
+
+      }
       $scope.allvalidation = [{
         field: $scope.checkout.firstname,
         validation: ""
@@ -1175,21 +1183,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       if (check) {
         $scope.tab = tab;
         $scope.checkout.cart = $scope.allCart;
-        NavigationService.placeOrder($scope.checkout, function(data) {
-          if (data != 0) {
-            $scope.order = data;
-            $scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
-            $scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
-            NavigationService.setOrder(data);
-            $scope.classa = '';
-            $scope.classb = '';
-            $scope.classc = '';
-            $scope.classd = "yellow-btn";
-          } else {
-            $scope.tab = "step3";
-          }
-
-        })
+        // NavigationService.placeOrder($scope.checkout, function(data) {
+        //   if (data != 0) {
+        //     $scope.order = data;
+        //     $scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
+        //     $scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
+        //     NavigationService.setOrder(data);
+        //     $scope.classa = '';
+        //     $scope.classb = '';
+        //     $scope.classc = '';
+        //     $scope.classd = "yellow-btn";
+        //   } else {
+        //     $scope.tab = "step3";
+        //   }
+        //
+        // })
       } else {
         $scope.addAlert("danger", "Please enter all Information");
       }
@@ -1476,7 +1484,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService, $filter, $uibModal, $http, $upload, $timeout, $filter, $stateParams, cfpLoadingBar) {
+.controller('CustomCreateCtrl', function($scope, TemplateService, NavigationService, $filter, $uibModal, $http, $upload, $timeout, $filter, $stateParams, cfpLoadingBar, $rootScope) {
 
   $scope.template = TemplateService.changecontent("custom-create");
   $scope.menutitle = NavigationService.makeactive("Custom");
@@ -1543,6 +1551,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.image1 = myImage;
   $scope.filter.image = {};
   $scope.filter.image = myImage;
+  $rootScope.$on('$stateChangeStart',
+      function(event, toState, toParams, fromState, fromParams) {
+        myImage = {
+          image: "",
+          image1: ""
+        };
+      });
   $scope.filter.distance = 1;
   $scope.filter.angle = 1;
   $scope.type = $stateParams.id;
@@ -2101,42 +2116,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   });
   $scope.changeArcPreview = function() {
-    _.each($scope.filter1.custom, function(n,key) {
+    _.each($scope.filter1.custom, function(n, key) {
 
       if (n.arc) {
-      var pos;
-      var newarc = n.arc;
-      if (n.arc < 500)
-        pos = 1;
-      else {
-        pos = -1;
-        newarc = 1000 - n.arc;
-      }
+        var pos;
+        var newarc = n.arc;
+        if (n.arc < 500)
+          pos = 1;
+        else {
+          pos = -1;
+          newarc = 1000 - n.arc;
+        }
 
-      switch (key) {
-        case 0:
-          {
-            var $example1 = $('#exp1').hide();
-          }
-          break;
-        case 1:
-          {
-            var $example1 = $('#exp2').hide();
-          }
-          break;
-        case 2:
-          {
-            var $example1 = $('#exp3').hide();
-          }
-          break;
-        case 3:
-          {
-            var $example1 = $('#exp4').hide();
-          }
-          break;
-        default:
+        switch (key) {
+          case 0:
+            {
+              var $example1 = $('#exp1').hide();
+            }
+            break;
+          case 1:
+            {
+              var $example1 = $('#exp2').hide();
+            }
+            break;
+          case 2:
+            {
+              var $example1 = $('#exp3').hide();
+            }
+            break;
+          case 3:
+            {
+              var $example1 = $('#exp4').hide();
+            }
+            break;
+          default:
 
-      }
+        }
         $example1.show().arctext({
           radius: Math.abs(newarc),
           dir: pos
@@ -3183,7 +3198,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.previewDesign = function(filter, custom) {
     cfpLoadingBar.start();
-    $scope.addToCart (0);
+    $scope.addToCart(0);
     $scope.isfront1 = $scope.isfront;
     $scope.filter1 = $scope.filter;
     console.log($scope.filter.custom[0].arc);

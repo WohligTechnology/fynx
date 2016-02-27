@@ -3,11 +3,15 @@
     Colour me cool
   </h3>
 
-  <div class="color-bar">
+  <div class="color-bar" ng-if="color==''">
+    No Colours.
+  </div>
+  <div class="color-bar" ng-if="color!=''">
     <ul>
       <li style="background-color: {{coloro.name}}" ng-repeat="coloro in color" ng-click="clickColor(coloro);" ng-class="{active : coloro.name == selectedColor}"> </li>
     </ul>
   </div>
+
   <div class="text-center" ng-click="$close()">
     <button type="button" class="btn btn-danger">DONE</button>
   </div>
