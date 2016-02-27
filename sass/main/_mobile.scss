@@ -1,8 +1,5 @@
 //mobile
 @media (max-width:$screen-xs-max) {
-  .navbar-collapse {
-    background-color: white;
-  }
   .product-slideset {
     ul.nav {
       li {
@@ -225,23 +222,21 @@
     margin-top: 5px;
   }
 }
-
 @media (max-width: $screen-xs-max) {
-	.navbar-collapse {
-		background-color: white;
-	}
-	.product-slideset {
-		ul.nav {
-			li {
-				a {
-					padding: 3px 15px;
-					font-size: 16px;
-				}
-			}
-		}
-	}
+  .navbar-collapse {
+    background-color: white;
+  }
+  .product-slideset {
+    ul.nav {
+      li {
+        a {
+          padding: 3px 15px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }
-
 @media (min-width: $screen-sm-min) {
   .left-bar {
     width: 175px;
@@ -253,9 +248,37 @@
     margin: 0 6px !important;
   }
 }
-
-@media (min-width: $screen-xs-max) {}
-
+@media (min-width: $screen-sm-max) {
+  .navbar-collapse {
+    background-color: white;
+  }
+  ul.nav.navbar-nav.inline {
+    display: none;
+  }
+  .menu {
+    .nav {
+      width: 100%;
+    }
+    > li {
+      width: 100%;
+      a {
+        padding-bottom: 20px;
+        padding-top: 20px;
+      }
+    }
+  }
+  .navbar-nav {
+    li {
+      a {
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-bottom: 1px solid #f5f5f5;
+      }
+    }
+  }
+  ul.nav.navbar-nav.inline {
+    display: none;
+  }
+}
 @media (min-width: $screen-md-max) {}
-
 @media (min-width: $screen-lg-max) {}
