@@ -1,7 +1,6 @@
 /* Start writing SASS here */
 @import "fonts";
 @import url(https://fonts.googleapis.com/css?family=Advent+Pro:400,100,200,300,500,600,700|Roboto+Condensed:400,300,700,300italic,400italic,700italic);
-
 @import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
@@ -10,7 +9,6 @@
 @import "../bower_components/angular-loading-bar/src/loading-bar.css";
 @import "../sass/angular-range-slider.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
-
 @font-face {
   font-family: "Flaticon";
   src: url("../fonts/flaticon.eot");
@@ -38,53 +36,42 @@
 .flaticon-zoom:before {
   content: "\e004";
 }
-
 $gray-base: #000 !default;
 $gray-darker: lighten($gray-base, 13.5%) !default; // #222
 $gray-dark: lighten($gray-base, 20%) !default; // #333
 $gray: lighten($gray-base, 33.5%) !default; // #555
 $gray-light: lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter: lighten($gray-base, 93.5%) !default; // #eee
-
 $brand-primary: #0d9dff !default;
 $brand-success: #84ce3c !default;
 $brand-warning: #ffec39 !default;
 $brand-danger: #fc483f !default;
 $brand-info: #000072 !default;
 $brand-account: #86ceff !default;
-
 $facebook: #3a579d !default;
 $google: #dd4d3c !default;
 $twitter: #49c8f5 !default;
-
 $popup: #515151 !default;
 $DarkBrown: #292321;
 $Orange: #c30;
 $bread-crumb: #84ce3c;
-
 $body-bg: #fff !default;
 $text-color: $gray-base !default;
-
 $link-color: $gray-base !default;
 $link-hover-color: $gray-base !default;
 $link-hover-decoration: none !default;
-
 $font-family-sans-serif: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif: "Advent Pro", Georgia, "Times New Roman", Times, serif !default;
-
 $border-radius-base: 0 !default;
 $border-radius-large: 0 !default;
 $border-radius-small: 0 !default;
 $menu-height: 74px !default;
 $select-height: 34px !default;
-
-// $screen-xs-max: 480px !default;
-// $screen-sm-max: 768px !default;
-// $screen-md-max: 992px !default;
+$screen-xs-max: 480px !default;
+$screen-sm-max: 768px !default;
+$screen-md-max: 992px !default;
 $screen-lg-max: 1200px !default;
-
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-
 @mixin placeholder {
   $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
   @each $placeholder in $placeholders {
@@ -153,7 +140,6 @@ $screen-lg-max: 1200px !default;
 .btn-twitter {
   @include button-variant(white, $twitter, $twitter);
 }
-
 body {
   padding-top: $menu-height;
 }
@@ -171,7 +157,8 @@ img.doneLoading {
   opacity: 1;
   cursor: pointer;
 }
-a, .pointer {
+a,
+.pointer {
   cursor: pointer;
 }
 .form-control:focus {
@@ -188,7 +175,7 @@ a, .pointer {
 .dropdown-menu {
   border-color: #EBEBEB;
   > li > a {
-      padding: 10px !important;
+    padding: 10px !important;
   }
 }
 nav {
@@ -699,7 +686,6 @@ h4.bold,
     display: inline-block;
     position: relative;
     z-index: 1;
-
     &:after {
       content: "\f107";
       font-family: FontAwesome;
@@ -707,7 +693,7 @@ h4.bold,
       margin-left: -10px;
       z-index: -1;
       position: absolute;
-      right: 0px;
+      right: 0;
       top: 15px;
     }
     +.arrow {
@@ -724,7 +710,6 @@ h4.bold,
     padding: 15px;
     position: relative;
     cursor: pointer;
-
     option {
       color: black;
     }
@@ -745,7 +730,34 @@ h4.bold,
       max-width: 100%;
       max-height: 100%;
       @include transition(all 300ms ease);
-
+    }
+  }
+  .price {
+    font-size: 20px;
+  }
+  .product-name {
+    text-transform: capitalize;
+  }
+  .product-info {
+    margin-bottom: 25px;
+  }
+}
+/*Product View*/
+.product-list {
+  min-height: 450px;
+  padding: 10px 0 0;
+  .image-holder {
+    height: 300px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    &:hover img {
+      @include transform(scale(1.1));
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      @include transition(all 300ms ease);
       &.loading {
         position: absolute;
         left: 50%;
@@ -762,40 +774,6 @@ h4.bold,
   }
   .product-info {
     margin-bottom: 25px;
-  }
-}
-/*Product View*/
-.product-detail {
-  margin-top: 40px;
-  padding-bottom: 30px;
-  .image-sidebar {
-    width: auto;
-    position: absolute;
-    left: 10px;
-    top: 0;
-    .thumb-img {
-      width: 80px;
-      height: 80px;
-      text-align: center;
-      border: 1px solid transparent;
-      +.thumb-img {
-        margin-top: 10px;
-      }
-      img {
-        max-width: 100%;
-        max-height: 100%;
-      }
-    }
-  }
-  .full-img {
-    padding-left: 90px;
-    height: 400px;
-    overflow: hidden;
-    text-align: center;
-    img {
-      max-width: 100%;
-      max-height: 100%;
-    }
   }
 }
 .right-bar {
@@ -1226,7 +1204,6 @@ h4.bold,
   .nav-tabs {
     display: flex;
     > li {
-
       //      min-width: 100px;
       flex: 1;
       width: 1px;
@@ -1240,7 +1217,6 @@ h4.bold,
     }
   }
 }
-
 //mahesh scss start
 .mar0 {
   margin: 0 !important;
@@ -1344,10 +1320,8 @@ h4.bold,
 }
 .fynx-select {
   position: relative;
-
   &.black-select {
     width: 100px;
-
     select {
       color: black;
     }
@@ -1355,48 +1329,43 @@ h4.bold,
       border: 2px solid black;
     }
     &:after {
-      background-color: black
+      background-color: black;
     }
   }
-
   &.gray-select {
     .only-border {
       border: 1px solid #ccc;
     }
     &:after {
-      background-color: #ccc
+      background-color: #ccc;
     }
   }
   .selected-text {
     height: $select-height;
     line-height: $select-height;
-    padding: 0px 26px 0 10px;
+    padding: 0 26px 0 10px;
     overflow: hidden;
     cursor: pointer;
   }
-
   .options {
     height: 200px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     position: absolute;
     background: white;
     width: 100%;
-    top: 0px;
+    top: 0;
     overflow-y: scroll;
     z-index: 9;
-
     li {
       padding: 12px 10px;
       cursor: pointer;
       @include user-select(none);
       @include transition(background-color 0.3s linear);
-
       &:hover {
         background-color: $gray-lighter;
       }
     }
   }
-
   select {
     @include x-appearance(none);
     border: none;
@@ -1411,7 +1380,6 @@ h4.bold,
     height: $select-height;
     line-height: $select-height;
   }
-
   &:after {
     font: normal normal normal 14px/1 FontAwesome;
     content: "\f107";
@@ -1575,7 +1543,6 @@ h4.bold,
       color: #fff;
       padding: 5px 40px;
       cursor: pointer;
-
       &.yellow-btn {
         background-color: $brand-warning;
         color: $gray-darker;
@@ -1586,7 +1553,6 @@ h4.bold,
 .paddbtm {
   padding-bottom: 0 !important;
 }
-
 .account-name {
   p {
     color: #515151;
@@ -1783,7 +1749,6 @@ h4.bold,
 .p25 {
   padding: 25px 0;
 }
-
 //mahesh scss
 .p70 {
   padding-bottom: 70px;
@@ -1816,12 +1781,10 @@ h4.bold,
   bottom: 0;
   left: 15px;
   z-index: 99;
-
   .icon-inner {
     cursor: pointer;
     @include user-select(none);
     min-width: 65px;
-
     i {
       display: block;
     }
@@ -1847,89 +1810,83 @@ h4.bold,
   overflow: hidden;
 }
 .zoom-holder {
-    width: 430px;
-    margin: 0 auto;
-
-    img {
-      width: 100%;
-    }
-
-    .on-img {
-      position: absolute;
-      top: 50%;
-      width: 186px;
-      left: 50%;
-      font-weight: 700;
-      text-align: center;
-      font-size: 80px;
+  width: 430px;
+  margin: 0 auto;
+  img {
+    width: 100%;
+  }
+  .on-img {
+    position: absolute;
+    top: 50%;
+    width: 186px;
+    left: 50%;
+    font-weight: 700;
+    text-align: center;
+    font-size: 80px;
+    display: block;
+    -webkit-user-select: none;
+    user-select: none;
+    min-height: 308px;
+    overflow: hidden;
+    @include transform(translate(-50%, -50%));
+    @include user-select(none);
+    border: 1px solid transparent;
+    span {
       display: block;
-      -webkit-user-select: none;
-      user-select: none;
-      min-height: 308px;
-      overflow: hidden;
-      @include transform(translate(-50%, -50%));
-      @include user-select(none);
-      border: 1px solid transparent;
-
-      span {
-        display: block;
-        line-height: 1;
-        float:left;
-      }
+      line-height: 1;
+      float: left;
     }
+  }
 }
 .alert-postion {
-    position: fixed;
-    max-width: 500px;
-    left: 50%;
-    width: 100%;
-    top: 50%;
-    @include transform(translate(-50%, -50%));
-    z-index: 99;
-
-    .alert {
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-      border: none;
-      &.alert-success {
-        color: $gray-darker;
-        background-color: $brand-success;
-      }
-      &.alert-danger {
-        color: $gray-darker;
-        background-color: $brand-danger;
-      }
+  position: fixed;
+  max-width: 500px;
+  left: 50%;
+  width: 100%;
+  top: 50%;
+  @include transform(translate(-50%, -50%));
+  z-index: 99;
+  .alert {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    &.alert-success {
+      color: $gray-darker;
+      background-color: $brand-success;
     }
+    &.alert-danger {
+      color: $gray-darker;
+      background-color: $brand-danger;
+    }
+  }
 }
-
 .padding-few {
   padding: 6px 5px;
   display: inline-block;
   min-width: 120px;
 }
 .primary-shadow {
-    text-shadow: 5px 5px 0px $brand-primary;
+  text-shadow: 5px 5px 0 $brand-primary;
 }
 h4.strong.font-smart {
-    font-size: 20px;
-    margin-bottom: 20px;
-    margin-top: 30px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-top: 30px;
 }
 .transaction-view {
   padding-bottom: 40px;
-    .min-width {
-      max-width: 500px;
-      margin: 0 auto;
+  .min-width {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 87px;
+    .primary-shadow {
+      font-size: 99px;
     }
-    h1 {
-      font-size: 87px;
-      .primary-shadow {
-        font-size: 99px;
-      }
-    }
+  }
 }
-
 .fancybox-image {
-	opacity: 1;
+  opacity: 1;
 }
 .fancybox-skin {
   background-color: white;
@@ -1938,25 +1895,26 @@ h4.strong.font-smart {
   @include border-bottom-radius(0px);
   @include border-left-radius(0px);
 }
-.quantity-text{
+.quantity-text {
   font-size: 12px;
 }
-.create-nostock{
+.create-nostock {
   padding-top: 20px;
 }
 .no-transform {
   text-transform: none;
 }
 .bordered input[type="checkbox"] {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 .bold {
   font-weight: 600 !important;
 }
-
 // harsh
 .edit_content p span {
-  a { margin-left: 10px; }
+  a {
+    margin-left: 10px;
+  }
 }
 .rang-slider:before {
   position: absolute;
@@ -1975,17 +1933,27 @@ h4.strong.font-smart {
   margin-top: 20px;
 }
 .layer-buttons {
-  button + button { margin-left: 15px; }
+  button + button {
+    margin-left: 15px;
+  }
 }
-.color-show { margin-top: 10px; }
+.color-show {
+  margin-top: 10px;
+}
 .clor-show {
   .strok:before {
     left: 30px;
   }
 }
-.text-iline { margin: 20px 25px 0; }
-.ml-30 { margin-left: 30px !important; }
-.ml-15 { margin-left: 15px !important; }
+.text-iline {
+  margin: 20px 25px 0;
+}
+.ml-30 {
+  margin-left: 30px !important;
+}
+.ml-15 {
+  margin-left: 15px !important;
+}
 .bod-x {
   padding: 7px;
   background-color: white;
@@ -2008,9 +1976,9 @@ h4.strong.font-smart {
   }
 }
 .canvasitem.movetext.ng-scope.ng-isolate-scope {
-    width: 10000px;
+  width: 10000px;
 }
-.textspan{
+.textspan {
   float: left;
 }
 //previewdesign
@@ -2018,15 +1986,17 @@ h4.strong.font-smart {
   @include position(absolute, 10px 10px auto auto);
   background-color: $brand-danger;
   cursor: pointer;
-  span i { color: white; }
+  span i {
+    color: white;
+  }
 }
 span.badge.red {
-    background: red;
-    position: absolute;
-    top: 1px;
-    left: -20px;
-    padding: 2px 5px;
-    font-weight: 100;
+  background: red;
+  position: absolute;
+  top: 1px;
+  left: -20px;
+  padding: 2px 5px;
+  font-weight: 100;
 }
 .auto-dim {
   height: auto;
@@ -2038,25 +2008,25 @@ span.badge.red {
   position: relative;
 }
 .scroll-fixed {
-    position: fixed;
-    z-index: 9;
-    top: 70px;
+  position: fixed;
+  z-index: 9;
+  top: 70px;
 }
 .median:after {
-    content:"";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    border-left: 2px dotted #0d9dff;
-  }
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 2px dotted #0d9dff;
+}
 .mgin-auto {
   margin: 0 auto;
 }
 .paded-modal {
-    padding: 20px;
-    margin-top: 25vh;
+  padding: 20px;
+  margin-top: 25vh;
 }
 .no-margin {
   margin: 0;
@@ -2087,21 +2057,18 @@ span.badge.red {
     display: inline-block;
     cursor: pointer;
     @include transition(all 300ms ease);
-
     + li {
       margin-left: 5px;
     }
-
     &.active {
       outline-color: black;
     }
   }
 }
 .modal-backdrop.in {
-    opacity: 0.8;
-    filter: alpha(opacity=80);
+  opacity: 0.8;
+  filter:alpha(opacity=80);
 }
-
 .step {
   ul {
     display: block;
@@ -2114,12 +2081,12 @@ span.badge.red {
       p {
         @extend .margin0;
         border: 1px solid $bread-crumb;
-        padding: 4px 4px 0px 25px;
-    cursor: pointer;
-    height: 30px;
-    i{
-      font-size: 20px;
-    }
+        padding: 4px 4px 0 25px;
+        cursor: pointer;
+        height: 30px;
+        i {
+          font-size: 20px;
+        }
       }
       &:hover p,
       &.active p {
@@ -2194,7 +2161,7 @@ span.badge.red {
     }
   }
 }
-.prev{
+.prev {
   display: inline-block;
   text-align: center;
 }
