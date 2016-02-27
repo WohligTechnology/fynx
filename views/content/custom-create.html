@@ -20,6 +20,19 @@
 
 			<div class="col-md-5 some-height">
 				<div class="custom-img" fix-scroller>
+
+					<div class="vertical icon">
+						<div class="icon-inner text-center zoom-img">
+							<i class="flaticon flaticon-zoom"></i>
+							<p>Zoom</p>
+						</div>
+
+						<div class="icon-inner text-center reset-zoom">
+							<i class="flaticon flaticon-cross"></i>
+							<p class="margin-zero">Reset</p>
+						</div>
+					</div>
+
 					<div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
 						<div id="tango" ng-show="isfront" ng-click="deselectAll()">
 							<img class="img-responsive m-center" ng-src="{{custom.frontSrc}}">
@@ -52,26 +65,6 @@
 					</div>
 				</div>
 
-				<div class="vertical icon" fix-scroller>
-
-					<!-- <div class="icon-inner text-center reset-zoom" ng-click="isfront = !isfront;">
-						<i class="flaticon flaticon-t-shirt-o"></i>
-						<p ng-show="isfront">Back</p>
-						<p ng-show="!isfront">Front</p>
-					</div> -->
-
-					<div class="icon-inner text-center zoom-img">
-						<i class="flaticon flaticon-zoom"></i>
-						<p>Zoom</p>
-					</div>
-
-					<div class="icon-inner text-center reset-zoom">
-						<i class="flaticon flaticon-cross"></i>
-						<p class="margin-zero">Reset</p>
-					</div>
-
-				</div>
-
 				<!-- <div class="social-share text-center">
 					<h5 class="head"> Share your Creation On:</h5>
 					<div class="button-set">
@@ -86,6 +79,7 @@
 						</button>
 					</div>
 				</div> -->
+
 			</div>
 
 			<div class="col-md-7">
