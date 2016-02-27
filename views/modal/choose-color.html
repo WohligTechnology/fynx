@@ -8,7 +8,7 @@
   </div>
   <div class="color-bar" ng-if="color!=''">
     <ul>
-      <li style="background-color: {{coloro.name}}" ng-repeat="coloro in color" ng-click="clickColor(coloro);" ng-class="{active : coloro.name == selectedColor}"> </li>
+      <li class="{{coloro.name}}" style="background-color: {{coloro.name}}" ng-repeat="coloro in color" ng-click="clickColor(coloro);" ng-class="{active : coloro.name == selectedColor}"> </li>
     </ul>
   </div>
 

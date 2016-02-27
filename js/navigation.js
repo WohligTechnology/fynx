@@ -1,7 +1,7 @@
 // var mainurl = "http://wohlig.co.in/newfynx/";
 // var mainurl = "http://localhost/newfynx/";
  var mainurl = "http://www.myfynx.com/newfynx/";
-// var mainurl = "http://192.168.0.121/newfynx/";
+// var mainurl = "http://192.168.0.123/newfynx/";
 // mainurlpaymentgateway is url for frontend
 var websiteurl = "http://www.myfynx.com/testing/";
 var mainurlpaymentgateway = "http://www.myfynx.com/newfynx/";
@@ -642,7 +642,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		addToCartCustom: function (filter, callback) {
-			return $http.get(adminurl + 'addToCart?product=' + filter.id + '&quantity=' + filter.quantity + '&design=&json=' + JSON.stringify(filter), {}, {
+			return $http.get(adminurl + 'addToCart?product=' + filter.id + '&quantity=' + filter.quantity + '&design=&json=' + JSON.stringify(filter) + '&backprice=' + filter.backprice, {}, {
 				withCredentials: true
 			}).success(callback);
 		},

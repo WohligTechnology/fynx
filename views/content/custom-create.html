@@ -704,7 +704,8 @@
 								<div class="tab-title">Back</div>
 							</uib-tab-heading>
 							<div class="add-input edit_content" ng-hide="isBackPay">
-								<h3>Back  design will add 200 Rs. per Item</h3>
+								<h3 ng-if="price!='' || price!=0">Back  design will add {{price}} Rs. per Item</h3>
+								<h3 ng-if="price=='' || price==0">No Extra charges.</h3>
 								<button class="btn btn-primary con-btn" ng-click="isBackPay=true">OK</button>
 							</div>
 

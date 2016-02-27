@@ -594,6 +594,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.toCreatePage = function(id) {
     NavigationService.getImageForCustomize(id, '', function(data) {
       $scope.typeid = id;
+      _.each(data.color, function(n, key) {
+        var cls = n.name.split(' ');
+        n.name = cls[0]+ '-' + cls[1];
+      })
       $scope.color = data.color;
       $uibModal.open({
         animation: true,
@@ -1906,6 +1910,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     NavigationService.getImageForCustomize($scope.filter.type, $scope.filter.color, function(data) {
       $scope.outofstock = false;
       cfpLoadingBar.complete();
+      $scope.price = data.backprice.price;
       $scope.color = data.color;
       _.each($scope.color, function(n) {
         n.class = "";
@@ -3280,6 +3285,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     })
     if (val === 1) {
+      if ($scope.filter.custom[2].text != '' || $scope.filter.custom[3].text != '' || $scope.filter.image.image1 != '') {
+        console.log("in back");
+        $scope.filter.backprice = $scope.price;
+      } else {
+        $scope.filter.backprice = 0;
+      }
 
       NavigationService.addToCartCustom($scope.filter, function(data) {
         if (data == "true") {
