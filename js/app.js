@@ -187,30 +187,30 @@ firstapp.directive('imgZoomer', function() {
   };
 });
 firstapp.directive('onlyDigits', function() {
-    return {
-        require: 'ngModel',
-        restrict: 'A',
-        link: function(scope, element, attr, ctrl) {
-            function inputValue(val) {
-                if (val) {
-                    if (attr.type == "tel") {
-                        var digits = val.replace(/[^0-9\+\\]/g, '');
-                    } else {
-                        var digits = val.replace(/[^0-9\-\\]/g, '');
-                    }
+  return {
+    require: 'ngModel',
+    restrict: 'A',
+    link: function(scope, element, attr, ctrl) {
+      function inputValue(val) {
+        if (val) {
+          if (attr.type == "tel") {
+            var digits = val.replace(/[^0-9\+\\]/g, '');
+          } else {
+            var digits = val.replace(/[^0-9\-\\]/g, '');
+          }
 
 
-                    if (digits !== val) {
-                        ctrl.$setViewValue(digits);
-                        ctrl.$render();
-                    }
-                    return parseInt(digits, 10);
-                }
-                return undefined;
-            }
-            ctrl.$parsers.push(inputValue);
+          if (digits !== val) {
+            ctrl.$setViewValue(digits);
+            ctrl.$render();
+          }
+          return parseInt(digits, 10);
         }
-    };
+        return undefined;
+      }
+      ctrl.$parsers.push(inputValue);
+    }
+  };
 });
 firstapp.directive('onlyDiogits', function() {
   return {
@@ -323,18 +323,22 @@ firstapp.directive('fixScroller', function($document) {
       var $element = $(element);
       var divScroll = $(element).offset().top;
       var windowWidth = $(window).width();
+      var isMobile = false;
 
-      if(windowWidth > 480) {
-      $(window).scroll(function() {
-        var windowScroll = $(window).scrollTop();
-        if (windowScroll >= divScroll-40) {
-          $(element).addClass("scroll-fixed");
-        }
-        else {
-          $(element).removeClass("scroll-fixed");
-        }
-      });
-    }
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        isMobile = true;
+      }
+
+      if (isMobile === false) {
+        $(window).scroll(function() {
+          var windowScroll = $(window).scrollTop();
+          if (windowScroll >= divScroll - 40) {
+            $(element).addClass("scroll-fixed");
+          } else {
+            $(element).removeClass("scroll-fixed");
+          }
+        });
+      }
 
     }
   };
@@ -346,20 +350,21 @@ firstapp.directive('ngDraggable', function($document) {
       dragOptions: '=ngDraggable'
     },
     link: function(scope, elem, attr) {
-      var startX, startY, x = 0, y = 0,
-          start, stop, drag, container;
+      var startX, startY, x = 0,
+        y = 0,
+        start, stop, drag, container;
 
-      var width  = elem[0].offsetWidth,
-          height = elem[0].offsetHeight;
+      var width = elem[0].offsetWidth,
+        height = elem[0].offsetHeight;
 
       // Obtain drag options
       if (scope.dragOptions) {
-        start  = scope.dragOptions.start;
-        drag   = scope.dragOptions.drag;
-        stop   = scope.dragOptions.stop;
+        start = scope.dragOptions.start;
+        drag = scope.dragOptions.drag;
+        stop = scope.dragOptions.stop;
         var id = scope.dragOptions.container;
         if (id) {
-            container = document.getElementById(id).getBoundingClientRect();
+          container = document.getElementById(id).getBoundingClientRect();
         }
       }
 
@@ -380,7 +385,7 @@ firstapp.directive('ngDraggable', function($document) {
         y = e.clientY - startY;
         x = e.clientX - startX;
         setPosition();
-        if (drag){
+        if (drag) {
           console.log("drag");
 
           drag(e);
@@ -416,7 +421,7 @@ firstapp.directive('ngDraggable', function($document) {
 
         elem.css({
           top: y + 'px',
-          left:  x + 'px'
+          left: x + 'px'
         });
       }
     }
