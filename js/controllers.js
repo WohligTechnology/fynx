@@ -438,9 +438,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           _.each(data.color, function(n, key) {
             var cls = n.name.split(' ');
             console.log(cls);
-            if(cls[1]){
-              n.name = cls[0]+ '-' + cls[1];
-            }else {
+            if (cls[1]) {
+              n.name = cls[0] + '-' + cls[1];
+            } else {
               n.name = cls[0];
             }
 
@@ -586,6 +586,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
 })
+.controller('CareersCtrl', function($scope, TemplateService, NavigationService, $state) {
+
+  $scope.template = TemplateService.changecontent("careers");
+  $scope.menutitle = NavigationService.makeactive("Careers");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+})
 
 
 .controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService, $uibModal, $state, $stateParams) {
@@ -605,9 +613,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       _.each(data.color, function(n, key) {
         var cls = n.name.split(' ');
         console.log(cls[1]);
-        if(cls[1]){
-          n.name = cls[0]+ '-' + cls[1];
-        }else {
+        if (cls[1]) {
+          n.name = cls[0] + '-' + cls[1];
+        } else {
           n.name = cls[0];
         }
 
@@ -1569,12 +1577,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.image = {};
   $scope.filter.image = myImage;
   $rootScope.$on('$stateChangeStart',
-      function(event, toState, toParams, fromState, fromParams) {
-        myImage = {
-          image: "",
-          image1: ""
-        };
-      });
+    function(event, toState, toParams, fromState, fromParams) {
+      myImage = {
+        image: "",
+        image1: ""
+      };
+    });
   $scope.filter.distance = 1;
   $scope.filter.angle = 1;
   $scope.type = $stateParams.id;
@@ -1597,8 +1605,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   cfpLoadingBar.start();
   // $scope.headertext =
   // console.log($stateParams);
-  console.log(_.find($scope.customids,['id',$stateParams.id]));
-  _.each($scope.customids, function(n){
+  console.log(_.find($scope.customids, ['id', $stateParams.id]));
+  _.each($scope.customids, function(n) {
     if (n.id == $stateParams.id) {
       $scope.headertext = n.name;
     }
@@ -1937,9 +1945,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.color = data.color;
       _.each($scope.color, function(n) {
         var cls = n.name.split(' ');
-        if(cls[1]){
-          n.name = cls[0]+ '-' + cls[1];
-        }else {
+        if (cls[1]) {
+          n.name = cls[0] + '-' + cls[1];
+        } else {
           n.name = cls[0];
         }
       });
@@ -2138,15 +2146,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         radius: newValue
       });
       $('#example1').arctext('destroy');
-      // $('#example1').html($(this).val().replace(newValue));
+    }else {
+      $scope.isArcChange = false;
     }
-
-    // $scope.changeArc();
-    // $('#example1').arctext({
-    //   radius: 1100
-    // });
-
   });
+
+  $scope.$watch('filter.custom[1].text', function(newValue, oldValue) {
+    $scope.filter.custom[1].text = newValue;
+    if ($scope.isArcChange == true) {
+      $('#example2').show().arctext({
+        radius: newValue
+      });
+      $('#example2').arctext('destroy');
+    }else {
+      $scope.isArcChange = false;
+    }
+  });
+
+  $scope.$watch('filter.custom[2].text', function(newValue, oldValue) {
+    $scope.filter.custom[2].text = newValue;
+    if ($scope.isArcChange == true) {
+      $('#example3').show().arctext({
+        radius: newValue
+      });
+      $('#example3').arctext('destroy');
+    }else {
+      $scope.isArcChange = false;
+    }
+  });
+
   $scope.changeArcPreview = function() {
     _.each($scope.filter1.custom, function(n, key) {
 
@@ -2201,7 +2229,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   }
   $scope.changeArc = function(value, num) {
-      console.log(value);
       var newValue = value;
       var pos;
       if (newValue < 500)
@@ -2257,8 +2284,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[0].css, {
       "font-size": newValue
     });
-    console.log($scope.filter.custom[0].arc);
-    $scope.changeArc($scope.filter.custom[0].arc, 1);
+    if ($scope.filter.custom[0].arc) {
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design[1].value, 1);
+    }
+
   });
   $scope.$watch('design.design[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -2305,6 +2335,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[1].css, {
       "font-size": newValue
     });
+
+    if ($scope.filter.custom[1].arc) {
+    $scope.isArcChange = true;
+    $scope.changeArc($scope.design.design1[1].value, 2);
+  }
   });
   $scope.$watch('design.design1[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -2350,6 +2385,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[2].css, {
       "font-size": newValue
     });
+        if ($scope.filter.custom[2].arc) {
+    $scope.isArcChange = true;
+    $scope.changeArc($scope.design.design2[1].value, 3);
+  }
   });
   $scope.$watch('design.design2[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -2395,6 +2434,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[3].css, {
       "font-size": newValue
     });
+        if ($scope.filter.custom[3].arc) {
+    $scope.isArcChange = true;
+    $scope.changeArc($scope.design.design3[1].value, 4);
+  }
   });
   $scope.$watch('design.design3[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -2978,7 +3021,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Stetch',
+    name: 'Strech',
     value: 40,
     from: 20,
     to: 200,
@@ -3010,7 +3053,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Stetch',
+    name: 'Strech',
     value: 40,
     from: 20,
     to: 200,
@@ -3042,7 +3085,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Stetch',
+    name: 'Strech',
     value: 40,
     from: 20,
     to: 200,
@@ -3074,7 +3117,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Stetch',
+    name: 'Strech',
     value: 40,
     from: 20,
     to: 200,

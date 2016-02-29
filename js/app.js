@@ -127,6 +127,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, cfpL
     templateUrl: "views/template.html",
     controller: 'ContactCtrl'
   })
+  .state('careers', {
+    url: "/careers",
+    templateUrl: "views/template.html",
+    controller: 'CareersCtrl'
+  })
 
   $urlRouterProvider.otherwise("/home");
 
