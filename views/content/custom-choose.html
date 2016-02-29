@@ -25,24 +25,24 @@
 <div class="row-flex" ng-if="gender=='women'">
   <div class="col-flex">
     <img alt="Tshits" class="img-responsive full-image" src="img/tees.jpg">
-    <button class="btn btn-danger btn-middle-big" ng-click="toCreatePage(4)">Tees</button>
+    <button class="btn btn-danger btn-middle-big" ng-click="toCreatePage(customids[0].id)">T-Shirts</button>
   </div>
   <div class="col-flex">
     <img alt="Hoodies" class="img-responsive full-image" src="img/croptop.jpg">
-    <button class="btn btn-primary btn-middle-big" ng-click="toCreatePage(5)">Crop-tops</button>
+    <button class="btn btn-primary btn-middle-big" ng-click="toCreatePage(customids[1].id)">Crop-tops</button>
   </div>
 </div>
 
 <div class="row-flex" ng-if="gender=='women'">
   <div class="col-flex">
     <img alt="Tanks" class="img-responsive full-image" src="img/tanks.jpg">
-    <button class="btn btn-warning btn-middle-big" ng-click="toCreatePage(3)">Tanks</button>
+    <button class="btn btn-warning btn-middle-big" ng-click="toCreatePage(customids[2].id)">Tanks</button>
   </div>
 </div>
 
 <div class="row-flex" ng-if="gender=='men'">
   <div class="col-flex">
     <img alt="Tanks" class="img-responsive full-image" src="img/beige-f.jpg">
-    <button class="btn btn-warning btn-middle-big" ng-click="toCreatePage(2)">T-shirts</button>
+    <button class="btn btn-warning btn-middle-big" ng-click="toCreatePage(customids[3].id)">T-shirts</button>
   </div>
 </div>

@@ -596,6 +596,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
   $scope.gender = $stateParams.cat;
+  $scope.customids = customids;
+  console.log($scope.customids);
 
   $scope.toCreatePage = function(id) {
     NavigationService.getImageForCustomize(id, '', function(data) {
@@ -1591,7 +1593,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.design = {};
   $scope.alerts = [];
   $scope.clr = 'red';
+  $scope.customids = customids;
   cfpLoadingBar.start();
+  // $scope.headertext =
+  // console.log($stateParams);
+  console.log(_.find($scope.customids,['id',$stateParams.id]));
+  _.each($scope.customids, function(n){
+    if (n.id == $stateParams.id) {
+      $scope.headertext = n.name;
+    }
+  });
 
   myfunc = $scope;
 
@@ -1655,7 +1666,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.showDelete = function(cust) {
-    console.log("trudkfjhaldjskfhlkj");
     _.each($scope.filter.custom, function(n) {
       n.state = false;
     });
@@ -2247,7 +2257,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[0].css, {
       "font-size": newValue
     });
-    // $scope.changeArc($scope.filter.custom[0].arc, 1);
+    console.log($scope.filter.custom[0].arc);
+    $scope.changeArc($scope.filter.custom[0].arc, 1);
   });
   $scope.$watch('design.design[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {

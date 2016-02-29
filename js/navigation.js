@@ -504,7 +504,19 @@ var countries = [{
         "value": "Zimbabwe"
     }
 ];
-
+var customids = [{
+  "name":"T-shirts",
+  "id":4
+},{
+  "name":"Crop-Tops",
+  "id":5
+},{
+  "name":"Tanks",
+  "id":3
+},{
+  "name":"T-shirts",
+  "id":2
+}]
 var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function ($http) {
