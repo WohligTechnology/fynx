@@ -2211,7 +2211,8 @@ $left-sider: 450px !default;
 @media (max-width:$screen-xs-max) {
   .tee-col {
     position: relative;
-    overflow-x: auto;
+    overflow-x: scroll;
+    width: auto;
   }
   .dee-col {
     padding-left: 0;
