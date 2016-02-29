@@ -1279,10 +1279,9 @@
 								<div class="rate m-45">
 									<div class="row">
 										<div class="col-md-3 col-xs-6 select-size">
-
+												<!-- <label for="">size:</label> -->
 											<div class="fynx-select">
-												<select ng-model="filter.size" ng-change="change">
-													<options>Size</options>
+												<select ng-model="filter.size">
 													<option ng-repeat="sz in size">{{sz.name}}</option>
 												</select>
 												<span class="only-border"></span>

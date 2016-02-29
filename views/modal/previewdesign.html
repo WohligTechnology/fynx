@@ -5,15 +5,15 @@
 
 
       <div class="text-center" ng-click="changeFrontBack()">
-        <h3 class="font-smart" ng-show="!isfront1">Front</h3>
-        <h3 class="font-smart" ng-show="isfront1">Back</h3>
+        <h3 class="font-smart" ng-show="!isfront1">View Front</h3>
+        <h3 class="font-smart" ng-show="isfront1">View Back</h3>
       </div>
 
 
   <div class="row">
     <div class="col-md-12">
       <div id="printdiv" class="custom-img" fix-scroller>
-        <div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative" ng-if="showpreview">
+        <div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
           <div id="tango" ng-show="isfront1" ng-click="deselectAll()">
             <img class="img-responsive m-center" ng-src="{{custom1.frontSrc}}">
             <div class="on-img shirtcanvas" style="top:280px;width:45%">

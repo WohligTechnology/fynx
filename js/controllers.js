@@ -3293,10 +3293,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       scope: $scope
     })
     $timeout(function() {
+
+  // $scope.isArcChange = true;
       $scope.changeArcPreview();
-      // $scope.addToCart (0);
       cfpLoadingBar.complete();
-    }, 300);
+    }, 100);
 
   }
 
