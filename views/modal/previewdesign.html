@@ -12,8 +12,8 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div id="printdiv" class="custom-img" fix-scroller>{{filter1.custom[0].arc}}
-        <div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative">
+      <div id="printdiv" class="custom-img" fix-scroller>
+        <div img-zoomer zoom="{{basezoom}}" class="zoom-holder relative" ng-if="showpreview">
           <div id="tango" ng-show="isfront1" ng-click="deselectAll()">
             <img class="img-responsive m-center" ng-src="{{custom1.frontSrc}}">
             <div class="on-img shirtcanvas" style="top:280px;width:45%">

@@ -3264,7 +3264,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     console.log($scope.isfront1);
     $timeout(function() {
       $scope.changeArcPreview();
-    }, 500);
+    }, 100);
     if ($scope.isfront1) {
       $scope.isfront1 = false;
     } else {
@@ -3296,7 +3296,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.changeArcPreview();
       // $scope.addToCart (0);
       cfpLoadingBar.complete();
-    }, 1000);
+    }, 300);
 
   }
 
