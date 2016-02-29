@@ -2193,6 +2193,31 @@ span.badge.red {
     }
   }
 }
+
+$left-sider: 450px !default;
+.custom-row {
+    position: relative;
+}
+.tee-col {
+    width: $left-sider;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.dee-col {
+    padding-left: $left-sider;
+    min-height: 560px;
+}
+@media (max-width:$screen-xs-max) {
+  .tee-col {
+    position: relative;
+    overflow-x: auto;
+  }
+  .dee-col {
+    padding-left: 0;
+    min-height: auto;
+  }
+}
 @import "main/mobile";
 @import "fancy-override";
 @import "custom-colors";

@@ -322,7 +322,9 @@ firstapp.directive('fixScroller', function($document) {
     link: function(scope, element, attr) {
       var $element = $(element);
       var divScroll = $(element).offset().top;
+      var windowWidth = $(window).width();
 
+      if(windowWidth > 480) {
       $(window).scroll(function() {
         var windowScroll = $(window).scrollTop();
         if (windowScroll >= divScroll-40) {
@@ -332,6 +334,7 @@ firstapp.directive('fixScroller', function($document) {
           $(element).removeClass("scroll-fixed");
         }
       });
+    }
 
     }
   };
