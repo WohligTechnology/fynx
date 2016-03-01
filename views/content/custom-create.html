@@ -1281,14 +1281,12 @@
 										<div class="col-md-3 col-xs-6 select-size">
 												<!-- <label for="">size:</label> -->
 											<div class="fynx-select">
-												<select ng-model="filter.size">
-													<option ng-repeat="sz in size">{{sz.name}}</option>
+												<select ng-model="filter.size" ng-options="sz as sz.name for sz in size" ng-change="changeSize()">
 												</select>
 												<span class="only-border"></span>
 											</div>
 										</div>
 										<div class="col-md-6 col-xs-6 ">
-
 											<form class="form-inline" role="form">
 												<div class="form-group">
 													<label for="">QUANTITY:</label>

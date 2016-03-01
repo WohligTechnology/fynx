@@ -1244,61 +1244,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.checkout.shippingcountry = country;
   }
 
-  $scope.shippingchange = function(data, num) {
-    switch (num) {
-      case 1:
-        {
-          $scope.predetail.shippingline1 = data;
-        }
-        break;
-      case 2:
-        {
-          $scope.predetail.shippingline2 = data;
-        }
-        break;
-      case 3:
-        {
-          $scope.predetail.shippingline3 = data;
-        }
-        break;
-      case 4:
-        {
-          $scope.predetail.shippingcity = data;
-        }
-        break;
-      case 5:
-        {
-          $scope.predetail.shippingpincode = data;
-        }
-        break;
-      case 6:
-        {
-          $scope.predetail.shippingstate = data;
-        }
-        break;
-      case 7:
-        {
-          $scope.predetail.shippingcountry = data;
-        }
-        break;
-      default:
-        {}
-
-    }
-  }
-
-  $scope.sameAsBilling = function(sameasbilling) {
-
-    if (sameasbilling == true) {
-      $scope.assign($scope.checkout.billingline1, $scope.checkout.billingline2, $scope.checkout.billingline3, $scope.checkout.billingcity, $scope.checkout.billingpincode, $scope.checkout.billingstate, $scope.checkout.billingcountry);
-
-    } else {
-      $scope.assign($scope.predetail.shippingline1, $scope.predetail.shippingline2, $scope.predetail.shippingline3, $scope.predetail.shippingcity, $scope.predetail.shippingpincode, $scope.predetail.shippingstate, $scope.predetail.shippingcountry);
-    }
-  }
-
-
-
   $scope.checkoutLogin = function() {
     console.log($scope.login);
 
@@ -1936,6 +1881,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
+  $scope.changeSize = function(){
+    if($scope.size[0].name=='size'){
+    $scope.size.splice(0,1);
+  }
+  }
+
   $scope.loadProduct = function() {
     NavigationService.getImageForCustomize($scope.filter.type, $scope.filter.color, function(data) {
       $scope.outofstock = false;
@@ -1959,6 +1910,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.filter.id = $scope.images.id;
       }
       $scope.size = data.size;
+      $scope.size.unshift({"id": " ", "status": "0", "name": "size"});
+      $scope.filter.size = $scope.size[0];
+      console.log($scope.size);
       if ($scope.size.length > 1) {
         $scope.sizelength = $scope.size[$scope.size.length - 1];
       }

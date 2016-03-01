@@ -654,7 +654,8 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		addToCartCustom: function (filter, callback) {
-			return $http.get(adminurl + 'addToCart?product=' + filter.id + '&quantity=' + filter.quantity + '&design=&json=' + JSON.stringify(filter) + '&backprice=' + filter.backprice, {}, {
+      console.log(filter);
+			return $http.get(adminurl + 'addToCart?product=' + filter.id + '&quantity=' + filter.quantity + '&design=&json=' + JSON.stringify(filter) + '&backprice=' + filter.backprice + '&size=' + filter.size, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
