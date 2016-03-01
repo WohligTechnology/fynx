@@ -649,14 +649,31 @@ var navigationservice = angular.module('navigationservice', [])
     			}).success(callback);
     		},
 		addToCart: function (filter, callback) {
-			return $http.get(adminurl + 'addToCart?product=' + filter.product + '&quantity=' + filter.quantity + '&design=' +filter.design+'&json=', {}, {
-				withCredentials: true
+      $http({
+				url: adminurl + 'addToCart',
+				method: 'POST',
+				withCredentials: true,
+				data: {
+          "product":filter.id,
+					"quantity": filter.quantity,
+					"design": filter.design,
+          "json": ''
+				}
 			}).success(callback);
 		},
 		addToCartCustom: function (filter, callback) {
-      console.log(filter);
-			return $http.get(adminurl + 'addToCart?product=' + filter.id + '&quantity=' + filter.quantity + '&design=&json=' + JSON.stringify(filter) + '&backprice=' + filter.backprice + '&size=' + filter.size.id, {}, {
-				withCredentials: true
+      $http({
+				url: adminurl + 'addToCart',
+				method: 'POST',
+				withCredentials: true,
+				data: {
+          "product":filter.id,
+					"quantity": filter.quantity,
+					"design": '',
+          "json": JSON.stringify(filter),
+          "backprice": filter.backprice,
+          "size": filter.size.id
+				}
 			}).success(callback);
 		},
 		deletecart: function (id, design, callback) {
@@ -675,6 +692,7 @@ var navigationservice = angular.module('navigationservice', [])
 				method: 'POST',
 				withCredentials: true,
 				data: {
+          "user":$.jStorage.get("user").id,
 					"product": product,
 					"design": design
 				}

@@ -33,15 +33,15 @@
 					<div ng-show="profile.nameemailedit=='save'">
 						<div class="form-group">
 							<label>Name</label>
-							<input class="form-control" ng-model="updateuser.user.name" type="text">
+							<input class="form-control" ng-model="updateuser.user.name" type="text" placeholder="name">
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input class="form-control" ng-model="updateuser.user.email" type="email">
+							<input class="form-control" ng-model="updateuser.user.email" type="email" placeholder="email">
 						</div>
 						<div class="form-group">
 							<label>Phone</label>
-							<input class="form-control" ng-model="updateuser.user.phone" type="tel" maxlength="15" only-digits>
+							<input class="form-control" ng-model="updateuser.user.phone" type="tel" maxlength="15" only-digits placeholder="phone number">
 						</div>
 					</div>
 				</form>
@@ -52,15 +52,15 @@
 					<div ng-if="profile.changepasswordedit=='save'">
 						<div class="form-group">
 							<label>Old Password</label>
-							<input class="form-control" ng-model="password.oldpassword" required type="password">
+							<input class="form-control" ng-model="password.oldpassword" required type="password" placeholder="old password">
 						</div>
 						<div class="form-group">
 							<label>New Password</label>
-							<input class="form-control" ng-model="password.newpassword" required type="password">
+							<input class="form-control" ng-model="password.newpassword" required type="password" placeholder="new password">
 						</div>
 						<div class="form-group">
 							<label>Re-enter Password</label>
-							<input class="form-control" ng-model="password.confirmpassword" required type="password">
+							<input class="form-control" ng-model="password.confirmpassword" required type="password" placeholder="confirm password">
 						</div>
 					</div>
 				</form>
@@ -82,28 +82,28 @@
 					<div ng-if="profile.billingaddressedit=='save'">
 						<div class="form-group">
 							<label>Line1*</label>
-							<input class="form-control" ng-model="updateuser.user.billingline1" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline1" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="flat number, building number">
 						</div>
 						<div class="form-group">
 							<label>Line2</label>
-							<input class="form-control" ng-model="updateuser.user.billingline2" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline2" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="street address">
 						</div>
 						<div class="form-group">
 							<label>Line3</label>
-							<input class="form-control" ng-model="updateuser.user.billingline3" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
+							<input class="form-control" ng-model="updateuser.user.billingline3" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="nearest address">
 						</div>
 
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>City*</label>
-									<input class="form-control" ng-model="updateuser.user.billingcity" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingcity" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="city">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pincode*</label>
-									<input class="form-control" ng-model="updateuser.user.billingpincode" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" maxlength="6" only-digits>
+									<input class="form-control" ng-model="updateuser.user.billingpincode" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" maxlength="6" only-digits placeholder="pincode/zipcode">
 								</div>
 							</div>
 						</div>
@@ -112,7 +112,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>State*</label>
-									<input class="form-control" ng-model="updateuser.user.billingstate" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text">
+									<input class="form-control" ng-model="updateuser.user.billingstate" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="state">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -120,9 +120,7 @@
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
 										<select ng-model="updateuser.user.billingcountry" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)">
-											<option value="IND">India</option>
-											<option value="JPN">Japan</option>
-											<option value="ITA">Italy</option>
+											<option value="{{country.name}}" ng-repeat="country in countries">{{country.name}}</option>
 										</select>
 										<span class="only-border"></span>
 									</div>
@@ -149,28 +147,28 @@
 						</div>
 						<div class="form-group">
 							<label>Line1*</label>
-							<input class="form-control" ng-model="updateuser.user.shippingline1" type="text">
+							<input class="form-control" ng-model="updateuser.user.shippingline1" type="text" placeholder="flat number, building number">
 						</div>
 						<div class="form-group">
 							<label>Line2</label>
-							<input class="form-control" ng-model="updateuser.user.shippingline2" type="text">
+							<input class="form-control" ng-model="updateuser.user.shippingline2" type="text" placeholder="street address">
 						</div>
 						<div class="form-group">
 							<label>Line3</label>
-							<input class="form-control" ng-model="updateuser.user.shippingline3" type="text">
+							<input class="form-control" ng-model="updateuser.user.shippingline3" type="text" placeholder="nearest landmark">
 						</div>
 
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>City*</label>
-									<input class="form-control" ng-model="updateuser.user.shippingcity" type="text">
+									<input class="form-control" ng-model="updateuser.user.shippingcity" type="text" placeholder="city">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pincode*</label>
-									<input class="form-control" ng-model="updateuser.user.shippingpincode" type="text" maxlength="6" only-digits>
+									<input class="form-control" ng-model="updateuser.user.shippingpincode" type="text" maxlength="6" only-digits placeholder="pincode/zipcode">
 								</div>
 							</div>
 						</div>
@@ -179,7 +177,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>State*</label>
-									<input class="form-control" ng-model="updateuser.user.shippingstate" type="text">
+									<input class="form-control" ng-model="updateuser.user.shippingstate" type="text" placeholder="state">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -187,9 +185,7 @@
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
 										<select ng-model="updateuser.user.shippingcountry">
-											<option value="IND">India</option>
-											<option value="JPN">Japan</option>
-											<option value="ITA">Italy</option>
+											<option value="{{country.name}}" ng-repeat="country in countries">{{country.name}}</option>
 										</select>
 										<span class="only-border"></span>
 									</div>

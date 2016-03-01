@@ -100,7 +100,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('FAQCtrl', function($scope, TemplateService, NavigationService) {
 
   $scope.template = TemplateService.changecontent("faq");
-  $scope.menutitle = NavigationService.makeactive("FAQ");
+  $scope.menutitle = NavigationService.makeactive("FAQS");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
@@ -350,7 +350,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.each($scope.product.color, function(n) {
       n.selected = "";
     });
-    color.selected = "selected";
+    color.selected = "size-selected";
     $scope.filter.color = color.id;
     if ($scope.filter.size && $scope.filter.size != '' && $scope.filter.color && $scope.filter.color != '') {
       $scope.loadProduct($scope.filter);
@@ -371,14 +371,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
   $scope.showdiv = false;
   $scope.loadProduct = function(filter) {
-    console.log("in size click");
     $scope.outofstock = false;
     $scope.showdiv = false;
     filter.design = $stateParams.design;
     NavigationService.getProductDetails(filter, function(data, status) {
       cfpLoadingBar.complete();
-
       if (data.product != '') {
+        $scope.filter.size = data.product.size;
         data.product.image = data.productdesignimage;
         if (data.product.quantity === "0") {
           $scope.outofstock = true;
@@ -404,39 +403,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
               }
               if (m.id == data.product.size) {
-                $scope.filter.size = n.id;
+                // $scope.filter.size = n.id;
                 m.style = "size-selected";
               }
             });
-            //					if (key1 == data.sportname.length - 1) {
-            //						$scope.checkmenu = true;
-            //						demo = 1;
-            //						//                    $scope.loadStudents();
-            //					}
-
-
           });
 
-
-          //	set size canceled
-          //				_.each(data1, function (n, key) {
-          //						if (data.size && data.size != '') {
-          //							_.each(data.size, function (m, key1) {
-          //								if (n.id == m.id) {
-          //									n.status = "";
-          //								} else {
-          //									n.status = "canceled";
-          //								}
-          //								if(n.id==data.product.size){
-          //									$scope.filter.size = n.id;
-          //									n.style = "color:#FC483F";
-          //								}
-          //							})
-          //						} else {
-          //							n.status = "canceled";
-          //						}
-          //					})
-          //	set color selected
           _.each(data.color, function(n, key) {
             var cls = n.name.split(' ');
             console.log(cls);
@@ -707,6 +679,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.countries = countries;
   $scope.updateuser = {};
   $scope.updateuser.user = {};
+  $scope.countries = countries;
 
   if (!NavigationService.getUser()) {
     $state.go("home");
@@ -1056,6 +1029,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   if (NavigationService.getUser()) {
     NavigationService.getUserDetails(function(data) {
       $scope.checkout = data;
+      $scope.checkout.billingcountry = "Please Select";
+      $scope.checkout.shippingcountry = "Please Select";
     });
   }
 
