@@ -303,7 +303,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal, cfpLoadingBar) {
+.controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal, cfpLoadingBar, $timeout) {
 
   $scope.template = TemplateService.changecontent("product-view");
   $scope.menutitle = NavigationService.makeactive("Men");
@@ -369,23 +369,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     }
   }
+  $scope.showdiv = false;
   $scope.loadProduct = function(filter) {
+    console.log("in size click");
     $scope.outofstock = false;
+    $scope.showdiv = false;
     filter.design = $stateParams.design;
     NavigationService.getProductDetails(filter, function(data, status) {
       cfpLoadingBar.complete();
+
       if (data.product != '') {
         data.product.image = data.productdesignimage;
-        console.log(data.product.image);
         if (data.product.quantity === "0") {
           $scope.outofstock = true;
+        }else {
+          $scope.outofstock = false;
         }
-        // _.each(data.product, function(n, key) {
-        //   if (key.split('image')[1]) {
-        //     console.log(n);
-        //     data.product.image.push(n);
-        //   }
-        // })
+        $timeout(function(){
+          $scope.showdiv = true;
+        },100);
         $scope.viewImage = data.product.image1;
         NavigationService.getAllSize(function(data1) {
 
