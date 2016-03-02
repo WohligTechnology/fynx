@@ -667,7 +667,7 @@ var navigationservice = angular.module('navigationservice', [])
 				method: 'POST',
 				withCredentials: true,
 				data: {
-          "product":filter.id,
+          "product":filter.size.product,
 					"quantity": filter.quantity,
 					"design": '',
           "json": JSON.stringify(filter),
