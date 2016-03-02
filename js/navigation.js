@@ -649,12 +649,13 @@ var navigationservice = angular.module('navigationservice', [])
     			}).success(callback);
     		},
 		addToCart: function (filter, callback) {
+      console.log(filter);
       $http({
 				url: adminurl + 'addToCart',
 				method: 'POST',
 				withCredentials: true,
 				data: {
-          "product":filter.id,
+          "product":filter.product,
 					"quantity": filter.quantity,
 					"design": filter.design,
           "json": ''
