@@ -628,6 +628,11 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
+    checkCoupon: function (coupon, callback) {
+			return $http.get(adminurl + 'checkCoupon?coupon=' + coupon, {}, {
+				withCredentials: true
+			}).success(callback);
+		},
 		getProductDetails: function (filter, callback) {
 			return $http.get(adminurl + 'getProductDetails?id=' + filter.product + "&color=" + filter.color + "&size=" + filter.size+"&design="+filter.design, {}, {
 				withCredentials: true
