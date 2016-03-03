@@ -101,7 +101,7 @@
                         <div class="related-view hidden-xs" ng-if="product.relatedproduct!='' && product.relatedproduct">
                             <h4 class="text-upper text-center mt-20">You may also like</h4>
                             <div class="row">
-                                <div class="col-sm-4" ng-repeat="related in product.relatedproduct" ui-sref="productview({id: related.id})">
+                                <div class="col-sm-4" ng-repeat="related in product.relatedproduct" ui-sref="productview({category:categoryname,id: related.id,design: related.design})">
                                     <img ng-src="{{related.image1 | serverimage}}" class="img-responsive">
                                 </div>
                             </div>
