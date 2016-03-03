@@ -1006,7 +1006,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('CheckoutCtrl', function($scope, TemplateService, NavigationService, $state, $timeout, $interval) {
+.controller('CheckoutCtrl', function($scope, TemplateService, NavigationService, $state, $timeout, $interval, $filter) {
 
   $scope.template = TemplateService.changecontent("checkout");
   $scope.menutitle = NavigationService.makeactive("Checkout");
@@ -1024,6 +1024,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.order = "";
   $scope.mainurl = mainurlpaymentgateway;
   $scope.adminurl = adminurl;
+  $scope.checkout.coupon = 0;
 
   $scope.alerts = [];
   if (NavigationService.getUser()) {
@@ -1064,6 +1065,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.loadCart = function() {
     NavigationService.totalcart(function(data) {
       $scope.amount = data;
+      $scope.totalamount = data;
     });
     NavigationService.showCart(function(data, status) {
       $scope.allCart = data;
@@ -1091,6 +1093,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     });
   };
+  $scope.couponamount = 0;
+  $scope.checkCoupon = function(coupon){
+    $scope.checkout.coupon = 0;
+    NavigationService.checkCoupon(coupon, function(data){
+      if (data != "false") {
+        // $scope.amount  cart amount
+        if (_.inRange($scope.amount, data.min, data.max)) {
+          $scope.couponamount = (data.discount/100)*$scope.amount;
+          $scope.checkout.coupon = data.id;
+          $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount,0);
+        }else {
+          $scope.totalamount = $scope.amount;
+        }
+      }else {
+        $scope.addAlert("danger", "Invalid coupon code.");
+        $scope.totalamount = $scope.amount;
+      }
+    });
+  }
+
   $scope.tabchange = function(tab, a, sameasbilling) {
     //        console.log(tab);
 

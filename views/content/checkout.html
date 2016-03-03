@@ -176,8 +176,8 @@
 			<div class="row">
 				<div class="col-xs-12">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Coupon code" aria-describedby="basic-addon2">
-							<span class="input-group-addon btn-blue btn btn-danger" id="basic-addon2">Get</span>
+							<input type="text" class="form-control" ng-model="coupon" placeholder="Coupon code" aria-describedby="basic-addon2">
+							<span class="input-group-addon btn-blue btn btn-danger" id="basic-addon2" ng-click="checkCoupon(coupon)">Get</span>
 						</div>
 				</div>
 			</div>
@@ -192,8 +192,8 @@
 				<div class="col-xs-6">
 					<div class="list ">
 						<p>{{amount}}</p>
-						<p>0</p>
-						<p>{{amount}}</p>
+						<p>{{couponamount}}</p>
+						<p>{{totalamount}}</p>
 					</div>
 				</div>
 			</div>
@@ -461,7 +461,7 @@
 						<tr style="display:none">
 							<td>Amount :</td>
 							<td>
-								<input type="text" name="amount" ng-model="amount" />
+								<input type="text" name="amount" ng-model="totalamount" />
 							</td>
 						</tr>
 						<tr>
@@ -469,7 +469,7 @@
 								<h4>Amount</h4>
 							</td>
 							<td>
-								<h4>{{amount}} Rs.</h4>
+								<h4>{{totalamount}} Rs.</h4>
 							</td>
 						</tr>
 						<tr style="display:none">
@@ -599,7 +599,7 @@
 						<tr style="display:none">
 							<td>Merchant Param1 :</td>
 							<td>
-								<input type="text" name="merchant_param1" value="additional Info." />
+								<input type="text" name="merchant_param1" ng-model="checkout.coupon" />
 							</td>
 						</tr>
 						<tr style="display:none">

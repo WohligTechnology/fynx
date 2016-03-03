@@ -509,13 +509,13 @@ var customids = [{
   "id":4
 },{
   "name":"Crop-Tops",
-  "id":5
-},{
-  "name":"Tanks",
   "id":3
 },{
-  "name":"T-shirts",
+  "name":"Tanks",
   "id":2
+},{
+  "name":"T-shirts",
+  "id":1
 }]
 var navigationservice = angular.module('navigationservice', [])
 
@@ -629,7 +629,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
     checkCoupon: function (coupon, callback) {
-			return $http.get(adminurl + 'checkCoupon?coupon=' + coupon, {}, {
+			return $http.get(adminurl + 'checkCoupon?couponname=' + coupon, {}, {
 				withCredentials: true
 			}).success(callback);
 		},

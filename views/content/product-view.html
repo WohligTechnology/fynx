@@ -117,7 +117,7 @@
                             <span class="very-bold">Size</span>
                             <button class="btn btn-tiny btn-gray btn-outline" ng-click="sizeChart()">Size Guide</button>
 
-                            <ul class="list-inline text-upper">
+                            <ul class="list-inline text-upper" ng-if="sizes!=''">
                                 <li ng-repeat="size in sizes" class="{{size.state}} {{size.style}}" ng-click="onSizeClick(size)">{{size.name}}</li>
 <!--                                <li class="canceled">XXL</li>-->
                             </ul>
