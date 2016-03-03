@@ -737,6 +737,8 @@ h4.bold,
   }
   .product-name {
     text-transform: capitalize;
+    height: 19px;
+    text-overflow: ellipsis;
   }
   .product-info {
     margin-bottom: 25px;
