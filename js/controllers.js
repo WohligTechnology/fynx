@@ -1058,7 +1058,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $timeout(function() {
         $scope.tabchange('step2', 2);
       }, 1000);
-
     }
   }
 
@@ -1203,7 +1202,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       } else {
         $scope.addAlert("danger", "Please enter all Information");
       }
-
 
       // checkout cade goes here..
 
@@ -1401,10 +1399,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.removeFromWishlist = function(mywish) {
     NavigationService.removeFromWishlist(mywish.id, mywish.designId, function(data) {
+    $scope.pageno = 0;
+    $scope.lastpage = 0;
+    $scope.wishlistProduct = [];
       $scope.loadWishlist();
-      $scope.wishlistProduct = [];
-      $scope.pageno = 0;
-      $scope.lastpage = 0;
     })
   }
 
