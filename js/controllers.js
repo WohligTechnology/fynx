@@ -1,4 +1,4 @@
-var myfunction = '';
+var myfunction = {};
 var myImage = {
   image: "",
   image1: ""
@@ -381,12 +381,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         data.product.image = data.productdesignimage;
         if (data.product.quantity === "0") {
           $scope.outofstock = true;
-        }else {
+        } else {
           $scope.outofstock = false;
         }
-        $timeout(function(){
+        $timeout(function() {
           $scope.showdiv = true;
-        },100);
+        }, 100);
         $scope.viewImage = data.product.image1;
         NavigationService.getAllSize(function(data1) {
 
@@ -554,20 +554,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('CustomCtrl', function($scope, TemplateService, NavigationService, $state) {
 
-  $scope.template = TemplateService.changecontent("custom");
-  $scope.menutitle = NavigationService.makeactive("Custom");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
-})
-.controller('CareersCtrl', function($scope, TemplateService, NavigationService, $state) {
+    $scope.template = TemplateService.changecontent("custom");
+    $scope.menutitle = NavigationService.makeactive("Custom");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+  })
+  .controller('CareersCtrl', function($scope, TemplateService, NavigationService, $state) {
 
-  $scope.template = TemplateService.changecontent("careers");
-  $scope.menutitle = NavigationService.makeactive("Careers");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
-})
+    $scope.template = TemplateService.changecontent("careers");
+    $scope.menutitle = NavigationService.makeactive("Careers");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+  })
 
 
 .controller('CustomChooseCtrl', function($scope, TemplateService, NavigationService, $uibModal, $state, $stateParams) {
@@ -1094,19 +1094,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   };
   $scope.couponamount = 0;
-  $scope.checkCoupon = function(coupon){
+  $scope.checkCoupon = function(coupon) {
     $scope.checkout.coupon = 0;
-    NavigationService.checkCoupon(coupon, function(data){
+    NavigationService.checkCoupon(coupon, function(data) {
       if (data != "false") {
         // $scope.amount  cart amount
         if (_.inRange($scope.amount, data.min, data.max)) {
-          $scope.couponamount = (data.discount/100)*$scope.amount;
+          $scope.couponamount = (data.discount / 100) * $scope.amount;
           $scope.checkout.coupon = data.id;
-          $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount,0);
-        }else {
+          $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
+        } else {
           $scope.totalamount = $scope.amount;
         }
-      }else {
+      } else {
         $scope.addAlert("danger", "Invalid coupon code.");
         $scope.totalamount = $scope.amount;
       }
@@ -1421,9 +1421,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.removeFromWishlist = function(mywish) {
     NavigationService.removeFromWishlist(mywish.id, mywish.designId, function(data) {
-    $scope.pageno = 0;
-    $scope.lastpage = 0;
-    $scope.wishlistProduct = [];
+      $scope.pageno = 0;
+      $scope.lastpage = 0;
+      $scope.wishlistProduct = [];
       $scope.loadWishlist();
     })
   }
@@ -1878,10 +1878,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
   }
 
-  $scope.changeSize = function(){
-    if($scope.size[0].name=='size'){
-    $scope.size.splice(0,1);
-  }
+  $scope.changeSize = function() {
+    if ($scope.size[0].name == 'size') {
+      $scope.size.splice(0, 1);
+    }
   }
 
   $scope.loadProduct = function() {
@@ -1907,7 +1907,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.filter.id = $scope.images.id;
       }
       $scope.size = data.size;
-      $scope.size.unshift({"id": " ", "status": "0", "name": "size"});
+      $scope.size.unshift({
+        "id": " ",
+        "status": "0",
+        "name": "size"
+      });
       $scope.filter.size = $scope.size[0];
       console.log($scope.size);
       if ($scope.size.length > 1) {
@@ -2097,7 +2101,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         radius: newValue
       });
       $('#example1').arctext('destroy');
-    }else {
+    } else {
       $scope.isArcChange = false;
     }
   });
@@ -2109,7 +2113,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         radius: newValue
       });
       $('#example2').arctext('destroy');
-    }else {
+    } else {
       $scope.isArcChange = false;
     }
   });
@@ -2121,7 +2125,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         radius: newValue
       });
       $('#example3').arctext('destroy');
-    }else {
+    } else {
       $scope.isArcChange = false;
     }
   });
@@ -2288,9 +2292,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
 
     if ($scope.filter.custom[1].arc) {
-    $scope.isArcChange = true;
-    $scope.changeArc($scope.design.design1[1].value, 2);
-  }
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design1[1].value, 2);
+    }
   });
   $scope.$watch('design.design1[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -2336,10 +2340,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[2].css, {
       "font-size": newValue
     });
-        if ($scope.filter.custom[2].arc) {
-    $scope.isArcChange = true;
-    $scope.changeArc($scope.design.design2[1].value, 3);
-  }
+    if ($scope.filter.custom[2].arc) {
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design2[1].value, 3);
+    }
   });
   $scope.$watch('design.design2[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -2385,10 +2389,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     _.merge($scope.filter.custom[3].css, {
       "font-size": newValue
     });
-        if ($scope.filter.custom[3].arc) {
-    $scope.isArcChange = true;
-    $scope.changeArc($scope.design.design3[1].value, 4);
-  }
+    if ($scope.filter.custom[3].arc) {
+      $scope.isArcChange = true;
+      $scope.changeArc($scope.design.design3[1].value, 4);
+    }
   });
   $scope.$watch('design.design3[1].value', function(newValue, oldValue) {
     if (oldValue != newValue) {
@@ -3245,7 +3249,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
     $timeout(function() {
 
-  // $scope.isArcChange = true;
+      // $scope.isArcChange = true;
       $scope.changeArcPreview();
       cfpLoadingBar.complete();
     }, 100);
@@ -3467,154 +3471,152 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('headerctrl', function($scope, TemplateService, $uibModal, NavigationService, $state, $interval, $location) {
-
-  $scope.template = TemplateService;
-  $scope.register = {};
-  $scope.login = {};
-  $scope.register.accept = false;
-  $scope.showLogout = false;
-  $scope.invalidLogin = false;
-  $scope.alreadyRegistered = false;
-  $scope.acceptTerms = false;
-  $scope.user = {};
-  $scope.totalcart = 0;
-  $scope.loginUrl = mainurl;
-
-  // COMMON FUNCTIONS
-  myfunction = function() {
-    NavigationService.gettotalcart(function(data) {
-      $scope.totalcart = data;
-    });
-    //		NavigationService.totalcart(function (data) {
-    //			$scope.amount = data;
-    //		});
-  }
-
-
-  myfunction();
-
-
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-    $(window).scrollTop(0);
-  });
-
-  $scope.openLogin = function() {
-    $uibModal.open({
-      animation: true,
-      templateUrl: 'views/modal/login.html',
-      controller: 'headerctrl'
-    })
-  };
-
-  if (NavigationService.getUser()) {
-    $scope.showLogout = true;
-    $scope.myuser = NavigationService.getUser('user');
-    if ($scope.myuser.firstname != '' || $scope.myuser.lastname != '') {
-      $scope.user.name = NavigationService.getUser('user').firstname + " " + NavigationService.getUser('user').lastname;
-    } else {
-      $scope.user.name = $scope.myuser.name;
+.controller('badgeCount', function($scope, TemplateService, $uibModal, NavigationService, $state, $interval, $location) {
+    // COMMON FUNCTIONS
+    myfunction = function() {
+      NavigationService.gettotalcart(function(data) {
+        $scope.totalcart = data;
+      });
     }
-  }
+    myfunction();
+  })
+  .controller('headerctrl', function($scope, TemplateService, $uibModal, NavigationService, $state, $interval, $location) {
 
-  $scope.registerUser = function() {
-    console.log($scope.register);
-    if ($scope.register.accept == true) {
-      $scope.acceptTerms = false;
-      NavigationService.registerUser($scope.register, function(data) {
-        console.log(data);
-        if (data != 'false') {
-          NavigationService.setUser(data);
-          // $uibModal.hide();
-          window.location.reload();
-        } else {
-          $scope.alreadyRegistered = true;
+    $scope.template = TemplateService;
+    $scope.register = {};
+    $scope.login = {};
+    $scope.register.accept = false;
+    $scope.showLogout = false;
+    $scope.invalidLogin = false;
+    $scope.alreadyRegistered = false;
+    $scope.acceptTerms = false;
+    $scope.user = {};
+    $scope.totalcart = 0;
+    $scope.loginUrl = mainurl;
+
+
+
+
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+      $(window).scrollTop(0);
+    });
+
+    $scope.openLogin = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'views/modal/login.html',
+        controller: 'headerctrl'
+      })
+    };
+
+    if (NavigationService.getUser()) {
+      $scope.showLogout = true;
+      $scope.myuser = NavigationService.getUser('user');
+      if ($scope.myuser.firstname != '' || $scope.myuser.lastname != '') {
+        $scope.user.name = NavigationService.getUser('user').firstname + " " + NavigationService.getUser('user').lastname;
+      } else {
+        $scope.user.name = $scope.myuser.name;
+      }
+    }
+
+    $scope.registerUser = function() {
+      console.log($scope.register);
+      if ($scope.register.accept == true) {
+        $scope.acceptTerms = false;
+        NavigationService.registerUser($scope.register, function(data) {
+          console.log(data);
+          if (data != 'false') {
+            NavigationService.setUser(data);
+            // $uibModal.hide();
+            window.location.reload();
+          } else {
+            $scope.alreadyRegistered = true;
+          }
+        })
+      } else {
+        $scope.acceptTerms = true;
+        $scope.alreadyRegistered = false;
+      }
+    }
+
+    $scope.loginUser = function() {
+      console.log($scope.login);
+      NavigationService.login($scope.login, function(data) {
+        if (data) {
+          console.log(data);
+          if (data != "false") {
+            NavigationService.setUser(data);
+            myfunction();
+            window.location.reload();
+            // $state.go('setting');
+          } else {
+            $scope.invalidLogin = true;
+          }
         }
       })
-    } else {
-      $scope.acceptTerms = true;
-      $scope.alreadyRegistered = false;
     }
-  }
 
-  $scope.loginUser = function() {
-    console.log($scope.login);
-    NavigationService.login($scope.login, function(data) {
-      if (data) {
-        console.log(data);
-        if (data != "false") {
-          NavigationService.setUser(data);
-          myfunction();
+    $scope.logout = function() {
+      $scope.showLogout = false;
+      NavigationService.logout(function(data) {
+        if (data == "true") {
+          if (window.location.hash == "#/profile") {
+            $state.go('home');
+          }
+          $.jStorage.flush();
           window.location.reload();
-          // $state.go('setting');
-        } else {
-          $scope.invalidLogin = true;
         }
-      }
-    })
-  }
+      });
+    }
 
-  $scope.logout = function() {
-    $scope.showLogout = false;
-    NavigationService.logout(function(data) {
-      if (data == "true") {
-        if (window.location.hash == "#/profile") {
-          $state.go('home');
-        }
-        $.jStorage.flush();
+    // GOOGLE AND FACEBOOK LOGIN
+    var checktwitter = function(data, status) {
+      if (data != "false") {
+        $interval.cancel(stopinterval);
+        ref.close();
+        NavigationService.authenticate(authenticatesuccess);
+      } else {
+
+      }
+
+    };
+
+    var callAtIntervaltwitter = function() {
+      NavigationService.authenticate(checktwitter);
+    };
+    var authenticatesuccess = function(data, status) {
+      if (data != "false") {
+        $.jStorage.set("user", data);
+        user = data;
+        $state.go('home');
         window.location.reload();
       }
-    });
-  }
+    };
 
-  // GOOGLE AND FACEBOOK LOGIN
-  var checktwitter = function(data, status) {
-    if (data != "false") {
-      $interval.cancel(stopinterval);
-      ref.close();
-      NavigationService.authenticate(authenticatesuccess);
-    } else {
-
+    $scope.facebooklogin = function() {
+      ref = window.open(mainurl + 'index.php/hauth/login/Facebook?returnurl=' + websiteurl, '_blank', 'location=yes');
+      stopinterval = $interval(callAtIntervaltwitter, 2000);
+      ref.addEventListener('exit', function(event) {
+        NavigationService.authenticate(authenticatesuccess);
+        $interval.cancel(stopinterval);
+      });
+    }
+    $scope.googlelogin = function() {
+      ref = window.open(mainurl + 'index.php/hauth/login/Google?returnurl=' + websiteurl, '_blank', 'location=yes');
+      stopinterval = $interval(callAtIntervaltwitter, 2000);
+      ref.addEventListener('exit', function(event) {
+        NavigationService.authenticate(authenticatesuccess);
+        $interval.cancel(stopinterval);
+      });
     }
 
-  };
-
-  var callAtIntervaltwitter = function() {
-    NavigationService.authenticate(checktwitter);
-  };
-  var authenticatesuccess = function(data, status) {
-    if (data != "false") {
-      $.jStorage.set("user", data);
-      user = data;
-      $state.go('home');
-      window.location.reload();
+    $scope.twitterlogin = function() {
+      ref = window.open(mainurl + 'index.php/hauth/login/Twitter?returnurl=' + websiteurl, '_blank', 'location=yes');
+      stopinterval = $interval(callAtIntervaltwitter, 2000);
+      ref.addEventListener('exit', function(event) {
+        NavigationService.authenticate(authenticatesuccess);
+        $interval.cancel(stopinterval);
+      });
     }
-  };
 
-  $scope.facebooklogin = function() {
-    ref = window.open(mainurl + 'index.php/hauth/login/Facebook?returnurl=' + websiteurl, '_blank', 'location=yes');
-    stopinterval = $interval(callAtIntervaltwitter, 2000);
-    ref.addEventListener('exit', function(event) {
-      NavigationService.authenticate(authenticatesuccess);
-      $interval.cancel(stopinterval);
-    });
-  }
-  $scope.googlelogin = function() {
-    ref = window.open(mainurl + 'index.php/hauth/login/Google?returnurl=' + websiteurl, '_blank', 'location=yes');
-    stopinterval = $interval(callAtIntervaltwitter, 2000);
-    ref.addEventListener('exit', function(event) {
-      NavigationService.authenticate(authenticatesuccess);
-      $interval.cancel(stopinterval);
-    });
-  }
-
-  $scope.twitterlogin = function() {
-    ref = window.open(mainurl + 'index.php/hauth/login/Twitter?returnurl=' + websiteurl, '_blank', 'location=yes');
-    stopinterval = $interval(callAtIntervaltwitter, 2000);
-    ref.addEventListener('exit', function(event) {
-      NavigationService.authenticate(authenticatesuccess);
-      $interval.cancel(stopinterval);
-    });
-  }
-
-});
+  });

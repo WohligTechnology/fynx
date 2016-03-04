@@ -85,11 +85,11 @@
 							<input class="form-control" ng-model="updateuser.user.billingline1" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="flat number, building number">
 						</div>
 						<div class="form-group">
-							<label>Line2</label>
+							<label>Line2*</label>
 							<input class="form-control" ng-model="updateuser.user.billingline2" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="street address">
 						</div>
 						<div class="form-group">
-							<label>Line3</label>
+							<label>Line3*</label>
 							<input class="form-control" ng-model="updateuser.user.billingline3" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)" type="text" placeholder="nearest address">
 						</div>
 
@@ -120,7 +120,7 @@
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
 										<select ng-model="updateuser.user.billingcountry" ng-change="assign(sameasbilling,updateuser.user.billingline1,updateuser.user.billingline2,updateuser.user.billingline3,updateuser.user.billingcity,updateuser.user.billingpincode,updateuser.user.billingstate,updateuser.user.billingcountry)">
-											<option value="{{country.name}}" ng-repeat="country in countries">{{country.name}}</option>
+											<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
 										</select>
 										<span class="only-border"></span>
 									</div>
@@ -185,7 +185,7 @@
 									<label>Country*</label>
 									<div class="fynx-select gray-select">
 										<select ng-model="updateuser.user.shippingcountry">
-											<option value="{{country.name}}" ng-repeat="country in countries">{{country.name}}</option>
+											<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
 										</select>
 										<span class="only-border"></span>
 									</div>
