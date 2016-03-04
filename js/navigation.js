@@ -1,10 +1,10 @@
 // var mainurl = "http://wohlig.co.in/newfynx/";
 // var mainurl = "http://localhost/newfynx/";
- var mainurl = "http://www.myfynx.com/newfynx/";
+ var mainurl = "http://admin.myfynx.com/";
 // var mainurl = "http://192.168.0.124/newfynx/";
 // mainurlpaymentgateway is url for frontend
-var websiteurl = "http://www.myfynx.com/testing/";
-var mainurlpaymentgateway = "http://www.myfynx.com/newfynx/";
+var websiteurl = "http://www.myfynx.com/";
+var mainurlpaymentgateway = "http://admin.myfynx.com/";
 var adminurl = mainurl + "index.php/json/";
 var countries = [{
         "value": "Please Select"
