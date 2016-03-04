@@ -3472,9 +3472,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 .controller('badgeCount', function($scope, TemplateService, $uibModal, NavigationService, $state, $interval, $location) {
+    $scope.totalcart = $.jStorage.get("badgeCount");
     // COMMON FUNCTIONS
     myfunction = function() {
       NavigationService.gettotalcart(function(data) {
+        $.jStorage.set("badgeCount",data);
         $scope.totalcart = data;
       });
     }
