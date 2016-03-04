@@ -441,7 +441,7 @@
 				<h3 ng-if="checkout.paymentmode==4">Your order is placed successfully.</h3>
 				<h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
 				<div class="order-table" ng-if="checkout.paymentmode!=4">
-					<form method="post" name="customerData" action="http://www.myfynx.com/newfynx/paymentgateway/ccavRequestHandler.php">
+					<form method="post" name="customerData" action="http://admin.myfynx.com/paymentgateway/ccavRequestHandler.php">
 						<table width="40%" height="100">
 							<tr style="display:none">
 								<td>TID :</td>
@@ -484,7 +484,7 @@
 							<tr style="display:none">
 								<td>Redirect URL :</td>
 								<td>
-									<input type="text" name="redirect_url" value="http://www.myfynx.com/newfynx/index.php/json/payumoneysuccess" />
+									<input type="text" name="redirect_url" value="http://admin.myfynx.com/index.php/json/payumoneysuccess" />
 								</td>
 							</tr>
 							<tr style="display:none">

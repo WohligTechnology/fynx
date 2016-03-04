@@ -11,7 +11,7 @@ var custom = {};
 var uploadres = [];
 var myfunc = {};
 var arcText = {};
-window.uploadUrl = 'http://www.myfynx.com/newfynx/index.php/json/uploadImage';
+window.uploadUrl = 'http://admin.myfynx.com/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload', 'angular-loading-bar'])
 
 
