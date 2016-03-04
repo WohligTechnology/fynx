@@ -62,6 +62,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, cfpL
     controller: 'CheckoutCtrl'
   })
 
+  .state('forgotpassword', {
+    url: "/forgotpassword",
+    templateUrl: "views/template.html",
+    controller: 'ForgotpasswordCtrl'
+  })
+
   .state('terms-conditions', {
     url: "/terms-conditions",
     templateUrl: "views/template.html",

@@ -86,6 +86,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
 })
+.controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService) {
+
+  $scope.template = TemplateService.changecontent("forgotpassword");
+  $scope.menutitle = NavigationService.makeactive("Forgot Password");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+})
 
 
 .controller('AboutCtrl', function($scope, TemplateService, NavigationService) {
@@ -306,7 +314,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal, cfpLoadingBar, $timeout) {
 
   $scope.template = TemplateService.changecontent("product-view");
-  $scope.menutitle = NavigationService.makeactive("Men");
+  if ($stateParams.category=='men') {
+    $scope.menutitle = NavigationService.makeactive("Men");
+  }else {
+    $scope.menutitle = NavigationService.makeactive("Women");
+  }
+
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
