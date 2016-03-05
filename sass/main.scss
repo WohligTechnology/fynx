@@ -2220,6 +2220,11 @@ $left-sider: 450px !default;
     min-height: auto;
   }
 }
+.input-group-addon {
+  color: white;
+  background-color: $brand-danger;
+  border: 1px solid $brand-danger;
+}
 @import "main/mobile";
 @import "fancy-override";
 @import "custom-colors";

@@ -1,271 +1,266 @@
 <div class="breadcrumb">
-	<div class="container relative">
-		<h3>CHECKOUT</h3>
-		<img src="img/mrfynx2.png" alt="Mr. Fynx" class="mascot">
-	</div>
+  <div class="container relative">
+    <h3>CHECKOUT</h3>
+    <img src="img/mrfynx2.png" alt="Mr. Fynx" class="mascot">
+  </div>
 </div>
 <div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<div class="account">
-				<ul>
-					<li class="tab-item {{classa}}">STEP 1</li>
-					<li class="tab-item {{classb}}">STEP 2</li>
-					<li class="tab-item {{classc}}">STEP 3</li>
-					<li class="tab-item {{classd}}">STEP 4</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="account">
+        <ul>
+          <li class="tab-item {{classa}}">STEP 1</li>
+          <li class="tab-item {{classb}}">STEP 2</li>
+          <li class="tab-item {{classc}}">STEP 3</li>
+          <li class="tab-item {{classd}}">STEP 4</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr>
 </div>
 <div class="container">
-	<div class="alert-postion">
-		<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
-	</div>
-	<div ng-show="tab=='step1'">
-		<div class="row">
-			<div class="col-md-3">
-				<div class="login-form content-view pad0">
-					<h4 class="login">LOGIN</h4>
-					<div class="form-group">
-						<label>EMAIL ADDRESS *</label>
-						<input type="email" class="form-control" ng-model="login.email" required>
-					</div>
-					<div class="form-group">
-						<label>PASSWORD *</label>
-						<input type="password" class="form-control" ng-model="login.password" required>
-					</div>
+  <div class="alert-postion">
+    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+  </div>
+  <div ng-show="tab=='step1'">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="login-form content-view pad0">
+          <h4 class="login">LOGIN</h4>
+          <div class="form-group">
+            <label>EMAIL ADDRESS *</label>
+            <input type="email" class="form-control" ng-model="login.email" required>
+          </div>
+          <div class="form-group">
+            <label>PASSWORD *</label>
+            <input type="password" class="form-control" ng-model="login.password" required>
+          </div>
 
-
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<button class="btn btn-danger mar0 con-btn" ng-click="checkoutLogin()">SIGN IN</button>
-					</div>
-					<!-- <div class="col-md-6 ">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-danger mar0 con-btn" ng-click="checkoutLogin()">SIGN IN</button>
+          </div>
+          <!-- <div class="col-md-6 ">
 						<div class="class-forget">
 							<p>Forgot Password?</p>
 						</div>
 
 					</div> -->
-				</div>
-				<div class="text-center list">
-					<p class="or">OR</p>
-					<p>LOGIN VIA</p>
-					<div class="button-set">
-						<button class="btn btn-facebook pad-btn" ng-click="facebooklogin()">
-							<i class="fa fa-facebook social-f"></i>
-						</button>
-						<button class="btn btn-google pad-btn" ng-click="googlelogin()">
-							<i class="fa fa-google-plus"></i>
-						</button>
-						<button class="btn btn-twitter pad-btn" ng-click="twitterlogin()">
-							<i class="fa fa-twitter"></i>
-						</button>
-					</div>
-				</div>
-				<div class="text-center list">
-					<p class="or">OR</p>
-					<div class="form-group i-check">
+        </div>
+        <div class="text-center list">
+          <p class="or">OR</p>
+          <p>LOGIN VIA</p>
+          <div class="button-set">
+            <button class="btn btn-facebook pad-btn" ng-click="facebooklogin()">
+              <i class="fa fa-facebook social-f"></i>
+            </button>
+            <button class="btn btn-google pad-btn" ng-click="googlelogin()">
+              <i class="fa fa-google-plus"></i>
+            </button>
+            <button class="btn btn-twitter pad-btn" ng-click="twitterlogin()">
+              <i class="fa fa-twitter"></i>
+            </button>
+          </div>
+        </div>
+        <div class="text-center list">
+          <p class="or">OR</p>
+          <div class="form-group i-check">
 
-						<input type="checkbox" name="vehicle" ng-model="asguest" class="iagree" ng-change="checkoutAsGuest(asguest)">Checkout as guest
-					</div>
-				</div>
-			</div>
-			<div class="col-md-offset-2 col-md-3">
-				<div class="login-form content-view pad0">
-					<h4 class="login">SIGN UP</h4>
-					<div class="form-group">
-						<label>FIRST NAME</label>
-						<input type="text" class="form-control" ng-model="register.firstname">
-					</div>
-					<div class="form-group">
-						<label>LAST NAME</label>
-						<input type="text" class="form-control" ng-model="register.lastname">
-					</div>
-					<div class="form-group">
-						<label>EMAIL ADDRESS</label>
-						<input type="email" class="form-control" ng-model="register.email">
-					</div>
-					<div class="form-group">
-						<label>PASSWORD
-							<span>(Minimum 6 Characters)</span>
-						</label>
-						<input type="password" class="form-control" ng-model="register.password">
-					</div>
-					<div class="form-group">
-						<label>CONFIRM PASSWORD</label>
-						<input type="password" class="form-control" ng-model="register.cpassword">
-					</div>
-					<!--
+            <input type="checkbox" name="vehicle" ng-model="asguest" class="iagree" ng-change="checkoutAsGuest(asguest)">Checkout as guest
+          </div>
+        </div>
+      </div>
+      <div class="col-md-offset-2 col-md-3">
+        <div class="login-form content-view pad0">
+          <h4 class="login">SIGN UP</h4>
+          <div class="form-group">
+            <label>FIRST NAME</label>
+            <input type="text" class="form-control" ng-model="register.firstname">
+          </div>
+          <div class="form-group">
+            <label>LAST NAME</label>
+            <input type="text" class="form-control" ng-model="register.lastname">
+          </div>
+          <div class="form-group">
+            <label>EMAIL ADDRESS</label>
+            <input type="email" class="form-control" ng-model="register.email">
+          </div>
+          <div class="form-group">
+            <label>PASSWORD
+              <span>(Minimum 6 Characters)</span>
+            </label>
+            <input type="password" class="form-control" ng-model="register.password">
+          </div>
+          <div class="form-group">
+            <label>CONFIRM PASSWORD</label>
+            <input type="password" class="form-control" ng-model="register.cpassword">
+          </div>
+          <!--
 					<div class="form-group">
 						<label>MOBILE NUMBER <span>(Optional)</span></label>
 						<input type="number" class="form-control" ng-model="register.">
 					</div>
 -->
-					<div class="form-group i-check">
+          <div class="form-group i-check">
 
-						<input type="checkbox" name="vehicle" ng-model="register.accept" value="Bike" class="iagree">I agree with the terms & conditions and privacy policy
-					</div>
-				</div>
-				<div class="text-center list mar-btm">
-					<button class="btn btn-danger mar0 con-btn" ng-click="checkoutRegister()">REGISTER</button>
-					<p class="or">OR</p>
-					<p>LOGIN VIA</p>
-					<div class="button-set">
-						<button class="btn btn-facebook pad-btn" ng-click="facebooklogin()">
-							<i class="fa fa-facebook social-f"></i>
-						</button>
-						<button class="btn btn-google pad-btn" ng-click="googlelogin()">
-							<i class="fa fa-google-plus"></i>
-						</button>
-						<button class="btn btn-twitter pad-btn" ng-click="twitterlogin()">
-							<i class="fa fa-twitter"></i>
-						</button>
-					</div>
-					<p class="i-check">Already Registerd? Log In</p>
-				</div>
-			</div>
-		</div>
-	</div>
+            <input type="checkbox" name="vehicle" ng-model="register.accept" value="Bike" class="iagree">I agree with the terms & conditions and privacy policy
+          </div>
+        </div>
+        <div class="text-center list mar-btm">
+          <button class="btn btn-danger mar0 con-btn" ng-click="checkoutRegister()">REGISTER</button>
+          <p class="or">OR</p>
+          <p>LOGIN VIA</p>
+          <div class="button-set">
+            <button class="btn btn-facebook pad-btn" ng-click="facebooklogin()">
+              <i class="fa fa-facebook social-f"></i>
+            </button>
+            <button class="btn btn-google pad-btn" ng-click="googlelogin()">
+              <i class="fa fa-google-plus"></i>
+            </button>
+            <button class="btn btn-twitter pad-btn" ng-click="twitterlogin()">
+              <i class="fa fa-twitter"></i>
+            </button>
+          </div>
+          <p class="i-check">Already Registerd? Log In</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<div ng-show="tab=='step2' && allCart!=''">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="order-table">
-					<table class="table">
-						<thead>
-							<tr class="text-center">
-								<th>ITEM</th>
-								<th>COLOUR</th>
-								<th>SIZE</th>
-								<th>QUANTITY</th>
-								<th>SUBTOTAL</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="text-center text-bold" ng-repeat="cart in allCart">
-								<td>
-									<figure>
-										<img ng-src="{{cart.image | serverimage}}">
-										<span ng-if="cart.json!=false && cart.json">+</span>
-										<img ng-src="{{cart.json.image.image | serverimage}}" ng-if="cart.json!=false && cart.json">
-										<figcaption>{{cart.options.realname}}</figcaption>
-									</figure>
-								</td>
-								<td>{{cart.options.colorname}}</td>
-								<td>{{cart.options.sizename}}</td>
-								<td>{{cart.qty}}
-									<p class="text-center danger quantity-text" ng-show="cart.exceeds">Item went out of stock. Please remove item.</p>
-								</td>
-								</td>
-								<td>
-									<p>{{cart.subtotal}}</p>
+  <div ng-show="tab=='step2' && allCart!=''">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="order-table">
+          <table class="table">
+            <thead>
+              <tr class="text-center">
+                <th>ITEM</th>
+                <th>COLOUR</th>
+                <th>SIZE</th>
+                <th>QUANTITY</th>
+                <th>SUBTOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center text-bold" ng-repeat="cart in allCart">
+                <td>
+                  <figure>
+                    <img ng-src="{{cart.image | serverimage}}">
+                    <span ng-if="cart.json!=false && cart.json">+</span>
+                    <img ng-src="{{cart.json.image.image | serverimage}}" ng-if="cart.json!=false && cart.json">
+                    <figcaption>{{cart.options.realname}}</figcaption>
+                  </figure>
+                </td>
+                <td>{{cart.options.colorname}}</td>
+                <td>{{cart.options.sizename}}</td>
+                <td>{{cart.qty}}
+                  <p class="text-center danger quantity-text" ng-show="cart.exceeds">Item went out of stock. Please remove item.</p>
+                </td>
+              </td>
+              <td>
+                <p>{{cart.subtotal}}</p>
 
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-			</div>
+    </div>
 
-		</div>
-		<div class="col-md-offset-8 col-md-4">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="input-group">
-						<input type="text" class="form-control" ng-model="coupon" placeholder="Coupon code" aria-describedby="basic-addon2">
-						<span class="input-group-addon btn-blue btn btn-danger" id="basic-addon2" ng-click="checkCoupon(coupon)">Get</span>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6">
-					<div class="category">
-						<p>TOTAL:</p>
-						<p>COUPON:</p>
-						<p>GRAND TOTAL:</p>
-					</div>
-				</div>
-				<div class="col-xs-6">
-					<div class="list ">
-						<p>{{amount}}</p>
-						<p>{{couponamount|number:2}}</p>
-						<p>{{totalamount}}</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-offset-2 col-md-4">
-					<div class="text-center">
-						<button type="submit" class="btn-blue btn btn-danger text-center" ng-click="checkoutCheck()">NEXT</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  </div>
+  <div class="row mar-btm">
+    <div class="col-md-4">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="coupon" placeholder="Coupon code" aria-describedby="basic-addon2">
+        <span class="input-group-addon btn-blue btn btn-danger" id="basic-addon2" ng-click="checkCoupon(coupon)">Get</span>
+      </div>
+    </div>
+    <div class="col-md-offset-4 col-md-4">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="category">
+            <p>TOTAL:</p>
+            <p>COUPON:</p>
+            <p>GRAND TOTAL:</p>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="list ">
+            <p>{{amount}}</p>
+            <p>{{couponamount|number:2}}</p>
+            <p>{{totalamount}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn-blue btn btn-danger text-center" ng-click="checkoutCheck()">NEXT</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 <div class="container">
-	<div ng-show="tab=='step3'">
-		<div class="row">
-			<div class="col-md-12 content-view paddbtm" style="padding-left:15px;">
-				<h4 class="login">YOUR DETAILS</h4>
-			</div>
+<div ng-show="tab=='step3'">
+  <div class="row">
+    <div class="col-md-12 content-view paddbtm" style="padding-left:15px;">
+      <h4 class="login">YOUR DETAILS</h4>
+    </div>
 
-		</div>
-		<div class="row content-view">
-			<div class="col-md-3">
-				<div class="form-group">
-					<input type="text" class="form-control" ng-model="checkout.firstname" placeholder="FIRST NAME *">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<input type="text" class="form-control" ng-model="checkout.lastname" placeholder="LAST NAME *">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<input type="tel" class="form-control" ng-model="checkout.phone" placeholder="MOBILE NUMBER *" maxlength="15" only-digits>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<input type="email" class="form-control" ng-model="checkout.email" placeholder="EMAIL ADDRESS *">
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<div class="login-form content-view pad0">
-					<h4 class="login">BILLING ADDRESS</h4>
-					<div class="form-group">
-						<label>LINE 1*</label>
-						<input type="text" ng-model="checkout.billingline1" class="form-control" placeholder="flat number, building number">
-					</div>
-					<div class="form-group">
-						<label>LINE 2*</label>
-						<input type="text" ng-model="checkout.billingline2" class="form-control" placeholder="street address">
-					</div>
-					<div class="form-group">
-						<label>LINE 3*</label>
-						<input type="text" ng-model="checkout.billingline3" class="form-control" placeholder="nearest landmark">
-					</div>
-					<div class="form-group">
-						<label>CITY *</label>
-						<input type="text" ng-model="checkout.billingcity" class="form-control" placeholder="city">
-					</div>
-					<div class="form-group">
-						<label>PINCODE *</label>
-						<input type="text" ng-model="checkout.billingpincode" class="form-control" maxlength="6" only-digits placeholder="pincode/zipcode">
-					</div>
-					<div class="form-group">
-						<label>STATE*</label>
-						<input type="text" class="form-control" ng-model="checkout.billingstate" placeholder="state">
-						<!--
+  </div>
+  <div class="row content-view">
+    <div class="col-md-3">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="checkout.firstname" placeholder="FIRST NAME *">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="checkout.lastname" placeholder="LAST NAME *">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input type="tel" class="form-control" ng-model="checkout.phone" placeholder="MOBILE NUMBER *" maxlength="15" only-digits>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input type="email" class="form-control" ng-model="checkout.email" placeholder="EMAIL ADDRESS *">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="login-form content-view pad0">
+        <h4 class="login">BILLING ADDRESS</h4>
+        <div class="form-group">
+          <label>LINE 1*</label>
+          <input type="text" ng-model="checkout.billingline1" class="form-control" placeholder="flat number, building number">
+        </div>
+        <div class="form-group">
+          <label>LINE 2*</label>
+          <input type="text" ng-model="checkout.billingline2" class="form-control" placeholder="street address">
+        </div>
+        <div class="form-group">
+          <label>LINE 3*</label>
+          <input type="text" ng-model="checkout.billingline3" class="form-control" placeholder="nearest landmark">
+        </div>
+        <div class="form-group">
+          <label>CITY *</label>
+          <input type="text" ng-model="checkout.billingcity" class="form-control" placeholder="city">
+        </div>
+        <div class="form-group">
+          <label>PINCODE *</label>
+          <input type="text" ng-model="checkout.billingpincode" class="form-control" maxlength="6" only-digits placeholder="pincode/zipcode">
+        </div>
+        <div class="form-group">
+          <label>STATE*</label>
+          <input type="text" class="form-control" ng-model="checkout.billingstate" placeholder="state">
+          <!--
 							<div class="fynx-select">
 								<select>
 									<option value=""></option>
@@ -276,93 +271,91 @@
 								<span class="only-border"></span>
 							</div>
 	-->
-					</div>
-					<div class="form-group">
-						<label>COUNTRY*</label>
-						<select name="country" ng-model="checkout.billingcountry" class="form-control">
-							<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
-						</select>
-					</div>
+        </div>
+        <div class="form-group">
+          <label>COUNTRY*</label>
+          <select name="country" ng-model="checkout.billingcountry" class="form-control">
+            <option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
+          </select>
+        </div>
 
+      </div>
+    </div>
+    <div class="col-md-offset-2 col-md-3">
+      <div class="login-form content-view pad0">
+        <h4 class="login">SHIPPING ADDRESS</h4>
+        <div class="form-group i-check">
+          <input type="checkbox" class="iagree" ng-model="sameasbilling" ng-change="sameAsBilling(sameasbilling)">Same as billing address
+        </div>
+        <div ng-if="sameasbilling">
+          <div class="form-group">
+            <label>LINE 1*</label>
+            <input type="text" ng-model="checkout.billingline1" class="form-control" placeholder="flat number, building number">
+          </div>
+          <div class="form-group">
+            <label>LINE 2*</label>
+            <input type="text" ng-model="checkout.billingline2" class="form-control" placeholder="street address">
+          </div>
+          <div class="form-group">
+            <label>LINE 3*</label>
+            <input type="text" ng-model="checkout.billingline3" class="form-control" placeholder="nearest landmark">
+          </div>
+          <div class="form-group">
+            <label>CITY *</label>
+            <input type="text" ng-model="checkout.billingcity" class="form-control" placeholder="city">
+          </div>
+          <div class="form-group">
+            <label>PINCODE *</label>
+            <input type="text" ng-model="checkout.billingpincode" class="form-control" maxlength="6" only-digits placeholder="pincode/zipcode">
+          </div>
+          <div class="form-group">
+            <label>STATE*</label>
+            <input type="text" class="form-control" ng-model="checkout.billingstate" placeholder="state">
+          </div>
+          <div class="form-group">
+            <label>COUNTRY*</label>
+            <select name="country" ng-model="checkout.billingcountry" class="form-control">
+              <option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
+            </select>
+          </div>
+        </div>
+        <div ng-if="!sameasbilling">
+          <div class="form-group">
+            <label>LINE 1*</label>
+            <input type="text" ng-model="checkout.shippingline1" class="form-control" placeholder="flat number, building number">
+          </div>
+          <div class="form-group">
+            <label>LINE 2*</label>
+            <input type="text" ng-model="checkout.shippingline2" class="form-control" placeholder="street address">
+          </div>
+          <div class="form-group">
+            <label>LINE 3*</label>
+            <input type="text" ng-model="checkout.shippingline3" class="form-control" placeholder="nearest landmark">
+          </div>
+          <div class="form-group">
+            <label>CITY *</label>
+            <input type="text" ng-model="checkout.shippingcity" class="form-control" placeholder="city">
+          </div>
+          <div class="form-group">
+            <label>PINCODE *</label>
+            <input type="text" ng-model="checkout.shippingpincode" class="form-control" maxlength="6" only-digits placeholder="pincode/zipcode">
+          </div>
+          <div class="form-group">
+            <label>STATE*</label>
+            <input type="text" ng-model="checkout.shippingstate" class="form-control" placeholder="state">
+          </div>
+          <div class="form-group">
+            <label>COUNTRY*</label>
+            <select name="country" ng-model="checkout.shippingcountry" class="form-control">
+              <option value="country.value" ng-repeat="country in countries">{{country.value}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-				</div>
-			</div>
-			<div class="col-md-offset-2 col-md-3">
-				<div class="login-form content-view pad0">
-					<h4 class="login">SHIPPING ADDRESS</h4>
-					<div class="form-group i-check">
-						<input type="checkbox" class="iagree" ng-model="sameasbilling" ng-change="sameAsBilling(sameasbilling)">Same as billing address
-					</div>
-					<div ng-if="sameasbilling">
-						<div class="form-group">
-							<label>LINE 1*</label>
-							<input type="text" ng-model="checkout.billingline1" class="form-control" placeholder="flat number, building number">
-						</div>
-						<div class="form-group">
-							<label>LINE 2*</label>
-							<input type="text" ng-model="checkout.billingline2" class="form-control" placeholder="street address">
-						</div>
-						<div class="form-group">
-							<label>LINE 3*</label>
-							<input type="text" ng-model="checkout.billingline3" class="form-control" placeholder="nearest landmark">
-						</div>
-						<div class="form-group">
-							<label>CITY *</label>
-							<input type="text" ng-model="checkout.billingcity" class="form-control" placeholder="city">
-						</div>
-						<div class="form-group">
-							<label>PINCODE *</label>
-							<input type="text" ng-model="checkout.billingpincode" class="form-control" maxlength="6" only-digits placeholder="pincode/zipcode">
-						</div>
-						<div class="form-group">
-							<label>STATE*</label>
-							<input type="text" class="form-control" ng-model="checkout.billingstate" placeholder="state">
-						</div>
-						<div class="form-group">
-							<label>COUNTRY*</label>
-							<select name="country" ng-model="checkout.billingcountry" class="form-control">
-								<option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
-							</select>
-						</div>
-					</div>
-					<div ng-if="!sameasbilling">
-						<div class="form-group">
-							<label>LINE 1*</label>
-							<input type="text" ng-model="checkout.shippingline1" class="form-control" placeholder="flat number, building number">
-						</div>
-						<div class="form-group">
-							<label>LINE 2*</label>
-							<input type="text" ng-model="checkout.shippingline2" class="form-control" placeholder="street address">
-						</div>
-						<div class="form-group">
-							<label>LINE 3*</label>
-							<input type="text" ng-model="checkout.shippingline3" class="form-control" placeholder="nearest landmark">
-						</div>
-						<div class="form-group">
-							<label>CITY *</label>
-							<input type="text" ng-model="checkout.shippingcity" class="form-control" placeholder="city">
-						</div>
-						<div class="form-group">
-							<label>PINCODE *</label>
-							<input type="text" ng-model="checkout.shippingpincode" class="form-control" maxlength="6" only-digits placeholder="pincode/zipcode">
-						</div>
-						<div class="form-group">
-							<label>STATE*</label>
-							<input type="text" ng-model="checkout.shippingstate" class="form-control" placeholder="state">
-						</div>
-						<div class="form-group">
-							<label>COUNTRY*</label>
-							<select name="country" ng-model="checkout.shippingcountry" class="form-control">
-								<option value="country.value" ng-repeat="country in countries">{{country.value}}</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- <div class="row">
+  <!-- <div class="row">
 				<div class="col-md-12 content-view paddbtm m-45" style="padding-left:15px;">
 					<h4 class="login">PAYMENT METHOD</h4>
 				</div>
@@ -400,264 +393,264 @@
 				</div>
 			</div> -->
 
+  <div class="row" ng-if="checkout.paymentmode!=4">
+    <div class="text-center">
+      <button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4,sameasbilling)">CONTINUE</button>
+    </div>
+  </div>
 
-		<div class="row" ng-if="checkout.paymentmode!=4">
-			<div class="text-center">
-				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4,sameasbilling)">CONTINUE</button>
-			</div>
-		</div>
+  <div class="row">
+    <div class="text-center" ng-if="checkout.paymentmode==4">
+      <button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4,false)">Place Order</button>
+    </div>
+  </div>
 
-		<div class="row">
-			<div class="text-center" ng-if="checkout.paymentmode==4">
-				<button class="btn btn-danger m-30 con-btn" ng-click="tabchange('step4',4,false)">Place Order</button>
-			</div>
-		</div>
-
-		<div class="row mar-btm">
-			<div class="col-md-6">
-				<div class="payment list">
-					<p>We Accept:</p>
-					<ul style="display: inline-block;">
-						<li>
-							<img src="img/visa.png">
-						</li>
-						<li>
-							<img src="img/card.png">
-						</li>
-						<li>
-							<img src="img/meastro.png">
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row mar-btm">
+    <div class="col-md-6">
+      <div class="payment list">
+        <p>We Accept:</p>
+        <ul style="display: inline-block;">
+          <li>
+            <img src="img/visa.png">
+          </li>
+          <li>
+            <img src="img/card.png">
+          </li>
+          <li>
+            <img src="img/meastro.png">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 <div ng-show="tab=='step4'">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h3 ng-if="checkout.paymentmode==4">Your order is placed successfully.</h3>
-				<h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
-				<div class="order-table" ng-if="checkout.paymentmode!=4">
-					<form method="post" name="customerData" action="http://admin.myfynx.com/paymentgateway/ccavRequestHandler.php">
-						<table width="40%" height="100">
-							<tr style="display:none">
-								<td>TID :</td>
-								<td>
-									<input type="text" name="tid" ng-model="order" readonly />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Merchant Id :</td>
-								<td>
-									<input type="text" name="merchant_id" value="88679" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Order Id :</td>
-								<td>
-									<input type="text" name="order_id" ng-model="order" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Amount :</td>
-								<td>
-									<input type="text" name="amount" ng-model="totalamount" />
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h4>Amount</h4>
-								</td>
-								<td>
-									<h4>{{totalamount}} Rs.</h4>
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Currency :</td>
-								<td>
-									<input type="text" name="currency" value="INR" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Redirect URL :</td>
-								<td>
-									<input type="text" name="redirect_url" value="http://admin.myfynx.com/index.php/json/payumoneysuccess" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Cancel URL :</td>
-								<td>
-									<input type="text" name="cancel_url" value="http://www.myfynx.com/testing" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Language :</td>
-								<td>
-									<input type="text" name="language" value="EN" />
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<h3>Billing Details</h3>
-								</td>
-							</tr>
-							<tr>
-								<td>Billing Name :</td>
-								<td>
-									<input type="text" name="billing_name" style="border: none; width: 100%;" ng-model="checkout.firstname" />
-								</td>
-							</tr>
-							<tr>
-								<td>Billing Address :</td>
-								<td>
-									<input type="text" name="billing_address" style="border: none; width: 100%;" ng-model="checkout.billingaddress" />
-								</td>
-							</tr>
-							<tr>
-								<td>Billing City :</td>
-								<td>
-									<input type="text" name="billing_city" style="border: none; width: 100%;" ng-model="checkout.billingcity" />
-								</td>
-							</tr>
-							<tr>
-								<td>Billing State :</td>
-								<td>
-									<input type="text" name="billing_state" style="border: none; width: 100%;" ng-model="checkout.billingstate" />
-								</td>
-							</tr>
-							<tr>
-								<td>Billing Zip :</td>
-								<td>
-									<input type="text" name="billing_zip" style="border: none; width: 100%;" ng-model="checkout.billingpincode" />
-								</td>
-							</tr>
-							<tr>
-								<td>Billing Country :</td>
-								<td>
-									<input type="text" name="billing_country" style="border: none; width: 100%;" ng-model="checkout.billingcountry" />
-								</td>
-							</tr>
-							<tr>
-								<td>Billing Tel :</td>
-								<td>
-									<input type="text" name="billing_tel" style="border: none; width: 100%;" ng-model="checkout.phone" />
-								</td>
-							</tr>
-							<tr>
-								<td>Billing Email :</td>
-								<td>
-									<input type="text" name="billing_email" style="border: none; width: 100%;" ng-model="checkout.email" />
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<h3>Shipping Details</h3>
-								</td>
-							</tr>
-							<tr>
-								<td>Shipping Name :</td>
-								<td>
-									<input type="text" name="delivery_name" style="border: none; width: 100%;" ng-model="checkout.firstname" />
-								</td>
-							</tr>
-							<tr>
-								<td>Shipping Address :</td>
-								<td>
-									<input type="text" name="delivery_address" style="border: none; width: 100%;" ng-model="checkout.shippingaddress" />
-								</td>
-							</tr>
-							<tr>
-								<td>shipping City :</td>
-								<td>
-									<input type="text" name="delivery_city" style="border: none; width: 100%;" ng-model="checkout.shippingcity" />
-								</td>
-							</tr>
-							<tr>
-								<td>shipping State :</td>
-								<td>
-									<input type="text" name="delivery_state" style="border: none; width: 100%;" ng-model="checkout.shippingstate" />
-								</td>
-							</tr>
-							<tr>
-								<td>shipping Zip :</td>
-								<td>
-									<input type="text" name="delivery_zip" style="border: none; width: 100%;" ng-model="checkout.shippingpincode" />
-								</td>
-							</tr>
-							<tr>
-								<td>shipping Country :</td>
-								<td>
-									<input type="text" name="delivery_country" style="border: none; width: 100%;" ng-model="checkout.shippingcountry" />
-								</td>
-							</tr>
-							<tr>
-								<td>Shipping Tel :</td>
-								<td>
-									<input type="text" name="delivery_tel" style="border: none; width: 100%;" ng-model="checkout.phone" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Merchant Param1 :</td>
-								<td>
-									<input type="text" name="merchant_param1" ng-model="checkout.coupon" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Merchant Param2 :</td>
-								<td>
-									<input type="text" name="merchant_param2" value="additional Info." />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Merchant Param3 :</td>
-								<td>
-									<input type="text" name="merchant_param3" value="additional Info." />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Merchant Param4 :</td>
-								<td>
-									<input type="text" name="merchant_param4" value="additional Info." />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Merchant Param5 :</td>
-								<td>
-									<input type="text" name="merchant_param5" value="additional Info." />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Promo Code :</td>
-								<td>
-									<input type="text" name="promo_code" value="" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Vault Info. :</td>
-								<td>
-									<input type="text" name="customer_identifier" value="" />
-								</td>
-							</tr>
-							<tr style="display:none">
-								<td>Integration Type :</td>
-								<td>
-									<input type="text" name="integration_type" value="iframe_normal" />
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>
-									<button class="btn btn-danger m-30 con-btn" type="submit" ng-show="showplaceorder">Place order</button>
-									<h4 ng-hide="showplaceorder">Loading...</h4>
-								</td>
-							</tr>
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 ng-if="checkout.paymentmode==4">Your order is placed successfully.</h3>
+      <h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
+      <div class="order-table mar-btm" ng-if="checkout.paymentmode!=4">
+        <form method="post" name="customerData" action="http://admin.myfynx.com/paymentgateway/ccavRequestHandler.php">
+          <table width="40%" height="100">
+            <tr style="display:none">
+              <td>TID :</td>
+              <td>
+                <input type="text" name="tid" ng-model="order" readonly/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Merchant Id :</td>
+              <td>
+                <input type="text" name="merchant_id" value="88679"/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Order Id :</td>
+              <td>
+                <input type="text" name="order_id" ng-model="order"/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Amount :</td>
+              <td>
+                <input type="text" name="amount" ng-model="totalamount"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>Amount</h4>
+              </td>
+              <td>
+                <h4>{{totalamount}}
+                  Rs.</h4>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Currency :</td>
+              <td>
+                <input type="text" name="currency" value="INR"/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Redirect URL :</td>
+              <td>
+                <input type="text" name="redirect_url" value="http://admin.myfynx.com/index.php/json/payumoneysuccess"/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Cancel URL :</td>
+              <td>
+                <input type="text" name="cancel_url" value="http://www.myfynx.com/testing"/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Language :</td>
+              <td>
+                <input type="text" name="language" value="EN"/>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <h3>Billing Details</h3>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing Name :</td>
+              <td>
+                <input type="text" name="billing_name" style="border: none; width: 100%;" ng-model="checkout.firstname"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing Address :</td>
+              <td>
+                <input type="text" name="billing_address" style="border: none; width: 100%;" ng-model="checkout.billingaddress"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing City :</td>
+              <td>
+                <input type="text" name="billing_city" style="border: none; width: 100%;" ng-model="checkout.billingcity"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing State :</td>
+              <td>
+                <input type="text" name="billing_state" style="border: none; width: 100%;" ng-model="checkout.billingstate"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing Zip :</td>
+              <td>
+                <input type="text" name="billing_zip" style="border: none; width: 100%;" ng-model="checkout.billingpincode"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing Country :</td>
+              <td>
+                <input type="text" name="billing_country" style="border: none; width: 100%;" ng-model="checkout.billingcountry"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing Tel :</td>
+              <td>
+                <input type="text" name="billing_tel" style="border: none; width: 100%;" ng-model="checkout.phone"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Billing Email :</td>
+              <td>
+                <input type="text" name="billing_email" style="border: none; width: 100%;" ng-model="checkout.email"/>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <h3>Shipping Details</h3>
+              </td>
+            </tr>
+            <tr>
+              <td>Shipping Name :</td>
+              <td>
+                <input type="text" name="delivery_name" style="border: none; width: 100%;" ng-model="checkout.firstname"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Shipping Address :</td>
+              <td>
+                <input type="text" name="delivery_address" style="border: none; width: 100%;" ng-model="checkout.shippingaddress"/>
+              </td>
+            </tr>
+            <tr>
+              <td>shipping City :</td>
+              <td>
+                <input type="text" name="delivery_city" style="border: none; width: 100%;" ng-model="checkout.shippingcity"/>
+              </td>
+            </tr>
+            <tr>
+              <td>shipping State :</td>
+              <td>
+                <input type="text" name="delivery_state" style="border: none; width: 100%;" ng-model="checkout.shippingstate"/>
+              </td>
+            </tr>
+            <tr>
+              <td>shipping Zip :</td>
+              <td>
+                <input type="text" name="delivery_zip" style="border: none; width: 100%;" ng-model="checkout.shippingpincode"/>
+              </td>
+            </tr>
+            <tr>
+              <td>shipping Country :</td>
+              <td>
+                <input type="text" name="delivery_country" style="border: none; width: 100%;" ng-model="checkout.shippingcountry"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Shipping Tel :</td>
+              <td>
+                <input type="text" name="delivery_tel" style="border: none; width: 100%;" ng-model="checkout.phone"/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Merchant Param1 :</td>
+              <td>
+                <input type="text" name="merchant_param1" ng-model="checkout.coupon"/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Merchant Param2 :</td>
+              <td>
+                <input type="text" name="merchant_param2" value="additional Info."/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Merchant Param3 :</td>
+              <td>
+                <input type="text" name="merchant_param3" value="additional Info."/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Merchant Param4 :</td>
+              <td>
+                <input type="text" name="merchant_param4" value="additional Info."/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Merchant Param5 :</td>
+              <td>
+                <input type="text" name="merchant_param5" value="additional Info."/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Promo Code :</td>
+              <td>
+                <input type="text" name="promo_code" value=""/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Vault Info. :</td>
+              <td>
+                <input type="text" name="customer_identifier" value=""/>
+              </td>
+            </tr>
+            <tr style="display:none">
+              <td>Integration Type :</td>
+              <td>
+                <input type="text" name="integration_type" value="iframe_normal"/>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <button class="btn btn-danger m-30 con-btn" type="submit" ng-show="showplaceorder">Place order</button>
+                <h4 ng-hide="showplaceorder">Loading...</h4>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
