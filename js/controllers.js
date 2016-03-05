@@ -1063,6 +1063,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.mainurl = mainurlpaymentgateway;
   $scope.adminurl = adminurl;
   $scope.checkout.coupon = 0;
+  $scope.showplaceorder = false;
 
   $scope.alerts = [];
   if (NavigationService.getUser()) {
@@ -1250,6 +1251,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.checkout.billingaddress = $scope.checkout.billingline1 + "," + $scope.checkout.billingline2 + "," + $scope.checkout.billingline3;
             $scope.checkout.shippingaddress = $scope.checkout.shippingline1 + "," + $scope.checkout.shippingline2 + "," + $scope.checkout.shippingline3;
             NavigationService.setOrder(data);
+            $scope.showplaceorder = true;
             $scope.classa = '';
             $scope.classb = '';
             $scope.classc = '';

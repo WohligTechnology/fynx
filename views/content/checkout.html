@@ -650,7 +650,8 @@
 							<tr>
 								<td></td>
 								<td>
-									<button class="btn btn-danger m-30 con-btn" type="submit">Place order</button>
+									<button class="btn btn-danger m-30 con-btn" type="submit" ng-show="showplaceorder">Place order</button>
+									<h4 ng-hide="showplaceorder">Loading...</h4>
 								</td>
 							</tr>
 						</table>
