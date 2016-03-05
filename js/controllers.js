@@ -1992,33 +1992,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.isfront = false;
   }
   $scope.colorText = function(col, num) {
+    _.each($scope.colour, function(n){
+      n.class = "";
+    })
     switch (num) {
       case 1:
         {
           _.merge($scope.filter.custom[0].css, {
-            "color": col
+            "color": col.color
           });
+          col.class = "active";
         }
         break;
       case 2:
         {
           _.merge($scope.filter.custom[1].css, {
-            "color": col
+            "color": col.color
           });
+          col.class = "active";
         }
         break;
       case 3:
         {
           _.merge($scope.filter.custom[2].css, {
-            "color": col
+            "color": col.color
           });
+          col.class = "active";
         }
         break;
       case 4:
         {
           _.merge($scope.filter.custom[3].css, {
-            "color": col
+            "color": col.color
           });
+          col.class = "active";
         }
         break;
       default:
@@ -2876,7 +2883,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.colour = [{
     color: "red",
-    class: "active"
+    class: ""
   }, {
     color: "black",
     class: ""

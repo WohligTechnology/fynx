@@ -118,7 +118,7 @@
 												* 100% Cotton Blend.
 											</span>
 										</p>
-																		 
+
 									</div>
 
 
@@ -198,7 +198,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color,1);colors[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col,1);colors[0].color=col.color;">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
@@ -446,7 +446,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color,2);colors1[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col,2);colors1[0].color=col.color;">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
@@ -763,7 +763,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color,3);colors2[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col,3);colors2[0].color=col.color;">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
@@ -1012,7 +1012,7 @@
 															<div class="color-pick mar">
 
 																<ul>
-																	<li ng-repeat="col in colour" ng-click="colorText(col.color,4);colors3[0].color=col.color;" class="{{col.class}}">
+																	<li ng-repeat="col in colour" ng-click="colorText(col,4);colors3[0].color=col.color;">
 																		<div class="color-bx" ng-style="{'background':col.color}"></div>
 																	</li>
 																</ul>
