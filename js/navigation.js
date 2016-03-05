@@ -683,7 +683,7 @@ var navigationservice = angular.module('navigationservice', [])
 				method: 'POST',
 				withCredentials: true,
 				data: {
-          "password":forgotform.password,
+          "password":forgotform.newpassword,
           "hashcode":forgotform.hashcode
 				}
 			}).success(callback);

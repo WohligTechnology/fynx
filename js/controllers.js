@@ -86,7 +86,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
 })
-.controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
+.controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, $timeout, $state) {
 
   $scope.template = TemplateService.changecontent("forgotpassword");
   $scope.menutitle = NavigationService.makeactive("Forgot Password");
@@ -111,7 +111,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.resetPassword = function(){
     if ($scope.forgotform.newpassword === $scope.forgotform.reenterpassword) {
       NavigationService.forgotpasswordsubmit($scope.forgotform, function(data){
-
+        if (data.value == true) {
+          $scope.addAlert("success","Password reset successfully.");
+          $timeout(function(){
+            $state.go("home");
+          },500)
+        }else {
+          $scope.addAlert("danger","Fail to update Password.");
+        }
       });
     }else {
       $scope.addAlert("danger","Both password should be same.");
@@ -133,7 +140,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('FAQCtrl', function($scope, TemplateService, NavigationService) {
 
   $scope.template = TemplateService.changecontent("faq");
-  $scope.menutitle = NavigationService.makeactive("FAQS");
+  $scope.menutitle = NavigationService.makeactive("FAQ'S");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
@@ -360,6 +367,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.product = $stateParams.id;
   $scope.categoryname = $stateParams.category;
   cfpLoadingBar.start();
+  $scope.customids = customids;
 
   $scope.addAlert = function(type, msg) {
     $scope.alerts[0] = {
@@ -465,6 +473,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           })
           $scope.sizes = data1;
           $scope.product = data;
+          $scope.sizechart = data.product.type;
         });
         $scope.filter.product = data.product.id;
       } else {
@@ -500,7 +509,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $uibModal.open({
       animation: true,
       templateUrl: 'views/modal/sizechart.html',
-      controller: 'ProductViewCtrl'
+      controller: 'ProductViewCtrl',
+      scope: $scope
     })
   }
 
@@ -1557,6 +1567,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }];
   $scope.filter.type = $stateParams.id;
   $scope.filter.color = $stateParams.color;
+  $scope.sizechart = $stateParams.id
   // $scope.filter.color = "";
   $scope.filter.size = "";
   $scope.filter.price = "";
@@ -3021,7 +3032,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Strech',
+    name: 'Stretch',
     value: 40,
     from: 20,
     to: 200,
@@ -3053,7 +3064,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Strech',
+    name: 'Stretch',
     value: 40,
     from: 20,
     to: 200,
@@ -3085,7 +3096,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Strech',
+    name: 'Stretch',
     value: 40,
     from: 20,
     to: 200,
@@ -3117,7 +3128,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     to: 200,
     step: 1
   }, {
-    name: 'Strech',
+    name: 'Stretch',
     value: 40,
     from: 20,
     to: 200,
@@ -3233,7 +3244,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $uibModal.open({
       animation: true,
       templateUrl: 'views/modal/sizechart.html',
-      controller: 'CustomCreateCtrl'
+      controller: 'CustomCreateCtrl',
+      scope: $scope
     })
   }
 
