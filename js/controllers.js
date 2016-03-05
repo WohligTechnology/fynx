@@ -1135,21 +1135,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.couponamount = 0;
   $scope.checkCoupon = function(coupon) {
     $scope.checkout.coupon = 0;
-    NavigationService.checkCoupon(coupon, function(data) {
-      if (data != "false") {
-        // $scope.amount  cart amount
-        if (_.inRange($scope.amount, data.min, data.max)) {
-          $scope.couponamount = (data.discount / 100) * $scope.amount;
-          $scope.checkout.coupon = data.id;
-          $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
+    if (NavigationService.getUser()) {
+      NavigationService.checkCoupon(coupon, function(data) {
+        if (data != "false") {
+          // $scope.amount  cart amount
+          if (_.inRange($scope.amount, data.min, data.max)) {
+            $scope.couponamount = (data.discount / 100) * $scope.amount;
+            $scope.checkout.coupon = data.id;
+            $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
+          } else {
+            $scope.totalamount = $scope.amount;
+          }
         } else {
+          $scope.addAlert("danger", "Invalid coupon code.");
           $scope.totalamount = $scope.amount;
         }
-      } else {
-        $scope.addAlert("danger", "Invalid coupon code.");
-        $scope.totalamount = $scope.amount;
-      }
-    });
+      });
+    }else {
+      $scope.addAlert("danger", "To Apply coupon login first.");
+    }
+
   }
 
   $scope.tabchange = function(tab, a, sameasbilling) {
