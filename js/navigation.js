@@ -667,6 +667,27 @@ var navigationservice = angular.module('navigationservice', [])
 				}
 			}).success(callback);
 		},
+    forgotPasswordEmail: function (email, callback) {
+      $http({
+				url: adminurl + 'forgotpassword',
+				method: 'POST',
+				withCredentials: true,
+				data: {
+          "email":email
+				}
+			}).success(callback);
+		},
+    forgotpasswordsubmit : function (forgotform, callback) {
+      $http({
+				url: adminurl + 'forgotpasswordsubmit',
+				method: 'POST',
+				withCredentials: true,
+				data: {
+          "password":forgotform.password,
+          "hashcode":forgotform.hashcode
+				}
+			}).success(callback);
+		},
 		addToCartCustom: function (filter, callback) {
       $http({
 				url: adminurl + 'addToCart',

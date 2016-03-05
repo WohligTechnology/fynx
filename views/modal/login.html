@@ -1,104 +1,134 @@
 <div class="modal-height bg-primary login-tab">
-    <uib-tabset justified="true">
-        <uib-tab heading="Sign Up">
-            <div class="content-view">
-                <form ng-submit="registerUser();">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="First Name" type="text" ng-model="register.firstname" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Last Name" type="text" ng-model="register.lastname" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Email" type="email" ng-model="register.email" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" type="password" ng-model="register.password" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="checkbox mb-10">
-                        <label>
-                            <input type="checkbox" ng-model="register.accept"> I Accept the Terms and Conditions and Privacy Policy of the website
-                        </label>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-danger btn-strong font-smart" type="submit">Sign Up</button>
-                    </div>
-                </form>
-                <div class="text-center">
-                    <p ng-show="acceptTerms">Please accept the terms</p>
-                    <p ng-show="alreadyRegistered">Email id already registered</p>
-                    <h3 class="light">OR</h3>
-                    <p>
-                        SIGN UP VIA
-                    </p>
-                    <div class="button-set">
-                        <a class="btn btn-facebook" ng-click="facebooklogin()">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a class="btn btn-google" ng-click="googlelogin()">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a class="btn btn-twitter" ng-click="twitterlogin()">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </div>
-                </div>
+   <uib-tabset justified="true" ng-if = "forgotpass==true">
+    <uib-tab heading="Forgot Password">
+      <div class="content-view">
+        <form ng-submit="registerUser();">
+          <div class="row">
+
+            <div class="col-md-12">
+              <label>
+                 Enter your registered email address and we will send you instructions.
+              </label>
+              <div class="form-group">
+                <input class="form-control" placeholder="Email" type="email" ng-model="email" required>
+              </div>
+              <label style="color:{{msg.color}}" ng-if="msg.text!=''">
+                 {{msg.text}}
+              </label>
             </div>
-        </uib-tab>
-        <uib-tab heading="Sign In">
-            <div class="content-view">
-                <form ng-submit="loginUser()">
-                    <div class="row">
-                        <div class="col-md-offset-3 col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Email" type="email" ng-model="login.email">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-offset-3 col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" type="password" ng-model="login.password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <p ng-show="invalidLogin">Invalid Login Credentials</p>
-                        <!-- <p>
-                            <a href="#">Forgot password?</a>
-                        </p> -->
-                        <button class="btn btn-danger btn-strong font-smart" type="submit">LOGIN</button>
-                    </div>
-                </form>
-                <div class="text-center">
-                    <h3 class="light">OR</h3>
-                    <p>
-                        SIGN UP VIA
-                    </p>
-                    <div class="button-set">
-                        <a class="btn btn-facebook" href="http://localhost/newfynx/index.php/hauth/login/Google">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <button class="btn btn-google">
-                            <i class="fa fa-google-plus"></i>
-                        </button>
-                        <button class="btn btn-twitter">
-                            <i class="fa fa-twitter"></i>
-                        </button>
-                    </div>
-                </div>
+          </div>
+          <div class="button-set text-center">
+            <a class="btn btn-danger btn-strong font-smart" ng-click="sendEmail(email)">
+              Reset Password
+            </a>
+            <a class="btn btn-danger btn-strong font-smart" ng-click="cancelForgot(forgotpass)">
+              Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </uib-tab>
+  </uib-tabset>
+   <uib-tabset justified="true" ng-if = "forgotpass!=true">
+    <uib-tab heading="Sign Up">
+      <div class="content-view">
+        <form ng-submit="registerUser();">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input class="form-control" placeholder="First Name" type="text" ng-model="register.firstname" required>
+              </div>
             </div>
-        </uib-tab>
-        </ui-tabset>
-        <img src="img/mrfynx.png" class="fixed-down" />
+            <div class="col-md-6">
+              <div class="form-group">
+                <input class="form-control" placeholder="Last Name" type="text" ng-model="register.lastname" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input class="form-control" placeholder="Email" type="email" ng-model="register.email" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input class="form-control" placeholder="Password" type="password" ng-model="register.password" required>
+              </div>
+            </div>
+          </div>
+          <div class="checkbox mb-10">
+            <label>
+              <input type="checkbox" ng-model="register.accept"> I Accept the Terms and Conditions and Privacy Policy of the website
+            </label>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-danger btn-strong font-smart" type="submit">Sign Up</button>
+          </div>
+        </form>
+        <div class="text-center">
+          <p ng-show="acceptTerms">Please accept the terms</p>
+          <p ng-show="alreadyRegistered">Email id already registered</p>
+          <h3 class="light">OR</h3>
+          <p>
+            SIGN UP VIA
+          </p>
+          <div class="button-set">
+            <a class="btn btn-facebook" ng-click="facebooklogin()">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a class="btn btn-google" ng-click="googlelogin()">
+              <i class="fa fa-google-plus"></i>
+            </a>
+            <a class="btn btn-twitter" ng-click="twitterlogin()">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab heading="Sign In">
+      <div class="content-view">
+        <form ng-submit="loginUser()">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <div class="form-group">
+                <input class="form-control" placeholder="Email" type="email" ng-model="login.email">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <div class="form-group">
+                <input class="form-control" placeholder="Password" type="password" ng-model="login.password">
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <p ng-show="invalidLogin">Invalid Login Credentials</p>
+            <p>
+              <a ng-click="cancelForgot(forgotpass)">Forgot password?</a>
+            </p>
+            <button class="btn btn-danger btn-strong font-smart" type="submit">LOGIN</button>
+          </div>
+        </form>
+        <div class="text-center">
+          <h3 class="light">OR</h3>
+          <p>
+            SIGN UP VIA
+          </p>
+          <div class="button-set">
+            <a class="btn btn-facebook" href="http://localhost/newfynx/index.php/hauth/login/Google">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <button class="btn btn-google">
+              <i class="fa fa-google-plus"></i>
+            </button>
+            <button class="btn btn-twitter">
+              <i class="fa fa-twitter"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </uib-tab>
+    </ui-tabset>
+    <img src="img/mrfynx.png" class="fixed-down" />
 </div>

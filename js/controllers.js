@@ -86,13 +86,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
 })
-.controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService) {
+.controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
 
   $scope.template = TemplateService.changecontent("forgotpassword");
   $scope.menutitle = NavigationService.makeactive("Forgot Password");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
+  $scope.forgotform = {};
+  $scope.alerts = [];
+  $scope.forgotform.hashcode = $stateParams.hashcode;
+
+  $scope.addAlert = function(type, msg) {
+    $scope.alerts[0] = {
+      type: type,
+      msg: msg
+    };
+  };
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
+  $scope.resetPassword = function(){
+    if ($scope.forgotform.newpassword === $scope.forgotform.reenterpassword) {
+      NavigationService.forgotpasswordsubmit($scope.forgotform, function(data){
+
+      });
+    }else {
+      $scope.addAlert("danger","Both password should be same.");
+    }
+
+  }
 })
 
 
@@ -3508,9 +3533,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.user = {};
     $scope.totalcart = 0;
     $scope.loginUrl = mainurl;
+    $scope.forgotpass = false;
+    $scope.email = '';
+    $scope.msg = {
+      "text":'',
+      "color":''
+     }
 
+    $scope.cancelForgot = function(val){
+      console.log(val);
+      $scope.forgotpass = !val;
+    }
 
+    $scope.sendEmail = function(email){
 
+        if (email!='') {
+      NavigationService.forgotPasswordEmail(email, function(data){
+        if (data.value == true) {
+          $scope.msg = {
+            "text":'Please check your inbox.',
+            "color":'#52FC00'
+           }
+        }else {
+          $scope.msg = {
+            "text":'This email is not registered with us.',
+            "color":'red'
+           }
+        }
+
+      });
+    }else {
+      $scope.msg = {
+        "text":'Please provide valid email Id.',
+        "color":'red'
+       }
+    }
+    }
 
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);
@@ -3520,7 +3578,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $uibModal.open({
         animation: true,
         templateUrl: 'views/modal/login.html',
-        controller: 'headerctrl'
+        controller: 'headerctrl',
+        scope: $scope
       })
     };
 
