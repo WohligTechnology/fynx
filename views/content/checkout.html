@@ -274,7 +274,7 @@
         </div>
         <div class="form-group">
           <label>COUNTRY*</label>
-          <select name="country" ng-model="checkout.billingcountry" class="form-control">
+          <select ng-model="checkout.billingcountry" class="form-control">
             <option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
           </select>
         </div>
@@ -347,7 +347,7 @@
           <div class="form-group">
             <label>COUNTRY*</label>
             <select name="country" ng-model="checkout.shippingcountry" class="form-control">
-              <option value="country.value" ng-repeat="country in countries">{{country.value}}</option>
+              <option value="{{country.value}}" ng-repeat="country in countries">{{country.value}}</option>
             </select>
           </div>
         </div>

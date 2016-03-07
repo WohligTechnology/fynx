@@ -98,7 +98,7 @@
 								<!-- <span ng-if="size[0]">: {{size[0].name}}</span> <span ng-if="sizelength"> to </span>  <span ng-if="sizelength">{{sizelength.name}}</span> <b class="b-color" ng-click="sizeChart();">SIZE CHART</b> -->
 								<p>SIZES:
 									<span>S,M,L,XL,XXL,XXXL</span>
-									<span class="size-chart"><a href="" class="danger bold" ng-click="sizeChart();">Size Chart</a></span>
+									<span class="size-chart"><a href="" class="danger bold" ng-click="sizeChart();" ng-if="images.sizechartimage && images.sizechartimage!='' && images.sizechartimage!=null">Size Chart</a></span>
 								</p>
 								<p>FABRIC:
 									<span>100% Pre-Shrunk Cotton</span>

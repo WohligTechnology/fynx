@@ -104,6 +104,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, cfpL
     controller: 'ProductListCtrl'
   })
 
+  .state('productlisturl', {
+    url: "/products/:category/:type/:subcategory",
+    templateUrl: "views/template.html",
+    controller: 'ProductListCtrl'
+  })
+
   .state('productview', {
     url: "/product/:category/:id/:design",
     templateUrl: "views/template.html",

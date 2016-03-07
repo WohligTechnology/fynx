@@ -114,8 +114,10 @@
                             <h3 class="primary">Rs. {{product.product.price}}</h3>
                         </div>
                         <div class="size-chart">
+                          <div ng-if="product.product.sizechartimage || product.product.sizechartimage!=''">
                             <span class="very-bold">Size</span>
                             <button class="btn btn-tiny btn-gray btn-outline" ng-click="sizeChart()">Size Guide</button>
+                          </div>
 
                             <ul class="list-inline text-upper" ng-if="sizes!=''">
                                 <li ng-repeat="size in sizes" class="{{size.state}} {{size.style}}" ng-click="onSizeClick(size)">{{size.name}}</li>

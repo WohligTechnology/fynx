@@ -80,52 +80,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('PrivacyCtrl', function($scope, TemplateService, NavigationService) {
 
-  $scope.template = TemplateService.changecontent("privacy");
-  $scope.menutitle = NavigationService.makeactive("Privacy Policy");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
-})
-.controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, $timeout, $state) {
+    $scope.template = TemplateService.changecontent("privacy");
+    $scope.menutitle = NavigationService.makeactive("Privacy Policy");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+  })
+  .controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, $timeout, $state) {
 
-  $scope.template = TemplateService.changecontent("forgotpassword");
-  $scope.menutitle = NavigationService.makeactive("Forgot Password");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.footerBlack = true;
-  $scope.forgotform = {};
-  $scope.alerts = [];
-  $scope.forgotform.hashcode = $stateParams.hashcode;
+    $scope.template = TemplateService.changecontent("forgotpassword");
+    $scope.menutitle = NavigationService.makeactive("Forgot Password");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.footerBlack = true;
+    $scope.forgotform = {};
+    $scope.alerts = [];
+    $scope.forgotform.hashcode = $stateParams.hashcode;
 
-  $scope.addAlert = function(type, msg) {
-    $scope.alerts[0] = {
-      type: type,
-      msg: msg
+    $scope.addAlert = function(type, msg) {
+      $scope.alerts[0] = {
+        type: type,
+        msg: msg
+      };
     };
-  };
 
-  $scope.closeAlert = function(index) {
-    $scope.alerts.splice(index, 1);
-  };
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
 
-  $scope.resetPassword = function(){
-    if ($scope.forgotform.newpassword === $scope.forgotform.reenterpassword) {
-      NavigationService.forgotpasswordsubmit($scope.forgotform, function(data){
-        if (data.value == true) {
-          $scope.addAlert("success","Password reset successfully.");
-          $timeout(function(){
-            $state.go("home");
-          },500)
-        }else {
-          $scope.addAlert("danger","Fail to update Password.");
-        }
-      });
-    }else {
-      $scope.addAlert("danger","Both password should be same.");
+    $scope.resetPassword = function() {
+      if ($scope.forgotform.newpassword === $scope.forgotform.reenterpassword) {
+        NavigationService.forgotpasswordsubmit($scope.forgotform, function(data) {
+          if (data.value == true) {
+            $scope.addAlert("success", "Password reset successfully.");
+            $timeout(function() {
+              $state.go("home");
+            }, 500)
+          } else {
+            $scope.addAlert("danger", "Fail to update Password.");
+          }
+        });
+      } else {
+        $scope.addAlert("danger", "Both password should be same.");
+      }
+
     }
-
-  }
-})
+  })
 
 
 .controller('AboutCtrl', function($scope, TemplateService, NavigationService) {
@@ -346,9 +346,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal, cfpLoadingBar, $timeout) {
 
   $scope.template = TemplateService.changecontent("product-view");
-  if ($stateParams.category=='men') {
+  if ($stateParams.category == 'men') {
     $scope.menutitle = NavigationService.makeactive("Men");
-  }else {
+  } else {
     $scope.menutitle = NavigationService.makeactive("Women");
   }
 
@@ -473,6 +473,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           })
           $scope.sizes = data1;
           $scope.product = data;
+          $scope.sizechartimage = data.product.sizechartimage;
           $scope.sizechart = data.product.type;
         });
         $scope.filter.product = data.product.id;
@@ -1079,8 +1080,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   if (NavigationService.getUser()) {
     NavigationService.getUserDetails(function(data) {
       $scope.checkout = data;
-      $scope.checkout.billingcountry = "Please Select";
-      $scope.checkout.shippingcountry = "Please Select";
+      // $scope.checkout.billingcountry = "Please Select";
+      // $scope.checkout.shippingcountry = "Please Select";
     });
   }
 
@@ -1146,23 +1147,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.checkCoupon = function(coupon) {
     $scope.checkout.coupon = 0;
     if (NavigationService.getUser()) {
-      NavigationService.checkCoupon(coupon, function(data) {
-        if (data != "false") {
-          // $scope.amount  cart amount
-          if (_.inRange($scope.amount, data.min, data.max)) {
-            $scope.couponamount = (data.discount / 100) * $scope.amount;
-            $scope.checkout.coupon = data.id;
-            $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
-          } else {
+      if (coupon && coupon != "") {
+
+        NavigationService.checkCoupon(coupon, function(data) {
+          if (data.value == false) {
+            // $scope.amount  cart amount
+            $scope.addAlert("danger", data.comment);
             $scope.totalamount = $scope.amount;
+          } else {
+            if ($scope.amount >= data.min) {
+              $scope.couponamount = (data.discount / 100) * $scope.amount;
+              console.log($scope.couponamount);
+              if ($scope.couponamount <= data.max) {
+                $scope.checkout.coupon = data.id;
+                $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
+              }else {
+                $scope.checkout.coupon = data.id;
+                $scope.totalamount = $filter('number')($scope.amount - data.max, 0);
+              }
+            } else {
+              $scope.totalamount = $scope.amount;
+            }
           }
-        } else {
-          $scope.addAlert("danger", "Invalid coupon code.");
-          $scope.totalamount = $scope.amount;
-        }
-      });
-    }else {
+        });
+      } else {
+        $scope.addAlert("danger", "Please enter Coupon Code.");
+        $scope.totalamount = $scope.amount;
+      }
+    } else {
       $scope.addAlert("danger", "To Apply coupon login first.");
+      $scope.totalamount = $scope.amount;
     }
 
   }
@@ -1568,7 +1582,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filter.type = $stateParams.id;
   $scope.filter.color = $stateParams.color;
   $scope.sizechart = $stateParams.id
-  // $scope.filter.color = "";
+    // $scope.filter.color = "";
   $scope.filter.size = "";
   $scope.filter.price = "";
   $scope.filter.image1 = myImage;
@@ -1959,6 +1973,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.outofstock = true;
       }
       $scope.images = data.image;
+      $scope.sizechartimage = data.image.sizechartimage;
       if ($scope.images.id) {
         $scope.filter.id = $scope.images.id;
       }
@@ -1992,7 +2007,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.isfront = false;
   }
   $scope.colorText = function(col, num) {
-    _.each($scope.colour, function(n){
+    _.each($scope.colour, function(n) {
       n.class = "";
     })
     switch (num) {
@@ -3540,7 +3555,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // COMMON FUNCTIONS
     myfunction = function() {
       NavigationService.gettotalcart(function(data) {
-        $.jStorage.set("badgeCount",data);
+        $.jStorage.set("badgeCount", data);
         $scope.totalcart = data;
       });
     }
@@ -3562,38 +3577,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.forgotpass = false;
     $scope.email = '';
     $scope.msg = {
-      "text":'',
-      "color":''
-     }
+      "text": '',
+      "color": ''
+    }
 
-    $scope.cancelForgot = function(val){
+    $scope.cancelForgot = function(val) {
       console.log(val);
       $scope.forgotpass = !val;
     }
 
-    $scope.sendEmail = function(email){
+    $scope.sendEmail = function(email) {
 
-        if (email!='') {
-      NavigationService.forgotPasswordEmail(email, function(data){
-        if (data.value == true) {
-          $scope.msg = {
-            "text":'Please check your inbox.',
-            "color":'#52FC00'
-           }
-        }else {
-          $scope.msg = {
-            "text":'This email is not registered with us.',
-            "color":'red'
-           }
+      if (email != '') {
+        NavigationService.forgotPasswordEmail(email, function(data) {
+          if (data.value == true) {
+            $scope.msg = {
+              "text": 'Please check your inbox.',
+              "color": '#52FC00'
+            }
+          } else {
+            $scope.msg = {
+              "text": 'This email is not registered with us.',
+              "color": 'red'
+            }
+          }
+
+        });
+      } else {
+        $scope.msg = {
+          "text": 'Please provide valid email Id.',
+          "color": 'red'
         }
-
-      });
-    }else {
-      $scope.msg = {
-        "text":'Please provide valid email Id.',
-        "color":'red'
-       }
-    }
+      }
     }
 
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -3611,12 +3626,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     if (NavigationService.getUser()) {
       $scope.showLogout = true;
-      $scope.myuser = NavigationService.getUser('user');
-      if ($scope.myuser.firstname != '' || $scope.myuser.lastname != '') {
-        $scope.user.name = NavigationService.getUser('user').firstname + " " + NavigationService.getUser('user').lastname;
-      } else {
+      NavigationService.getUserDetails(function(data) {
+        $scope.myuser = data;
+        // if ($scope.myuser.firstname != '' || $scope.myuser.lastname != '') {
+        //   $scope.user.name = $scope.myuser.firstname + " " + $scope.myuser.lastname;
+        // } else {
         $scope.user.name = $scope.myuser.name;
-      }
+        // }
+      });
+
     }
 
     $scope.registerUser = function() {
