@@ -2226,6 +2226,21 @@ $left-sider: 450px !default;
   background-color: $brand-danger;
   border: 1px solid $brand-danger;
 }
+.white-close {
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+.home-popup {
+  margin-top: 20vh;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
 @import "main/mobile";
 @import "fancy-override";
 @import "custom-colors";

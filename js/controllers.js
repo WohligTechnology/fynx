@@ -15,7 +15,7 @@ window.uploadUrl = 'http://admin.myfynx.com/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload', 'angular-loading-bar'])
 
 
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
 
   //Used to name the .html file
   $scope.template = TemplateService.changecontent("home");
@@ -28,9 +28,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // $scope.mySlides = data;
   });
 
+  $scope.open = function () {
+    var discountModal = $uibModal.open({
+      animation: true,
+      templateUrl: 'views/modal/home-popup.html',
+      size: 'lg',
+      backdrop: 'static',
+      resolve: {}
+    });
+
+    discountModal.result.then(function() {
+      $.jStorage.set('modalHome', 1);
+    });
+  };
+
+  var modalHome = $.jStorage.get('modalHome');
+  if (modalHome !== 1) {
+    setTimeout(function() {
+      $scope.open();
+    }, 1500);
+  }
+
+
   NavigationService.getHomeSlider(function(data) {
     $scope.mySlides = data;
-  })
+  });
 
   // $scope.mySlides = [{
   //   id: 1,
@@ -86,6 +108,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.footerBlack = true;
   })
+
   .controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, $timeout, $state) {
 
     $scope.template = TemplateService.changecontent("forgotpassword");
@@ -113,11 +136,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       forgotform.hashcode = $stateParams.hashcode;
       if (forgotform.newpassword === forgotform.reenterpassword) {
         NavigationService.forgotpasswordsubmit(forgotform, function(data) {
-          if (data.value == true) {
+          if (data.value === true) {
             $scope.addAlert("success", "Password reset successfully.");
             $timeout(function() {
               $state.go("home");
-            }, 500)
+            }, 500);
           } else {
             $scope.addAlert("danger", "Fail to update Password.");
           }
@@ -126,7 +149,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.addAlert("danger", "Both password should be same.");
       }
 
-    }
+    };
   })
 
 
@@ -158,7 +181,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   myfunction();
   NavigationService.getorderbyorderid($stateParams.order, function(data) {
     $scope.order = data;
-  })
+  });
 })
 
 .controller('SorryCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
