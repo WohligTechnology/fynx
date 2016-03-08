@@ -579,7 +579,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		getProductByCategory: function (filters, callback) {
-			return $http.get(adminurl + 'getproductbycategory?name=' + filters.name + '&category=' + filters.category + '&subcategory=' + filters.subcategory + '&color=' + filters.color + '&size=' + filters.size + '&price=' + filters.price + '&type=' + filters.type + '&maxrow=5' + '&pageno=' + filters.pageno, {}, {
+			return $http.get(adminurl + 'getproductbycategory?name=' + filters.name + '&category=' + filters.category + '&subcategory=' + filters.subcategory + '&color=' + filters.color + '&size=' + filters.size + '&price=' + filters.price + '&typename=' + filters.typename + '&type=' + filters.type + '&maxrow=5' + '&pageno=' + filters.pageno, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
@@ -668,16 +668,20 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
     forgotPasswordEmail: function (email, callback) {
-      $http({
-				url: adminurl + 'forgotpassword',
-				method: 'POST',
-				withCredentials: true,
-				data: {
-          "email":email
-				}
+      // $http({
+			// 	url: adminurl + 'forgotpassword',
+			// 	method: 'POST',
+			// 	withCredentials: true,
+			// 	data: {
+      //     "email":email
+			// 	}
+			// }).success(callback);
+      return $http.get(adminurl + 'forgotpassword?email='+email, {}, {
+				withCredentials: true
 			}).success(callback);
 		},
     forgotpasswordsubmit : function (forgotform, callback) {
+      console.log(forgotform);
       $http({
 				url: adminurl + 'forgotpasswordsubmit',
 				method: 'POST',
@@ -777,11 +781,11 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 
 		},
-		getproductbycategory: function (filter, callback) {
-			return $http.get(adminurl + 'getproductbycategory?type=' + filter.type + '&color='+filter.color+ '&size='+filter.size+'&price='+filter.price, {}, {
-				withCredentials: true
-			}).success(callback);
-		},
+		// getproductbycategory: function (filter, callback) {
+		// 	return $http.get(adminurl + 'getproductbycategory?type=' + filter.type + '&color='+filter.color+ '&size='+filter.size+'&price='+filter.price, {}, {
+		// 		withCredentials: true
+		// 	}).success(callback);
+		// },
 		gettotalcart: function (callback) {
 			return $http.get(adminurl + 'totalitemcart', {}, {
 				withCredentials: true

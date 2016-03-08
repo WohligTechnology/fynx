@@ -108,9 +108,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.alerts.splice(index, 1);
     };
 
-    $scope.resetPassword = function() {
-      if ($scope.forgotform.newpassword === $scope.forgotform.reenterpassword) {
-        NavigationService.forgotpasswordsubmit($scope.forgotform, function(data) {
+    $scope.resetPassword = function(forgotform) {
+      console.log(forgotform.newpassword);
+      forgotform.hashcode = $stateParams.hashcode;
+      if (forgotform.newpassword === forgotform.reenterpassword) {
+        NavigationService.forgotpasswordsubmit(forgotform, function(data) {
           if (data.value == true) {
             $scope.addAlert("success", "Password reset successfully.");
             $timeout(function() {
@@ -192,7 +194,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.footerBlack = true;
   $scope.filters = {};
   $scope.filters.pageno = 1;
-  $scope.filters.category = $stateParams.category;
+  $scope.filters.category = $stateParams.category.split('-')[0];
+  $scope.filters.typename = $stateParams.category.split('-')[1];
   $scope.filters.subcategory = '';
   $scope.filters.color = '';
   $scope.filters.size = '';
