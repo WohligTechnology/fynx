@@ -1148,14 +1148,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.checkout.coupon = 0;
     if (NavigationService.getUser()) {
       if (coupon && coupon != "") {
-
         NavigationService.checkCoupon(coupon, function(data) {
           if (data.value == false) {
             // $scope.amount  cart amount
             $scope.addAlert("danger", data.comment);
             $scope.totalamount = $scope.amount;
           } else {
-            if ($scope.amount >= data.min) {
+            if (parseInt($scope.amount) >= parseInt(data.min)) {
               $scope.couponamount = (data.discount / 100) * $scope.amount;
               console.log($scope.couponamount);
               if ($scope.couponamount <= data.max) {
