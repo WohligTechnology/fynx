@@ -1,4 +1,9 @@
 //mobile
+@media (max-width: $screen-sm-max) {
+  .navbar-collapse {
+    background-color: white;
+  }
+}
 @media (max-width:$screen-xs-max) {
   .navbar-collapse {
     background-color: white;

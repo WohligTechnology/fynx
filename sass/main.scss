@@ -130,6 +130,12 @@ $screen-lg-max: 1200px !default;
 }
 .btn-dark {
   @include button-variant(white, black, black);
+  &.btn-outline {
+    color: black;
+    &:hover, &:focus {
+      color: white;
+    }
+  }
 }
 .btn-facebook {
   @include button-variant(white, $facebook, $facebook);
@@ -498,7 +504,7 @@ span.mobile {
   line-height: 120%;
 }
 .follow-text {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .social-icon {
   font-size: 25px;
@@ -512,6 +518,17 @@ span.mobile {
   color: white;
   a {
     color: inherit;
+  }
+  .btn-dark {
+    @include button-variant(black, white, white);
+    &.btn-outline {
+      background-color: transparent;
+      color: white;
+      &:hover, &:focus {
+        color: black;
+        background-color: white;
+      }
+    }
   }
   .dashed {
     &:after {
@@ -2240,6 +2257,12 @@ $left-sider: 450px !default;
     max-width: 100%;
     height: auto;
   }
+}
+.btn.btn-big {
+  font-size: 18px;
+  font-weight: bold;
+  border-width: 3px;
+  padding: 6px 30px;
 }
 @import "main/mobile";
 @import "fancy-override";

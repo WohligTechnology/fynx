@@ -28,7 +28,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // $scope.mySlides = data;
   });
 
-  $scope.open = function () {
+  $scope.openDiscount = function () {
     var discountModal = $uibModal.open({
       animation: true,
       templateUrl: 'views/modal/home-popup.html',
@@ -45,7 +45,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   var modalHome = $.jStorage.get('modalHome');
   if (modalHome !== 1) {
     setTimeout(function() {
-      $scope.open();
+      $scope.openDiscount();
     }, 1500);
   }
 
