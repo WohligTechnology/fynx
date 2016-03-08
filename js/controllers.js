@@ -217,8 +217,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.footerBlack = true;
   $scope.filters = {};
   $scope.filters.pageno = 1;
-  $scope.filters.category = $stateParams.category.split('-')[0];
-  $scope.filters.typename = $stateParams.category.split('-')[1];
+  $scope.filters.category = $stateParams.category;
+  if ($stateParams.type) {
+    $scope.filters.typename = $stateParams.type;
+  }else {
+    $scope.filters.typename = "";
+  }
+
   $scope.filters.subcategory = '';
   $scope.filters.color = '';
   $scope.filters.size = '';
@@ -238,7 +243,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.productList = [];
   $scope.categoryName = $stateParams.category;
   var lastpage = 0;
+  $scope.counter = 0;
   $scope.filters.pageno = 0;
+  var typesel = {};
   $scope.price = [{
     id: "",
     name: "Default Price"
@@ -251,12 +258,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }];
 
   $scope.loadProducts = function() {
-    console.log("demo");
+
     if (lastpage >= $scope.filters.pageno) {
       ++$scope.filters.pageno;
+
       NavigationService.getProductByCategory($scope.filters, function(data) {
         if (data) {
-          console.log(data);
           lastpage = data.product.lastpage;
           if ($scope.freeze.freezeColor == "") {
             $scope.colors = data.filter.color;
@@ -273,10 +280,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
           }
           if ($scope.freeze.freezeType == "") {
+            console.log("freeze type");
             $scope.subcategory = data.filter.subcategory;
             _.each($scope.subcategory, function(n) {
               n.state = false;
+              if ($scope.counter==0) {
+                _.each(n.types, function(m){
+                  if ($filter('lowercase')(m.name)==$filter('lowercase')($scope.filters.typename)) {
+                    m.status = true;
+                    n.state = true;
+                    typesel = m;
+                    $scope.filters.type.push(typesel.id);
+                  }else {
+                    m.status = false;
+                  }
+                });
+              }else {
+
+              }
+
             });
+
           }
           _.each(data.product.queryresult, function(n) {
             $scope.productList.push(n);
@@ -304,6 +328,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.addtype = function(type, index) {
+console.log(type);
+$scope.counter = 1;
     $scope.productList = [];
     lastpage = 0;
     $scope.filters.pageno = 0;
@@ -327,6 +353,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.freeze.freezeType = $scope.subcategory;
     }
     console.log($scope.filters.type);
+    if ($scope.filters.type=="") {
+      $scope.filters.typename = "";
+    }
     $scope.loadProducts();
 
   }
@@ -1170,6 +1199,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
   };
   $scope.couponamount = 0;
+  $scope.showcoupontext = false;
   $scope.checkCoupon = function(coupon) {
     $scope.checkout.coupon = 0;
     if (NavigationService.getUser()) {
@@ -1186,6 +1216,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
               if ($scope.couponamount <= data.max) {
                 $scope.checkout.coupon = data.id;
                 $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
+                $scope.showcoupontext = true;
+                $timeout(function(){
+                  $scope.showcoupontext = false;
+                },4000);
               }else {
                 $scope.checkout.coupon = data.id;
                 $scope.totalamount = $filter('number')($scope.amount - data.max, 0);

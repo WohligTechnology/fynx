@@ -2227,6 +2227,10 @@ $left-sider: 450px !default;
     padding-left: $left-sider;
     min-height: 560px;
 }
+.coupon-text {
+  padding: 10px;
+    color: green;
+}
 @media (max-width:$screen-xs-max) {
   .tee-col {
     position: relative;
