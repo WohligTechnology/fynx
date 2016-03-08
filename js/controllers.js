@@ -14,20 +14,7 @@ var arcText = {};
 window.uploadUrl = 'http://admin.myfynx.com/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload', 'angular-loading-bar'])
 
-
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
-
-  //Used to name the .html file
-  $scope.template = TemplateService.changecontent("home");
-  $scope.menutitle = NavigationService.makeactive("Home");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-
-  NavigationService.gethomecontent(function(data) {
-    console.log(data);
-    // $scope.mySlides = data;
-  });
-
+.controller('DiscountCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
   $scope.openDiscount = function () {
     var discountModal = $uibModal.open({
       animation: true,
@@ -49,6 +36,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }, 1500);
   }
 
+})
+
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+
+  //Used to name the .html file
+  $scope.template = TemplateService.changecontent("home");
+  $scope.menutitle = NavigationService.makeactive("Home");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+  NavigationService.gethomecontent(function(data) {
+    console.log(data);
+    // $scope.mySlides = data;
+  });
 
   NavigationService.getHomeSlider(function(data) {
     $scope.mySlides = data;
