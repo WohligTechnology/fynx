@@ -20,10 +20,11 @@
             <div class="template menu text-center" ng-include="template.menu"></div>
           </div>
         </div>
-        <div class="col-sm-3 text-center visible-lg-block visible-md-block" ng-controller="badgeCount">
+        <div class="col-sm-3 text-center hide-ph" ng-controller="badgeCount">
           <ul class="nav navbar-nav inline">
-            <li>
-              <a href="" ng-click="openLogin();" ng-hide="showLogout">Login</a></li>
+            <li ng-hide="showLogout">
+              <a href="" ng-click="openLogin();">Login</a>
+            </li>
             <li ng-show="showLogout">
               <a href="#/profile">{{user.name}}</a>
               <ul class="dropdown-menu">
