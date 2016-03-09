@@ -2286,6 +2286,8 @@ $left-sider: 450px !default;
   padding: 8px 0;
   text-align: center;
   z-index: 99;
+  cursor: pointer;
+  @include transition(all ease 300ms);
   i {
     font-size: 24px;
     color: #222;
