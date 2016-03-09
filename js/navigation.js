@@ -579,7 +579,7 @@ var navigationservice = angular.module('navigationservice', [])
 			}).success(callback);
 		},
 		getProductByCategory: function (filters, callback) {
-			return $http.get(adminurl + 'getproductbycategory?name=' + filters.name + '&category=' + filters.category + '&subcategory=' + filters.subcategory + '&color=' + filters.color + '&size=' + filters.size + '&price=' + filters.price + '&typename=' + filters.typename + '&type=' + filters.type + '&maxrow=5' + '&pageno=' + filters.pageno, {}, {
+			return $http.get(adminurl + 'getproductbycategory?name=' + filters.name + '&category=' + filters.category + '&subcategory=' + filters.subcategory + '&color=' + filters.color + '&size=' + filters.size + '&price=' + filters.price + '&typename=' + filters.typename + '&type=' + filters.type + '&maxrow=9' + '&pageno=' + filters.pageno, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
