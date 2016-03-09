@@ -2268,6 +2268,8 @@ $left-sider: 450px !default;
   border-width: 3px;
   padding: 6px 30px;
 }
+.coupon-button:hover span {display:none}
+.coupon-button:hover:before {content:"GRAB THIS OFFER!"}
 @import "main/mobile";
 @import "fancy-override";
 @import "custom-colors";

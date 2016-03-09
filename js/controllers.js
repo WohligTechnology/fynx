@@ -11,10 +11,13 @@ var custom = {};
 var uploadres = [];
 var myfunc = {};
 var arcText = {};
+var checkPoup = 0;
 window.uploadUrl = 'http://admin.myfynx.com/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload', 'angular-loading-bar'])
 
 .controller('DiscountCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+
+
   $scope.openDiscount = function () {
     var discountModal = $uibModal.open({
       animation: true,
@@ -32,7 +35,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   var modalHome = $.jStorage.get('modalHome');
   if (modalHome !== 1) {
     setTimeout(function() {
-      $scope.openDiscount();
+      if(checkPoup==0){
+        $scope.openDiscount();
+        checkPoup++;
+      }
     }, 1500);
   }
 
