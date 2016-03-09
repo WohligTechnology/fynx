@@ -1224,6 +1224,7 @@ $scope.counter = 1;
               }else {
                 $scope.checkout.coupon = data.id;
                 $scope.totalamount = $filter('number')($scope.amount - data.max, 0);
+                $scope.couponamount = data.max;
               }
             } else {
               $scope.totalamount = $scope.amount;
