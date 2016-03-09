@@ -132,7 +132,8 @@ $screen-lg-max: 1200px !default;
   @include button-variant(white, black, black);
   &.btn-outline {
     color: black;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: white;
     }
   }
@@ -524,7 +525,8 @@ span.mobile {
     &.btn-outline {
       background-color: transparent;
       color: white;
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         color: black;
         background-color: white;
       }
@@ -2212,24 +2214,23 @@ span.badge.red {
     }
   }
 }
-
 $left-sider: 450px !default;
 .custom-row {
-    position: relative;
+  position: relative;
 }
 .tee-col {
-    width: $left-sider;
-    position: absolute;
-    left: 0;
-    top: 0;
+  width: $left-sider;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .dee-col {
-    padding-left: $left-sider;
-    min-height: 560px;
+  padding-left: $left-sider;
+  min-height: 560px;
 }
 .coupon-text {
   padding: 10px;
-    color: green;
+  color: green;
 }
 @media (max-width:$screen-xs-max) {
   .tee-col {
@@ -2248,12 +2249,12 @@ $left-sider: 450px !default;
   border: 1px solid $brand-danger;
 }
 .white-close {
-    background-color: white;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    cursor: pointer;
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
 }
 .home-popup {
   margin-top: 20vh;
@@ -2268,8 +2269,27 @@ $left-sider: 450px !default;
   border-width: 3px;
   padding: 6px 30px;
 }
-.coupon-button:hover span {display:none}
-.coupon-button:hover:before {content:"GRAB THIS OFFER!"}
+.coupon-button:hover span {
+  display: none;
+}
+.coupon-button:hover:before {
+  content: "GRAB THIS OFFER!";
+}
+.scroll-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  background: #ddd;
+  border-radius: 50%;
+  padding: 8px 0;
+  text-align: center;
+  i {
+    font-size: 24px;
+    color: #222;
+  }
+}
 @import "main/mobile";
 @import "fancy-override";
 @import "custom-colors";

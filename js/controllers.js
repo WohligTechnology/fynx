@@ -18,7 +18,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('DiscountCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
 
 
-  $scope.openDiscount = function () {
+  $scope.openDiscount = function() {
     var discountModal = $uibModal.open({
       animation: true,
       templateUrl: 'views/modal/home-popup.html',
@@ -35,7 +35,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   var modalHome = $.jStorage.get('modalHome');
   if (modalHome !== 1) {
     setTimeout(function() {
-      if(checkPoup==0){
+      if (checkPoup == 0) {
         $scope.openDiscount();
         checkPoup++;
       }
@@ -109,55 +109,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('PrivacyCtrl', function($scope, TemplateService, NavigationService) {
 
-    $scope.template = TemplateService.changecontent("privacy");
-    $scope.menutitle = NavigationService.makeactive("Privacy Policy");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.footerBlack = true;
-  })
+  $scope.template = TemplateService.changecontent("privacy");
+  $scope.menutitle = NavigationService.makeactive("Privacy Policy");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+})
 
-  .controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, $timeout, $state) {
+.controller('ForgotpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, $timeout, $state) {
 
-    $scope.template = TemplateService.changecontent("forgotpassword");
-    $scope.menutitle = NavigationService.makeactive("Forgot Password");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.footerBlack = true;
-    $scope.forgotform = {};
-    $scope.alerts = [];
-    $scope.forgotform.hashcode = $stateParams.hashcode;
+  $scope.template = TemplateService.changecontent("forgotpassword");
+  $scope.menutitle = NavigationService.makeactive("Forgot Password");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.footerBlack = true;
+  $scope.forgotform = {};
+  $scope.alerts = [];
+  $scope.forgotform.hashcode = $stateParams.hashcode;
 
-    $scope.addAlert = function(type, msg) {
-      $scope.alerts[0] = {
-        type: type,
-        msg: msg
-      };
+  $scope.addAlert = function(type, msg) {
+    $scope.alerts[0] = {
+      type: type,
+      msg: msg
     };
+  };
 
-    $scope.closeAlert = function(index) {
-      $scope.alerts.splice(index, 1);
-    };
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
 
-    $scope.resetPassword = function(forgotform) {
-      console.log(forgotform.newpassword);
-      forgotform.hashcode = $stateParams.hashcode;
-      if (forgotform.newpassword === forgotform.reenterpassword) {
-        NavigationService.forgotpasswordsubmit(forgotform, function(data) {
-          if (data.value === true) {
-            $scope.addAlert("success", "Password reset successfully.");
-            $timeout(function() {
-              $state.go("home");
-            }, 500);
-          } else {
-            $scope.addAlert("danger", "Fail to update Password.");
-          }
-        });
-      } else {
-        $scope.addAlert("danger", "Both password should be same.");
-      }
+  $scope.resetPassword = function(forgotform) {
+    console.log(forgotform.newpassword);
+    forgotform.hashcode = $stateParams.hashcode;
+    if (forgotform.newpassword === forgotform.reenterpassword) {
+      NavigationService.forgotpasswordsubmit(forgotform, function(data) {
+        if (data.value === true) {
+          $scope.addAlert("success", "Password reset successfully.");
+          $timeout(function() {
+            $state.go("home");
+          }, 500);
+        } else {
+          $scope.addAlert("danger", "Fail to update Password.");
+        }
+      });
+    } else {
+      $scope.addAlert("danger", "Both password should be same.");
+    }
 
-    };
-  })
+  };
+})
 
 
 .controller('AboutCtrl', function($scope, TemplateService, NavigationService) {
@@ -227,7 +227,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.filters.category = $stateParams.category;
   if ($stateParams.type) {
     $scope.filters.typename = $stateParams.type;
-  }else {
+  } else {
     $scope.filters.typename = "";
   }
 
@@ -291,18 +291,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.subcategory = data.filter.subcategory;
             _.each($scope.subcategory, function(n) {
               n.state = false;
-              if ($scope.counter==0) {
-                _.each(n.types, function(m){
-                  if ($filter('lowercase')(m.name)==$filter('lowercase')($scope.filters.typename)) {
+              if ($scope.counter == 0) {
+                _.each(n.types, function(m) {
+                  if ($filter('lowercase')(m.name) == $filter('lowercase')($scope.filters.typename)) {
                     m.status = true;
                     n.state = true;
                     typesel = m;
                     $scope.filters.type.push(typesel.id);
-                  }else {
+                  } else {
                     m.status = false;
                   }
                 });
-              }else {
+              } else {
 
               }
 
@@ -335,8 +335,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
 
   $scope.addtype = function(type, index) {
-console.log(type);
-$scope.counter = 1;
+    console.log(type);
+    $scope.counter = 1;
     $scope.productList = [];
     lastpage = 0;
     $scope.filters.pageno = 0;
@@ -360,7 +360,7 @@ $scope.counter = 1;
       $scope.freeze.freezeType = $scope.subcategory;
     }
     console.log($scope.filters.type);
-    if ($scope.filters.type=="") {
+    if ($scope.filters.type == "") {
       $scope.filters.typename = "";
     }
     $scope.loadProducts();
@@ -401,7 +401,11 @@ $scope.counter = 1;
     $scope.filters.check = check;
     $scope.loadProducts();
   }
-
+  $scope.scrollTop = function() {
+    $('html,body').animate({
+      scrollTop: 0
+    }, 1000);
+  };
 })
 
 
@@ -1224,10 +1228,10 @@ $scope.counter = 1;
                 $scope.checkout.coupon = data.id;
                 $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
                 $scope.showcoupontext = true;
-                $timeout(function(){
+                $timeout(function() {
                   $scope.showcoupontext = false;
-                },4000);
-              }else {
+                }, 4000);
+              } else {
                 $scope.checkout.coupon = data.id;
                 $scope.totalamount = $filter('number')($scope.amount - data.max, 0);
                 $scope.couponamount = data.max;
