@@ -3632,7 +3632,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
     myfunction();
   })
-  .controller('headerctrl', function($scope, TemplateService, $uibModal, NavigationService, $state, $interval, $location) {
+  .controller('headerctrl', function($scope, TemplateService, $uibModal, NavigationService, $state, $interval, $location, $timeout) {
 
     $scope.template = TemplateService;
     $scope.register = {};
@@ -3655,6 +3655,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.cancelForgot = function(val) {
       console.log(val);
       $scope.forgotpass = !val;
+    }
+    $scope.checkTimeout = function(){
+      $timeout(function(){
+        $scope.alreadyRegistered = false;
+        $scope.acceptTerms = false;
+      },3000)
     }
 
     $scope.sendEmail = function(email) {
@@ -3720,11 +3726,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             window.location.reload();
           } else {
             $scope.alreadyRegistered = true;
+            $scope.checkTimeout();
           }
         })
       } else {
         $scope.acceptTerms = true;
         $scope.alreadyRegistered = false;
+        $scope.checkTimeout();
       }
     }
 
@@ -3740,6 +3748,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             // $state.go('setting');
           } else {
             $scope.invalidLogin = true;
+            $scope.checkTimeout();
           }
         }
       })
