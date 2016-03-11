@@ -506,7 +506,7 @@ var countries = [{
 ];
 var customids = [{
   "name":"T-shirts",
-  "id":5
+  "id":4
 },{
   "name":"Crop-Tops",
   "id":3
