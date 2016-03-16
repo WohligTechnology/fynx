@@ -2903,7 +2903,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }
   $scope.showor = function() {
     console.log($scope.filter.size);
-    if ($scope.filter.quantity && $scope.filter.size != '') {
+    if ($scope.filter.quantity && $scope.filter.size.name != 'size') {
       if ($scope.showSecond == true) {
         if ($scope.filter.custom[2].text != '' || $scope.filter.custom[3].text != '' || $scope.filter.image.image1 != '') {
           console.log("in back");
