@@ -185,7 +185,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
-  myfunction();
+  // myfunction();
   NavigationService.getorderbyorderid($stateParams.order, function(data) {
     $scope.order = data;
   });
@@ -971,10 +971,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.sameAsBilling = function(sameasbilling) {
     console.log(sameasbilling);
-    if (sameasbilling == true) {
+    if (sameasbilling === true) {
       $scope.assign(true, $scope.updateuser.user.billingline1, $scope.updateuser.user.billingline2, $scope.updateuser.user.billingline3, $scope.updateuser.user.billingcity, $scope.updateuser.user.billingpincode, $scope.updateuser.user.billingstate, $scope.updateuser.user.billingcountry);
     }
-  }
+  };
 
 })
 
@@ -997,8 +997,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     NavigationService.fedexTrack('', function(data) {
       console.log(data.TrackPackagesResponse.packageList[0]);
       order.fedex = data.TrackPackagesResponse.packageList[0];
-    })
-  }
+    });
+  };
 
   $scope.loadOrders = function() {
     if ($scope.lastpage >= $scope.pageno) {
@@ -1006,20 +1006,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       NavigationService.getorders($scope.pageno, function(data) {
         _.each(data.queryresult, function(n) {
           $scope.orders.push(n);
-        })
+        });
         $scope.lastpage = data.lastpage;
       });
       if ($scope.orders == '') {
-        $scope.msg = "";
+        $scope.msg = "No orders";
       } else {
         $scope.msg = "";
       }
     }
-  }
+  };
   $scope.loadOrders();
   $scope.loadProducts = function() {
     $scope.loadOrders();
-  }
+  };
 
 })
 
