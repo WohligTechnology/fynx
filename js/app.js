@@ -13,106 +13,106 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
   $stateProvider
 
-  .state('home', {
-    url: "/home",
-    templateUrl: "views/template.html",
-    controller: 'HomeCtrl'
-  })
-
-  .state('privacy', {
-    url: "/privacy",
-    templateUrl: "views/template.html",
-    controller: 'PrivacyCtrl'
-  })
+  // .state('home', {
+  //   url: "/home",
+  //   templateUrl: "views/template.html",
+  //   controller: 'HomeCtrl'
+  // })
+  //
+  // .state('privacy', {
+  //   url: "/privacy",
+  //   templateUrl: "views/template.html",
+  //   controller: 'PrivacyCtrl'
+  // })
   .state('comingsoon', {
     url: "/comingsoon",
     templateUrl: "views/template.html",
     controller: 'ComingsoonCtrl'
   })
-
-  .state('profile', {
-    url: "/profile",
-    templateUrl: "views/template.html",
-    controller: 'ProfileCtrl'
-  })
-
-  .state('order', {
-    url: "/order",
-    templateUrl: "views/template.html",
-    controller: 'OrderCtrl'
-  })
-
-  .state('wishlist', {
-    url: "/wishlist",
-    templateUrl: "views/template.html",
-    controller: 'WishlistCtrl'
-  })
-
-  .state('cart', {
-    url: "/cart",
-    templateUrl: "views/template.html",
-    controller: 'CartCtrl'
-  })
-
-  .state('confirmationmail', {
-    url: "/confirmationmail",
-    templateUrl: "views/template.html",
-    controller: 'ConfirmationmailCtrl'
-  })
-
-  .state('checkout', {
-    url: "/checkout",
-    templateUrl: "views/template.html",
-    controller: 'CheckoutCtrl'
-  })
-
-  .state('terms-conditions', {
-    url: "/terms-conditions",
-    templateUrl: "views/template.html",
-    controller: 'TermsCtrl'
-  })
-
-  .state('about', {
-    url: "/about",
-    templateUrl: "views/template.html",
-    controller: 'AboutCtrl'
-  })
-
-  .state('productlist', {
-    url: "/product/men",
-    templateUrl: "views/template.html",
-    controller: 'ProductListCtrl'
-  })
-
-  .state('productview', {
-    url: "/product/men/1",
-    templateUrl: "views/template.html",
-    controller: 'ProductViewCtrl'
-  })
-
-  .state('customization', {
-    url: "/custom",
-    templateUrl: "views/template.html",
-    controller: 'CustomCtrl'
-  })
-
-  .state('chooseAttire', {
-    url: "/custom/choose",
-    templateUrl: "views/template.html",
-    controller: 'CustomChooseCtrl'
-  })
-
-  .state('customCreate', {
-    url: "/custom/create",
-    templateUrl: "views/template.html",
-    controller: 'CustomCreateCtrl'
-  })
-
-  .state('contact', {
-    url: "/contact",
-    templateUrl: "views/template.html",
-    controller: 'ContactCtrl'
-  })
+  //
+  // .state('profile', {
+  //   url: "/profile",
+  //   templateUrl: "views/template.html",
+  //   controller: 'ProfileCtrl'
+  // })
+  //
+  // .state('order', {
+  //   url: "/order",
+  //   templateUrl: "views/template.html",
+  //   controller: 'OrderCtrl'
+  // })
+  //
+  // .state('wishlist', {
+  //   url: "/wishlist",
+  //   templateUrl: "views/template.html",
+  //   controller: 'WishlistCtrl'
+  // })
+  //
+  // .state('cart', {
+  //   url: "/cart",
+  //   templateUrl: "views/template.html",
+  //   controller: 'CartCtrl'
+  // })
+  //
+  // .state('confirmationmail', {
+  //   url: "/confirmationmail",
+  //   templateUrl: "views/template.html",
+  //   controller: 'ConfirmationmailCtrl'
+  // })
+  //
+  // .state('checkout', {
+  //   url: "/checkout",
+  //   templateUrl: "views/template.html",
+  //   controller: 'CheckoutCtrl'
+  // })
+  //
+  // .state('terms-conditions', {
+  //   url: "/terms-conditions",
+  //   templateUrl: "views/template.html",
+  //   controller: 'TermsCtrl'
+  // })
+  //
+  // .state('about', {
+  //   url: "/about",
+  //   templateUrl: "views/template.html",
+  //   controller: 'AboutCtrl'
+  // })
+  //
+  // .state('productlist', {
+  //   url: "/product/men",
+  //   templateUrl: "views/template.html",
+  //   controller: 'ProductListCtrl'
+  // })
+  //
+  // .state('productview', {
+  //   url: "/product/men/1",
+  //   templateUrl: "views/template.html",
+  //   controller: 'ProductViewCtrl'
+  // })
+  //
+  // .state('customization', {
+  //   url: "/custom",
+  //   templateUrl: "views/template.html",
+  //   controller: 'CustomCtrl'
+  // })
+  //
+  // .state('chooseAttire', {
+  //   url: "/custom/choose",
+  //   templateUrl: "views/template.html",
+  //   controller: 'CustomChooseCtrl'
+  // })
+  //
+  // .state('customCreate', {
+  //   url: "/custom/create",
+  //   templateUrl: "views/template.html",
+  //   controller: 'CustomCreateCtrl'
+  // })
+  //
+  // .state('contact', {
+  //   url: "/contact",
+  //   templateUrl: "views/template.html",
+  //   controller: 'ContactCtrl'
+  // })
 
   $urlRouterProvider.otherwise("/comingsoon");
 
