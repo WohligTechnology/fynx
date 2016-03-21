@@ -262,6 +262,17 @@ firstapp.filter('serverimage', function() {
   };
 });
 
+firstapp.filter('serverimage800', function() {
+  return function(input) {
+    if (input) {
+      return mainurl + "index.php/image/index?name=" + input + "&width=800";
+      // return  "http://wohlig.co.in/newfynx/uploads/" + input;
+    } else {
+      return "img/logo.png";
+    }
+  };
+});
+
 
 firstapp.filter('capitalize', function() {
   return function(input, all) {
