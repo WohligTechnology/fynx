@@ -433,7 +433,7 @@
   <div class="row">
     <div class="col-md-12">
       <h3 ng-if="checkout.paymentmode==4">Your order is placed successfully.</h3>
-      <h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4>
+      <!-- <h4 ng-if="checkout.paymentmode!=4">Payment Gateway under testing.</h4> -->
       <div class="order-table mar-btm" ng-if="checkout.paymentmode!=4">
         <form method="post" name="customerData" action="http://admin.myfynx.com/paymentgateway/ccavRequestHandler.php">
           <table width="40%" height="100">
