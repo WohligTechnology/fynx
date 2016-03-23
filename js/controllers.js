@@ -560,7 +560,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       NavigationService.addToCart($scope.filter, function(data, status) {
         console.log(data);
         if (data == "true") {
-          $scope.addAlert("success", "Added to cart");
+          $scope.addAlert("success", "Added to Bag");
         } else {
           $scope.addAlert("danger", "Something has gone wrong");
         }
@@ -1081,7 +1081,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       })
       console.log($scope.allCart);
       if (data == 0) {
-        $scope.msg = "Cart is empty.";
+        $scope.msg = "Bag is empty.";
       } else {
         $scope.msg = "";
       }
@@ -1189,7 +1189,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         key.exceeds = $scope.validateQuantity(key);
       });
       if (data == 0) {
-        $scope.msg = "Cart is empty.";
+        $scope.msg = "Bag is empty.";
       } else {
         $scope.msg = "";
       }
@@ -1576,7 +1576,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       mywish.quantity = 1;
       NavigationService.addToCart(mywish, function(data, status) {
         if (data == "true") {
-          $scope.addAlert("success", "Added to cart");
+          $scope.addAlert("success", "Added to Bag");
         } else {
           $scope.addAlert("danger", "Something has gone wrong");
         }
@@ -3472,7 +3472,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
       NavigationService.addToCartCustom($scope.filter, function(data) {
         if (data == "true") {
-          $scope.addAlert("success", "Added to cart");
+          $scope.addAlert("success", "Added to Bag");
           myImage = {
             image: ""
           };
