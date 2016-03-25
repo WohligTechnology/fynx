@@ -1007,13 +1007,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         _.each(data.queryresult, function(n) {
           $scope.orders.push(n);
         });
+        console.log($scope.orders);
         $scope.lastpage = data.lastpage;
+        if ($scope.orders.length==0) {
+          $scope.msg = "No orders";
+        } else {
+          $scope.msg = "";
+        }
       });
-      if ($scope.orders == '') {
-        $scope.msg = "No orders";
-      } else {
-        $scope.msg = "";
-      }
+
     }
   };
   $scope.loadOrders();
