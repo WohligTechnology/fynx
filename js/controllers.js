@@ -198,7 +198,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.footerBlack = true;
-  myfunction();
+  // myfunction();
   NavigationService.getorderbyorderid($stateParams.order, function(data) {
     $scope.order = data;
   })
@@ -1228,18 +1228,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
               console.log($scope.couponamount);
               if ($scope.couponamount <= data.max) {
                 $scope.checkout.coupon = data.id;
-                $scope.totalamount = $filter('number')($scope.amount - $scope.couponamount, 0);
+                $scope.totalamount = $scope.amount - $scope.couponamount;
                 $scope.showcoupontext = true;
                 $timeout(function() {
                   $scope.showcoupontext = false;
                 }, 4000);
               } else {
                 $scope.checkout.coupon = data.id;
-                $scope.totalamount = $filter('number')($scope.amount - data.max, 0);
+                $scope.totalamount = $scope.amount - data.max;
                 $scope.couponamount = data.max;
               }
             } else {
               $scope.totalamount = $scope.amount;
+
             }
           }
         });
