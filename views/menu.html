@@ -7,6 +7,16 @@
 			</li>
 		</ul>
 	</li>
-	<li class="show-ph"><a ng-click="openLogin();">Login</a></li>
+	<li ng-hide="showLogout" class="show-ph">
+		<a href="" ng-click="openLogin();">Login</a>
+	</li>
+	<li ng-show="showLogout" class="show-ph">
+		<a href="#/profile">{{user.name}}</a>
+		<ul class="dropdown-menu">
+			<li>
+				<a ng-click="logout();" ng-show="showLogout">Logout</a>
+			</li>
+		</ul>
+	</li>
 	<li class="show-ph"><a href="#/cart">Cart (0)</a></li>
 </ul>

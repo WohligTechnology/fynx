@@ -143,7 +143,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, cfpL
     url: "/careers",
     templateUrl: "views/template.html",
     controller: 'CareersCtrl'
-  })
+  });
 
   $urlRouterProvider.otherwise("/home");
 
@@ -185,7 +185,7 @@ firstapp.directive('imgZoomer', function() {
           "transform": "scale(" + newValue + ")",
           "transition": "all 300ms ease"
         });
-      }
+      };
 
       $(".reset-zoom").click(function() {
         basezoom = 1.0;
@@ -197,7 +197,7 @@ firstapp.directive('imgZoomer', function() {
         if (basezoom <= maxzoom) {
           basezoom += 0.3;
           zoom(basezoom);
-        };
+        }
       });
 
     }
@@ -208,12 +208,13 @@ firstapp.directive('onlyDigits', function() {
     require: 'ngModel',
     restrict: 'A',
     link: function(scope, element, attr, ctrl) {
+      var digits;
       function inputValue(val) {
         if (val) {
           if (attr.type == "tel") {
-            var digits = val.replace(/[^0-9\+\\]/g, '');
+             digits = val.replace(/[^0-9\+\\]/g, '');
           } else {
-            var digits = val.replace(/[^0-9\-\\]/g, '');
+             digits = val.replace(/[^0-9\-\\]/g, '');
           }
 
 
@@ -280,7 +281,7 @@ firstapp.filter('capitalize', function() {
     return (!!input) ? input.replace(reg, function(txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }) : '';
-  }
+  };
 });
 
 var setfilter = function(freezed, newdata) {
@@ -291,13 +292,13 @@ var setfilter = function(freezed, newdata) {
         check = true;
       }
 
-    })
-    if (check == false) {
+    });
+    if (check === false) {
       freezed.push(n);
     }
   });
   return freezed;
-}
+};
 
 var formvalidation = function(allvalidation) {
   var isvalid2 = true;
@@ -409,7 +410,7 @@ firstapp.directive('ngDraggable', function($document) {
       // Handle drag event
       function mousemove(e) {
         $(".shirtcanvas").css("border", "1px solid #0d9dff");
-        $(".shirtcanvas").addClass("median")
+        $(".shirtcanvas").addClass("median");
         y = e.clientY - startY;
         x = e.clientX - startX;
         setPosition();
@@ -423,7 +424,7 @@ firstapp.directive('ngDraggable', function($document) {
       // Unbind drag events
       function mouseup(e) {
         $(".shirtcanvas").css("border", "");
-        $(".shirtcanvas").removeClass("median")
+        $(".shirtcanvas").removeClass("median");
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
         if (stop) {
@@ -453,9 +454,9 @@ firstapp.directive('ngDraggable', function($document) {
         });
       }
     }
-  }
+  };
 
-})
+});
 firstapp.directive('dragcanvasitem', function() {
   return {
     link: function(scope, element, attr) {
