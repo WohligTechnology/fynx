@@ -6,7 +6,7 @@
 var websiteurl = "http://www.myfynx.com/";
 var mainurlpaymentgateway = "http://admin.myfynx.com/";
 var adminurl = mainurl + "index.php/json/";
-var countries = [{
+  var countries = [{
         "value": "Please Select"
     }, {
         "value": "Afganistan"
@@ -506,17 +506,17 @@ var countries = [{
 ];
 var customids = [{
   "name":"T-shirts",
-  "id":4
+  "id":2
 },{
   "name":"Crop-Tops",
-  "id":3
+  "id":4
 },{
   "name":"Tanks",
-  "id":2
+  "id":3
 },{
   "name":"T-shirts",
   "id":1
-}]
+}];
 var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function ($http) {
@@ -530,6 +530,12 @@ var navigationservice = angular.module('navigationservice', [])
 		name: "Women",
 		active: "",
 		link: "#/product/women",
+		classis: "active",
+		subnav: []
+    },{
+		name: "Shoe",
+		active: "",
+		link: "#/product/Shoes",
 		classis: "active",
 		subnav: []
     },
