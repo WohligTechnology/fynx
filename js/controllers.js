@@ -500,7 +500,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           $scope.showdiv = true;
         }, 100);
         $scope.viewImage = data.product.image1;
-        NavigationService.getAllSize(function(data1) {
+        NavigationService.getAllSize($stateParams.category,function(data1) {
 
           _.each(data.size, function(n, key1) {
             _.each(data1, function(m, key2) {

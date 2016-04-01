@@ -1,7 +1,7 @@
 // var mainurl = "http://wohlig.co.in/newfynx/";
 // var mainurl = "http://localhost/newfynx/";
  var mainurl = "http://admin.myfynx.com/";
-// var mainurl = "http://192.168.0.124/newfynx/";
+// var mainurl = "http://192.168.1.115/newfynx/";
 // mainurlpaymentgateway is url for frontend
 var websiteurl = "http://www.myfynx.com/";
 var mainurlpaymentgateway = "http://admin.myfynx.com/";
@@ -532,13 +532,14 @@ var navigationservice = angular.module('navigationservice', [])
 		link: "#/product/women",
 		classis: "active",
 		subnav: []
-    },{
-		name: "Shoe",
-		active: "",
-		link: "#/product/Shoes",
-		classis: "active",
-		subnav: []
     },
+    // {
+		// name: "Shoes",
+		// active: "",
+		// link: "#/product/Shoes",
+		// classis: "active",
+		// subnav: []
+    // },
 //					  {
 //		name: "Infants",
 //		active: "",
@@ -649,8 +650,8 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
-		getAllSize: function (callback) {
-			return $http.get(adminurl + 'getAllSize', {}, {
+		getAllSize: function (name, callback) {
+			return $http.get(adminurl + 'getAllSize?name=' + name, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
