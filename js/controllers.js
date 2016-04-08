@@ -412,11 +412,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('ProductViewCtrl', function($scope, TemplateService, NavigationService, $stateParams, $uibModal, cfpLoadingBar, $timeout) {
 
   $scope.template = TemplateService.changecontent("product-view");
-  if ($stateParams.category == 'men') {
-    $scope.menutitle = NavigationService.makeactive("Men");
-  } else {
-    $scope.menutitle = NavigationService.makeactive("Women");
+  switch ($stateParams.category) {
+    case 'men':
+      $scope.menutitle = NavigationService.makeactive("Men");
+      break;
+    case 'women':
+      $scope.menutitle = NavigationService.makeactive("Women");
+      break;
+    case 'Shoes':
+      $scope.menutitle = NavigationService.makeactive("Shoes");
+      break;
+    default:
+
   }
+
 
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
@@ -1615,42 +1624,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     "text": "",
     "state": false,
     "css": {
-      "z-index": 1
+      "z-index": 1,
+      "background": "transparent",
+      "border":"none"
     }
   }, {
     "id": 2,
     "text": "",
     "state": false,
     "css": {
-      "z-index": 2
+      "z-index": 2,
+      "background": "transparent",
+      "border":"none"
     }
   }, {
     "id": 3,
     "text": "",
     "state": false,
     "css": {
-      "z-index": 1
+      "z-index": 1,
+      "background": "transparent",
+      "border":"none"
     }
   }, {
     "id": 4,
     "text": "",
     "state": false,
     "css": {
-      "z-index": 2
+      "z-index": 2,
+      "background": "transparent",
+      "border":"none"
     }
   }, {
     "id": 5,
     "text": "",
     "state": false,
     "css": {
-      "z-index": 3
+      "z-index": 3,
+      "background": "transparent",
+      "border":"none"
     }
   }, {
     "id": 6,
     "text": "",
     "state": false,
     "css": {
-      "z-index": 3
+      "z-index": 3,
+      "background": "transparent",
+      "border":"none"
     }
   }];
   $scope.filter.type = $stateParams.id;

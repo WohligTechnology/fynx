@@ -533,13 +533,13 @@ var navigationservice = angular.module('navigationservice', [])
 		classis: "active",
 		subnav: []
     },
-    // {
-		// name: "Shoes",
-		// active: "",
-		// link: "#/product/Shoes",
-		// classis: "active",
-		// subnav: []
-    // },
+    {
+		name: "Shoes",
+		active: "",
+		link: "#/product/Shoes",
+		classis: "active",
+		subnav: []
+    },
 //					  {
 //		name: "Infants",
 //		active: "",

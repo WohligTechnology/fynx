@@ -22,8 +22,8 @@
 
               </div>
               <div class="canvasitem movetext" ng-repeat="txt in filter1.custom track by $index" ng-style="txt.stylo">
-                <span id="exp{{txt.id}}" class="textspan"
-                 name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></span>
+                <pre id="exp{{txt.id}}" class="textspan"
+                 name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></pre>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
                 <img class="auto-dim m-center" ng-style="filter1.custom[5].css" ng-click="showDelete(filter1.custom[5]); $event.stopPropagation();" ng-src="{{filter1.image.image1 | serverimage}}">
               </div>
               <div class="canvasitem movetext" ng-repeat="txt in filter1.custom track by $index" ng-style="txt.stylo">
-                <span id="exp{{txt.id}}" name="distext" ng-style="txt.css" ng-click="showDelete(txt); $event.stopPropagation();" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
+                <pre id="exp{{txt.id}}" name="distext" ng-style="txt.css" ng-click="showDelete(txt); $event.stopPropagation();" ng-bind="txt.text" ng-if="$index==2 || $index==3"></pre>
               </div>
             </div>
           </div>
