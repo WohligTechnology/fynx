@@ -17,8 +17,9 @@
         <li ui-sref="home">Home</li>
         <li><a href="#/product/men">Men</a></li>
         <li><a href="#/product/women">Women</a></li>
-<!--
-        <li><a href="#/product/infants">Infants</a></li>
+
+        <li><a href="#/product/Shoes">Shoes</a></li>
+        <!--
         <li><a href="#/product/pets">Pets</a></li>
 -->
     </ul>
@@ -72,7 +73,7 @@
                         Home
                     </a>
                     </li>
-                    <li><a href="#/product/men">
+                    <li><a href="#/product/{{categoryname}}">
                         {{categoryname}}
                     </a>
                     </li>
@@ -171,7 +172,7 @@
                         <div class="detail-tab">
                             <uib-tabset>
                                 <uib-tab heading="Description">
-                                  <p>
+                                  <!-- <p>
                                     My Fynx sets the Standard for Round Neck T-shirt comfort and quality.
                                     <ul>
                                       <li>100% Super Premium Compressed Cotton.</li>
@@ -181,8 +182,8 @@
                                       <li>Full cut provides roomier fit (Preshrunk to stay true to size).</li>
                                       <li>Washable.</li>
                                     </ul>
-                                  </p>
-                                <!-- <p ng-bind-html="product.product.description"></p> -->
+                                  </p> -->
+                                <p ng-bind-html="product.product.description"></p>
 <!--
                                     <p>- Slim fit
                                         <br>- Crew neck
