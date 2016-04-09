@@ -16,31 +16,14 @@ window.uploadUrl = 'http://admin.myfynx.com/index.php/json/uploadImage';
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider', 'angularRangeSlider', 'infinite-scroll', 'angularFileUpload', 'angular-loading-bar'])
 
 .controller('DiscountCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
-
-
   $scope.openDiscount = function() {
     var discountModal = $uibModal.open({
       animation: true,
       templateUrl: 'views/modal/home-popup.html',
       size: 'lg',
-      backdrop: 'static',
       resolve: {}
     });
-
-    discountModal.result.then(function() {
-      $.jStorage.set('modalHome', 1);
-    });
   };
-
-  var modalHome = $.jStorage.get('modalHome');
-  if (modalHome !== 1) {
-    setTimeout(function() {
-      if (checkPoup == 0) {
-        $scope.openDiscount();
-        checkPoup++;
-      }
-    }, 1500);
-  }
 
 })
 
@@ -51,6 +34,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.menutitle = NavigationService.makeactive("Home");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+
+  $scope.openDiscount = function() {
+    var discountModal = $uibModal.open({
+      animation: true,
+      templateUrl: 'views/modal/home-popup.html',
+      size: 'lg',
+      resolve: {}
+    });
+  };
+  $scope.openDiscount();
 
   NavigationService.gethomecontent(function(data) {
     console.log(data);
