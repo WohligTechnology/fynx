@@ -42,8 +42,8 @@
 									<span class="badge red ab" ng-click="deleteElement(filter.custom[4],1,0); $event.stopPropagation();" ng-show="filter.custom[4].state">X</span>
 								</div>
 								<div class="canvasitem movetext" ng-draggable='dragOptions' ng-repeat="txt in filter.custom track by $index">
-									<pre id="example{{txt.id}}" class="textspan"
-									 name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></pre>
+									<span id="example{{txt.id}}" class="textspan"
+									 name="distext" ng-style="txt.css" ng-bind="txt.text" ng-if="$index==0 || $index==1" ng-click="showDelete(txt); $event.stopPropagation();"></span>
 									<span class="badge red ab" ng-if="txt.text!=''&&($index==0 || $index==1)" ng-click="deleteElement(txt,0,''); $event.stopPropagation();" ng-show="txt.state">X</span>
 								</div>
 							</div>
@@ -56,7 +56,7 @@
 									<span class="badge red ab" ng-click="deleteElement(filter.custom[4],2,0); $event.stopPropagation();" ng-show="filter.custom[5].state">X</span>
 								</div>
 								<div class="canvasitem movetext" ng-draggable='dragOptions' ng-repeat="txt in filter.custom track by $index">
-									<pre id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-click="showDelete(txt); $event.stopPropagation();" ng-bind="txt.text" ng-if="$index==2 || $index==3"></pre>
+									<span id="example{{txt.id}}" name="distext" ng-style="txt.css" ng-click="showDelete(txt); $event.stopPropagation();" ng-bind="txt.text" ng-if="$index==2 || $index==3"></span>
 									<span class="badge red ab" ng-if="txt.text!=''&&($index==2 || $index==3)" ng-click="deleteElement(txt,0,''); $event.stopPropagation();" ng-show="txt.state">X</span>
 								</div>
 							</div>
