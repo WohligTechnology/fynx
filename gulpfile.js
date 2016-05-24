@@ -21,6 +21,8 @@ var jsArray = [
     './lib/fileupload/angular-file-upload.js',
     './lib/fileupload/FileAPI.js',
     './lib/fileupload/upload.js',
+    './bower_components/angulartics/dist/angulartics.min.js',
+    './bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
     './js/app.js',
     './js/controllers.js',
     './js/templateservice.js',
